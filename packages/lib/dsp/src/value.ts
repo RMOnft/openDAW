@@ -11,8 +11,11 @@ export type Interpolation = | { type: "none" } | { type: "linear" } | { type: "c
 
 /** Factory helpers for {@link Interpolation} variants. */
 export const Interpolation = {
+    /** Hold value until next event. */
     None: {type: "none"},
+    /** Linearly interpolate to next value. */
     Linear: {type: "linear"},
+    /** Apply a curved interpolation with the given slope. */
     Curve: (slope: unitValue) => ({type: "curve", slope}) as const
 } as const
 
@@ -20,8 +23,11 @@ export const Interpolation = {
 export interface ValueEvent extends Event {
     readonly type: "value-event"
 
+    /** Index within a multi-value event collection. */
     get index(): int
+    /** Event value. */
     get value(): number
+    /** Interpolation method to the subsequent event. */
     get interpolation(): Interpolation
 }
 
