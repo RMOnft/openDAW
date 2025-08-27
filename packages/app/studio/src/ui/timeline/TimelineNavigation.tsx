@@ -10,10 +10,14 @@ import {TimeAxis} from "@/ui/timeline/TimeAxis.tsx"
 import {createElement} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"
 
+/** CSS class applied to the navigation container. */
 const className = Html.adoptStyleSheet(css, "TimelineNavigation")
 
+/** Parameters for constructing {@link TimelineNavigation}. */
 type Construct = {
+    /** Lifecycle controlling nested components. */
     lifecycle: Lifecycle
+    /** Application service providing timeline state. */
     service: StudioService
 }
 

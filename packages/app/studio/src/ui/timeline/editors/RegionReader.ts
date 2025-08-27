@@ -69,15 +69,20 @@ export class RegionReader<REGION extends LoopableRegionBoxAdapter<CONTENT>, CONT
         return region.box.subscribe(Propagation.Children, update => {
             if (update.type === "primitive") {
                 switch (true) {
+                    // React to relevant property changes that might move the region
+                    // outside of the visible range.
                     case update.matches(region.box.position):
                     case update.matches(region.box.duration):
                     case update.matches(region.box.loopOffset):
                     case update.matches(region.box.loopDuration): {
                         let unit = range.unitMin
+                        // If the region extends beyond the right edge, pan the range
+                        // so the entire region becomes visible.
                         if (region.offset + region.loopDuration > range.unitMax) {
                             const paddingRight = range.unitPadding * 2
                             unit = (region.offset + region.loopDuration + paddingRight) - range.unitRange
                         }
+                        // If the region moved to the left, scroll to its new start.
                         if (region.offset < range.unitMin) {
                             unit = region.offset
                         }
@@ -89,9 +94,11 @@ export class RegionReader<REGION extends LoopableRegionBoxAdapter<CONTENT>, CONT
         })
     }
     mapPlaybackCursor(value: ppqn): ppqn {
+        // When the cursor is outside this region, return the value unchanged.
         if (value < this.position || value > this.complete) {
             return value
         }
+        // Wrap the cursor into the loop while preserving offset.
         return mod(value - this.offset, this.loopDuration) + this.offset
     }
 }

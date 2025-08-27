@@ -10,8 +10,10 @@ import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {LoopArea} from "@opendaw/studio-boxes"
 import {Colors} from "@opendaw/studio-core"
 
+/** CSS class applied to the editor container. */
 const className = Html.adoptStyleSheet(css, "loop-area-editor")
 
+// Mapping from captured target names to cursor styles.
 const CursorMap = {
     "loop-start": "w-resize",
     "loop-end": "e-resize",
@@ -20,11 +22,17 @@ const CursorMap = {
 
 type Target = keyof typeof CursorMap
 
+/** Parameters for constructing a {@link LoopAreaEditor}. */
 type Construct = {
+    /** Lifecycle controlling attached listeners. */
     lifecycle: Lifecycle
+    /** Editing context to apply undoable modifications. */
     editing: Editing
+    /** Current viewport of the timeline. */
     range: TimelineRange
+    /** Grid snapping configuration. */
     snapping: Snapping
+    /** Loop range being edited. */
     loopArea: LoopArea
 }
 
@@ -34,6 +42,7 @@ type Construct = {
 export const LoopAreaEditor = ({lifecycle, editing, range, snapping, loopArea}: Construct) => {
     const {from: loopFrom, to: loopTo} = loopArea
     const canvas: HTMLCanvasElement = <canvas/>
+    // Detect which part of the loop brace the pointer interacts with.
     const capturing = new ElementCapturing<Target>(canvas, {
         capture: (x: number, _y: number): Nullable<Target> => {
             const {clientHeight: height} = canvas
@@ -58,6 +67,7 @@ export const LoopAreaEditor = ({lifecycle, editing, range, snapping, loopArea}: 
         const x1 = Math.floor(range.unitToX(loopTo.getValue()) * devicePixelRatio)
         const handleSize = height
         const handleY = 0
+        // Draw filled region between start and end handles.
         context.fillStyle = "rgba(255, 255, 255, 0.1)"
         context.fillRect(x0, handleY, x1 - x0, handleSize)
         context.fillStyle = Colors.yellow
@@ -77,6 +87,7 @@ export const LoopAreaEditor = ({lifecycle, editing, range, snapping, loopArea}: 
         const length = loopTo.getValue() - loopFrom.getValue()
         return Option.wrap({
             update: (event: Dragging.Event) => {
+                // Apply incremental change while dragging.
                 editing.modify(() => {
                     const delta = snapping.computeDelta(pointerPulse, event.clientX, referencePulse)
                     const position = Math.max(0, referencePulse + delta)
@@ -104,6 +115,7 @@ export const LoopAreaEditor = ({lifecycle, editing, range, snapping, loopArea}: 
         range.width = clientWidth
         canvas.width = clientWidth * devicePixelRatio
         canvas.height = clientHeight * devicePixelRatio
+        // Force render to update after a resize so the loop brace fits.
         immediateRender()
     }
     lifecycle.own(Html.watchResize(canvas, onResize))

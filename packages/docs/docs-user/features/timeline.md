@@ -22,6 +22,12 @@ Drag the mouse to draw a rectangle and select multiple clips or regions.
 Use the keyboard to delete the selection or press <kbd>Ctrl</kbd>+<kbd>A</kbd>
 to select everything on the timeline.
 
+## Gestures
+
+Drag handles on the navigation bar to resize the visible range. Double-click
+the end marker on the time axis to set the project length. Scroll the mouse
+wheel over the time axis to zoom and pan.
+
 ## Example Integration
 
 ```ts
