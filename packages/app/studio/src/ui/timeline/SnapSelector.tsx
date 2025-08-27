@@ -15,6 +15,14 @@ type Construct = {
     snapping: Snapping
 }
 
+/**
+ * Dropdown for selecting timeline snap resolution.
+ *
+ * @example
+ * ```tsx
+ * <SnapSelector lifecycle={lifecycle} snapping={snapping} />
+ * ```
+ */
 export const SnapSelector = ({lifecycle, snapping}: Construct) => {
     const snappingName = Inject.value(snapping.unit.name)
     lifecycle.own(snapping.subscribe(snapping => {snappingName.value = snapping.unit.name}))

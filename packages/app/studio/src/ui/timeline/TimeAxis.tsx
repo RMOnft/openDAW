@@ -26,10 +26,20 @@ type Construct = {
     mapper?: TimeAxisCursorMapper
 }
 
+/** Maps playback position to a different pulse value when drawing the cursor. */
 export interface TimeAxisCursorMapper {
     mapPlaybackCursor(position: ppqn): ppqn
 }
 
+/**
+ * Visualizes tempo grid and current playback position.
+ *
+ * @param lifecycle - Lifecycle for resource cleanup.
+ * @param service - Access to engine and project state.
+ * @param snapping - Snap settings for cursor interactions.
+ * @param range - Range object describing current viewport.
+ * @param mapper - Optional mapper for custom cursor rendering.
+ */
 export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construct) => {
     let endMarkerPosition: Nullable<ppqn> = null
     const {project: {timelineBox: {signature, durationInPulses}, editing, boxGraph}} = service

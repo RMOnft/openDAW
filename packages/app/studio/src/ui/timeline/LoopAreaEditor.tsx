@@ -28,6 +28,9 @@ type Construct = {
     loopArea: LoopArea
 }
 
+/**
+ * Canvas widget for editing the loop start and end markers on the timeline.
+ */
 export const LoopAreaEditor = ({lifecycle, editing, range, snapping, loopArea}: Construct) => {
     const {from: loopFrom, to: loopTo} = loopArea
     const canvas: HTMLCanvasElement = <canvas/>

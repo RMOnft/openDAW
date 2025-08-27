@@ -13,6 +13,12 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Hosts the loop editor and time axis used to navigate the timeline.
+ *
+ * @remarks
+ * Place this component directly beneath the {@link TimelineHeader}.
+ */
 export const TimelineNavigation = ({lifecycle, service}: Construct) => {
     const {range, snapping} = service.timeline
     const {editing, timelineBox} = service.project

@@ -17,6 +17,17 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Toolbar shown above the timeline for snap settings and visibility toggles.
+ *
+ * @param lifecycle - Manages subscriptions for the header.
+ * @param service - Provides access to shared timeline state.
+ *
+ * @example
+ * ```tsx
+ * <TimelineHeader lifecycle={lifecycle} service={studioService} />
+ * ```
+ */
 export const TimelineHeader = ({lifecycle, service}: Construct) => {
     const {snapping, followPlaybackCursor, primaryVisible, clips} = service.timeline
     return (
