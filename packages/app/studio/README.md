@@ -6,6 +6,11 @@ For a guided overview of the interface, see the [UI tour](../../docs/docs-user/u
 Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md). The [notepad feature](../../docs/docs-user/features/notepad.md) lets you store project notes using Markdown.
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
 
+Exchange projects with other DAWs via the `.dawproject` format using the
+[DAWproject workflow](../../docs/docs-user/workflows/dawproject.md). Implementation
+details for developers live in the
+[Studio serialization guide](../../docs/docs-dev/serialization/studio-dawproject.md).
+
 The project notepad uses markdown and can be customized. See the
 [markdown editing guide](../../docs/docs-dev/ui/markdown/editing.md) for
 developer details. For instructions on using the feature in the Studio,

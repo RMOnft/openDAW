@@ -3,12 +3,18 @@ import {ArrayMultimap, asInstanceOf, isDefined, isInstanceOf, Nullable, Option} 
 import {AudioUnitType} from "@opendaw/studio-enums"
 import {DeviceBoxUtils} from "@opendaw/studio-adapters"
 
+/**
+ * Utilities for arranging {@link AudioUnitBox} connections into tracks for
+ * export. The resulting structure reflects how audio flows between units.
+ */
 export namespace AudioUnitExportLayout {
+    /** Recursive track representation used during export. */
     export interface Track {
         audioUnit: AudioUnitBox
         children: Array<Track>
     }
 
+    /** Build a hierarchy of tracks from the current set of audio units. */
     export const layout = (audioUnits: ReadonlyArray<AudioUnitBox>): Array<Track> => {
         const feedsInto = new ArrayMultimap<AudioUnitBox, AudioUnitBox>()
         audioUnits.forEach(unit => {
@@ -57,6 +63,9 @@ export namespace AudioUnitExportLayout {
         return {audioUnit, children}
     }
 
+    /**
+     * Debug helper that logs the computed track hierarchy to the console.
+     */
     export const printTrackStructure = (tracks: ReadonlyArray<Track>, indent = 0): void => {
         const spaces = " ".repeat(indent)
         tracks.forEach(track => {

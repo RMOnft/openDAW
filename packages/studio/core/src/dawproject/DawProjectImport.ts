@@ -72,6 +72,12 @@ import {ColorCodes} from "../ColorCodes"
 import {DeviceIO} from "./DeviceIO"
 import {BuiltinDevices} from "./BuiltinDevices"
 
+/**
+ * Maps DAWproject XML into the Studio's box graph representation.
+ *
+ * The importer resolves audio resources, recreates device chains and returns a
+ * {@link ProjectDecoder.Skeleton} ready for further processing.
+ */
 export namespace DawProjectImport {
     type AudioBusUnit = { audioBusBox: AudioBusBox, audioUnitBox: AudioUnitBox }
     type InstrumentUnit = { instrumentBox: InstrumentBox, audioUnitBox: AudioUnitBox }
@@ -83,6 +89,10 @@ export namespace DawProjectImport {
         ifDefined(timeSignature?.denominator, value => denominator.setValue(value))
     }
 
+    /**
+     * Outcome of {@link read}. Contains the reconstructed project skeleton and
+     * identifiers of audio files that must be loaded separately.
+     */
     export type Result = {
         audioIds: ReadonlyArray<UUID.Format>,
         skeleton: ProjectDecoder.Skeleton
@@ -93,6 +103,9 @@ export namespace DawProjectImport {
         if (contentType === "notes") return Option.wrap(CaptureMidiBox.create(boxGraph, UUID.generate()))
         return Option.None
     }
+    /**
+     * Rehydrate a project from a DAWproject schema and its resource provider.
+     */
     export const read = async (schema: ProjectSchema, resources: DawProject.ResourceProvider): Promise<Result> => {
         const boxGraph = new BoxGraph<BoxIO.TypeMap>(Option.wrap(BoxIO.create))
         boxGraph.beginTransaction()
