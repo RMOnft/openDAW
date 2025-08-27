@@ -115,7 +115,11 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Versioning Policy](packages/docs/docs-dev/build-and-run/versioning.md)
 - [Bootstrapping Overview](packages/docs/docs-dev/architecture/bootstrap.md)
 - [Headless mode workflow](packages/docs/docs-user/workflows/headless-mode.md) – feature parity with Studio service, see [headless vs studio](packages/docs/docs-dev/architecture/headless-vs-studio.md)
+- [Feature Flags](packages/docs/docs-dev/architecture/feature-flags.md)
+- [Troubleshooting Guide](packages/docs/docs-user/troubleshooting.md)
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
+- [Icon Library](packages/docs/docs-dev/ui/icons/overview.md)
+- [Notepad Guide](packages/docs/docs-user/features/notepad.md)
 
 ### Style Documentation
 

@@ -3,7 +3,18 @@
  */
 export namespace Window {
     /** Shapes of supported window functions. */
-    export enum Type {Bartlett, Blackman, BlackmanHarris, Hamming, Hanning}
+    export enum Type {
+        /** Triangular Bartlett window. */
+        Bartlett,
+        /** Blackman window with good sidelobe suppression. */
+        Blackman,
+        /** Four-term Blackman–Harris window for very low sidelobes. */
+        BlackmanHarris,
+        /** Hamming window. */
+        Hamming,
+        /** Hanning (raised cosine) window. */
+        Hanning
+    }
 
     /**
      * Generates a window of the desired `type` and length `n`.

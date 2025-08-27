@@ -1,6 +1,16 @@
 import { isDefined, Notifier, Nullable, Observable, Observer, Procedure, Subscription, Terminable } from "@opendaw/lib-std"
 
 /**
+ * Utilities for exchanging messages over {@link Port}‑like endpoints.
+ *
+ * @remarks
+ * A messenger wraps objects such as {@link Worker}, {@link MessagePort} or
+ * {@link BroadcastChannel} and exposes a simple observable interface.  It can
+ * also create logical sub‑channels so multiple communication streams share the
+ * same underlying transport.
+ */
+
+/**
  * Minimal subset of the {@link MessagePort} interface required by {@link Messenger}.
  *
  * @remarks

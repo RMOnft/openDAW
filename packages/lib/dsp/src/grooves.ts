@@ -1,24 +1,32 @@
 import {ppqn} from "./ppqn"
 import {assert, Bijective, BinarySearch, FloatArray, NumberComparator, quantizeFloor, unitValue} from "@opendaw/lib-std"
 
+/** Bijective mapping between normalised time values. */
 export interface GrooveFunction extends Bijective<unitValue, unitValue> {}
 
+/** Time-warping function that repeats over a duration. */
 export interface GroovePatternFunction extends GrooveFunction {
+    /** Duration of a single pattern cycle in PPQN. */
     duration(): ppqn
 }
 
+/** Warp/unwarp positions expressed in PPQN. */
 export interface Groove {
+    /** Maps a position from original to warped space. */
     warp(position: ppqn): ppqn
+    /** Maps a position from warped back to original space. */
     unwarp(position: ppqn): ppqn
 }
 
 export namespace Groove {
+    /** No-op groove that leaves positions unchanged. */
     export const Identity: Groove = {
         warp: (position: ppqn): ppqn => position,
         unwarp: (position: ppqn): ppqn => position
     }
 }
 
+/** Applies a {@link GroovePatternFunction} to warp PPQN positions. */
 export class GroovePattern implements Groove {
     readonly #func: GroovePatternFunction
 
@@ -36,6 +44,7 @@ export class GroovePattern implements Groove {
     }
 }
 
+/** Groove function defined by quantised lookup table. */
 export class QuantisedGrooveFunction implements GrooveFunction {
     readonly #values: FloatArray
 
@@ -46,6 +55,7 @@ export class QuantisedGrooveFunction implements GrooveFunction {
         this.#values = values
     }
 
+    /** Forward transform from input to output space. */
     fx(x: unitValue): unitValue {
         if (x <= 0.0) {return 0.0}
         if (x >= 1.0) {return 1.0}
@@ -56,6 +66,7 @@ export class QuantisedGrooveFunction implements GrooveFunction {
         return valueFloor + alpha * (this.#values[idxInteger + 1] - valueFloor)
     }
 
+    /** Inverse transform from output back to input space. */
     fy(y: unitValue): unitValue {
         if (y <= 0.0) {return 0.0}
         if (y >= 1.0) {return 1.0}
@@ -67,6 +78,7 @@ export class QuantisedGrooveFunction implements GrooveFunction {
     }
 }
 
+/** Combines multiple grooves and applies them sequentially. */
 export class GrooveChain implements Groove {
     readonly #grooves: ReadonlyArray<Groove>
 

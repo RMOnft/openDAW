@@ -16,6 +16,9 @@ import { ControlType } from "./ControlType";
 export class MidiTrack {
   /**
    * Decode a track from the given decoder.
+   *
+   * @param decoder - MIDI file decoder positioned at the start of a track
+   * @returns a populated {@link MidiTrack} instance
    */
   static decode(decoder: MidiFileDecoder): MidiTrack {
     const controlEvents: ArrayMultimap<Channel, ControlEvent> =
@@ -59,18 +62,24 @@ export class MidiTrack {
     return new MidiTrack(controlEvents, metaEvents);
   }
 
-  /** Create an empty track with no events. */
+  /**
+   * Create an empty track with no events.
+   */
   static createEmpty(): MidiTrack {
     return new MidiTrack(new ArrayMultimap<Channel, ControlEvent>(), []);
   }
 
   constructor(
+    /** Control events grouped by channel */
     readonly controlEvents: ArrayMultimap<Channel, ControlEvent>,
+    /** Meta events belonging to this track */
     readonly metaEvents: Array<MetaEvent>,
   ) {}
 
   /**
    * Encode the track into a MIDI track chunk.
+   *
+   * @returns an ArrayBuffer containing the serialized track data
    */
   encode(): ArrayBufferLike {
     const output = ByteArrayOutput.create();

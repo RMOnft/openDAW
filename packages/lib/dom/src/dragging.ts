@@ -7,8 +7,8 @@
  *
  * @example
  * ```ts
- * import {Dragging} from "@opendaw/lib-dom";
- * import {Option} from "@opendaw/lib-std";
+ * import { Dragging } from "@opendaw/lib-dom";
+ * import { Option } from "@opendaw/lib-std";
  *
  * const detach = Dragging.attach(element, ev => Option.some({
  *   update(e) { console.log(e.clientX, e.clientY); }
@@ -57,6 +57,11 @@ export namespace Dragging {
   /**
    * Attaches pointer listeners to `target` and creates a dragging lifecycle
    * managed by a `Process` instance produced by `factory`.
+   *
+   * @param target Element initiating the pointer interaction.
+   * @param factory Produces a {@link Process} for the drag sequence.
+   * @param options Additional configuration flags.
+   * @returns Terminable subscription controlling the drag lifecycle.
    */
   export const attach = <T extends PointerCaptureTarget>(
     target: T,
@@ -152,7 +157,7 @@ export namespace Dragging {
           Events.subscribe(
             self,
             "beforeunload",
-            (_event: BeforeUnloadEvent) => {
+            () => {
               // Workaround for Chrome (does not release or cancel pointer)
               target.releasePointerCapture(pointerId);
               cancel();
