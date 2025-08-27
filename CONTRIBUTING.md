@@ -17,7 +17,8 @@ Thank you for your interest in contributing to openDAW! This guide outlines the 
 
 ## Style Guidelines
 
-- Use **Prettier** for formatting and **ESLint** for linting.
+- Use **Prettier** for formatting and **ESLint** for linting. See the
+  [ESLint configuration guide](./packages/docs/docs-dev/configuration/eslint.md).
 - Prefer clear, self-documenting code and avoid unnecessary abstractions.
 - Write Markdown documentation using ATX headings (`#`, `##`, etc.) and keep line length reasonable.
 - Include tests or documentation updates alongside code changes when appropriate.
