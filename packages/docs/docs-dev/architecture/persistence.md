@@ -6,7 +6,7 @@ openDAW stores project data and samples in the browser using the Origin Private 
 - `meta.json` – metadata such as title and tags
 - `image.bin` – optional cover image
 
-Sample files referenced by projects are managed via `SampleStorage` and can be packaged together with a project into a distributable bundle. Bundles are standard ZIP archives with a `uuid` marker and a `samples/` folder holding audio data.
+Sample files referenced by projects are managed via `SampleStorage` and can be packaged together with a project into a distributable bundle. Bundles are standard ZIP archives with a `uuid` marker and a `samples/` folder holding audio data. The worker based file access is described in more detail in the [OPFS sample storage](./opfs-samples.md) notes.
 
 The `Projects` utility provides functions for reading and writing these artifacts as well as creating and importing bundles.
 

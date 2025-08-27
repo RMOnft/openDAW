@@ -1,6 +1,8 @@
 # File Management
 
-Import, export, and organize project files. Developers can dive deeper in the
+Import, export, and organize project files. openDAW stores data in the
+browser's Origin Private File System (OPFS) so sessions and samples persist
+offline. Developers can dive deeper in the
 [project docs](../../docs-dev/projects/overview.md) and the
 [info panel reference](../../docs-dev/ui/info-panel/overview.md).
 
@@ -9,6 +11,7 @@ Import, export, and organize project files. Developers can dive deeper in the
 - Use the **Sample Browser** to switch between cloud and local libraries.
 - Search, preview and delete samples directly from the list.
 - Adjust preview volume with the slider in the browser footer.
+- Local samples are cached in OPFS and survive page reloads.
 
 ## Save Projects
 

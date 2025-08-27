@@ -15,6 +15,9 @@ import { FilePickerAcceptTypes } from "@/ui/FilePickerAcceptTypes";
 /**
  * Dialog helpers for managing samples.
  *
+ * Exposed utilities are used by {@link SampleService} and
+ * {@link SampleBrowser} to locate missing files or edit metadata.
+ *
  * @see SampleImporter
  * @see SampleUtils.verify
  */

@@ -53,7 +53,10 @@ const location = new DefaultObservableValue(SampleLocation.Cloud);
  * Browser and management UI for audio samples, allowing local or cloud
  * sources and providing preview, deletion and volume control.
  *
- * Keyboard delete removes selected local samples.
+ * Combines {@link SampleService} with {@link SampleApi} and
+ * {@link SampleLocation} to present a unified view of locally cached OPFS
+ * samples and the remote library. Keyboard delete removes selected local
+ * samples.
  */
 export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own({ terminate: () => service.samplePlayback.eject() });
