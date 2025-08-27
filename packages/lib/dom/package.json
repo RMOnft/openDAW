@@ -3,7 +3,7 @@
   "version": "0.0.20",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
@@ -30,5 +30,6 @@
     "@opendaw/eslint-config": "^0.0.18",
     "@opendaw/typescript-config": "^0.0.19"
   },
-  "gitHead": "498716ab88a9a6bba7f8e1c034703cdc749ef8b0"
+  "gitHead": "498716ab88a9a6bba7f8e1c034703cdc749ef8b0",
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }
