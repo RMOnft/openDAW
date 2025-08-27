@@ -15,6 +15,15 @@ module.exports = {
     { type: "doc", id: "licensing" },
     {
       type: "category",
+      label: "Architecture",
+      items: [
+        "architecture/overview",
+        "architecture/audio-path",
+        "architecture/browser-compat",
+      ],
+    },
+    {
+      type: "category",
       label: "XML",
       items: [
         "xml/overview",

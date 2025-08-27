@@ -14,6 +14,8 @@
  * ```
  */
 // noinspection PlatformDetectionJS
+// Supported Browsers: Chrome (latest), Firefox (latest), Safari (latest), Edge (Chromium)
+
 export namespace Browser {
   const hasLocation =
     typeof self !== "undefined" &&
