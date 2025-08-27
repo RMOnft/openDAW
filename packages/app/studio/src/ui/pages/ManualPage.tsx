@@ -1,5 +1,8 @@
 /**
  * Renders documentation manuals and navigation.
+ *
+ * @see AutomationPage for automation examples.
+ * @see ComponentsPage for the component showcase.
  */
 import css from "./ManualPage.sass?inline"
 import {Await, createElement, LocalLink, PageContext, PageFactory} from "@opendaw/lib-jsx"

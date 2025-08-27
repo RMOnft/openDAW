@@ -14,7 +14,8 @@ export namespace SampleDialogs {
   /**
    * Open the browser's file picker for selecting sample files.
    *
-   * @param multiple allow the user to select multiple files at once.
+   * @param multiple Allow selection of multiple files.
+   * @returns Result of the picker invocation.
    */
   export const nativeFileBrowser = async (multiple: boolean = true) =>
     Promises.tryCatch(
@@ -102,7 +103,8 @@ export namespace SampleDialogs {
   /**
    * Show a dialog to edit the name and bpm metadata of a sample.
    *
-   * @param sample sample whose metadata should be changed.
+   * @param sample The sample to mutate.
+   * @returns Updated sample after confirmation.
    */
   export const showEditSampleDialog = async (
     sample: Sample,

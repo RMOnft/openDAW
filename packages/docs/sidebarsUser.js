@@ -16,6 +16,7 @@ module.exports = {
         "features/devices-and-plugins",
         "features/file-management",
         "features/browse",
+        "features/notepad",
       ],
     },
   ],

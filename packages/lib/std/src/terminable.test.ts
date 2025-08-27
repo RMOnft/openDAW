@@ -1,3 +1,4 @@
+/** Tests for terminable utilities and cascading subscriptions. */
 import {beforeEach, describe, expect, it} from "vitest"
 import {Option} from "./option"
 import {CascadingSubscriptions, Subscription, Terminable, Terminator} from "./terminable"

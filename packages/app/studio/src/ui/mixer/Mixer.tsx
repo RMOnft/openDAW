@@ -21,14 +21,20 @@ type AudioUnitEntry = {
     editor: Element
 }
 
+/** Props for {@link Mixer}. */
 type Construct = {
+    /** Lifecycle owner for managing channel strips. */
     lifecycle: Lifecycle
+    /** Shared studio service. */
     service: StudioService
 }
 
 /**
  * Renders the main mixer view with channel strips for each audio unit.
  * Handles scrolling, ordering and selection of channels.
+ *
+ * @param lifecycle - Lifecycle owner for subscriptions.
+ * @param service - Access to project state and utilities.
  */
 export const Mixer = ({lifecycle, service}: Construct) => {
     const project = service.project

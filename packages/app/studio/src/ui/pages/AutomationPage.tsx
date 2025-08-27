@@ -1,5 +1,8 @@
 /**
  * Development page demonstrating value stream rendering and automation edge cases.
+ *
+ * @see ComponentsPage for the interactive component gallery.
+ * @see ManualPage for developer manual navigation.
  */
 import css from "./AutomationPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"

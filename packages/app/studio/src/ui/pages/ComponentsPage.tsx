@@ -1,5 +1,8 @@
 /**
  * Interactive showcase of reusable UI components.
+ *
+ * @see AutomationPage for automation rendering tests.
+ * @see ManualPage for developer manual navigation.
  */
 import css from "./ComponentsPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"

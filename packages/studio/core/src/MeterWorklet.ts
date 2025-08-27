@@ -45,8 +45,14 @@ export class MeterWorklet extends AudioWorkletNode implements Terminable {
         )
     }
 
-    /** Subscribe to receive metering updates. */
+    /**
+     * Subscribe to receive metering updates.
+     *
+     * @param observer - Callback invoked with peak and RMS values.
+     * @returns Subscription handle used to unsubscribe.
+     */
     subscribe(observer: Observer<PeakSchema>): Subscription {return this.#notifier.subscribe(observer)}
+
     /** Terminates the worklet and releases resources. */
     terminate(): void {this.#terminator.terminate()}
 }

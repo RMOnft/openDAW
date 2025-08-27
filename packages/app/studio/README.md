@@ -3,8 +3,11 @@
 This package contains the web-based user interface for the OpenDAW project.
 
 For a guided overview of the interface, see the [UI tour](../../docs/docs-user/ui-tour.md).
-Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md).
+Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md). The [notepad feature](../../docs/docs-user/features/notepad.md) lets you store project notes using Markdown.
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
+
+For browser compatibility considerations refer to the [feature flags overview](../../docs/docs-dev/architecture/feature-flags.md).
+Common problems are addressed in the [troubleshooting guide](../../docs/docs-user/troubleshooting.md).
 
 For individual topics, browse the in-app [manuals](public/manuals/index.md).
 

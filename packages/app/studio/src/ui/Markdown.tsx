@@ -11,6 +11,11 @@ type Construct = {
   text: string;
 };
 
+/**
+ * Renders markdown into the given element and enriches the output with
+ * application specific behaviour such as internal navigation and
+ * copy-to-clipboard for code blocks.
+ */
 export const renderMarkdown = (element: HTMLElement, text: string) => {
   if (Browser.isWindows()) {
     Object.entries(ModfierKeys.Mac).forEach(
@@ -50,6 +55,11 @@ export const renderMarkdown = (element: HTMLElement, text: string) => {
   });
 };
 
+/**
+ * Stateless component that converts the provided markdown string to HTML.
+ *
+ * @param text - Markdown source to render.
+ */
 export const Markdown = ({ text }: Construct) => {
   if (text.startsWith("<")) {
     return "Invalid Markdown";

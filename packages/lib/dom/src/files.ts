@@ -3,7 +3,8 @@
  *
  * @example
  * ```ts
- * const arrayBuffer = await fetch(url).then(r => r.arrayBuffer());
+ * import { Files } from "@opendaw/lib-dom";
+ * const arrayBuffer = await fetch(url).then((r) => r.arrayBuffer());
  * await Files.save(arrayBuffer, { suggestedName: "sample.bin" });
  * ```
  */
@@ -15,6 +16,8 @@ export namespace Files {
    * Saves an `ArrayBuffer` as a file using the File System Access API when
    * available, falling back to a download link otherwise.
    *
+   * @param arrayBuffer Data to persist.
+   * @param options Optional picker configuration.
    * @returns Name of the created file.
    */
   export const save = async (
@@ -44,6 +47,9 @@ export namespace Files {
    * Opens a file selection dialog and returns the selected `File` objects.
    * Uses the File System Access API when supported and falls back to a
    * hidden `<input>` element otherwise.
+   *
+   * @param options Optional picker configuration.
+   * @returns List of selected files.
    */
   export const open = async (
     options?: OpenFilePickerOptions,

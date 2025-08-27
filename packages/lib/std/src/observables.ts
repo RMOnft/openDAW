@@ -5,12 +5,17 @@ import {Func, isDefined, Nullable, Nullish, Procedure, ValueOrProvider} from "./
 import {Bijective} from "./bijective"
 import {Observer} from "./observers"
 
+/** Basic observable emitting values to subscribed observers. */
 export interface Observable<VALUE> {
+    /** Register an observer receiving notifications of emitted values. */
     subscribe(observer: Observer<VALUE>): Subscription
 }
 
+/** Observable that exposes the current value on demand. */
 export interface ObservableValue<T> extends Observable<ObservableValue<T>> {
+    /** Returns the current value. */
     getValue(): T
+    /** Subscribe and immediately emit the current value. */
     catchupAndSubscribe(observer: Observer<ObservableValue<T>>): Subscription
 }
 
@@ -25,11 +30,14 @@ export namespace ObservableValue {
     }
 }
 
+/** Observable value that can be updated. */
 export interface MutableObservableValue<T> extends ObservableValue<T> {
+    /** Updates the underlying value and notifies observers. */
     setValue(value: T): void
 }
 
 export namespace MutableObservableValue {
+    /** Constant observable boolean that is always `false`. */
     export const False: MutableObservableValue<boolean> =
         new class implements MutableObservableValue<boolean> {
             getValue() {return false}
@@ -41,6 +49,10 @@ export namespace MutableObservableValue {
             }
         }
 
+    /**
+     * Creates a view on the given boolean observable that presents and
+     * writes the negated value.
+     */
     export const inverseBoolean = (observableValue: MutableObservableValue<boolean>): MutableObservableValue<boolean> =>
         new class implements MutableObservableValue<boolean> {
             getValue() {return !observableValue.getValue()}
@@ -53,8 +65,13 @@ export namespace MutableObservableValue {
         }
 }
 
+/** Option value that can be observed and terminated. */
 export interface ObservableOption<T> extends Option<T>, Observable<Option<T>>, Terminable {}
 
+/**
+ * Mutable {@link Option} that notifies observers whenever the wrapped
+ * value changes.
+ */
 export class MutableObservableOption<T> implements ObservableOption<T> {
     readonly #notifier: Notifier<Option<T>>
 
@@ -106,6 +123,9 @@ export class MutableObservableOption<T> implements ObservableOption<T> {
     terminate(): void {this.#notifier.terminate()}
 }
 
+/**
+ * Observable value derived from another one via a bijective mapping.
+ */
 export class MappedMutableObservableValue<SOURCE, TARGET> implements MutableObservableValue<TARGET>, Terminable {
     readonly #source: MutableObservableValue<SOURCE>
     readonly #mapping: Bijective<SOURCE, TARGET>
@@ -135,8 +155,13 @@ export class MappedMutableObservableValue<SOURCE, TARGET> implements MutableObse
     terminate(): void {this.#subscription.terminate()}
 }
 
+/** Guard that sanitises or constrains values before update. */
 export interface ValueGuard<T> {guard(value: T): T}
 
+/**
+ * Default implementation of a mutable observable value.
+ * Supports optional {@link ValueGuard} to validate incoming values.
+ */
 export class DefaultObservableValue<T> implements MutableObservableValue<T>, Terminable {
     readonly #notifier: Notifier<ObservableValue<T>>
 

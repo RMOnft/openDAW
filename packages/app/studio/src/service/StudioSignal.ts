@@ -14,9 +14,12 @@ import {Sample} from "@opendaw/studio-adapters"
  */
 export type StudioSignal =
     | {
+    /** Request to reset all waveform peaks. */
     type: "reset-peaks"
 } | {
+    /** Import the given sample into the project. */
     type: "import-sample", sample: Sample
 } | {
+    /** Delete a project identified by its metadata. */
     type: "delete-project", meta: ProjectMeta
 }

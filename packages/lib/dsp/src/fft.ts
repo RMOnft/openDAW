@@ -1,6 +1,8 @@
 import {int} from "@opendaw/lib-std"
 
+/** In-place radix-2 fast Fourier transform. */
 export class FFT {
+    /** Bit-reversal helper for FFT processing. */
     static reverse(i: int) {
         i = (i & 0x55555555) << 1 | (i >>> 1) & 0x55555555
         i = (i & 0x33333333) << 2 | (i >>> 2) & 0x33333333
@@ -14,6 +16,11 @@ export class FFT {
     readonly #cosTable: Float32Array
     readonly #sinTable: Float32Array
 
+    /**
+     * Creates an FFT instance.
+     *
+     * @param n - FFT size (must be power of two).
+     */
     constructor(n: int) {
         this.#n = n
 
@@ -28,6 +35,7 @@ export class FFT {
         }
     }
 
+    /** Performs the transform on the provided real and imaginary arrays. */
     process(real: Float32Array, imag: Float32Array): void {
         let i: int, j: int, k: int, temp: number
         for (let i = 0 | 0; i < this.#n; ++i) {

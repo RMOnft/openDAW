@@ -28,8 +28,15 @@ export namespace VUMeter {
     geometry: Geometry;
   }
 
+  /** Props for {@link Element}. */
   type Construct = { design: Design; model: ObservableValue<unitValue> };
 
+  /**
+   * Builds a URL to load a Google Web Font.
+   *
+   * @param fontFamily - Name of the font family.
+   * @param fontWeight - Desired weight to request.
+   */
   const getGoogleFontUrl = (fontFamily: string, fontWeight: number) =>
     `url("https://fonts.googleapis.com/css?family=${fontFamily.replace(" ", "+")}:${fontWeight}")`;
 
@@ -202,6 +209,9 @@ export namespace VUMeter {
       this.#style = style;
     }
 
+    /**
+     * Defines the section of the meter the stripe occupies.
+     */
     setSection(u0: number, u1: number, v0: number, v1: number): this {
       this.#u0 = u0;
       this.#u1 = u1;
@@ -210,11 +220,20 @@ export namespace VUMeter {
       return this;
     }
 
+    /** Adds a marker spanning from `u0` to `u1` with the given radial `length`. */
     addMarker(u0: number, u1: number, length: number): this {
       this.#markers.push({ u0, u1, length });
       return this;
     }
 
+    /**
+     * Adds a marker centered around a unit value.
+     *
+     * @param unit - Normalised position on the scale.
+     * @param width - Width of the marker in unit space.
+     * @param length - Radial length of the marker.
+     * @param align - Alignment relative to the unit value.
+     */
     addMarkerAt(
       unit: number,
       width: number,
@@ -243,6 +262,7 @@ export namespace VUMeter {
       return this;
     }
 
+    /** Finalises the stripe and returns the SVG path element. */
     build(): SVGPathElement {
       const markers = this.#markers;
       const u0 =
