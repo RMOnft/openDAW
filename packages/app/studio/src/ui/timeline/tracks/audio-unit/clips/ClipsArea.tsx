@@ -23,14 +23,26 @@ import {showProcessMonolog} from "@/ui/components/dialogs"
 
 const className = Html.adoptStyleSheet(css, "ClipsArea")
 
+/**
+ * Construction options for {@link ClipsArea}.
+ */
 type Construct = {
+    /** Lifecycle for the area. */
     lifecycle: Lifecycle
+    /** Access to project services. */
     service: StudioService
+    /** Manager providing track information. */
     manager: TracksManager
+    /** Scroll model synced with the timeline. */
     scrollModel: ScrollModel
+    /** Scroll container element. */
     scrollContainer: HTMLElement
 }
 
+/**
+ * Top level container hosting clip lanes and managing selection,
+ * dragging and context menus for clips.
+ */
 export const ClipsArea = ({lifecycle, service, manager, scrollModel, scrollContainer}: Construct) => {
     const {project} = service
     const {selection, boxAdapters, editing, userEditingManager} = project

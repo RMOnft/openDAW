@@ -8,3 +8,7 @@ For a guided overview of the interface, see the [UI tour](../../docs/docs-user/u
 
 ![Component hierarchy](../../../assets/ui/component-hierarchy.svg)
 Developers can extend the Studio with custom devices and user interfaces. Learn how to build and test plugins in the [developer docs](../../docs/docs-dev/extending/plugin-guide.md).
+
+For implementation details on the timeline, see the developer docs for
+[clips](../../docs/docs-dev/ui/timeline/clips.md) and
+[regions](../../docs/docs-dev/ui/timeline/regions.md).

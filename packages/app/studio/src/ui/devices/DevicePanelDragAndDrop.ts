@@ -1,3 +1,9 @@
+/**
+ * Drag-and-drop helpers for the device panel.
+ *
+ * This module manages inserting, reordering and swapping devices when the user
+ * drags elements within the panel.
+ */
 import {asDefined, panic, Terminable} from "@opendaw/lib-std"
 import {DragAndDrop} from "@/ui/DragAndDrop"
 import {AnyDragData} from "@/ui/AnyDragData"

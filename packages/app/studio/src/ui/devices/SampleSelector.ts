@@ -1,3 +1,9 @@
+/**
+ * Handles selecting and importing audio samples for devices.
+ *
+ * The selector coordinates drag-and-drop, browsing dialogs and pointer field
+ * updates so that devices can reference new or existing samples.
+ */
 import {AudioFileBox} from "@opendaw/studio-boxes"
 import {isDefined, Option, Terminable, UUID} from "@opendaw/lib-std"
 import {showProcessMonolog} from "@/ui/components/dialogs"

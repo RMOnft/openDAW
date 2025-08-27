@@ -12,6 +12,17 @@ const headers: RequestInit = {
     credentials: "include"
 }
 
+/**
+ * REST API helpers for retrieving and uploading sample files.
+ *
+ * ```mermaid
+ * sequenceDiagram
+ *   participant U as Client
+ *   participant A as ApiRoot
+ *   U->>A: list.php
+ *   U->>A: get.php
+ * ```
+ */
 export namespace SampleApi {
     export const ApiRoot = "https://api.opendaw.studio/samples"
     export const FileRoot = "https://assets.opendaw.studio/samples"

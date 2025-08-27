@@ -1,3 +1,9 @@
+/**
+ * Helper functions to build context menus for devices.
+ *
+ * The namespace exposes menu item builders used throughout device editors and
+ * the panel for actions such as renaming, adding or moving effects.
+ */
 import {DeviceHost, Devices, EffectDeviceBoxAdapter} from "@opendaw/studio-adapters"
 import {MenuItem} from "@/ui/model/menu-item.ts"
 import {Editing, PrimitiveField, PrimitiveValues, StringField} from "@opendaw/lib-box"
@@ -151,3 +157,4 @@ export namespace MenuItems {
                 }
             )
 }
+

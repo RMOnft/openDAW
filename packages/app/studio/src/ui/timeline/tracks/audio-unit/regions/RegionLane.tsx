@@ -11,13 +11,23 @@ import {TrackType} from "@opendaw/studio-adapters"
 
 const className = Html.adoptStyleSheet(css, "RegionLane")
 
+/**
+ * Construction parameters for {@link RegionLane}.
+ */
 type Construct = {
+    /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle
+    /** Track manager used to resolve region data. */
     trackManager: TracksManager
+    /** Visible range of the timeline. */
     range: TimelineRange
+    /** Adapter of the track whose regions are rendered. */
     adapter: TrackBoxAdapter
 }
 
+/**
+ * Displays region previews for a single track using a canvas renderer.
+ */
 export const RegionLane = ({lifecycle, trackManager, range, adapter}: Construct) => {
     if (adapter.type === TrackType.Undefined) {
         return <div className={Html.buildClassList(className, "deactive")}/>
