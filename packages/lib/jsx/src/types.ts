@@ -1,16 +1,29 @@
 import {Procedure} from "@opendaw/lib-std"
 import {Inject} from "./inject"
 
+/** DOM element type supported by the JSX helper functions. */
 export type DomElement = HTMLElement | SVGElement
+
+/**
+ * Any value that can appear within JSX markup including nested arrays and
+ * primitive values.
+ */
 export type JsxValue = null | undefined | boolean | string | number | DomElement | Array<JsxValue>
 
-// These are all utility type to let jsx understand usual HTML and SVG elements.
-//
+// These are all utility types to let JSX understand usual HTML and SVG elements.
+
+/**
+ * Attributes that receive special handling by the JSX factory.
+ */
 type AttributeMap = {
     className?: string | Inject.ClassList
     style?: Partial<CSSStyleDeclaration>
 }
 
+/**
+ * Extracts valid properties from a given DOM element type and augments them
+ * with the special attributes understood by this library.
+ */
 type ExtractProperties<T extends Element> = Partial<{
     [K in keyof T]:
     K extends keyof AttributeMap ? AttributeMap[K] :
@@ -23,7 +36,9 @@ type ExtractProperties<T extends Element> = Partial<{
                                 T[K] extends boolean ? boolean | string :
                                     string) | Inject.Attribute
 }> & {
+    /** Reference to the backing DOM element. */
     ref?: Inject.Ref<T>
+    /** Called when the element has been inserted into the DOM. */
     onLoad?: Procedure<T>
 } & Record<string, unknown>
 
