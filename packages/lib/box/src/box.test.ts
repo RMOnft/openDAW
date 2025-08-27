@@ -335,12 +335,16 @@ describe("gen (create/navigate)", () => {
   it("find box", () => expect(fooBox.foo.solo.box).toBe(fooBox));
   it("getField(1)", () => expect(fooBox.foo.getField(1)).toBe(fooBox.foo.solo));
   it("share graph", () => expect(fooBox.foo.solo.graph).toBe(graph));
-  // @ts-expect-error: testing invalid box configuration
   it("incompatible", () =>
-    expect(() => fooBox.ref.refer(fooBox.foo.mute)).toThrow());
-  // @ts-expect-error: deliberately wrong constant usage
+    expect(() => {
+      // @ts-expect-error: testing invalid box configuration
+      fooBox.ref.refer(fooBox.foo.mute);
+    }).toThrow());
   it("incompatible", () =>
-    expect(() => fooBox.ref.refer(fooBox.foo.bar)).toThrow());
+    expect(() => {
+      // @ts-expect-error: deliberately wrong constant usage
+      fooBox.ref.refer(fooBox.foo.bar);
+    }).toThrow());
   // it("compatible", () => expect(() => barBox.ref.refer(fooBox)).not.toThrow())
   // it("compatible", () => expect(() => fooBox.ref.refer(fooBox.foo.baz)).not.toThrow())
   // it("compatible", () => expect(() => fooBox.ref.refer(fooBox.foo.solo)).not.toThrow())

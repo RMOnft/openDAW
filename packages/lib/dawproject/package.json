@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint \"**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\"",
     "test": "vitest run"
   },
   "dependencies": {
