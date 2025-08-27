@@ -1,6 +1,15 @@
 import {Pointers} from "@opendaw/studio-enums"
 import {ClassSchema} from "@opendaw/lib-box-forge"
 
+/**
+ * Reusable playback parameters shared by clip types.
+ *
+ * ```mermaid
+ * graph TD
+ *   ClipPlaybackFields --> loop
+ *   ClipPlaybackFields --> speed
+ * ```
+ */
 export const ClipPlaybackFields = {
     name: "ClipPlaybackFields",
     fields: {
