@@ -18,6 +18,14 @@ type Construct = {
 
 /**
  * List of saved projects allowing the user to select or delete entries.
+ *
+ * @example
+ * ```tsx
+ * const handleSelect = ([id, meta]: [UUID.Format, ProjectMeta]) => {
+ *   console.log(meta.name)
+ * }
+ * <ProjectBrowser service={service} select={handleSelect}/>
+ * ```
  */
 export const ProjectBrowser = ({service, select}: Construct) => {
     const now = new Date().getTime()

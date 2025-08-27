@@ -12,6 +12,14 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Form component for editing project metadata and cover image.
+ *
+ * @example
+ * ```tsx
+ * <ProjectInfo lifecycle={lifecycle} service={service}/>
+ * ```
+ */
 export const ProjectInfo = ({lifecycle, service}: Construct) => {
     if (!service.hasProjectSession) {return "No session."}
     const {session} = service

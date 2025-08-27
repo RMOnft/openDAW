@@ -7,6 +7,15 @@ import {MidiDeviceAccess} from "@/midi/devices/MidiDeviceAccess"
 import {StudioService} from "@/service/StudioService"
 import {Project} from "@opendaw/studio-core"
 
+/**
+ * Wraps a loaded project together with its metadata and persistence helpers.
+ *
+ * @example
+ * ```ts
+ * const session = new ProjectSession(service, uuid, project, meta, Option.None, true)
+ * await session.save()
+ * ```
+ */
 export class ProjectSession {
     readonly #service: StudioService
     readonly #uuid: UUID.Format
@@ -41,6 +50,9 @@ export class ProjectSession {
     get meta(): ProjectMeta {return this.#meta}
     get cover(): Option<ArrayBuffer> {return this.#cover}
 
+    /**
+     * Persist the current project state to storage.
+     */
     async save(): Promise<void> {
         this.updateModifyDate()
         this.saveMidiConfiguration()
@@ -49,6 +61,14 @@ export class ProjectSession {
             : Promise.reject("Project has not been saved")
     }
 
+    /**
+     * Save the project under a new name.
+     *
+     * @example
+     * ```ts
+     * await session.saveAs({name: "copy", description: "", tags: [], created: date, modified: date})
+     * ```
+     */
     async saveAs(meta: ProjectMeta): Promise<Option<ProjectSession>> {
         Object.assign(this.meta, meta)
         this.updateModifyDate()
@@ -86,11 +106,17 @@ export class ProjectSession {
         return this.subscribeMetaData(observer)
     }
 
+    /**
+     * Update the session's cover image.
+     */
     updateCover(cover: Option<ArrayBuffer>): void {
         this.#cover = cover
         this.#hasChanges = true
     }
 
+    /**
+     * Modify a metadata field and notify subscribers.
+     */
     updateMetaData<KEY extends keyof ProjectMeta>(key: KEY, value: ProjectMeta[KEY]): void {
         if (this.meta[key] === value) {return}
         this.meta[key] = value

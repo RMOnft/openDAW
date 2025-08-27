@@ -15,6 +15,12 @@ export namespace ProjectDialogs {
 
     /**
      * Prompt the user to save a project by entering a name and meta data.
+     *
+     * @example
+     * ```ts
+     * const meta = await ProjectDialogs.showSaveDialog({headline: "Save"})
+     * console.log(meta.name)
+     * ```
      */
     export const showSaveDialog = async ({headline, meta}: {
         headline: string,
@@ -70,6 +76,11 @@ export namespace ProjectDialogs {
     /**
      * Display a dialog containing the {@link ProjectBrowser} component and
      * resolve with the selected project.
+     *
+     * @example
+     * ```ts
+     * const [id, meta] = await ProjectDialogs.showBrowseDialog(service)
+     * ```
      */
     export const showBrowseDialog = async (service: StudioService): Promise<[UUID.Format, ProjectMeta]> => {
         const {resolve, reject, promise} = Promise.withResolvers<[UUID.Format, ProjectMeta]>()
@@ -95,6 +106,11 @@ export namespace ProjectDialogs {
     /**
      * Ask the user which stems should be exported for the given project and
      * return the chosen configuration.
+     *
+     * @example
+     * ```ts
+     * const config = await ProjectDialogs.showExportStemsDialog(project)
+     * ```
      */
     export const showExportStemsDialog = async (project: Project): Promise<ExportStemsConfiguration> => {
         const {resolve, reject, promise} = Promise.withResolvers<ExportStemsConfiguration>()

@@ -1,6 +1,6 @@
 # File Management
 
-Import, export, and organize project files.
+Import, export, and organize project files. Developers can dive deeper in the [project docs](../../docs-dev/projects/overview.md).
 
 ## Save Projects
 
