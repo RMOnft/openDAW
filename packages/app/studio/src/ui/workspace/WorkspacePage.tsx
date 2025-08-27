@@ -23,6 +23,11 @@ import { Html } from "@opendaw/lib-dom";
 
 const className = Html.adoptStyleSheet(css, "WorkspacePage");
 
+/**
+ * Builds the DOM structure for the given workspace screen. The function
+ * recursively traverses the screen's layout configuration and injects panel
+ * placeholders and resizers into the provided container element.
+ */
 const buildScreen = (
   lifecycle: Lifecycle,
   panelContents: PanelContents,
@@ -89,6 +94,11 @@ const buildScreen = (
   build(element, [], Workspace.Default[screenKey].content, null, "vertical");
 };
 
+/**
+ * Page component that renders the currently selected workspace. It subscribes
+ * to the layout service and rebuilds the screen whenever the active screen
+ * changes.
+ */
 export const WorkspacePage: PageFactory<StudioService> = ({
   lifecycle,
   service,

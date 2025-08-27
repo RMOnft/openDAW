@@ -1,11 +1,12 @@
-import css from "./FlexSpace.sass?inline"
-import {createElement} from "@opendaw/lib-jsx"
-import {Html} from "@opendaw/lib-dom"
+import css from "./FlexSpace.sass?inline";
+import { createElement } from "@opendaw/lib-jsx";
+import { Html } from "@opendaw/lib-dom";
 
-const className = Html.adoptStyleSheet(css, "FlexSpace")
+const className = Html.adoptStyleSheet(css, "FlexSpace");
 
+/**
+ * Empty filler component used when a layout requires spare flexible space.
+ */
 export const FlexSpace = () => {
-    return (
-        <div className={className}/>
-    )
-}
+  return <div className={className} />;
+};
