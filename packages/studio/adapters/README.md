@@ -59,3 +59,8 @@ These patterns allow the studio to share behaviour across many different parts
 of the application while keeping the underlying data structures immutable and
 serialisable.
 
+## Device boxes
+
+Instrument, effect and groove adapters expose strongly-typed device boxes. To
+create custom devices or extend existing ones, see the [device boxes guide](../docs/docs-dev/extending/device-boxes.md) in the developer documentation.
+

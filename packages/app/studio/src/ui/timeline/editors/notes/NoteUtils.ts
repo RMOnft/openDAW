@@ -1,3 +1,6 @@
+/**
+ * Utility helpers for working with note data.
+ */
 import {NoteEventCollectionBoxAdapter} from "@opendaw/studio-adapters"
 import {Promises} from "@opendaw/lib-runtime"
 import {Files} from "@opendaw/lib-dom"
@@ -5,6 +8,9 @@ import {Channel, ControlEvent, ControlType, MidiFile, MidiTrack} from "@opendaw/
 import {ArrayMultimap, int} from "@opendaw/lib-std"
 import {EventCollection, EventSpan, NoteEvent, PPQN, ppqn} from "@opendaw/lib-dsp"
 
+/**
+ * Converts a note event collection into a MIDI track.
+ */
 const fromCollection = <E extends NoteEvent>(collection: EventCollection<E>): MidiTrack => {
     const events: Array<ControlEvent> = []
     const toTicks = (position: ppqn, timeDivision: int = 96): int => Math.floor(position / PPQN.Quarter * timeDivision)
@@ -15,6 +21,9 @@ const fromCollection = <E extends NoteEvent>(collection: EventCollection<E>): Mi
     return new MidiTrack(new ArrayMultimap<Channel, ControlEvent>([[0, events]], ControlEvent.Comparator), [])
 }
 
+/**
+ * Exports a collection of notes to a downloadable MIDI file.
+ */
 export const exportNotesToMidiFile = async (collection: NoteEventCollectionBoxAdapter, suggestedName: string) => {
     const encoder = MidiFile.encoder()
     encoder.addTrack(fromCollection(collection.events))

@@ -1,3 +1,6 @@
+/**
+ * Context menu entries for pitch editing operations.
+ */
 import {Editing} from "@opendaw/lib-box"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {Procedure, Selection} from "@opendaw/lib-std"
@@ -5,6 +8,9 @@ import {NoteEventBoxAdapter} from "@opendaw/studio-adapters"
 import {EventCollection} from "@opendaw/lib-dsp"
 import {MenuCollector, MenuItem} from "@/ui/model/menu-item.ts"
 
+/**
+ * Builds the menu items used by the pitch editor's edit menu.
+ */
 export const createPitchMenu = (editing: Editing,
                                 snapping: Snapping,
                                 selection: Selection<NoteEventBoxAdapter>,

@@ -1,24 +1,21 @@
-/** Indicates the type of an OPFS entry. */
+/** Describes an OPFS entry type. */
 export type Kind = "file" | "directory"
 
-/** Name and {@link Kind} pair returned by {@link OpfsProtocol.list}. */
+/** A single file system entry returned by {@link OpfsProtocol.list}. */
 export type Entry = { name: string, kind: Kind }
 
 /**
- * Minimal protocol used to interact with the Origin Private File System.
- *
- * Implementations can be used both inside a worker and on the main thread.
+ * Contract describing operations supported by the OPFS worker.
+ * Implementations perform synchronous file system tasks and return results
+ * via promises to the main thread.
  */
 export interface OpfsProtocol {
-    /** Write a file to the given path. */
+    /** Writes data to the given file path. */
     write(path: string, data: Uint8Array): Promise<void>
-
-    /** Read an entire file from the given path. */
+    /** Reads the contents of the specified file path. */
     read(path: string): Promise<Uint8Array>
-
-    /** Remove a file or directory tree at the given path. */
+    /** Removes a file or directory at the supplied path. */
     delete(path: string): Promise<void>
-
-    /** List entries below the given directory path. */
+    /** Lists entries within the directory at the supplied path. */
     list(path: string): Promise<ReadonlyArray<Entry>>
 }

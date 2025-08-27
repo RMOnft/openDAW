@@ -1,3 +1,6 @@
+/**
+ * Utilities for locating clips or tracks under pointer coordinates.
+ */
 import {AnyClipBoxAdapter} from "@opendaw/studio-adapters"
 import {ElementCapturing} from "@/ui/canvas/capturing.ts"
 import {BinarySearch, int, Nullable, NumberComparator} from "@opendaw/lib-std"

@@ -13,6 +13,13 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Top-level container for marker visuals and interactions.
+ *
+ * @remarks
+ * Listens to the timeline's visibility state to hide or show the
+ * track and assembles the header and body sections.
+ */
 export const MarkerTrack = ({lifecycle, service}: Construct) => {
     const classList = Inject.classList(className)
     const visibleObserver = (owner: ObservableValue<boolean>) => classList.toggle("hidden", !owner.getValue())

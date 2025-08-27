@@ -1,3 +1,7 @@
+/**
+ * Visual component representing an individual clip in the timeline. Handles
+ * painting of the clip preview and reacts to playback notifications.
+ */
 import css from "./Clip.sass?inline"
 import {asDefined, DefaultObservableValue, Lifecycle, Procedure, Terminator, UUID} from "@opendaw/lib-std"
 import {

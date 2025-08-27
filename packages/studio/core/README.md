@@ -21,3 +21,13 @@ Further architectural details are covered in the documentation:
 - [Architecture overview](../../docs/docs-dev/architecture/overview.md)
 - [Audio path and scheduler](../../docs/docs-dev/architecture/audio-path.md)
 
+### Routing diagram
+
+```mermaid
+graph LR
+    I[Instrument] -->|audio| B[Bus]
+    B -->|audio| M[Master]
+    I -- send --> R[Return]
+    R --> M
+```
+

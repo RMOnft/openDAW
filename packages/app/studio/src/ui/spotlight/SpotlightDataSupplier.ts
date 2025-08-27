@@ -1,3 +1,6 @@
+/**
+ * Provides prefix-based action search for the Spotlight command palette.
+ */
 import { Arrays, assert, Exec } from "@opendaw/lib-std";
 
 import { IconSymbol } from "@opendaw/studio-adapters";

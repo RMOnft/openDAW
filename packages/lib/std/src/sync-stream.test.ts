@@ -1,62 +1,65 @@
-import {describe, expect, it, vi} from "vitest"
-import {ByteArrayInput, ByteArrayOutput} from "./data"
-import {SyncStream} from "./sync-stream"
-import {Schema} from "./schema"
+/**
+ * Tests for synchronous stream utilities.
+ */
+import { describe, expect, it, vi } from "vitest";
+import { ByteArrayInput, ByteArrayOutput } from "./data";
+import { SyncStream } from "./sync-stream";
+import { Schema } from "./schema";
 
 /**
  * Minimal stub that fulfils the {@link Schema.IO} contract by
  * serialising a single signed 32-bit integer.
  */
-type Sample = { n: number }
+type Sample = { n: number };
 
 const makeIO = (): Schema.IO<Sample> => ({
-    bytesTotal: 4,
-    object: {n: 0},
-    write(out: ByteArrayOutput) {
-        out.writeInt(this.object.n)
-    },
-    read(inp: ByteArrayInput) {
-        this.object.n = inp.readInt()
-    }
-})
+  bytesTotal: 4,
+  object: { n: 0 },
+  write(out: ByteArrayOutput) {
+    out.writeInt(this.object.n);
+  },
+  read(inp: ByteArrayInput) {
+    this.object.n = inp.readInt();
+  },
+});
 
 /* ------------------------------------------------------------------ *
  * Tests
  * ------------------------------------------------------------------ */
 describe("SyncStream", () => {
-    it("round-trips data from sender to receiver exactly once", () => {
-        const io = makeIO()
+  it("round-trips data from sender to receiver exactly once", () => {
+    const io = makeIO();
 
-        const spy = vi.fn()
+    const spy = vi.fn();
 
-        /* ----------------------  set up writer / reader  ---------------------- */
-        // buffer is supplied by the receiver; +1 byte for the state flag
-        const reader = SyncStream.reader(io, obj => {
-            // verify the incoming value
-            expect(obj.n).toBe(42)
-            // mutate after read to be sure the writer does not see it
-            obj.n = 99
-            spy()
-        })
+    /* ----------------------  set up writer / reader  ---------------------- */
+    // buffer is supplied by the receiver; +1 byte for the state flag
+    const reader = SyncStream.reader(io, (obj) => {
+      // verify the incoming value
+      expect(obj.n).toBe(42);
+      // mutate after read to be sure the writer does not see it
+      obj.n = 99;
+      spy();
+    });
 
-        const writer = SyncStream.writer(io, reader.buffer, obj => {
-            obj.n = 42
-        })
+    const writer = SyncStream.writer(io, reader.buffer, (obj) => {
+      obj.n = 42;
+    });
 
-        /* -------------------------  perform I/O  ------------------------------ */
-        while (!writer.tryWrite()) {
-            // wait for writer
-        }
-        while (!reader.tryRead()) {
-            // wait for reader
-        }
-        expect(spy).toHaveBeenCalled()
-    })
+    /* -------------------------  perform I/O  ------------------------------ */
+    while (!writer.tryWrite()) {
+      // wait for writer
+    }
+    while (!reader.tryRead()) {
+      // wait for reader
+    }
+    expect(spy).toHaveBeenCalled();
+  });
 
-    it("rejects buffers that are too small", () => {
-        const io = makeIO()
-        const tiny = new SharedArrayBuffer(1) // definitely smaller than bytesTotal + 1
+  it("rejects buffers that are too small", () => {
+    const io = makeIO();
+    const tiny = new SharedArrayBuffer(1); // definitely smaller than bytesTotal + 1
 
-        expect(() => SyncStream.writer(io, tiny, () => undefined)).toThrow()
-    })
-})
+    expect(() => SyncStream.writer(io, tiny, () => undefined)).toThrow();
+  });
+});

@@ -1,3 +1,6 @@
+/**
+ * Runtime environment values needed when constructing a project.
+ */
 import {SampleManager} from "@opendaw/studio-adapters"
 
 /**
@@ -11,3 +14,4 @@ export interface ProjectEnv {
     /** Manager responsible for loading and caching samples. */
     sampleManager: SampleManager
 }
+

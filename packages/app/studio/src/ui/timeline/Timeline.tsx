@@ -11,10 +11,14 @@ import {ClipsHeader} from "@/ui/timeline/tracks/audio-unit/clips/ClipsHeader.tsx
 import {ppqn} from "@opendaw/lib-dsp"
 import {Html} from "@opendaw/lib-dom"
 
+/** CSS class applied to the outer timeline container. */
 const className = Html.adoptStyleSheet(css, "Timeline")
 
+/** Parameters for constructing the {@link Timeline} component. */
 type Construct = {
+    /** Lifecycle used to dispose observers. */
     lifecycle: Lifecycle
+    /** Service providing timeline and engine state. */
     service: StudioService
 }
 
@@ -47,6 +51,7 @@ export const Timeline = ({lifecycle, service}: Construct) => {
             {tracksFooter}
         </div>
     )
+    // Toggle CSS state based on the engine's recording flags.
     const updateRecordingState = () =>
         element.classList.toggle("recording", engine.isRecording.getValue() || engine.isCountingIn.getValue())
     lifecycle.ownAll(

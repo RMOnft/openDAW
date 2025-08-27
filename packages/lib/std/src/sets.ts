@@ -1,5 +1,8 @@
+/**
+ * Set helpers and operations.
+ */
 export class Sets {
-    static readonly #EMPTY: ReadonlySet<never> = Object.freeze(new Set<never>())
+  static readonly #EMPTY: ReadonlySet<never> = Object.freeze(new Set<never>());
 
-    static readonly empty = <T>(): ReadonlySet<T> => Sets.#EMPTY
+  static readonly empty = <T>(): ReadonlySet<T> => Sets.#EMPTY;
 }

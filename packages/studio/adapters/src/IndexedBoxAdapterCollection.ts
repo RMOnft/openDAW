@@ -93,6 +93,7 @@ export class IndexedBoxAdapterCollection<A extends IndexedBoxAdapter, P extends 
 
     getAdapterById(uuid: UUID.Format): Option<A> {return this.#entries.opt(uuid).map(({adapter}) => adapter)}
 
+    /** Returns the smallest free index that can be assigned to an adapter. */
     getMinFreeIndex(): int {
         const adapters = this.adapters()
         for (let index = 0; index < adapters.length; index++) {
@@ -116,6 +117,10 @@ export class IndexedBoxAdapterCollection<A extends IndexedBoxAdapter, P extends 
         this.moveIndex(adapter.indexField.getValue(), delta)
     }
 
+    /**
+     * Moves an adapter starting at {@link startIndex} by {@link delta} steps and
+     * updates indices of affected neighbours.
+     */
     moveIndex(startIndex: int, delta: int): void {
         const adapters = this.adapters()
         const adapter = adapters[startIndex]

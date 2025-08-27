@@ -10,6 +10,8 @@ import {FileReferenceSchema} from "@opendaw/lib-dawproject"
 import {DawProjectExporter} from "./DawProjectExporter"
 import {Peaks} from "@opendaw/lib-fusion"
 
+/** Verifies that a project can be exported to DAWproject format. */
+
 describe("DawProjectExport", () => {
     it("export", async () => {
         const __dirname = path.dirname(fileURLToPath(import.meta.url))

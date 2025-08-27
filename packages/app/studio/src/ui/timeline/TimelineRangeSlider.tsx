@@ -10,15 +10,24 @@ import {ValueDragging} from "@/ui/hooks/dragging.ts"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 import {Events, Html} from "@opendaw/lib-dom"
 
+/** CSS class applied to the slider root element. */
 const className = Html.adoptStyleSheet(css, "TimelineRangeSlider")
 
+/**
+ * Constructor parameters for {@link TimelineRangeSlider}.
+ */
 type Construct = {
+    /** Lifecycle managing internal subscriptions. */
     lifecycle: Lifecycle
+    /** Range object being manipulated. */
     range: TimelineRange
+    /** Optional style overrides applied to the container. */
     style?: Partial<CSSStyleDeclaration>
+    /** Additional class names for the container. */
     className?: string
 }
 
+// Colours used for the slider handles and filler bar.
 const COLOR_HANDLER = "rgba(255,255,255,0.25)"
 const COLOR_BACKGROUND = "rgba(255,255,255,0.125)"
 
@@ -28,6 +37,7 @@ const COLOR_BACKGROUND = "rgba(255,255,255,0.125)"
  */
 export const TimelineRangeSlider = ({lifecycle, range, style, className: extraClassName}: Construct) => {
     const radius = 5
+    // Space left and right so that handles are fully visible.
     const padding = radius * 2
     const markerParts: [SVGElement, SVGElement, SVGRectElement] = (
         <Frag>
@@ -44,10 +54,12 @@ export const TimelineRangeSlider = ({lifecycle, range, style, className: extraCl
         <svg classList="slider" viewBox="0 0 0 0" shape-rendering="geometricPrecision">{markerParts}</svg>
     )
     const dragLifeTime = lifecycle.own(new Terminator())
+    // Re-compute dimensions whenever the host element changes size.
     const computeSize = () => {
         const {clientWidth, clientHeight} = slider
         return ({clientWidth, clientHeight, trackLength: clientWidth - padding * 2})
     }
+    // Sync the SVG handle positions with the current range.
     const onUpdate = () => {
         if (!slider.isConnected) {return}
         const {trackLength} = computeSize()
@@ -63,6 +75,7 @@ export const TimelineRangeSlider = ({lifecycle, range, style, className: extraCl
         if (clientWidth === 0 || clientHeight === 0) return
         slider.viewBox.baseVal.width = clientWidth
         slider.viewBox.baseVal.height = clientHeight
+        // Recreate dragging handlers whenever the slider resizes.
         dragLifeTime.terminate()
         dragLifeTime.own(ValueDragging.installUnitValueRelativeDragging((event: PointerEvent) =>
             Option.wrap(new class implements ValueDragging.Process {

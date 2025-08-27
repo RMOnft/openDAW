@@ -5,7 +5,13 @@ import {CanvasPainter} from "@/ui/canvas/painter"
 import {MarkerTrackAdapter} from "@opendaw/studio-adapters"
 import {Context2d} from "@opendaw/lib-dom"
 
+/**
+ * Utility functions for painting marker boxes on a canvas.
+ */
 export namespace MarkerRenderer {
+    /**
+     * Creates a painter that renders all markers in the given track.
+     */
     export const createTrackRenderer = (canvas: HTMLCanvasElement,
                                         range: TimelineRange,
                                         {events}: MarkerTrackAdapter,
@@ -35,6 +41,9 @@ export namespace MarkerRenderer {
             renderMarker(prev)
         })
 
+    /**
+     * Renders a single marker box at the given canvas position.
+     */
     export const renderMarker = (context: CanvasRenderingContext2D,
                                  range: TimelineRange,
                                  adapter: MarkerBoxAdapter,
@@ -70,6 +79,9 @@ export namespace MarkerRenderer {
         }
     }
 
+    /**
+     * Computes the pixel width of the given marker label.
+     */
     export const computeWidth = (context: CanvasRenderingContext2D,
                                  adapter: MarkerBoxAdapter,
                                  isPlaying: boolean,
@@ -83,6 +95,9 @@ export namespace MarkerRenderer {
         }
     }
 
+    /**
+     * Builds a marker label string including repeat information.
+     */
     const renderLabel = (adapter: MarkerBoxAdapter, isPlaying: boolean, repeat: int): string => {
         if (adapter.plays === 1) {
             return adapter.label

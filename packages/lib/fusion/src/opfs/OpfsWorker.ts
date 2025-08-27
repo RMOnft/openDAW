@@ -18,6 +18,7 @@ export namespace OpfsWorker {
      * Register the OPFS protocol handlers on the given messenger channel.
      *
      * @param messenger messenger used to communicate with the worker host.
+     * {@link OpfsProtocol} commands.
      */
     export const init = (messenger: Messenger) =>
         Communicator.executor(messenger.channel("opfs"), new class implements OpfsProtocol {
@@ -96,7 +97,10 @@ export namespace OpfsWorker {
             }
         })
 
-    /** Split a slash-delimited path into individual segments. */
+    /**
+     * Splits a POSIX style path into individual segments while removing
+     * leading and trailing slashes.
+     */
     const pathToSegments = (path: string): ReadonlyArray<string> => {
         const noSlashes = path.replace(/^\/+|\/+$/g, "")
         return noSlashes === "" ? [] : noSlashes.split("/")

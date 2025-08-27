@@ -1,3 +1,7 @@
+/**
+ * Strategies describing how clips are visually modified during interactive
+ * editing operations such as moving or mirroring.
+ */
 import {AnyClipBoxAdapter} from "@opendaw/studio-adapters"
 import {int} from "@opendaw/lib-std"
 
@@ -21,6 +25,7 @@ export namespace ClipModifyStrategies {
         unselectedModifyStrategy: (): ClipModifyStrategy => ClipModifyStrategy.Identity
     })
 }
+
 
 /**
  * Describes how a clip should be read or transformed for temporary preview.

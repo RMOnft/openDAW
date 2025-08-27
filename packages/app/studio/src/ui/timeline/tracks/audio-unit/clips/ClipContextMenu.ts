@@ -1,3 +1,7 @@
+/**
+ * Installs a context menu for clips in the timeline offering common editing
+ * operations like delete, rename or converting clips to regions.
+ */
 import {ContextMenu} from "@/ui/ContextMenu.ts"
 import {MenuItem} from "@/ui/model/menu-item.ts"
 import {ElementCapturing} from "@/ui/canvas/capturing.ts"

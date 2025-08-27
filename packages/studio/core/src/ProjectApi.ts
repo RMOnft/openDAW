@@ -1,3 +1,6 @@
+/**
+ * Helper functions for constructing and modifying the project box graph.
+ */
 import {
     asDefined,
     asInstanceOf,
@@ -46,11 +49,13 @@ import {ColorCodes} from "./ColorCodes"
 import {EffectBox} from "./EffectBox"
 import {AudioUnitOrdering} from "./AudioUnitOrdering"
 
+/** Options for naming and coloring created clips or regions. */
 export type ClipRegionOptions = {
     name?: string
     hue?: number
 }
 
+/** Parameters for creating a note event. */
 export type NoteEventParams = {
     owner: { events: PointerField<Pointers.NoteEventCollection> }
     position: ppqn
@@ -61,6 +66,7 @@ export type NoteEventParams = {
     chance?: int
 }
 
+/** Parameters for creating a note region on a track. */
 export type NoteRegionParams = {
     trackBox: TrackBox
     position: ppqn
@@ -75,6 +81,9 @@ export type NoteRegionParams = {
 }
 
 // noinspection JSUnusedGlobalSymbols
+/**
+ * Convenience API providing factory methods to build project structures.
+ */
 export class ProjectApi {
     readonly #project: Project
 

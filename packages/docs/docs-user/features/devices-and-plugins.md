@@ -21,7 +21,9 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 - Traditional desktop formats like VST or Audio Unit may require additional support and are not guaranteed to work.
 - Different plugins may expose unique parameters; test them in your environment to confirm full compatibility.
 
-Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) in the developer documentation.
+Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) and the [device boxes guide](../../docs-dev/extending/device-boxes.md) in the developer documentation.
+
+For how device controls are connected to automation, see the [parameter adapter guide](../../docs-dev/extending/parameter-adapters.md).
 
 ## Modular workflow
 
@@ -41,3 +43,6 @@ Learn more about how openDAW interfaces with hardware and exports audio:
 - [Audio devices](../../docs-dev/audio-midi/audio-devices.md)
 - [MIDI devices](../../docs-dev/audio-midi/midi-devices.md)
 - [Offline rendering](../../docs-dev/audio-midi/offline-rendering.md)
+- [Audio effects](../../docs-dev/dsp/devices/audio-effects.md)
+- [MIDI effects](../../docs-dev/dsp/devices/midi-effects.md)
+- [Instruments](../../docs-dev/dsp/devices/instruments.md)

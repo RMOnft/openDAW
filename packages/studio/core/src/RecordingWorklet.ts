@@ -1,3 +1,7 @@
+/**
+ * Audio worklet node that records incoming audio into a ring buffer while
+ * generating waveform peaks.
+ */
 import {
     Arrays,
     assert,
@@ -64,6 +68,10 @@ class PeaksWriter implements Peaks, Peaks.Stage {
     nearest(_unitsPerPixel: number): Nullable<Peaks.Stage> {return this.stages.at(0) ?? null}
 }
 
+/**
+ * Captures audio from its input and exposes recorded data along with peak
+ * information.
+ */
 export class RecordingWorklet extends AudioWorkletNode implements Terminable, SampleLoader {
     readonly uuid: UUID.Format = UUID.generate()
 
@@ -125,6 +133,10 @@ export class RecordingWorklet extends AudioWorkletNode implements Terminable, Sa
         return this.#notifier.subscribe(observer)
     }
 
+    /**
+     * Stops recording, builds the audio and peak data and stores it via
+     * {@link SampleStorage}.
+     */
     async finalize() {
         this.#reader.stop()
         this.#isRecording = false

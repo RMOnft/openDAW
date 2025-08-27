@@ -3,8 +3,8 @@
  * react to pointer movement and optionally commit or revert changes through the
  * provided editing API.
  */
-import {Dragging} from "@opendaw/lib-dom"
-import {Editing} from "@opendaw/lib-box"
+import {Dragging} from "@opendaw/lib-dom" // pointer drag events
+import {Editing} from "@opendaw/lib-box" // transactional editing API
 
 /**
  * Represents an ongoing modification gesture within the timeline.

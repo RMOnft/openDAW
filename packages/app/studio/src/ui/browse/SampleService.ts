@@ -1,3 +1,7 @@
+/**
+ * Utility service wrapping {@link StudioService} to perform common sample
+ * operations used by the browser UI.
+ */
 import { asDefined, DefaultObservableValue, UUID } from "@opendaw/lib-std";
 import { PPQN } from "@opendaw/lib-dsp";
 import { Promises } from "@opendaw/lib-runtime";

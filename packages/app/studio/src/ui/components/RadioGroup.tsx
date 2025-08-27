@@ -4,16 +4,24 @@ import {Appearance, ButtonCheckboxRadio} from "@/ui/components/ButtonCheckboxRad
 import {TextTooltip} from "@/ui/surface/TextTooltip.tsx"
 import {Html} from "@opendaw/lib-dom"
 
-type Construct<VALUE> = {
+/** Props for {@link RadioGroup}. */
+export interface RadioGroupProps<VALUE> {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Observable representing the selected value. */
     model: MutableObservableValue<VALUE>
+    /** Definitions for each radio option. */
     elements: ReadonlyArray<Readonly<{ value: VALUE, element: DomElement, tooltip?: ValueOrProvider<string> }>>
+    /** Inline style for the wrapper. */
     style?: Partial<CSSStyleDeclaration>
+    /** Additional CSS class names. */
     className?: string
+    /** Visual appearance customisation. */
     appearance?: Appearance
 }
 
-export const RadioGroup = <T, >({lifecycle, model, elements, style, className, appearance}: Construct<T>) => {
+/** Groups several radio buttons sharing a model. */
+export const RadioGroup = <T, >({lifecycle, model, elements, style, className, appearance}: RadioGroupProps<T>) => {
     const name = Html.nextID()
     const map = new Map<T, HTMLInputElement>()
     const children: ReadonlyArray<[HTMLInputElement, HTMLLabelElement]> = elements.map(({value, element, tooltip}) => {
@@ -60,3 +68,13 @@ export const RadioGroup = <T, >({lifecycle, model, elements, style, className, a
                              dataClass="radio-group">{children}</ButtonCheckboxRadio>
     )
 }
+
+/** Property table for {@link RadioGroup}. */
+export const RadioGroupPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<any>", description: "Observable representing the selected value."},
+    {prop: "elements", type: "ReadonlyArray<{ value: any, element: DomElement, tooltip?: ValueOrProvider<string> }>", description: "Definitions for each radio option."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline style for the wrapper."},
+    {prop: "className", type: "string", description: "Additional CSS class names."},
+    {prop: "appearance", type: "Appearance", description: "Visual appearance customisation."}
+] as const

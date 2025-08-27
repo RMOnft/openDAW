@@ -13,16 +13,24 @@ import {DblClckTextInput} from "@/ui/wrapper/DblClckTextInput"
 import {TextTooltip} from "@/ui/surface/TextTooltip"
 import {Colors} from "@opendaw/studio-core"
 
+/** CSS class applied to the axis container. */
 const className = Html.adoptStyleSheet(css, "time-axis")
 
+// Reasonable bounds for track duration in bars.
 const MIN_TRACK_DURATION = 8 * PPQN.Bar
 const MAX_TRACK_DURATION = 1024 * PPQN.Bar
 
+/** Parameters for constructing {@link TimeAxis}. */
 type Construct = {
+    /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle
+    /** Service providing access to engine and project. */
     service: StudioService
+    /** Snap settings controlling cursor rounding. */
     snapping: Snapping
+    /** Visible range of the timeline. */
     range: TimelineRange
+    /** Optional mapper for custom cursor positioning. */
     mapper?: TimeAxisCursorMapper
 }
 
@@ -74,6 +82,7 @@ export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construc
         context.fillRect(x, 0, devicePixelRatio, height)
     }))
     const cursorElement: HTMLDivElement = <div className="cursor" data-component="cursor"/>
+    // Position cursor according to playback progress.
     const updateCursor = () => {
         const pulses = isDefined(mapper) ? mapper.mapPlaybackCursor(position.getValue()) : position.getValue()
         const x = Math.floor(range.unitToX(pulses))
@@ -81,6 +90,7 @@ export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construc
         cursorElement.style.visibility = 0 < x && x < range.width ? "visible" : "hidden"
     }
     const endMarkerElement: HTMLDivElement = <div className="end-marker" data-component="end-marker"/>
+    // Move end marker with project duration or temporary override.
     const updateEndMarker = () => {
         const pulses = endMarkerPosition ?? durationInPulses.getValue()
         endMarkerElement.style.left = `${Math.floor(range.unitToX(pulses))}px`
@@ -102,6 +112,7 @@ export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construc
             update: (event: Dragging.Event) => {
                 const x = event.clientX - canvas.getBoundingClientRect().left
                 const p = Math.max(0, range.xToUnit(x))
+                // Move playback position and keep cursor within view.
                 service.engine.setPosition(snapping.round(p))
                 if (p < range.unitMin) {
                     range.moveToUnit(p)
@@ -122,6 +133,7 @@ export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construc
             event.preventDefault()
             const scale = event.deltaY * 0.01
             const rect = canvas.getBoundingClientRect()
+            // Zoom and scroll the range based on wheel input.
             range.scaleBy(scale, range.xToValue(event.clientX - rect.left))
             range.moveBy(event.deltaX * 0.00001)
         }, {passive: false}),
