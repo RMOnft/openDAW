@@ -3,12 +3,13 @@ module.exports = {
     { type: "doc", id: "intro" },
     {
       type: "category",
-      label: "Workflows",
+      label: "Features",
       items: [
-        "workflows/beat",
-        "workflows/record-and-fx",
-        "workflows/export-share",
-        "workflows/automation-modulation",
+        "features/tracks",
+        "features/mixer",
+        "features/piano-roll",
+        "features/devices-and-plugins",
+        "features/file-management",
       ],
     },
   ],
