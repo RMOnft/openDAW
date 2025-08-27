@@ -2,14 +2,17 @@
 @use "@/colors"
 
 @mixin width-available
+  // Expands the element to the available width in the container
   width: -moz-available
   width: -webkit-fill-available
 
 @mixin height-available
+  // Expands the element to the available height in the container
   height: -moz-available
   height: -webkit-fill-available
 
 @mixin controllable
+  // Visual indication for automated controls
   &.automated, .automated &
     border-radius: 1px
     outline-offset: 1px
@@ -17,10 +20,12 @@
     background-color: rgba(white, 0.02)
 
 @mixin clips-aware
+  // Adds margin when clips are hidden
   &:not(.clips-visible *)
     margin-left: 1px
 
 @mixin form-element
+  // Default styling for editable form controls
   color: var(--color-gray)
   background-color: rgba(black, 0.08)
   box-shadow: 0 0 0 1px rgba(white, 0.02)
@@ -34,10 +39,12 @@
     opacity: 0.5
 
 @mixin dragging
+  // Reduces opacity while an element is dragged
   &.dragging
     opacity: 0.1
 
 @mixin unit-type-colors
+  // Sets track colours based on unit type
   &
     --color: var(--color-green)
 
@@ -51,6 +58,7 @@
     --color: var(--color-blue)
 
 @mixin markdown
+  // Basic styles for markdown-rendered content
   color: var(--color-gray)
 
   h1, h2, h3, h4, h5, h6, p
@@ -90,17 +98,20 @@
     background-color: rgba(white, 0.1)
 
 @mixin Control()
+  // Base layout sizing for control grids
   padding: 0.5em 0.25em
   height: 192px
   width: min-content
 
 @mixin ControlLayout($numColumns)
+  // Grid layout for controls with configurable column count
   display: grid
   grid-template: repeat(3, 3.5em) / repeat($numColumns, 3.5em)
   row-gap: 0.25em
   @include Control
 
 @mixin Input($ident: right)
+  // Standard numeric input with optional alignment
   display: flex
   flex-direction: row
   column-gap: 2px
@@ -150,6 +161,7 @@
       color: var(--color-gray)
 
 @mixin floating($semitransparent: true)
+  // Floating panel used for context menus and tooltips
   font-size: 0.75rem
   font-weight: inherit
   font-family: inherit
@@ -169,6 +181,7 @@
     background-color: hsl(200, 12%, 11%)
 
 @mixin corner-frame($color: rgba(white, 0.06))
+  // Draws small corner markers around an element
   position: relative
 
   &::before,

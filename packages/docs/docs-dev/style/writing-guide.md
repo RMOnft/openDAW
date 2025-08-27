@@ -10,3 +10,6 @@ Use this guide when contributing documentation.
 - Link to related topics to help navigation.
 
 These practices align with our Markdown linting and Vale configuration.
+
+For naming conventions of colours and other UI variables, refer to the [Design Tokens](./design-tokens.md) guide.
+
