@@ -1,7 +1,16 @@
-import {describe, expect, it} from "vitest"
-import {Xml} from "./index"
-import {ComicSchema, LibrarySchema, NovelSchema, TextbookSchema} from "./test.schema"
-import {assertInstanceOf} from "@opendaw/lib-std"
+/**
+ * Tests for the XML utilities using a library example to verify parsing and
+ * serialization of complex documents.
+ */
+import { describe, expect, it } from "vitest";
+import { Xml } from "./index";
+import {
+  ComicSchema,
+  LibrarySchema,
+  NovelSchema,
+  TextbookSchema,
+} from "./test.schema";
+import { assertInstanceOf } from "@opendaw/lib-std";
 
 // Example XML document used for round‑trip tests
 
@@ -30,49 +39,52 @@ ${Xml.Declaration}
     </Section>
   </Sections>
 </Library>
-`
+`;
 
 describe("Xml.parse() – LibrarySchema", () => {
-    it("should parse a complex library with books, reviews and inheritance", () => {
-        // Parse the XML string into a typed LibrarySchema instance
-        const library = Xml.parse(xml, LibrarySchema)
+  it("should parse a complex library with books, reviews and inheritance", () => {
+    // Parse the XML string into a typed LibrarySchema instance
+    const library = Xml.parse(xml, LibrarySchema);
 
-        expect(library.name).toBe("Central Library")
-        expect(library.location).toBe("Downtown")
-        expect(library.sections).toHaveLength(2)
+    expect(library.name).toBe("Central Library");
+    expect(library.location).toBe("Downtown");
+    expect(library.sections).toHaveLength(2);
 
-        const fiction = library.sections[0]
-        expect(fiction.id).toBe("sec1")
-        expect(fiction.name).toBe("Fiction")
-        expect(fiction.shelves).toHaveLength(1)
+    const fiction = library.sections[0];
+    expect(fiction.id).toBe("sec1");
+    expect(fiction.name).toBe("Fiction");
+    expect(fiction.shelves).toHaveLength(1);
 
-        const shelf1 = fiction.shelves[0]
-        expect(shelf1.id).toBe("shelf1")
-        expect(shelf1.books).toHaveLength(2)
+    const shelf1 = fiction.shelves[0];
+    expect(shelf1.id).toBe("shelf1");
+    expect(shelf1.books).toHaveLength(2);
 
-        const [novel, comic] = shelf1.books
-        expect(novel).toBeInstanceOf(NovelSchema)
-        assertInstanceOf(novel, NovelSchema)
-        expect(novel.title).toBe("1984")
-        expect(novel.pages).toBe(328)
-        expect(novel.review?.score).toBe(9.5)
-        expect(novel.review?.text).toBe("Dystopian masterpiece.")
-        expect(comic).toBeInstanceOf(ComicSchema)
-        expect(comic.title).toBe("Watchmen")
-        assertInstanceOf(comic, ComicSchema)
-        expect(comic.illustrator).toBe("Dave Gibbons")
-        expect(comic.review?.score).toBe(9.0)
-        expect(comic.review?.text).toBe("Iconic and gripping.")
-        const science = library.sections[1]
-        expect(science.name).toBe("Science")
-        const shelf2 = science.shelves[0]
-        expect(shelf2.books?.[0]).toBeInstanceOf(TextbookSchema)
-        expect((shelf2.books?.[0] as TextbookSchema).edition).toBe(2)
-    })
-    it("should preserve structure in parse → toElement → serialize", () => {
-        // Round‑trip: parse then serialize back and compare
-        const library = Xml.parse(xml, LibrarySchema)
-        const recreate = Xml.parse(Xml.pretty(Xml.toElement("Library", library)), LibrarySchema)
-        expect(JSON.stringify(library)).toBe(JSON.stringify(recreate)) // not perfect (missing tag names)
-    })
-})
+    const [novel, comic] = shelf1.books;
+    expect(novel).toBeInstanceOf(NovelSchema);
+    assertInstanceOf(novel, NovelSchema);
+    expect(novel.title).toBe("1984");
+    expect(novel.pages).toBe(328);
+    expect(novel.review?.score).toBe(9.5);
+    expect(novel.review?.text).toBe("Dystopian masterpiece.");
+    expect(comic).toBeInstanceOf(ComicSchema);
+    expect(comic.title).toBe("Watchmen");
+    assertInstanceOf(comic, ComicSchema);
+    expect(comic.illustrator).toBe("Dave Gibbons");
+    expect(comic.review?.score).toBe(9.0);
+    expect(comic.review?.text).toBe("Iconic and gripping.");
+    const science = library.sections[1];
+    expect(science.name).toBe("Science");
+    const shelf2 = science.shelves[0];
+    expect(shelf2.books?.[0]).toBeInstanceOf(TextbookSchema);
+    expect((shelf2.books?.[0] as TextbookSchema).edition).toBe(2);
+  });
+  it("should preserve structure in parse → toElement → serialize", () => {
+    // Round‑trip: parse then serialize back and compare
+    const library = Xml.parse(xml, LibrarySchema);
+    const recreate = Xml.parse(
+      Xml.pretty(Xml.toElement("Library", library)),
+      LibrarySchema,
+    );
+    expect(JSON.stringify(library)).toBe(JSON.stringify(recreate)); // not perfect (missing tag names)
+  });
+});
