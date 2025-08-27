@@ -5,7 +5,9 @@ Thank you for your interest in contributing to openDAW! This guide outlines the 
 ## Pull Request Workflow
 
 1. **Fork and clone** the repository, then create a descriptive branch for your work.
-2. **Install dependencies** with `npm install` and make sure the project builds locally.
+2. **Install dependencies**:
+   - `npm run install:deps` to install required system tools.
+   - `npm install` to fetch project packages.
 3. **Keep commits focused** and write clear commit messages that describe the change.
 4. **Format and lint** your changes:
    - `npx prettier --write <files>`
@@ -23,3 +25,8 @@ Thank you for your interest in contributing to openDAW! This guide outlines the 
 - Include tests or documentation updates alongside code changes when appropriate.
 
 Following these steps helps maintain a clean git history and a stable codebase. We appreciate every contribution—thank you for helping improve openDAW!
+
+## Useful Scripts
+
+- `npm run clean` – remove build artifacts and dependencies.
+- `npm run cert` – regenerate the HTTPS development certificate.

@@ -1,13 +1,29 @@
 #!/usr/bin/env node
+
+/**
+ * Install required system dependencies for developing openDAW.
+ *
+ * Usage:
+ *   npm run install:deps
+ *
+ * The script checks for common tools (Git, Node.js, mkcert, Sass,
+ * TypeScript, OpenSSL) and installs any missing ones using the
+ * platform's package manager. It finishes by running `npm install`
+ * to fetch JavaScript dependencies for the repository.
+ */
+
 const { execSync } = require('child_process');
 const os = require('os');
 
+// Determine the current operating system to select install commands.
 const platform = os.platform();
 
+// Helper to run shell commands and forward their output.
 function run(cmd) {
   execSync(cmd, { stdio: 'inherit' });
 }
 
+// List of external dependencies to verify and potentially install.
 const deps = [
   {
     name: 'git',
@@ -69,8 +85,10 @@ const deps = [
 for (const dep of deps) {
   let installed = false;
   try {
+    // Run the dependency's check command to see if it is installed.
     const output = execSync(dep.check, { stdio: 'pipe' }).toString().trim();
     if (dep.verify) {
+      // Some dependencies require version validation (e.g., Node.js >= 23).
       installed = dep.verify(output);
     } else {
       installed = true;
@@ -84,6 +102,7 @@ for (const dep of deps) {
     continue;
   }
 
+  // Select the installation command for the current platform.
   const installCmd = dep.install[platform];
   if (!installCmd) {
     console.log(`No install command for ${dep.name} on ${platform}. Please install manually.`);
@@ -98,7 +117,7 @@ for (const dep of deps) {
   }
 }
 
-// install project npm dependencies
+// Finally install Node.js packages for the repository itself.
 try {
   console.log('Installing npm packages...');
   run('npm install');
