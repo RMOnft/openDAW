@@ -3,6 +3,7 @@ import {Surface} from "@/ui/surface/Surface.tsx"
 import {FloatingTextInput} from "@/ui/components/FloatingTextInput.tsx"
 import {Events} from "@opendaw/lib-dom"
 
+/** Configuration values for {@link installValueInput}. */
 export type Construct<T> = {
     element: Element
     selection: Selection<T>
@@ -10,6 +11,11 @@ export type Construct<T> = {
     setter: Procedure<string>
 }
 
+/**
+ * Attaches a floating text input to an element that allows quick editing of
+ * values from a selection. Pressing <kbd>Enter</kbd> opens the editor at the
+ * pointer position.
+ */
 export const installValueInput = <T>({element, selection, getter, setter}: Construct<T>): Terminable => {
     let lastSelected: Nullable<T> = null
     return Terminable.many(

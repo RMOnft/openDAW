@@ -63,7 +63,18 @@ module.exports = {
     {
       type: "category",
       label: "UI",
-      items: ["ui/browse"],
+      items: [
+        {
+          type: "category",
+          label: "Timeline",
+          items: [
+            "ui/timeline/editors",
+            "ui/timeline/renderers",
+            "ui/timeline/performance",
+          ],
+        },
+        "ui/browse"
+      ],
     },
     {
       type: "category",
