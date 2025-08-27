@@ -12,6 +12,14 @@ const className = Html.adoptStyleSheet(css, "footer");
 
 type Construct = { lifecycle: Lifecycle; service: StudioService };
 
+/**
+ * Application footer displaying session information and build metadata.
+ *
+ * @example
+ * ```tsx
+ * <Footer lifecycle={lifecycle} service={service} />
+ * ```
+ */
 export const Footer = ({ lifecycle, service }: Construct) => {
   const labelOnline: HTMLElement = <div title="Online" aria-live="polite" />;
   const updateOnline = () =>

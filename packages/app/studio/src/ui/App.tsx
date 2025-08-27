@@ -14,6 +14,14 @@ import { ErrorsPage } from "@/ui/pages/ErrorsPage.tsx";
 import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
+/**
+ * Root component wiring together routing, header and footer.
+ *
+ * @example
+ * ```tsx
+ * render(App(service), mountNode);
+ * ```
+ */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();
   return (
