@@ -4,6 +4,9 @@ openDAW's appearance can be adjusted by overriding the CSS variables defined in
 [`colors.sass`](../../../packages/app/studio/src/colors.sass). Variables and
 class names use kebab-case such as `--color-green` or `.help-section`.
 
+
+The default UI uses the **Rubik** and **Open Sans** typefaces from [`packages/app/studio/public/fonts`](../../../packages/app/studio/public/fonts). These fonts are provided under the [SIL Open Font License 1.1](https://scripts.sil.org/OFL). Replace these files or override the CSS `font-family` to customize text appearance.
+
 To create a custom theme:
 
 1. Fork or clone the repository.
