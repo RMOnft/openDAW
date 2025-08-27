@@ -10,6 +10,20 @@ module.exports = {
     { type: "doc", id: "security" },
     { type: "doc", id: "security-privacy" },
     { type: "doc", id: "browser-support" },
+    { type: "doc", id: "fork-overview" },
+    {
+      type: "category",
+      label: "Documentation",
+      items: [
+        "documentation-site/overview",
+        "documentation-site/structure",
+        "documentation-site/styling",
+        "documentation-site/contributing",
+        "documentation-site/documentation-plan",
+        "documentation-site/i18n-accessibility",
+        "documentation-site/ownership-map",
+      ],
+    },
     {
       type: "category",
       label: "Debugging",
