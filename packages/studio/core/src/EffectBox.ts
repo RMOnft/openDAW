@@ -14,9 +14,13 @@ import {
 /**
  * Union of all effect device boxes supported by the studio.
  *
+ * Effects can be inserted or reached via sends using
+ * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}.
+ *
  * @public
  */
 export type EffectBox =
     | ArpeggioDeviceBox | PitchDeviceBox | ZeitgeistDeviceBox | UnknownMidiEffectDeviceBox
     | DelayDeviceBox | ReverbDeviceBox | RevampDeviceBox | StereoToolDeviceBox
     | ModularDeviceBox | UnknownAudioEffectDeviceBox
+

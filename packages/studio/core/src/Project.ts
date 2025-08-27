@@ -34,6 +34,9 @@ import {CaptureManager} from "./capture/CaptureManager"
 /**
  * Represents a full project including all boxes, adapters and runtime services.
  *
+ * The master audio unit is created using
+ * {@link @opendaw/studio-enums#AudioUnitType.Output | AudioUnitType.Output}.
+ *
  * @public
  */
 export class Project implements BoxAdaptersContext, Terminable, TerminableOwner {
