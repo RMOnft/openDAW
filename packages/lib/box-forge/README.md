@@ -3,6 +3,10 @@
 Utility for generating strongly typed [Box](../box/README.md) classes from a
 declarative schema.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/box-forge/) for detailed reference.
+
 The forge consumes schemas that mirror the
 [TypeScript definitions](./src/schema.ts) and emits complete class
 implementations. For an overview of how schemas map to generated code, see the

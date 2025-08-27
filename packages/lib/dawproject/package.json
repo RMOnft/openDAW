@@ -1,5 +1,6 @@
 {
   "name": "@opendaw/lib-dawproject",
+  "version//": "Version is managed by openDAW versioning policy; see packages/docs/docs-dev/build-and-run/versioning.md",
   "version": "0.0.6",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

@@ -9,6 +9,8 @@
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+// Adds the necessary COOP/COEP headers so the app runs in a
+// `crossOriginIsolated` context during development.
 import crossOriginIsolation from "vite-plugin-cross-origin-isolation";
 import viteCompression from "vite-plugin-compression";
 import { BuildInfo } from "./src/BuildInfo";
@@ -58,6 +60,7 @@ export default defineConfig(({ command }) => {
             }
           : undefined,
       headers: {
+        // These headers enable cross-origin isolation in supported browsers.
         "Cross-Origin-Opener-Policy": "same-origin",
         "Cross-Origin-Embedder-Policy": "require-corp",
       },
@@ -67,6 +70,7 @@ export default defineConfig(({ command }) => {
       },
     },
     plugins: [
+      // Apply the cross-origin isolation headers via a dedicated plugin.
       crossOriginIsolation(),
       viteCompression({
         algorithm: "brotliCompress",

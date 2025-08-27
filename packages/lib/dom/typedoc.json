@@ -1,0 +1,8 @@
+{
+  "//": "TypeDoc configuration for @opendaw/lib-dom",
+  "$schema": "https://typedoc.org/schema.json",
+  "extends": ["../../../typedoc.json"],
+  "entryPoints": ["./src/index.ts"],
+  "tsconfig": "./tsconfig.json",
+  "out": "../../docs/api/dom"
+}

@@ -36,6 +36,7 @@ export namespace ProjectPaths {
     export const projectFolder = (uuid: UUID.Format): string => `${Folder}/${UUID.toString(uuid)}`
 }
 
+/** Functions for persisting and transferring projects. */
 export namespace Projects {
     /**
      * Store the given project and its metadata.

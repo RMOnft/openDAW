@@ -1,7 +1,9 @@
 {
-  "//": "Typedoc configuration for generating API documentation",
+  "//": "Base TypeDoc configuration for openDAW packages",
+  "$schema": "https://typedoc.org/schema.json",
   "excludeExternals": false,
-  "excludePrivate": true,
   "excludeInternal": true,
+  "excludePrivate": true,
+  "plugin": ["typedoc-plugin-missing-exports"],
   "readme": "none"
 }

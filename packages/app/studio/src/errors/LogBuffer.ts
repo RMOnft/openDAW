@@ -1,13 +1,14 @@
 /**
  * Captures recent console output for inclusion in error reports.
  */
-import {int} from "@opendaw/lib-std"
+import { int } from "@opendaw/lib-std";
 
 /**
  * Captures a bounded history of console messages in production so they can be
  * sent along with error reports.
  */
 export namespace LogBuffer {
+  /** Single console log entry preserved for debugging. */
   export type Entry = {
     time: number;
     level: "debug" | "info" | "warn";
@@ -90,5 +91,6 @@ export namespace LogBuffer {
       original.warn.apply(console, args);
     };
   }
+  /** Retrieves the buffered log entries. */
   export const get = () => logBuffer;
 }

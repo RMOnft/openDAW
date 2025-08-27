@@ -1,3 +1,10 @@
+/**
+ * Application bootstrap for the OpenDAW Studio front end.
+ *
+ * The page must be served with cross-origin isolation headers (COOP/COEP)
+ * so that `window.crossOriginIsolated` is true and WebAssembly threads and
+ * AudioWorklets can run. See `docs-dev/build-and-run/cross-origin-isolation.md`.
+ */
 import "./main.sass"
 import {App} from "@/ui/App.tsx"
 import {panic, Procedure, unitValue, UUID} from "@opendaw/lib-std"
@@ -22,14 +29,22 @@ import {FontLoader} from "@/ui/FontLoader"
 import {ErrorHandler} from "@/errors/ErrorHandler.ts"
 import {MainThreadSampleManager, SampleProvider, SampleStorage, WorkerAgents, Worklets} from "@opendaw/studio-core"
 
-import WorkersUrl from "@opendaw/studio-core/workers.js?worker&url"
-import WorkletsUrl from "@opendaw/studio-core/processors.js?worker&url"
+import WorkersUrl from "@opendaw/studio-core/workers.js?worker&url";
+import WorkletsUrl from "@opendaw/studio-core/processors.js?worker&url";
 
-window.name = "main"
+window.name = "main";
 
-const loadBuildInfo = async () => fetch(`/build-info.json?v=${Date.now()}`).then(x => x.json().then(x => x as BuildInfo))
+/**
+ * Loads build metadata written during deployment. The unique UUID is
+ * used to validate cached resources and detect new releases.
+ */
+const loadBuildInfo = async (): Promise<BuildInfo> =>
+  fetch(`/build-info.json?v=${Date.now()}`).then((x) =>
+    x.json().then((x) => x as BuildInfo),
+  );
 
 requestAnimationFrame(async () => {
+        // Abort early if the required COOP/COEP headers are missing.
         if (!window.crossOriginIsolated) {return panic("window must be crossOriginIsolated")}
         console.debug("booting...")
         WorkerAgents.install(WorkersUrl)
@@ -81,56 +96,79 @@ requestAnimationFrame(async () => {
                     Spotlight.install(surface, service)
                 )
             }
-        }, errorHandler)
-        document.querySelector("#preloader")?.remove()
-        document.addEventListener("touchmove", (event: TouchEvent) => event.preventDefault(), {passive: false})
-        replaceChildren(surface.ground, App(service))
-        AnimationFrame.start()
-        installCursors()
-        if (buildInfo.env === "production" && !Browser.isLocalHost()) {
-            const uuid = buildInfo.uuid
-            const sourceCss = document.querySelector<HTMLLinkElement>("link[rel='stylesheet']")?.href ?? ""
-            const sourceCode = document.querySelector<HTMLScriptElement>("script[src]")?.src ?? ""
-            if (!sourceCss.includes(uuid) || !sourceCode.includes(uuid)) {
-                console.warn("Cache issue:")
-                console.warn("expected uuid", uuid)
-                console.warn("sourceCss", sourceCss)
-                console.warn("sourceCode", sourceCode)
-                showCacheDialog()
-                return
-            }
-            const checkExtensions = setInterval(() => {
-                if (document.scripts.length > 1) {
-                    showInfoDialog({
-                        headline: "Warning",
-                        message: "Please disable extensions to avoid undefined behavior.",
-                        okText: "Ignore"
-                    }).then()
-                    clearInterval(checkExtensions)
-                }
-            }, 5_000)
-            const checkUpdates = setInterval(async () => {
-                if (!navigator.onLine) {return}
-                const {status, value: newBuildInfo} = await Promises.tryCatch(loadBuildInfo())
-                if (status === "resolved" && newBuildInfo.uuid !== undefined && newBuildInfo.uuid !== buildInfo.uuid) {
-                    document.body.prepend(UpdateMessage())
-                    console.warn("A new version is online.")
-                    clearInterval(checkUpdates)
-                }
-            }, 5_000)
-        } else {
-            console.debug("No production checks (build version & updates).")
-        }
-        if (Browser.isFirefox()) {
-            const persisted = await Promises.tryCatch(navigator.storage.persisted())
-            console.debug("Firefox.isPersisted", persisted.value)
-            if (persisted.status === "resolved" && !persisted.value) {
-                await Promises.tryCatch(showStoragePersistDialog())
-            }
-        }
-        // delete obsolete indexedDB
-        try {indexedDB.deleteDatabase("audio-file-cache")} catch (_: any) {}
-        // delete obsolete samples
-        SampleStorage.clean().then()
+          }),
+          ContextMenu.install(surface.owner),
+          Spotlight.install(surface, service),
+        );
+      },
+    },
+    errorHandler,
+  );
+  document.querySelector("#preloader")?.remove();
+  document.addEventListener(
+    "touchmove",
+    (event: TouchEvent) => event.preventDefault(),
+    { passive: false },
+  );
+  replaceChildren(surface.ground, App(service));
+  AnimationFrame.start();
+  installCursors();
+  // In production verify resources and check for updates periodically
+  if (buildInfo.env === "production" && !Browser.isLocalHost()) {
+    const uuid = buildInfo.uuid;
+    const sourceCss =
+      document.querySelector<HTMLLinkElement>("link[rel='stylesheet']")?.href ??
+      "";
+    const sourceCode =
+      document.querySelector<HTMLScriptElement>("script[src]")?.src ?? "";
+    if (!sourceCss.includes(uuid) || !sourceCode.includes(uuid)) {
+      console.warn("Cache issue:");
+      console.warn("expected uuid", uuid);
+      console.warn("sourceCss", sourceCss);
+      console.warn("sourceCode", sourceCode);
+      showCacheDialog();
+      return;
     }
-)
+    const checkExtensions = setInterval(() => {
+      if (document.scripts.length > 1) {
+        showInfoDialog({
+          headline: "Warning",
+          message: "Please disable extensions to avoid undefined behavior.",
+          okText: "Ignore",
+        }).then();
+        clearInterval(checkExtensions);
+      }
+    }, 5_000);
+    const checkUpdates = setInterval(async () => {
+      if (!navigator.onLine) {
+        return;
+      }
+      const { status, value: newBuildInfo } =
+        await Promises.tryCatch(loadBuildInfo());
+      if (
+        status === "resolved" &&
+        newBuildInfo.uuid !== undefined &&
+        newBuildInfo.uuid !== buildInfo.uuid
+      ) {
+        document.body.prepend(UpdateMessage());
+        console.warn("A new version is online.");
+        clearInterval(checkUpdates);
+      }
+    }, 5_000);
+  } else {
+    console.debug("No production checks (build version & updates).");
+  }
+  if (Browser.isFirefox()) {
+    const persisted = await Promises.tryCatch(navigator.storage.persisted());
+    console.debug("Firefox.isPersisted", persisted.value);
+    if (persisted.status === "resolved" && !persisted.value) {
+      await Promises.tryCatch(showStoragePersistDialog());
+    }
+  }
+  // delete obsolete indexedDB
+  try {
+    indexedDB.deleteDatabase("audio-file-cache");
+  } catch (_: any) {}
+  // delete obsolete samples
+  SampleStorage.clean().then();
+});
