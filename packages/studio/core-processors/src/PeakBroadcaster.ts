@@ -72,10 +72,18 @@ export class PeakBroadcaster implements Terminable {
         }
     }
 
-    /** Convenience wrapper accepting a stereo channel tuple. */
+    /**
+     * Convenience wrapper accepting a stereo channel tuple instead of
+     * separate left and right buffers.
+     *
+     * @param channels - Tuple containing left and right channel buffers.
+     * @param fromIndex - Start index within the provided buffers.
+     * @param toIndex - End index (exclusive) within the provided buffers.
+     */
     processStereo([l, r]: StereoMatrix.Channels, fromIndex: int = 0, toIndex: int = RenderQuantum): void {
         this.process(l, r, fromIndex, toIndex)
     }
 
+    /** Stops broadcasting and releases resources. */
     terminate(): void {this.#terminable.terminate()}
 }

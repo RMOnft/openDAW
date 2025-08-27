@@ -13,11 +13,16 @@ import { Messenger } from "./messenger";
 import { ExecutorTuple } from "./promises";
 
 /**
- * Communicator provides type-safe communication between Window, Worker, MessagePort, BroadcastChannel.
- * Passed objects are structured cloned: https://developer.mozilla.org/en-US/docs/Web/API/structuredClone
- * It is highly advised not to pass classes with methods and or real private properties (starting with #).
- * They will lose their prototype and private property inheritance, and it is cumbersome to patch that up later.
- * Also read: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+ * @packageDocumentation
+ * Implements a typed RPC mechanism that builds on {@link Messenger}.
+ *
+ * Communicator provides type-safe communication between {@link Window},
+ * {@link Worker}, {@link MessagePort} and {@link BroadcastChannel}.  Passed
+ * objects are structured cloned – avoid sending class instances with methods or
+ * private fields as their prototypes will be lost during transport. See
+ * https://developer.mozilla.org/en-US/docs/Web/API/structuredClone and
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain for
+ * further details.
  *
  * Error Handling: protocol violations trigger {@link panic}. Returned promises
  * reject with errors sent from the remote side and should be handled by the
@@ -79,6 +84,13 @@ export namespace Communicator {
     ) => Promise<R>;
   }
 
+  /**
+   * Internal helper that proxies protocol calls through a {@link Messenger}.
+   *
+   * @remarks
+   * Instances track pending promises so that results returned by the remote
+   * executor are mapped back to the correct call site.
+   */
   class Sender<PROTOCOL> implements Dispatcher, Terminable {
     readonly #messenger: Messenger;
     readonly #expected = new Map<int, Return>();

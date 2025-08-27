@@ -8,3 +8,4 @@ This directory contains the font files bundled with openDAW.
 These files are used by the studio UI and loaded via `src/ui/Fonts.ts`.
 
 If you add or replace fonts, ensure that the license is compatible and update this document accordingly.
+

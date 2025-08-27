@@ -35,7 +35,9 @@ const className = Html.adoptStyleSheet(css, "Samples");
 
 /** Construction parameters for {@link SampleBrowser}. */
 type Construct = {
+  /** Lifecycle into which subscriptions are registered. */
   lifecycle: Lifecycle;
+  /** Access to studio services such as sample playback. */
   service: StudioService;
 };
 
@@ -44,7 +46,9 @@ const location = new DefaultObservableValue(SampleLocation.Cloud);
 
 /**
  * Browser and management UI for audio samples, allowing local or cloud
- * sources and providing preview and deletion options.
+ * sources and providing preview, deletion and volume control.
+ *
+ * Keyboard delete removes selected local samples.
  */
 export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own({ terminate: () => service.samplePlayback.eject() });

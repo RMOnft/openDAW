@@ -1,6 +1,10 @@
 import {int} from "@opendaw/lib-std"
 
-/** Sliding window root-mean-square calculator. */
+/**
+ * Rolling root-mean-square (RMS) calculator for continuous streams of
+ * samples. Internally a circular buffer is used to maintain the last `n`
+ * squared values and compute the RMS in constant time.
+ */
 export class RMS {
     readonly #values: Float32Array
     readonly #inv: number
@@ -9,7 +13,7 @@ export class RMS {
     #sum: number
 
     /**
-     * @param n - Number of samples forming the RMS window.
+     * @param n - Length of the sliding window in samples.
      */
     constructor(n: int) {
         this.#values = new Float32Array(n)
@@ -19,7 +23,12 @@ export class RMS {
         this.#sum = 0.0
     }
 
-    /** Pushes a sample and returns the current RMS value. */
+    /**
+     * Inserts a new sample into the window and returns the updated RMS value.
+     *
+     * @param x - Input sample to add.
+     * @returns Current RMS of the window contents.
+     */
     pushPop(x: number): number {
         const squared = x * x
         this.#sum -= this.#values[this.#index]
@@ -29,7 +38,7 @@ export class RMS {
         return this.#sum <= 0.0 ? 0.0 : Math.sqrt(this.#sum * this.#inv)
     }
 
-    /** Resets the internal state to zero. */
+    /** Resets the window contents and internal state. */
     clear(): void {
         this.#values.fill(0.0)
         this.#sum = 0.0

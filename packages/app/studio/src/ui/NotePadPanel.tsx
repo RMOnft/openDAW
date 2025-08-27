@@ -16,6 +16,12 @@ type Construct = {
   service: StudioService;
 };
 
+/**
+ * Markdown based notepad embedded in the workspace.
+ *
+ * Allows users to jot down notes. Content is persisted in the session's
+ * metadata under the key `notepad`.
+ */
 export const NotePadPanel = ({ lifecycle, service }: Construct) => {
   const markdownText = new DefaultObservableValue("");
   const editMode = new DefaultObservableValue(false);

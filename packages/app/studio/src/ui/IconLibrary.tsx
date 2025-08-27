@@ -1,6 +1,11 @@
 import { createElement } from "@opendaw/lib-jsx";
 import { IconSymbol } from "@opendaw/studio-adapters";
 
+/**
+ * Renders a hidden `<svg>` element containing `symbol` definitions for every
+ * icon used in the studio. The component should be included once at the root
+ * of the document so icons can be referenced via `<use>` elements elsewhere.
+ */
 export const IconLibrary = () => (
   <svg width="0" height="0" display="none" aria-hidden="true" focusable="false">
     <defs>

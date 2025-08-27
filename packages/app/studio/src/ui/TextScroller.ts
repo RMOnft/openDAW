@@ -1,7 +1,15 @@
 import {clamp, Terminable, Terminator} from "@opendaw/lib-std"
 import {AnimationFrame, Events} from "@opendaw/lib-dom"
 
+/**
+ * Provides an auto-scrolling effect for overflowing text blocks.
+ */
 export namespace TextScroller {
+    /**
+     * Enable smooth scrolling for the supplied element on pointer hover.
+     *
+     * @returns A {@link Terminable} used to remove installed listeners.
+     */
     export const install = (element: HTMLElement): Terminable => {
         element.style.overflow = "hidden"
         const scrolling = new Terminator()
