@@ -1,16 +1,36 @@
+/**
+ * Core schema definitions for the DAWproject XML format.
+ *
+ * @remarks
+ * The classes and enums in this file describe the default structure expected
+ * by a DAWproject compliant host. They are primarily used with the
+ * `@opendaw/lib-xml` utilities for parsing and serializing project files.
+ */
 import type {int} from "@opendaw/lib-std"
 import {Xml} from "@opendaw/lib-xml"
 
+/**
+ * Common properties that may be supplied for any DAWproject element.
+ */
 export interface Nameable {
     name?: string
     color?: string
     comment?: string
 }
 
+/**
+ * Elements that can be referenced by a unique identifier.
+ */
 export interface Referenceable extends Nameable {
     id?: string
 }
 
+/**
+ * Measurement units used by numeric parameters.
+ *
+ * @remarks
+ * These mirror the units defined by the DAWproject specification.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum Unit {
     LINEAR = "linear",
@@ -24,24 +44,36 @@ export enum Unit {
     BPM = "bpm"
 }
 
+/**
+ * Interpolation algorithms used by envelopes and automations.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum Interpolation {
     HOLD = "hold",
     LINEAR = "linear"
 }
 
+/**
+ * Available time units for timeline related values.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum TimeUnit {
     BEATS = "beats",
     SECONDS = "seconds"
 }
 
+/**
+ * Signal flow positions for channel sends.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum SendType {
     PRE = "pre",
     POST = "post"
 }
 
+/**
+ * Roles a device can fulfil inside a channel strip.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum DeviceRole {
     NOTE_FX = "noteFX",
@@ -49,6 +81,9 @@ export enum DeviceRole {
     AUDIO_FX = "audioFX"
 }
 
+/**
+ * Channel strip categories.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum ChannelRole {
     REGULAR = "regular",
@@ -58,12 +93,18 @@ export enum ChannelRole {
     VCA = "vca"
 }
 
+/**
+ * Algorithms used for audio stretching.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum AudioAlgorithm {
     REPITCH = "repitch",
     STRETCH = "stretch"
 }
 
+/**
+ * Project-wide metadata such as title, artist or copyright.
+ */
 @Xml.Class("MetaData")
 export class MetaDataSchema {
     @Xml.Element("Title", String) readonly title?: string
@@ -81,6 +122,9 @@ export class MetaDataSchema {
     @Xml.Element("Comment", String) readonly comment?: string
 }
 
+/**
+ * Information about the application that created the project file.
+ */
 @Xml.Class("Application")
 export class ApplicationSchema {
     @Xml.Attribute("name", Xml.StringRequired)
@@ -90,6 +134,9 @@ export class ApplicationSchema {
     readonly version!: string
 }
 
+/**
+ * Boolean parameter node storing on/off values.
+ */
 @Xml.Class("BooleanParameter")
 export class BooleanParameterSchema implements Referenceable {
     @Xml.Attribute("value", Xml.BoolRequired)
@@ -102,6 +149,9 @@ export class BooleanParameterSchema implements Referenceable {
     readonly name?: string
 }
 
+/**
+ * Floating point parameter node storing numeric values.
+ */
 @Xml.Class("RealParameter")
 export class RealParameterSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -123,6 +173,9 @@ export class RealParameterSchema implements Referenceable {
     readonly max?: number
 }
 
+/**
+ * Parameter describing a time signature.
+ */
 @Xml.Class("TimeSignature")
 export class TimeSignatureParameterSchema {
     @Xml.Attribute("numerator", Xml.NumberOptional)
@@ -132,6 +185,9 @@ export class TimeSignatureParameterSchema {
     readonly denominator?: number
 }
 
+/**
+ * Generic numeric parameter without a fixed unit.
+ */
 @Xml.Class("Parameter")
 export class ParameterSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -153,12 +209,18 @@ export class ParameterSchema implements Referenceable {
     readonly max?: number
 }
 
+/**
+ * Arbitrary path based state information.
+ */
 @Xml.Class("State")
 export class StateSchema {
     @Xml.Attribute("path")
     readonly path?: string
 }
 
+/**
+ * Definition of a channel send routing.
+ */
 @Xml.Class("Send")
 export class SendSchema {
     @Xml.Attribute("id")
@@ -180,6 +242,9 @@ export class SendSchema {
     readonly enable?: BooleanParameterSchema
 }
 
+/**
+ * Global transport related parameters such as tempo.
+ */
 @Xml.Class("Transport")
 export class TransportSchema {
     @Xml.Element("Tempo", RealParameterSchema)
@@ -189,12 +254,18 @@ export class TransportSchema {
     readonly timeSignature?: TimeSignatureParameterSchema
 }
 
+/**
+ * Base type for arrangable elements that can appear on timelines.
+ */
 @Xml.Class("Lane")
 export class LaneSchema implements Referenceable {
     @Xml.Attribute("id")
     readonly id?: string
 }
 
+/**
+ * Timeline container referencing a track.
+ */
 @Xml.Class("Timeline")
 export class TimelineSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -207,6 +278,9 @@ export class TimelineSchema implements Referenceable {
     readonly track?: string
 }
 
+/**
+ * Describes a single MIDI note event.
+ */
 @Xml.Class("Note")
 export class NoteSchema {
     @Xml.Attribute("time", Xml.NumberRequired)
@@ -228,12 +302,18 @@ export class NoteSchema {
     readonly rel?: number
 }
 
+/**
+ * Collection of {@link NoteSchema} entries on a timeline.
+ */
 @Xml.Class("Notes")
 export class NotesSchema extends TimelineSchema {
     @Xml.ElementRef(NoteSchema, "Note")
     readonly notes!: ReadonlyArray<NoteSchema>
 }
 
+/**
+ * Represents an audio or MIDI clip.
+ */
 @Xml.Class("Clip")
 export class ClipSchema implements Nameable {
     @Xml.Attribute("name")
@@ -285,12 +365,18 @@ export class ClipSchema implements Nameable {
     readonly reference?: string
 }
 
+/**
+ * Container for multiple {@link ClipSchema} instances.
+ */
 @Xml.Class("Clips")
 export class ClipsSchema extends TimelineSchema {
     @Xml.ElementRef(ClipSchema)
     readonly clips!: ReadonlyArray<ClipSchema>
 }
 
+/**
+ * Slot holding a single {@link ClipSchema}.
+ */
 @Xml.Class("ClipSlot")
 export class ClipSlotSchema extends TimelineSchema {
     @Xml.Element("Clip", ClipSchema)
@@ -300,6 +386,9 @@ export class ClipSlotSchema extends TimelineSchema {
     readonly hasStop?: boolean
 }
 
+/**
+ * Time based marker within the arrangement.
+ */
 @Xml.Class("Marker")
 export class MarkerSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -318,12 +407,18 @@ export class MarkerSchema implements Referenceable {
     readonly time!: number
 }
 
+/**
+ * Wrapper for multiple {@link MarkerSchema} elements.
+ */
 @Xml.Class("Markers")
 export class MarkersSchema {
     @Xml.Element("Marker", Array)
     readonly marker!: ReadonlyArray<MarkerSchema>
 }
 
+/**
+ * Warp point mapping content time to arrangement time.
+ */
 @Xml.Class("Warp")
 export class WarpSchema {
     @Xml.Attribute("time", Xml.NumberRequired)
@@ -333,6 +428,9 @@ export class WarpSchema {
     readonly contentTime!: number
 }
 
+/**
+ * Reference to an external or bundled file.
+ */
 @Xml.Class("File")
 export class FileReferenceSchema {
     @Xml.Attribute("path", Xml.StringRequired)
@@ -342,6 +440,9 @@ export class FileReferenceSchema {
     readonly external?: boolean
 }
 
+/**
+ * Base schema for media files such as audio or video.
+ */
 @Xml.Class("MediaFile")
 export class MediaFileSchema extends TimelineSchema {
     @Xml.Element("File", FileReferenceSchema)
@@ -351,6 +452,9 @@ export class MediaFileSchema extends TimelineSchema {
     readonly duration!: number
 }
 
+/**
+ * Audio file description with sample rate and channel information.
+ */
 @Xml.Class("Audio")
 export class AudioSchema extends MediaFileSchema {
     @Xml.Attribute("algorithm")
@@ -363,6 +467,9 @@ export class AudioSchema extends MediaFileSchema {
     readonly sampleRate!: int
 }
 
+/**
+ * Container for {@link WarpSchema} entries on a timeline.
+ */
 @Xml.Class("Warps")
 export class WarpsSchema extends TimelineSchema {
     @Xml.ElementRef(TimelineSchema)
@@ -375,6 +482,9 @@ export class WarpsSchema extends TimelineSchema {
     readonly contentTimeUnit!: string
 }
 
+/**
+ * Video file description analogous to {@link AudioSchema}.
+ */
 @Xml.Class("Video")
 export class VideoSchema extends MediaFileSchema {
     @Xml.Attribute("algorithm")
@@ -387,6 +497,9 @@ export class VideoSchema extends MediaFileSchema {
     readonly sampleRate!: int
 }
 
+/**
+ * Specifies what a set of automation points controls.
+ */
 @Xml.Class("Target")
 export class AutomationTargetSchema {
     @Xml.Attribute("parameter")
@@ -405,18 +518,27 @@ export class AutomationTargetSchema {
     readonly controller?: int
 }
 
+/**
+ * Base automation point with a time stamp.
+ */
 @Xml.Class("Point")
 export class PointSchema {
     @Xml.Attribute("time")
     readonly time!: number
 }
 
+/**
+ * Boolean automation point.
+ */
 @Xml.Class("BoolPoint")
 export class BoolPoint extends PointSchema {
     @Xml.Attribute("value", Xml.BoolOptional)
     readonly value!: boolean
 }
 
+/**
+ * Floating point automation point.
+ */
 @Xml.Class("RealPoint")
 export class RealPointSchema extends PointSchema {
     @Xml.Attribute("value", Xml.NumberRequired)
@@ -426,12 +548,18 @@ export class RealPointSchema extends PointSchema {
     readonly interpolation?: Interpolation
 }
 
+/**
+ * Integer automation point.
+ */
 @Xml.Class("IntegerPoint")
 export class IntegerPointSchema extends PointSchema {
     @Xml.Attribute("value", Xml.NumberRequired)
     readonly value!: int
 }
 
+/**
+ * Time-signature automation point.
+ */
 @Xml.Class("TimeSignaturePoint")
 export class TimeSignaturePointSchema extends PointSchema {
     @Xml.Attribute("numerator", Xml.NumberRequired)
@@ -441,6 +569,9 @@ export class TimeSignaturePointSchema extends PointSchema {
     readonly denominator!: int
 }
 
+/**
+ * Collection of heterogeneous automation points.
+ */
 @Xml.Class("Points")
 export class PointsSchema extends TimelineSchema {
     @Xml.Element("Target", AutomationTargetSchema)
@@ -453,12 +584,18 @@ export class PointsSchema extends TimelineSchema {
     readonly unit?: Unit
 }
 
+/**
+ * Collection of nested {@link TimelineSchema} lanes.
+ */
 @Xml.Class("Lanes")
 export class LanesSchema extends TimelineSchema {
     @Xml.ElementRef(TimelineSchema)
     readonly lanes?: ReadonlyArray<TimelineSchema>
 }
 
+/**
+ * The global arrangement of lanes and automation.
+ */
 @Xml.Class("Arrangement")
 export class ArrangementSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -477,6 +614,9 @@ export class ArrangementSchema implements Referenceable {
     readonly lanes?: LanesSchema
 }
 
+/**
+ * Scene containing a set of timeline elements.
+ */
 @Xml.Class("Scene")
 export class SceneSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -486,6 +626,9 @@ export class SceneSchema implements Referenceable {
     readonly content?: ReadonlyArray<TimelineSchema>
 }
 
+/**
+ * Base device description shared by plugins and built-ins.
+ */
 @Xml.Class("Device")
 export class DeviceSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -519,9 +662,15 @@ export class DeviceSchema implements Referenceable {
     readonly automatedParameters?: ReadonlyArray<ParameterSchema>
 }
 
+/**
+ * Built-in device provided by the host application.
+ */
 @Xml.Class("BuiltinDevice")
 export class BuiltinDeviceSchema extends DeviceSchema {}
 
+/**
+ * Equalizer band types supported by {@link EqualizerSchema}.
+ */
 // noinspection JSUnusedGlobalSymbols
 export enum EqBandType {
     HIGH_PASS = "highPass",
@@ -533,6 +682,9 @@ export enum EqBandType {
     NOTCH = "notch"
 }
 
+/**
+ * Single equalizer band definition.
+ */
 @Xml.Class("Band")
 export class BandSchema {
     @Xml.Attribute("type", Xml.StringRequired)
@@ -554,18 +706,27 @@ export class BandSchema {
     readonly enabled?: BooleanParameterSchema
 }
 
+/**
+ * Built-in multi-band equalizer device.
+ */
 @Xml.Class("Equalizer")
 export class EqualizerSchema extends BuiltinDeviceSchema {
     @Xml.ElementRef(BandSchema)
     readonly bands!: ReadonlyArray<BandSchema>
 }
 
+/**
+ * Third-party plugin device.
+ */
 @Xml.Class("Plugin")
 export class PluginSchema extends DeviceSchema {
     @Xml.Attribute("pluginVersion")
     readonly pluginVersion?: string
 }
 
+/**
+ * Mixer channel with devices and sends.
+ */
 @Xml.Class("Channel")
 export class ChannelSchema implements Referenceable {
     @Xml.Attribute("id")
@@ -599,6 +760,9 @@ export class ChannelSchema implements Referenceable {
     readonly sends?: SendSchema[]
 }
 
+/**
+ * Track which may contain nested tracks or clips.
+ */
 @Xml.Class("Track")
 export class TrackSchema extends LaneSchema {
     @Xml.Attribute("contentType")
@@ -620,9 +784,15 @@ export class TrackSchema extends LaneSchema {
     readonly tracks?: ReadonlyArray<TrackSchema>
 }
 
+/**
+ * [CLAP](https://cleveraudio.org/) plugin device.
+ */
 @Xml.Class("ClapPlugin")
 export class ClapPluginSchema extends PluginSchema {}
 
+/**
+ * Root element representing a complete DAWproject file.
+ */
 @Xml.Class("Project")
 export class ProjectSchema {
     @Xml.Attribute("version", Xml.StringRequired)
