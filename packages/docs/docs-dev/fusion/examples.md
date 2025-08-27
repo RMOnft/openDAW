@@ -13,3 +13,6 @@ const peaks = await worker.generate(buffer)
 const opfs = new OpfsWorker()
 await opfs.writeFile('demo.wav', data)
 ```
+
+More details are available in the [OPFS](opfs.md),
+[Live Stream](live-stream.md) and [Peaks](peaks.md) guides.

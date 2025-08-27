@@ -1,3 +1,7 @@
+/**
+ * Displays a single sample entry with metadata and context actions such as
+ * playback, editing or deletion.
+ */
 import css from "./SampleView.sass?inline";
 import { createElement } from "@opendaw/lib-jsx";
 import { Exec, Lifecycle, Objects, UUID } from "@opendaw/lib-std";

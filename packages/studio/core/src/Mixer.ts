@@ -5,7 +5,13 @@ import {AudioUnitBoxAdapter, IndexedBoxAdapterCollection} from "@opendaw/studio-
 import {DeferExec, deferNextFrame} from "@opendaw/lib-dom"
 import {Box} from "@opendaw/lib-box"
 
+/**
+ * View interface for channel strips that react to solo or mute changes.
+ */
 export interface ChannelStripView {
+    /**
+     * Toggles visual silence state of the channel strip.
+     */
     silent(value: boolean): void
 }
 
@@ -15,6 +21,9 @@ interface ChannelStripState {
     subscription: Subscription
 }
 
+/**
+ * Coordinates mute and solo state across a collection of audio units.
+ */
 export class Mixer implements Terminable {
     readonly #terminator: Terminator = new Terminator()
     readonly #states: SortedSet<UUID.Format, ChannelStripState>
@@ -61,6 +70,13 @@ export class Mixer implements Terminable {
         }))
     }
 
+    /**
+     * Registers a {@link ChannelStripView} for the given adapter.
+     *
+     * @param uuid - Adapter identifier used to attach the view.
+     * @param view - View instance to update when mixer state changes.
+     * @returns Terminable handle to remove the view.
+     */
     registerChannelStrip({uuid}: AudioUnitBoxAdapter, view: ChannelStripView): Terminable {
         this.#states.get(uuid).views.push(view)
         this.#deferUpdate.request()
@@ -70,6 +86,7 @@ export class Mixer implements Terminable {
         })
     }
 
+    /** Cleans up all resources used by the mixer. */
     terminate(): void {this.#terminator.terminate()}
 
     #updateStates(): void {

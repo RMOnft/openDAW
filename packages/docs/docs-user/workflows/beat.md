@@ -20,3 +20,4 @@ flowchart TD
 7. **Extend the arrangement.** Duplicate the clip or record more variations to build a longer beat.
 
 This workflow gets a basic rhythm going so you can start layering basslines, melodies, and effects.
+For a comparison of straight and shuffled timing, listen to the [groove examples](../../docs-learn/how-it-works/groove-examples.md).

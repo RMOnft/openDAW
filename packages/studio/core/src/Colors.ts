@@ -7,6 +7,9 @@
  */
 const computedStyle = getComputedStyle(document.documentElement)
 
+/**
+ * Application color palette resolved from CSS variables.
+ */
 export const Colors = {
     // Accent blue used for links and active states
     blue: computedStyle.getPropertyValue("--color-blue"),

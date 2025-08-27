@@ -68,8 +68,9 @@ C4Component
 - **Config** – Delivers runtime and build settings consumed by other components through
   [`@opendaw/eslint-config`](../package-inventory.md#config) and related packages.
 
-For a deeper look at timing, see the [audio path](./audio-path.md), and
-learn how to build the project in [Build and Run](../build-and-run/setup.md).
+For a deeper look at timing, see the [audio path](./audio-path.md) and the
+[engine sequence diagrams](./engine.md), and learn how to build the project in
+[Build and Run](../build-and-run/setup.md).
 
 - **App** – Provides the user interface and coordinates system interactions.
 - **Studio** – Handles audio processing, scheduling, and engine control.
@@ -77,7 +78,8 @@ learn how to build the project in [Build and Run](../build-and-run/setup.md).
 - **Config** – Delivers runtime and build settings consumed by other components.
 
 Communication between these parts is based on lightweight message channels; see
-the [messaging architecture](./messaging.md) for details.
+the [messaging architecture](./messaging.md) for details. Concrete worker
+protocols are described in the [Fusion docs](../fusion/overview.md).
 
 ## Worker Lifecycle
 

@@ -13,7 +13,13 @@ import {asDefined, asInstanceOf, UUID} from "@opendaw/lib-std"
 import {AudioUnitType} from "@opendaw/studio-enums"
 import {Capture} from "./capture/Capture"
 
+/**
+ * Utility that upgrades project graphs to the current schema.
+ */
 export class ProjectMigration {
+    /**
+     * Applies all available migrations to the provided project skeleton.
+     */
     static migrate({boxGraph, mandatoryBoxes}: ProjectDecoder.Skeleton): void {
         const {rootBox} = mandatoryBoxes
         if (rootBox.groove.targetAddress.isEmpty()) {
@@ -83,3 +89,4 @@ export class ProjectMigration {
         }))
     }
 }
+

@@ -1,3 +1,6 @@
+/**
+ * UI component for selecting the musical key/scale.
+ */
 import css from "./ScaleSelector.sass?inline"
 import {Arrays, Lifecycle} from "@opendaw/lib-std"
 import {MenuButton} from "@/ui/components/MenuButton.tsx"
@@ -10,11 +13,17 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "ScaleSelector")
 
+/**
+ * Parameters for {@link ScaleSelector}.
+ */
 type Construct = {
     lifecycle: Lifecycle
     scale: ScaleConfig
 }
 
+/**
+ * Dropdown menu allowing users to pick the root key for the scale.
+ */
 export const ScaleSelector = ({lifecycle, scale}: Construct) => {
     const labels = MidiKeys.Names.English
     const labelName = Inject.value(labels[scale.key])

@@ -51,9 +51,17 @@ import {encodeWavFloat} from "../Wav"
 import {DeviceBoxUtils} from "@opendaw/studio-adapters"
 import {DeviceIO} from "./DeviceIO"
 
+/**
+ * Serializes the Studio project graph into the DAWproject XML schema.
+ */
 export namespace DawProjectExporter {
+    /** Callback used to store binary resources such as samples or presets. */
     export interface ResourcePacker {write(path: string, buffer: ArrayBufferLike): FileReferenceSchema}
 
+    /**
+     * Convert the given {@link Project} into a {@link ProjectSchema} and emit
+     * resources via the provided {@link ResourcePacker}.
+     */
     export const write = (project: Project, resourcePacker: ResourcePacker) => {
         const ids = new AddressIdEncoder()
         const {boxGraph, timelineBox, rootBox, sampleManager} = project

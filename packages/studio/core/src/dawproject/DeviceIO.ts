@@ -3,7 +3,13 @@ import {assert, ByteArrayInput, ByteArrayOutput, Option, panic, UUID} from "@ope
 import {AudioFileBox, BoxIO} from "@opendaw/studio-boxes"
 import {DeviceBox, DeviceBoxUtils} from "@opendaw/studio-adapters"
 
+/**
+ * Binary import/export helpers for {@link DeviceBox} instances.
+ */
 export namespace DeviceIO {
+    /**
+     * Serialize a device box and its dependencies into a compact binary format.
+     */
     export const exportDevice = (box: Box): ArrayBufferLike => {
         const dependencies = Array.from(box.graph.dependenciesOf(box).boxes)
 
@@ -23,6 +29,9 @@ export namespace DeviceIO {
         return output.toArrayBuffer()
     }
 
+    /**
+     * Deserialize a previously exported device into the given {@link BoxGraph}.
+     */
     export const importDevice = (boxGraph: BoxGraph<BoxIO.TypeMap>, buffer: ArrayBufferLike): DeviceBox => {
         const input = new ByteArrayInput(buffer)
         const header = input.readString()

@@ -1,3 +1,6 @@
+/**
+ * Modifier that adjusts the loop or content duration of a note region.
+ */
 import {int, Notifier, Observer, Option, Terminable} from "@opendaw/lib-std"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -8,6 +11,9 @@ import {ppqn} from "@opendaw/lib-dsp"
 import {UINoteEvent} from "./UINoteEvent"
 import {Dragging} from "@opendaw/lib-dom"
 
+/**
+ * Construction parameters for {@link NoteContentDurationModifier}.
+ */
 type Construct = Readonly<{
     element: Element
     snapping: Snapping
@@ -15,6 +21,9 @@ type Construct = Readonly<{
     reference: NoteEventOwnerReader
 }>
 
+/**
+ * Handles drag interactions that change the note region's loop length.
+ */
 export class NoteContentDurationModifier implements NoteModifier {
     static create(construct: Construct): NoteContentDurationModifier {
         return new NoteContentDurationModifier(construct)

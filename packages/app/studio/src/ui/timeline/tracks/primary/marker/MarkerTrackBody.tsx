@@ -17,6 +17,12 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Canvas based renderer and interaction layer for timeline markers.
+ *
+ * @remarks
+ * Manages drawing, hit testing and editing operations for marker boxes.
+ */
 export const MarkerTrackBody = ({lifecycle, service}: Construct) => {
     const {project, engine} = service
     const {editing, boxGraph} = project

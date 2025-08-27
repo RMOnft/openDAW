@@ -1,7 +1,12 @@
 import {int} from "@opendaw/lib-std"
 import {Peaks} from "./Peaks"
 
+/** Helper functions for drawing peak data onto a canvas context. */
 export namespace PeaksPainter {
+    /**
+     * Layout describing the mapping between waveform units (u, v) and canvas
+     * coordinates (x, y).
+     */
     export interface Layout {
         x0: number,
         x1: number,
@@ -13,6 +18,10 @@ export namespace PeaksPainter {
         v1: number
     }
 
+    /**
+     * Renders blocks for the specified channel of the provided
+     * {@link Peaks} object within the given layout.
+     */
     export const renderBlocks = (path: CanvasRenderingContext2D,
                                  peaks: Peaks,
                                  channelIndex: int,
