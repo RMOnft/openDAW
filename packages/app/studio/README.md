@@ -29,3 +29,7 @@ The workspace layout is defined in `src/ui/workspace`. New screens can be added 
 For implementation details on the timeline, see the developer docs for
 [clips](../../docs/docs-dev/ui/timeline/clips.md) and
 [regions](../../docs/docs-dev/ui/timeline/regions.md).
+Additional information is available for
+[tracks](../../docs/docs-dev/ui/timeline/tracks.md),
+[markers](../../docs/docs-dev/ui/timeline/markers.md) and the
+[timeline footer](../../docs/docs-dev/ui/timeline/footer.md).

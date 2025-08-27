@@ -38,3 +38,10 @@ const painter = new CanvasUnitPainter(
     }
 );
 ```
+
+### Developer Documentation
+
+Further implementation details are covered in the developer docs for
+[timeline tracks](../../docs-dev/ui/timeline/tracks.md),
+[markers](../../docs-dev/ui/timeline/markers.md) and the
+[timeline footer](../../docs-dev/ui/timeline/footer.md).
