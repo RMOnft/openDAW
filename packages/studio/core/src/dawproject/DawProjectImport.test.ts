@@ -5,6 +5,8 @@ import * as fs from "node:fs"
 import {DawProject} from "./DawProject"
 import {DawProjectImport} from "./DawProjectImport"
 
+/** Basic sanity checks for the DAWproject importer. */
+
 describe("DawProjectImport", () => {
     it("import", async () => {
         const __dirname = path.dirname(fileURLToPath(import.meta.url))
