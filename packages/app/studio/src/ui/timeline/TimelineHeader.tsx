@@ -1,3 +1,7 @@
+/**
+ * Header toolbar displayed above the timeline.  It exposes snap settings and
+ * toggles for visibility of various timeline layers such as markers and clips.
+ */
 import css from "./TimelineHeader.sass?inline"
 import {Lifecycle} from "@opendaw/lib-std"
 import {StudioService} from "@/service/StudioService.ts"

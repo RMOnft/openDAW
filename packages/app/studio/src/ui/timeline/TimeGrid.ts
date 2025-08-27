@@ -1,3 +1,7 @@
+/**
+ * Helpers for walking the musical grid of the timeline.  Provides iteration
+ * utilities that call back for each bar, beat or subdivision within a range.
+ */
 import {PPQN} from "@opendaw/lib-dsp"
 import {int, quantizeFloor} from "@opendaw/lib-std"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"

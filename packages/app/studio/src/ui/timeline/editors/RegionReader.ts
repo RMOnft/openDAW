@@ -1,3 +1,8 @@
+/**
+ * Implementation of {@link EventOwnerReader} for region adapters.  Provides a
+ * unified way to access region properties independent of the underlying event
+ * type (audio, notes or values).
+ */
 import {ValueRegionBoxAdapter} from "@opendaw/studio-adapters"
 import {
     ValueEventCollectionBoxAdapter
@@ -21,7 +26,9 @@ import {Propagation} from "@opendaw/lib-box"
 import {AudioFileBoxAdapter} from "@opendaw/studio-adapters"
 import {TrackBoxAdapter} from "@opendaw/studio-adapters"
 
-export class RegionReader<REGION extends LoopableRegionBoxAdapter<CONTENT>, CONTENT> implements EventOwnerReader<CONTENT> {
+export class RegionReader<REGION extends LoopableRegionBoxAdapter<CONTENT>, CONTENT>
+    implements EventOwnerReader<CONTENT> {
+    /** Creates a reader for an {@link AudioRegionBoxAdapter}. */
     static forAudioRegionBoxAdapter(region: AudioRegionBoxAdapter): AudioEventOwnerReader {
         return new class extends RegionReader<AudioRegionBoxAdapter, never> implements AudioEventOwnerReader {
             constructor(region: AudioRegionBoxAdapter) {super(region)}
@@ -30,10 +37,12 @@ export class RegionReader<REGION extends LoopableRegionBoxAdapter<CONTENT>, CONT
         }(region)
     }
 
+    /** Creates a reader for a {@link NoteRegionBoxAdapter}. */
     static forNoteRegionBoxAdapter(adapter: NoteRegionBoxAdapter): NoteEventOwnerReader {
         return new RegionReader<NoteRegionBoxAdapter, NoteEventCollectionBoxAdapter>(adapter)
     }
 
+    /** Creates a reader for a {@link ValueRegionBoxAdapter}. */
     static forValueRegionBoxAdapter(adapter: ValueRegionBoxAdapter): ValueEventOwnerReader {
         return new RegionReader<ValueRegionBoxAdapter, ValueEventCollectionBoxAdapter>(adapter)
     }

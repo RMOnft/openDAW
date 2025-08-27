@@ -1,3 +1,7 @@
+/**
+ * Helpers for importing MIDI files and translating their events into
+ * timeline tracks and regions.
+ */
 import {
     Arrays,
     byte,
@@ -20,6 +24,11 @@ import {ColorCodes, Project} from "@opendaw/studio-core"
 import {ControlType, MidiFile} from "@opendaw/lib-midi"
 
 export namespace MidiImport {
+    /**
+     * Prompts the user for a MIDI file and converts it into note regions within
+     * the supplied project.  New tracks are created as needed and the operation
+     * runs inside an editing modification so it can be reverted on failure.
+     */
     export const toTracks = async (project: Project, audioUnitBoxAdapter: AudioUnitBoxAdapter) => {
         const fileResult = await Promises.tryCatch(Files.open().then(([file]) => file.arrayBuffer()))
         if (fileResult.status === "rejected") {

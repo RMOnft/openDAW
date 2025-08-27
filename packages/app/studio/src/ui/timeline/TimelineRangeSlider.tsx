@@ -1,3 +1,8 @@
+/**
+ * Slider widget that lets the user adjust the visible or playback range of
+ * the timeline.  The control exposes draggable handles for the start and end
+ * markers and supports dragging the middle section to move the entire range.
+ */
 import css from "./TimelineRangeSlider.sass?inline"
 import {int, Lifecycle, Option, Terminator, unitValue} from "@opendaw/lib-std"
 import {createElement, Frag} from "@opendaw/lib-jsx"
@@ -17,6 +22,10 @@ type Construct = {
 const COLOR_HANDLER = "rgba(255,255,255,0.25)"
 const COLOR_BACKGROUND = "rgba(255,255,255,0.125)"
 
+/**
+ * Visual slider for manipulating a {@link TimelineRange}.  Resizes according to
+ * the hosting element and updates the range in response to pointer gestures.
+ */
 export const TimelineRangeSlider = ({lifecycle, range, style, className: extraClassName}: Construct) => {
     const radius = 5
     const padding = radius * 2

@@ -16,6 +16,12 @@ Enable snapping to align edits to the musical grid.
 
 ![Timeline snapping menu](./img/timeline-snapping.svg)
 
+## Selection
+
+Drag the mouse to draw a rectangle and select multiple clips or regions.
+Use the keyboard to delete the selection or press <kbd>Ctrl</kbd>+<kbd>A</kbd>
+to select everything on the timeline.
+
 ## Example Integration
 
 ```ts
