@@ -1,3 +1,8 @@
+/**
+ * Main entry point for the headless openDAW demo. This script boots the audio
+ * engine and plays a small example project once the user interacts with the
+ * page.
+ */
 import "./style.css"
 import {assert, Progress, UUID} from "@opendaw/lib-std"
 import {PPQN} from "@opendaw/lib-dsp"
@@ -19,7 +24,11 @@ import {createExampleProject} from "./ExampleProject"
     assert(crossOriginIsolated, "window must be crossOriginIsolated")
     console.debug("booting...")
     document.body.textContent = "booting..."
+
+    // Install worker scripts used by the core engine.
     WorkerAgents.install(WorkersUrl)
+
+    // Abort early if required browser APIs are missing.
     {
         const {status, error} = await Promises.tryCatch(testFeatures())
         if (status === "rejected") {
@@ -28,6 +37,8 @@ import {createExampleProject} from "./ExampleProject"
             return
         }
     }
+
+    // Prepare the audio context and install worklets.
     const context = new AudioContext({latencyHint: 0})
     console.debug(`AudioContext state: ${context.state}, sampleRate: ${context.sampleRate}`)
     {
@@ -37,6 +48,8 @@ import {createExampleProject} from "./ExampleProject"
             return
         }
     }
+
+    // Create and play the example project when the user clicks.
     {
         const sampleManager = new MainThreadSampleManager({
             fetch: (uuid: UUID.Format, progress: Progress.Handler): Promise<[AudioData, SampleMetaData]> =>
@@ -50,6 +63,7 @@ import {createExampleProject} from "./ExampleProject"
             : createExampleProject(env)
         const worklet = Worklets.get(context).createEngine(project)
         await worklet.isReady()
+        // eslint-disable-next-line no-empty
         while (!await worklet.queryLoadingComplete()) {}
         worklet.connect(context.destination)
         window.addEventListener("click", () => {
@@ -61,11 +75,14 @@ import {createExampleProject} from "./ExampleProject"
             })
         }, {once: true})
     }
+
+    // Resume audio context on user gesture if the browser started it suspended.
     if (context.state === "suspended") {
         window.addEventListener("click",
             async () => await context.resume().then(() =>
                 console.debug(`AudioContext resumed (${context.state})`)), {capture: true, once: true})
     }
+
     AnimationFrame.start()
     document.querySelector("#preloader")?.remove()
     document.body.textContent = "Ready."

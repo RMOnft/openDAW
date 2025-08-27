@@ -1,3 +1,7 @@
+/**
+ * Vite configuration for the headless demo. Enables cross‑origin isolation so
+ * that AudioWorklets can run and exposes the `src` directory via the `@` alias.
+ */
 import {defineConfig} from "vite"
 import crossOriginIsolation from "vite-plugin-cross-origin-isolation"
 import {readFileSync} from "fs"
