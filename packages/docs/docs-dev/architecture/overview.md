@@ -5,6 +5,10 @@ openDAW is composed of several packages such as
 [`@opendaw/studio-core`](../package-inventory.md#studio). The architecture is
 described using the C4 model.
 
+Static assets like the abstract SVG set in
+`packages/app/studio/public/viscious-speed` are bundled with the app; see that
+folder's README for a complete list and licensing details.
+
 ## Context
 
 ```mermaid
