@@ -1,3 +1,9 @@
+/**
+ * Visual container displaying the currently edited device chain.
+ *
+ * The panel hosts individual device editors, meters and the channel strip
+ * while supporting scrolling and drag-and-drop reordering of devices.
+ */
 import css from "./DevicePanel.sass?inline"
 import {asDefined, Lifecycle, ObservableValue, Option, Terminable, Terminator, UUID} from "@opendaw/lib-std"
 import {appendChildren, createElement} from "@opendaw/lib-jsx"

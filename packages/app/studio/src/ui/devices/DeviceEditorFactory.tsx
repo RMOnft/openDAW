@@ -1,3 +1,9 @@
+/**
+ * Maps device boxes to their respective editor components.
+ *
+ * The factory hides the visitor pattern used by boxes and allows callers to
+ * obtain the correct editor for midi, instrument, or audio effects.
+ */
 import {createElement, JsxValue} from "@opendaw/lib-jsx"
 import {
     ArpeggioDeviceBox,

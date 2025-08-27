@@ -1,3 +1,9 @@
+/**
+ * UI wrapper for audio bus devices.
+ *
+ * Utilises the generic DeviceEditor while showing a peak meter for the bus
+ * output and exposing the input routing menu.
+ */
 import css from "./AudioBusEditor.sass?inline"
 import {Lifecycle} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
