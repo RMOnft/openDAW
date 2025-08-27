@@ -3,6 +3,19 @@ import {BoxSchema} from "@opendaw/lib-box-forge"
 import {Pointers} from "@opendaw/studio-enums"
 import {ClipPlaybackFields} from "./clips"
 
+/**
+ * Schemas for note events, regions and clips within the timeline.
+ */
+
+/**
+ * Individual MIDI note event information.
+ *
+ * ```mermaid
+ * graph TD
+ *   NoteEventBox --> pitch
+ *   NoteEventBox --> velocity
+ * ```
+ */
 export const NoteEventBox: BoxSchema<Pointers> = {
     type: "box",
     class: {
@@ -65,6 +78,15 @@ export const NoteRegionBox: BoxSchema<Pointers> = {
     }, pointerRules: {accepts: [Pointers.Selection, Pointers.Editing], mandatory: false}
 }
 
+/**
+ * Clip container combining events with playback settings.
+ *
+ * ```mermaid
+ * graph LR
+ *   NoteClipBox --> events
+ *   NoteClipBox --> playback
+ * ```
+ */
 export const NoteClipBox: BoxSchema<Pointers> = {
     type: "box",
     class: {

@@ -2,6 +2,15 @@ import {PPQN} from "@opendaw/lib-dsp"
 import {BoxSchema} from "@opendaw/lib-box-forge"
 import {Pointers} from "@opendaw/studio-enums"
 
+/**
+ * Root timeline definition describing signature and loop area.
+ *
+ * ```mermaid
+ * graph LR
+ *   TimelineBox --> "marker-track"
+ *   TimelineBox --> "loop-area"
+ * ```
+ */
 export const TimelineBox: BoxSchema<Pointers> = {
     type: "box",
     class: {
