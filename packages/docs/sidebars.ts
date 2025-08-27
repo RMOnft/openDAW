@@ -1,5 +1,8 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
+// See docs-dev/documentation-site/structure.md for how sidebars integrate with
+// docusaurus.config.ts and other sidebar definitions.
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /**

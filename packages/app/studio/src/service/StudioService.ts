@@ -64,11 +64,6 @@ import {ProjectDialogs} from "@/project/ProjectDialogs"
 import {AudioImporter} from "@/audio/AudioImport"
 import {FilePickerAcceptTypes} from "@/ui/FilePickerAcceptTypes"
 
-/**
- * I am just piling stuff after stuff in here to boot the environment.
- * I suppose this gets cleaned up sooner or later.
- */
-
 const range = new TimelineRange({padding: 12})
 range.minimum = PPQN.fromSignature(3, 8)
 range.maxUnits = PPQN.fromSignature(128, 1)
@@ -82,6 +77,17 @@ export type Session = {
     readonly meta: ProjectMeta
 }
 
+/**
+ * Central service orchestrating workspace screens, project handling and the
+ * audio engine.
+ *
+ * ```mermaid
+ * flowchart LR
+ *   StudioService --> SessionService
+ *   StudioService --> SamplePlayback
+ *   StudioService --> Shortcuts
+ * ```
+ */
 export class StudioService implements ProjectEnv {
     readonly layout = {
         systemOpen: new DefaultObservableValue<boolean>(false),

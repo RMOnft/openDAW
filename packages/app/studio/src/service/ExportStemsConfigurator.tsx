@@ -23,6 +23,16 @@ type Construct = {
     configuration: EditableExportStemsConfiguration
 }
 
+/**
+ * Configurator dialog for selecting and naming stems during export.
+ *
+ * ```mermaid
+ * flowchart TB
+ *   includeAll --> stem
+ *   includeAudioEffectsAll --> stem
+ *   includeSendsAll --> stem
+ * ```
+ */
 export const ExportStemsConfigurator = ({lifecycle, configuration}: Construct) => {
     const includeAll = new DefaultObservableValue(true)
     const includeAudioEffectsAll = new DefaultObservableValue(true)

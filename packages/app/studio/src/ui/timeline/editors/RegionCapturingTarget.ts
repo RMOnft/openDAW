@@ -8,12 +8,22 @@ import {isDefined, Nullable, Option, Provider} from "@opendaw/lib-std"
 import {PointerRadiusDistance} from "@/ui/timeline/constants.ts"
 import {TimelineRange} from "../TimelineRange"
 
+/**
+ * Different interactive targets around a region. These values are returned
+ * by the capturing system to indicate which part of the region the user
+ * is manipulating.
+ */
 export type CaptureTarget =
     | { type: "region-position", region: AnyRegionBoxAdapter }
     | { type: "region-start", region: AnyLoopableRegionBoxAdapter }
     | { type: "region-complete", region: AnyRegionBoxAdapter }
     | { type: "loop-duration", region: AnyRegionBoxAdapter }
 
+/**
+ * Creates an {@link ElementCapturing} helper that resolves pointer
+ * coordinates to region manipulation targets used for moving or
+ * resizing regions on the timeline.
+ */
 export const createRegionCapturing = (canvas: Element,
                                       regionProvider: Provider<Option<AnyRegionBoxAdapter>>,
                                       range: TimelineRange) => new ElementCapturing<CaptureTarget>(canvas, {

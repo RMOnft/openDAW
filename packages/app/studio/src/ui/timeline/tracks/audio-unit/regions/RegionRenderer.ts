@@ -13,6 +13,11 @@ import {renderValueStream} from "@/ui/timeline/renderer/value.ts"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 import {Context2d} from "@opendaw/lib-dom"
 
+/**
+ * Renders the regions of a given track into a canvas context.
+ * It respects the provided range and modification strategies from the
+ * {@link TracksManager}.
+ */
 export const renderRegions = (context: CanvasRenderingContext2D,
                               tracks: TracksManager,
                               range: TimelineRange,

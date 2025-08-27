@@ -35,3 +35,8 @@
 
 - Check browser permissions and allow access when prompted.
 - Verify that the correct input device is selected in audio settings.
+
+### Reporting errors
+
+- When an unexpected error dialog appears, note the steps that led to the
+  issue and send them to support using the built-in error report template.

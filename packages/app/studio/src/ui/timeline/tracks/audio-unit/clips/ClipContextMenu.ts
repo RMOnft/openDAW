@@ -12,13 +12,24 @@ import {AudioRegionBox, NoteRegionBox, ValueRegionBox} from "@opendaw/studio-box
 import {ColorMenu} from "@/ui/timeline/ColorMenu"
 import {Project} from "@opendaw/studio-core"
 
+/**
+ * Parameters required to install the clip context menu.
+ */
 type Creation = {
+    /** Element that receives the context menu. */
     element: HTMLElement
+    /** Current project to apply mutations to. */
     project: Project
+    /** Helper used to resolve what clip or track is under the cursor. */
     capturing: ElementCapturing<ClipCaptureTarget>
+    /** Selection containing currently highlighted clips. */
     selection: Selection<AnyClipBoxAdapter>
 }
 
+/**
+ * Installs a context menu for timeline clips handling edit actions such as
+ * rename, delete or color adjustments.
+ */
 export const installClipContextMenu = ({element, project, selection, capturing}: Creation) =>
     ContextMenu.subscribe(element, collector => {
         const client = collector.client

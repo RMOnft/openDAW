@@ -21,19 +21,32 @@ import {deferNextFrame, Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "ClipLane")
 
+/**
+ * Placeholder cell that hosts a clip instance.
+ */
 type Cell = {
     readonly terminator: Terminator
     readonly placeholder: HTMLElement
     readonly adapter: MutableObservableValue<Nullable<AnyClipBoxAdapter>>
 }
 
+/**
+ * Construction options for {@link ClipLane}.
+ */
 type Construct = {
+    /** Lifecycle of the lane. */
     lifecycle: Lifecycle
+    /** Studio service for editing operations. */
     service: StudioService
+    /** Track manager providing track lookups. */
     trackManager: TracksManager
+    /** Adapter of the track represented by this lane. */
     adapter: TrackBoxAdapter
 }
 
+/**
+ * Displays clips for a single track by managing a pool of placeholder cells.
+ */
 export const ClipLane = ({lifecycle, service, trackManager, adapter}: Construct) => {
     const placeholderContainer: HTMLElement = <Group/>
     const container: HTMLElement = (<div className={className}>{placeholderContainer}</div>)

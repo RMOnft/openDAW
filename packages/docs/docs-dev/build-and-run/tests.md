@@ -11,6 +11,9 @@ This command executes unit tests for packages such as
 [`@opendaw/lib-runtime`](../package-inventory.md#lib) and
 [`@opendaw/studio-core`](../package-inventory.md#studio).
 
+For an overview of how test files are organized, see the
+[Unit tests](../testing/unit-tests.md) guide.
+
 ```mermaid
 flowchart LR
   A[Build] --> B[Test]

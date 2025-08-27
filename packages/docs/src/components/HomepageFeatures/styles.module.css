@@ -1,3 +1,7 @@
+/* Styles specific to the HomepageFeatures component.
+   See docs-dev/documentation-site/styling.md for guidance and
+   packages/docs/src/pages/index.tsx for usage. */
+
 .features {
   display: flex;
   align-items: center;
