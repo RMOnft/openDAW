@@ -26,13 +26,15 @@ Replace `⌘` with `Ctrl` on Windows and Linux.
 
 ## Timeline
 
-- Hold `⌘` and click to cut a region
-- Hold `⌥` and drag to copy a region/clip
-- Hold `⌥⇧` and drag to copy a region/clip as mirrored
+- Hold `⌘` and click to cut a region (see [selection](../docs-dev/ui/interactions/selection.md))
+- Hold `⌥` and [drag](../docs-dev/ui/interactions/drag-and-drop.md) to copy a region/clip
+- Hold `⌥⇧` and [drag](../docs-dev/ui/interactions/drag-and-drop.md) to copy a region/clip as mirrored
 - Click track header and hit `⌫` to delete track
 
 ## Editing
 
 - `⌘C`: Copy
 - `⌘V`: Paste
-- `⌘D`: Duplicate selection
+- `⌘D`: Duplicate selection ([wrappers](../docs-dev/ui/interactions/wrappers.md))
+
+For cursor behaviour see [cursors](../docs-dev/ui/interactions/cursors.md).
