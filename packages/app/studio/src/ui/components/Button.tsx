@@ -1,7 +1,10 @@
+import css from "./Button.sass?inline"
 import {Lifecycle, Procedure} from "@opendaw/lib-std"
 import {createElement, JsxValue} from "@opendaw/lib-jsx"
 import {Appearance, ButtonCheckboxRadio} from "@/ui/components/ButtonCheckboxRadio"
 import {Html} from "@opendaw/lib-dom"
+
+const className = Html.adoptStyleSheet(css, "Button")
 
 /**
  * Props for {@link Button}.
@@ -27,7 +30,11 @@ export const Button = ({lifecycle, onClick, style, appearance}: ButtonProps, chi
     const id = Html.nextID()
     const input: HTMLInputElement = <input type="button" id={id} onclick={onClick}/>
     return (
-        <ButtonCheckboxRadio lifecycle={lifecycle} style={style} appearance={appearance} dataClass="button">
+        <ButtonCheckboxRadio lifecycle={lifecycle}
+                             style={style}
+                             appearance={appearance}
+                             dataClass="button"
+                             className={className}>
             {input}
             <label htmlFor={id}>{children}</label>
         </ButtonCheckboxRadio>

@@ -94,13 +94,17 @@ export class ProjectSession {
         }
     }
 
+    /** Whether the session has been written to persistent storage. */
     saved(): boolean {return this.#saved}
+    /** Indicates if project or metadata changes are pending. */
     hasChanges(): boolean {return this.#hasChanges}
 
+    /** Subscribe to metadata updates. */
     subscribeMetaData(observer: Observer<ProjectMeta>): Subscription {
         return this.#metaUpdated.subscribe(observer)
     }
 
+    /** Subscribe to metadata updates and immediately receive the current value. */
     catchSubscribeMetaData(observer: Observer<ProjectMeta>): Subscription {
         observer(this.meta)
         return this.subscribeMetaData(observer)
@@ -124,14 +128,20 @@ export class ProjectSession {
         this.#metaUpdated.notify(this.meta)
     }
 
+    /** Update the modification timestamp. */
     updateModifyDate(): void {this.meta.modified = new Date().toISOString()}
 
+    /** Persist the current MIDI learn configuration to local storage. */
     saveMidiConfiguration(): void {
         const key = UUID.toString(this.#uuid)
         console.debug(`saveMidiConfiguration(${key})`)
         this.#service.midiLearning.saveToLocalStorage(key)
     }
 
+    /**
+     * Load the MIDI learn configuration and optionally prompt to connect
+     * a device if mappings are present.
+     */
     async loadMidiConfiguration(): Promise<void> {
         const key = UUID.toString(this.#uuid)
         const hasMidi = this.#service.midiLearning.loadFromLocalStorage(key)
@@ -149,6 +159,7 @@ export class ProjectSession {
         }
     }
 
+    /** String representation for debugging. */
     toString(): string {
         return `{uuid: ${UUID.toString(this.uuid)}, meta: ${JSON.stringify(this.meta)}}`
     }

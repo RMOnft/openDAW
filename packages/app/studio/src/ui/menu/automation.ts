@@ -6,6 +6,17 @@ import {AudioUnitTracks} from "@opendaw/studio-adapters"
 import {MIDILearning} from "@/midi/devices/MIDILearning"
 import {AutomatableParameterFieldAdapter} from "@opendaw/studio-adapters"
 
+/**
+ * Attaches a context menu to an automatable parameter providing options to
+ * create or remove automation, learn MIDI mappings and reset values.
+ *
+ * @param editing - editing context used to modify the project
+ * @param midiDevices - MIDI learning manager
+ * @param tracks - track collection to attach automation tracks
+ * @param parameter - parameter field to control
+ * @param element - DOM element that receives the context menu
+ * @see ../../../../../docs/docs-dev/ui/menu/automation.md
+ */
 export const attachParameterContextMenu = <T extends PrimitiveValues>(editing: Editing,
                                                                       midiDevices: MIDILearning,
                                                                       tracks: AudioUnitTracks,

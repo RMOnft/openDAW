@@ -1,7 +1,7 @@
 /**
  * Helpers to normalize error information from various event types.
  */
-import {isDefined} from "@opendaw/lib-std"
+import { isDefined } from "@opendaw/lib-std";
 
 /** Normalized representation of diverse error events. */
 export type ErrorInfo = {
@@ -11,6 +11,11 @@ export type ErrorInfo = {
 };
 
 export namespace ErrorInfo {
+  /**
+   * Derives a normalized {@link ErrorInfo} from a variety of error event types.
+   *
+   * @param event - The raw event raised by the platform.
+   */
   export const extract = (event: Event): ErrorInfo => {
     if (event instanceof ErrorEvent && event.error instanceof Error) {
       return {

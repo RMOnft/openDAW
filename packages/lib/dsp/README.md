@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Digital Signal Processing utilities and audio processing functions for TypeScript projects.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/dsp/) for detailed reference.
+
 ## Signal Flow
 
 ```mermaid

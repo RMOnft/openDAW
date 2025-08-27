@@ -15,3 +15,6 @@ The build loads `src/main.ts`, which in turn creates a project from code using
 `createExampleProject` and bootstraps the audio engine. See the package README
 for more details.
 
+
+This demo uses the same sample management API and core engine as the Studio service, providing feature parity for audio processing. See the [headless vs studio comparison](../../docs-dev/architecture/headless-vs-studio.md) for architectural details.
+

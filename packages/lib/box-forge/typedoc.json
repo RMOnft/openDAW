@@ -1,0 +1,8 @@
+{
+  "//": "TypeDoc configuration for @opendaw/lib-box-forge",
+  "$schema": "https://typedoc.org/schema.json",
+  "extends": ["../../../typedoc.json"],
+  "entryPoints": ["./src/index.ts"],
+  "tsconfig": "./tsconfig.json",
+  "out": "../../docs/api/box-forge"
+}

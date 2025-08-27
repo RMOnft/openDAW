@@ -2,6 +2,8 @@
 
 Crafting a song involves placing sections on the timeline so that the music unfolds logically.
 
+To experiment with song structure right away, load one of the [template projects](../../docs-user/examples/templates.md) bundled with the Studio.
+
 ## Song Structure
 
 ```mermaid

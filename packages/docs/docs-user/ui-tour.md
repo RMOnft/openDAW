@@ -7,7 +7,13 @@ open additional tooling such as the mixer or project browser.
 The tour walks through the default layout and highlights common entry points
 for editing audio, managing devices and browsing samples.
 
+The interface uses abstract SVG art from the
+`packages/app/studio/public/viscious-speed` collection; see that folder's
+README for the full catalogue and licensing terms.
+
 Get oriented with the main areas of the interface.
+
+For feature-specific notes, see the [manuals overview](manuals/overview.md).
 
 ## Transport
 
@@ -32,6 +38,10 @@ Displays the device chain for the active track, allowing you to add and tweak in
 ## Mixer
 
 Shows channel strips for each track. Toggle the panel with `M` or switch to the dedicated mixer view via `⇧2`.
+
+## Surfaces
+
+The interface is built on "surfaces" which wrap each browser window and manage tooltips and flyout layers. Advanced users can open additional windows; see the developer [Surface docs](../docs-dev/ui/surface/overview.md) for details.
 
 ## Developer Pages
 

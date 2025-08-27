@@ -3,8 +3,10 @@
 ## Pipeline Overview
 
 Turbo coordinates workspace tasks such as builds, tests, and documentation
-generation, while Lerna handles package versioning and publishing. Deployment
-configs for Vercel and Netlify document how releases will be delivered.
+generation, while Lerna handles package versioning and publishing; see the
+[versioning policy](packages/docs/docs-dev/build-and-run/versioning.md).
+Deployment configs for Vercel and Netlify document how releases will be
+delivered.
 
 ## Near term
 
