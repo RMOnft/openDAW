@@ -1,13 +1,13 @@
-import css from "./UpdateMessage.sass?inline"
-import {Html} from "@opendaw/lib-dom"
-import {createElement} from "@opendaw/lib-jsx"
+import css from "./UpdateMessage.sass?inline";
+import { Html } from "@opendaw/lib-dom";
+import { createElement } from "@opendaw/lib-jsx";
 
-const className = Html.adoptStyleSheet(css, "UpdateMessage")
+const className = Html.adoptStyleSheet(css, "UpdateMessage");
 
 export const UpdateMessage = () => {
-    return (
-        <div className={className}>
-            Update available! (please reload)
-        </div>
-    )
-}
+  return (
+    <div className={className} role="alert" aria-live="assertive">
+      Update available! (please reload)
+    </div>
+  );
+};
