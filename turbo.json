@@ -1,5 +1,5 @@
 {
-  "//": "Turbo configuration orchestrates tasks across packages",
+  "//": "Turbo configuration orchestrates tasks across packages. Versioning policy: see packages/docs/docs-dev/build-and-run/versioning.md",
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "build": {

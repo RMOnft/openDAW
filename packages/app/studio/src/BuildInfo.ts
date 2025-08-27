@@ -1,8 +1,10 @@
 /**
- * Metadata about the current build generated during the build step
- * (see `vite.config.ts`). The information is written to the public
- * folder and fetched at runtime to verify cache validity and expose
- * build details to the client.
+ * Interface representing metadata about the current Studio build.
+ * Generated during the Vite build step (see `vite.config.ts`) and
+ * persisted to `public/build-info.json`. The data is fetched at
+ * runtime to validate caches and expose build details to the client.
+ *
+ * @public
  */
 export type BuildInfo = {
   /** Unix timestamp of when the build was created. */
