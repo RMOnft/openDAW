@@ -111,6 +111,12 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Accessibility Guide](packages/docs/docs-user/accessibility.md)
 - [Developer i18n Notes](packages/docs/docs-dev/i18n.md)
 
+### Style Documentation
+
+- [Style Guidelines](styles/OpenDAW/style-guidelines.md)
+- [Developer Style Guide](packages/docs/docs-dev/style-guide.md)
+- [User Style Customization](packages/docs/docs-user/style-customization.md)
+
 ### Prepare, Clone, Installation, and Run
 
 openDAW tries to avoid external libraries and frameworks. Following is a list of the external libraries we currently use in the web studio:

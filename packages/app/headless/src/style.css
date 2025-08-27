@@ -1,4 +1,5 @@
-/* Basic styles for the headless demo page. */
+/* Basic styles for the headless demo page.
+   Naming follows styles/OpenDAW/style-guidelines.md */
 :root {
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16px;
