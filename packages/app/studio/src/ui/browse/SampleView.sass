@@ -7,9 +7,11 @@ component
   align-items: center
 
   &.selected
+    // Highlight selected samples
     color: var(--color-gray)
 
   > div.edit
+    // Buttons for editing and deleting
     display: flex
 
   > div.meta
@@ -27,14 +29,17 @@ component
       cursor: grabbing
 
     &.buffering
+      // While audio is loading
       color: var(--color-black)
       background-color: var(--color-shadow)
 
     &.playing
+      // Playback active
       color: var(--color-black)
       background-color: var(--color-blue)
 
     &.error
+      // Playback failed
       color: var(--color-black)
       background-color: var(--color-red)
 

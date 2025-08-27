@@ -22,6 +22,9 @@ import {Project} from "@opendaw/studio-core"
  * Handles the lifecycle of a project session, including loading, saving and
  * exporting bundles.
  *
+ * See {@link StudioService} for application orchestration and
+ * [SampleApi](./SampleApi.ts) for sample transfers.
+ *
  * ```mermaid
  * flowchart LR
  *   SessionService -->|creates| ProjectSession
@@ -37,11 +40,18 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         this.#session = new DefaultObservableValue<Option<ProjectSession>>(Option.None)
     }
 
+    /** @inheritdoc */
     getValue(): Option<ProjectSession> {return this.#session.getValue()}
+    /** @inheritdoc */
     setValue(value: Option<ProjectSession>): void {this.#session.setValue(value)}
+    /** @inheritdoc */
     subscribe(observer: Observer<ObservableValue<Option<ProjectSession>>>): Terminable {
         return this.#session.subscribe(observer)
     }
+    /**
+     * Subscribes to the session value and immediately dispatches the current
+     * state to the observer.
+     */
     catchupAndSubscribe(observer: Observer<ObservableValue<Option<ProjectSession>>>): Terminable {
         observer(this)
         return this.#session.subscribe(observer)

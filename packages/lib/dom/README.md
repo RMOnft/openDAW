@@ -45,6 +45,20 @@ AnimationFrame.add(() => console.log("frame"));
 AnimationFrame.start();
 ```
 
+```ts
+import { loadFont, Compression } from "@opendaw/lib-dom";
+
+await loadFont({
+  "font-family": "Demo",
+  "font-style": "normal",
+  "font-weight": "normal",
+  src: "/fonts/demo.woff2"
+});
+
+const buffer = new TextEncoder().encode("data").buffer;
+const zipped = await Compression.encode(buffer);
+```
+
 ## Modules
 
 - File handling and manipulation utilities **files.ts**
@@ -60,6 +74,7 @@ AnimationFrame.start();
 - Font loading and management **fonts.ts**
 - Error handling for DOM operations **errors.ts**
 - Console utility commands **console-commands.ts**
+- DOM constraint helpers **constraint.ts**
 
 ### Input & Interaction
 
@@ -94,3 +109,4 @@ AnimationFrame.start();
 - Resource cleanup and termination handling **terminable.ts**
 
 For more in‑depth discussion see the [developer docs](../docs/docs-dev/dom/overview.md).
+

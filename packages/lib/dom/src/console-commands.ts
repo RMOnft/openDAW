@@ -2,10 +2,28 @@ import {AnyFunc, DefaultObservableValue, EmptyProcedure, ObservableValue, Proced
 
 export type DotPath = string
 
+/**
+ * Exposes values and methods on the global `opendaw` namespace so they can be
+ * interacted with directly from the browser console.
+ */
 export namespace ConsoleCommands {
+    /**
+     * Registers a function that can be invoked from the console using a dot
+     * separated path.
+     *
+     * @example
+     * ```ts
+     * ConsoleCommands.exportMethod("demo.hello", () => console.log("hi"));
+     * // in devtools: opendaw.demo.hello()
+     * ```
+     */
     export const exportMethod = (path: DotPath, callback: AnyFunc): void =>
         store(path, {value: callback})
 
+    /**
+     * Exposes a mutable boolean value to the console and returns an observable
+     * that reflects changes.
+     */
     export const exportBoolean = (path: DotPath, init: boolean = false): ObservableValue<boolean> => {
         const observableValue = new DefaultObservableValue(init)
         exportAccessor(path, () => observableValue.getValue(), input => {
@@ -16,6 +34,9 @@ export namespace ConsoleCommands {
         return observableValue
     }
 
+    /**
+     * Exports a pair of getter/setter functions to the console.
+     */
     export const exportAccessor = (path: DotPath, getter: Provider<unknown>, setter: Procedure<any> = EmptyProcedure): void =>
         store(path, {
             get: () => {

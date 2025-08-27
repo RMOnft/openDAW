@@ -1,5 +1,6 @@
 import {assert, int, nextPowOf2, unitValue} from "@opendaw/lib-std"
 
+/** Simple delay line with feedback and wet/dry mixing. */
 export class Delay {
     readonly #delaySize: int
     readonly #delayBuffer: Float32Array
@@ -17,6 +18,12 @@ export class Delay {
     #processed = false
     #interpolating = false
 
+    /**
+     * Creates a delay buffer.
+     *
+     * @param maxFrames - Maximum delay time in frames.
+     * @param interpolationLength - Number of samples used for fractional offset interpolation.
+     */
     constructor(maxFrames: int, interpolationLength: int) {
         const pow2Size = nextPowOf2(maxFrames)
 
@@ -25,6 +32,7 @@ export class Delay {
         this.#interpolationLength = interpolationLength
     }
 
+    /** Clears all internal state and zeroes the buffer. */
     reset(): void {
         this.#writePosition = 0
         if (this.#processed) {
@@ -35,6 +43,7 @@ export class Delay {
         this.#initDelayTime()
     }
 
+    /** Sets the delay offset in frames. */
     set offset(value: number) {
         assert(value >= 0 && value < this.#delaySize, "Out of bounds")
         if (this.#targetOffset === value) {return}
@@ -45,16 +54,28 @@ export class Delay {
             this.#initDelayTime()
         }
     }
+    /** Current delay offset in frames. */
     get offset(): number {return this.#targetOffset}
 
+    /** Feedback amount between `0` and `1`. */
     set feedback(value: unitValue) {this.#pFeedback = value}
+    /** Feedback amount between `0` and `1`. */
     get feedback(): unitValue {return this.#pFeedback}
 
+    /** Configures wet/dry mix ratios. */
     mix(wet: unitValue, dry: unitValue): void {
         this.#pWetLevel = wet
         this.#pDryLevel = dry
     }
 
+    /**
+     * Processes the provided audio block.
+     *
+     * @param input - Source buffer.
+     * @param output - Destination buffer.
+     * @param fromIndex - Starting frame.
+     * @param toIndex - Exclusive end frame.
+     */
     process(input: Float32Array, output: Float32Array, fromIndex: int, toIndex: int): void {
         if (this.#interpolating) {
             this.#processInterpolate(input, output, fromIndex, toIndex)

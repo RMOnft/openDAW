@@ -1,3 +1,4 @@
+/** Behavioural tests for {@link SortedSet}. */
 import {describe, expect, it} from "vitest"
 import {SortedSet} from "./sorted-set"
 

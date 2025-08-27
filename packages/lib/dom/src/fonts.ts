@@ -1,4 +1,8 @@
 // Supported Browsers: Chrome (latest), Firefox (latest), Safari (latest), Edge (Chromium)
+
+/**
+ * Properties required to load a custom font.
+ */
 export type FontFaceProperties = {
   "font-family": string;
   "font-style": "normal" | "italic" | "oblique";
@@ -20,6 +24,20 @@ export type FontFaceProperties = {
   src: string;
 };
 
+/**
+ * Loads a font via the `FontFace` API and registers it with the document.
+ *
+ * @example
+ * ```ts
+ * await loadFont({
+ *   "font-family": "MyFont",
+ *   "font-style": "normal",
+ *   "font-weight": "normal",
+ *   src: "/fonts/my-font.woff2"
+ * });
+ * document.body.style.fontFamily = "MyFont";
+ * ```
+ */
 export const loadFont = async (properties: FontFaceProperties) => {
   try {
     const response = await fetch(properties.src, { credentials: "omit" });
@@ -36,3 +54,4 @@ export const loadFont = async (properties: FontFaceProperties) => {
     console.error(error);
   }
 };
+

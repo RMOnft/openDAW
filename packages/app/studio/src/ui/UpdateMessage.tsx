@@ -7,7 +7,8 @@ const className = Html.adoptStyleSheet(css, "UpdateMessage");
 /**
  * Banner shown when a new application version is available.
  *
- * The message prompts users to reload the page so the latest build is loaded.
+ * The message lives in an assertive ARIA live region so assistive
+ * technologies announce it immediately.
  */
 export const UpdateMessage = () => {
   return (

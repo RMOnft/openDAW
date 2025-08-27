@@ -13,8 +13,14 @@ const className = Html.adoptStyleSheet(css, "footer");
 type Construct = { lifecycle: Lifecycle; service: StudioService };
 
 /**
- * Persistent footer displaying status information like connectivity,
- * project name, audio settings, and build metadata.
+ * Application footer displaying session information and build metadata.
+ *
+ * @example
+ * ```tsx
+ * <Footer lifecycle={lifecycle} service={service} />
+ * ```
+ * Footer component showing connection state, project metadata and runtime
+ * statistics.
  */
 export const Footer = ({ lifecycle, service }: Construct) => {
   const labelOnline: HTMLElement = <div title="Online" aria-live="polite" />;

@@ -28,12 +28,21 @@ export const enum MetaType {
  */
 export class MetaEvent implements Event<MetaType> {
   private constructor(
+    /** Absolute tick position */
     readonly ticks: number,
+    /** Meta-event type identifier */
     readonly type: MetaType,
+    /** Associated payload value */
     readonly value: unknown,
   ) {}
 
-  /** Decode a meta-event from the stream. */
+  /**
+   * Decode a meta-event from the stream.
+   *
+   * @param decoder - MIDI file decoder providing the bytes
+   * @param ticks - absolute tick position
+   * @returns the decoded event or {@code null} if unsupported
+   */
   static decode(decoder: MidiFileDecoder, ticks: number): MetaEvent | null {
     const type = decoder.readByte() & 0xff;
     const length = decoder.readVarLen();

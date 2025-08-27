@@ -13,6 +13,7 @@ export class Recovery {
   /** Directory within OPFS used to store temporary recovery data. */
   static readonly #RESTORE_FILE_PATH = ".backup";
 
+  /** Service used for project loading and session management. */
   readonly #service: StudioService;
 
   /**
