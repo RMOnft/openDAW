@@ -14,7 +14,11 @@ type Construct = {
   service: StudioService;
 };
 
-/** Landing page presenting templates and recent projects. */
+/**
+ * Landing page presenting templates and recent projects.
+ *
+ * Provides quick links for creating new sessions and reopening existing ones.
+ */
 export const Dashboard = ({ service }: Construct) => {
   const time = TimeSpan.millis(
     new Date(service.buildInfo.date).getTime() - new Date().getTime(),

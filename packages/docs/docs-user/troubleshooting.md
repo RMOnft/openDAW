@@ -43,3 +43,13 @@
 
 - Developers looking to diagnose issues in depth can consult the
   [debugging guide](/dev/debugging/overview).
+
+### App stuck on loading screen
+
+- Check your internet connection and reload the page.
+- Make sure a supported browser is used and that extensions aren't blocking the app.
+
+### I see a "Missing Feature" message
+
+- Update the browser to the latest version or try a different one.
+- If the message persists, report it to support with your browser details.
