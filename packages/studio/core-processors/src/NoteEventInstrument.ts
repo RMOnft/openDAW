@@ -6,6 +6,10 @@ import {NoteBroadcaster} from "@opendaw/studio-adapters"
 import {Address} from "@opendaw/lib-box"
 import {LiveStreamBroadcaster} from "@opendaw/lib-fusion"
 
+/**
+ * Bridges {@link NoteEventSource} instances into processors by converting the
+ * emitted note events into scheduled events and visual feedback.
+ */
 export class NoteEventInstrument implements Terminable {
     readonly #terminator = new Terminator()
     readonly #receiver: Processor
@@ -13,12 +17,20 @@ export class NoteEventInstrument implements Terminable {
 
     #source: Option<NoteEventSource> = Option.None
 
+    /**
+     * @param receiver - processor receiving generated note events
+     * @param broadcaster - stream broadcaster used for visualization
+     * @param address - address for note broadcast messages
+     */
     constructor(receiver: Processor, broadcaster: LiveStreamBroadcaster, address: Address) {
         this.#receiver = receiver
 
         this.#broadcaster = this.#terminator.own(new NoteBroadcaster(broadcaster, address))
     }
 
+    /**
+     * Connects a {@link NoteEventSource} to this instrument.
+     */
     setNoteEventSource(source: NoteEventSource): Terminable {
         assert(this.#source.isEmpty(), "NoteEventSource already set")
         this.#source = Option.wrap(source)
@@ -29,6 +41,9 @@ export class NoteEventInstrument implements Terminable {
         })
     }
 
+    /**
+     * Fetches note events for the block and forwards them to the receiver.
+     */
     introduceBlock({index, p0, p1, flags}: Block): void {
         if (this.#source.isEmpty()) {return}
         for (const event of this.#source.unwrap().processNotes(p0, p1, flags)) {

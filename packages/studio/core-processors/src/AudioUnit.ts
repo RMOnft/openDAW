@@ -10,6 +10,9 @@ import {AudioUnitOptions} from "./AudioUnitOptions"
 import {AudioUnitInputAdapter} from "@opendaw/studio-adapters"
 import {InstrumentDeviceProcessor} from "./InstrumentDeviceProcessor"
 
+/**
+ * High level container representing a track or device chain in the engine.
+ */
 export class AudioUnit implements Terminable {
     static ID: int = 0 | 0
 
@@ -25,6 +28,11 @@ export class AudioUnit implements Terminable {
 
     #input: Option<InstrumentDeviceProcessor | AudioBusProcessor> = Option.None
 
+    /**
+     * @param context - engine context used to resolve processors
+     * @param adapter - adapter exposing the backing box
+     * @param options - configuration for the created device chains
+     */
     constructor(context: EngineContext, adapter: AudioUnitBoxAdapter, options: AudioUnitOptions) {
         this.#context = context
         this.#adapter = adapter
@@ -43,8 +51,15 @@ export class AudioUnit implements Terminable {
         )
     }
 
+    /**
+     * Returns the currently connected input processor if any.
+     */
     input(): Option<InstrumentDeviceProcessor | AudioBusProcessor> {return this.#input}
+    /**
+     * Convenience wrapper that asserts the input is an {@link AudioBusProcessor}.
+     */
     inputAsAudioBus(): AudioBusProcessor {return asInstanceOf(this.#input.unwrap("No input available"), AudioBusProcessor)}
+    /** Access to the channel strip's audio output. */
     audioOutput(): AudioBuffer {return this.#audioDeviceChain.channelStrip.audioOutput}
 
     get midiDeviceChain(): MidiDeviceChain {return this.#midiDeviceChain}
