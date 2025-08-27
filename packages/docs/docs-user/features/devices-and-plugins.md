@@ -23,6 +23,11 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 
 Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) in the developer documentation.
 
+## Modular workflow
+
+Devices can be arranged as modules on a canvas and linked with wires for
+custom signal chains. Learn more in the [modular UI overview](../../docs-dev/ui/modular/overview.md).
+
 ## Mapping parameters
 
 - Right-click a control to create automation or modulation targets.

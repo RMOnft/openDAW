@@ -130,6 +130,17 @@ module.exports = {
           ],
         },
         "ui/mixer",
+        {
+          type: "category",
+          label: "Modular",
+          items: [
+            "ui/modular/overview",
+            "ui/modular/wires",
+            "ui/modular/modules",
+            "ui/modular/camera",
+            "ui/modular/faq",
+          ],
+        },
       ],
     },
     {
