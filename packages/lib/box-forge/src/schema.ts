@@ -2,6 +2,9 @@
  * Schema definitions used by {@link BoxForge} to generate strongly-typed box
  * classes. These types describe the shape of boxes, fields and pointer
  * relations in a declarative manner.
+ *
+ * @see {@link BoxForge.gen} for compiling schemas
+ * @see {@link ../../../docs/docs-dev/serialization/box-forge.md | Box forge serialization guide}
  */
 import { float, Func, int, Objects } from "@opendaw/lib-std";
 import { FieldKey, PointerRules, PointerTypes } from "@opendaw/lib-box";
@@ -19,6 +22,8 @@ export interface PrimitiveTypes {
 
 /**
  * Placeholder value used to reserve numeric field keys for future extension.
+ *
+ * @see reserveMany
  */
 export const reserved = Object.freeze({ type: "reserved", name: "" } as const);
 
@@ -28,6 +33,7 @@ type ReservedType = typeof reserved;
  * Creates an object that reserves multiple field keys at once.
  *
  * @param _keys - Field keys to mark as {@link reserved}.
+ * @see reserved
  */
 export const reserveMany = <Keys extends int[]>(
   ..._keys: Keys
@@ -118,6 +124,8 @@ export type AnyField<E extends PointerTypes> =
 //
 /**
  * Merge two field records ensuring no key overlap at compile time.
+ *
+ * @see FieldRecord
  */
 export const mergeFields = <
   E extends PointerTypes,

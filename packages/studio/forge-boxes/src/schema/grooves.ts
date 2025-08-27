@@ -4,6 +4,17 @@ import {BoxSchema, FieldRecord, mergeFields, reserveMany} from "@opendaw/lib-box
 import {PPQN} from "@opendaw/lib-dsp"
 import {Objects} from "@opendaw/lib-std"
 
+/**
+ * Groove utilities describing timing feel boxes. `createGrooveBox` is a helper
+ * to build concrete groove boxes like shuffle and offset.
+ *
+ * ```mermaid
+ * graph TD
+ *   GrooveShuffleBox -->|amount| Parameter
+ *   GrooveOffsetBox -->|sync| Parameter
+ * ```
+ */
+
 const GrooveBoxAttributes = {
     1: {type: "string", name: "label"},
     ...reserveMany(2, 3, 4, 5, 6, 7, 8, 9)

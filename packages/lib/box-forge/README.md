@@ -1,6 +1,12 @@
 # @opendaw/lib-box-forge
 
-Utility for generating strongly typed [Box](../box/README.md) classes from a declarative schema.
+Utility for generating strongly typed [Box](../box/README.md) classes from a
+declarative schema.
+
+The forge consumes schemas that mirror the
+[TypeScript definitions](./src/schema.ts) and emits complete class
+implementations. For an overview of how schemas map to generated code, see the
+[serialization guide](../../docs/docs-dev/serialization/box-forge.md).
 
 ## Features
 
@@ -26,3 +32,8 @@ BoxForge.gen({
 ```
 
 See the developer documentation under `packages/docs/docs-dev/box-forge` for more details.
+
+## Documentation
+
+- [Box forge mapping](../../docs/docs-dev/serialization/box-forge.md)
+- [Serialization overview](../../docs/docs-dev/serialization/overview.md)

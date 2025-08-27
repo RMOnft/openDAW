@@ -24,6 +24,8 @@ import { Pointers } from "@opendaw/studio-enums";
  * ```ts
  * const tape = InstrumentFactories.Tape.create(graph, host, "Vocals", IconSymbol.Tape)
  * ```
+ * Host routing uses {@link @opendaw/studio-enums#Pointers | Pointers} to
+ * connect instruments with their audio destinations.
  */
 export namespace InstrumentFactories {
   /**

@@ -12,6 +12,9 @@ import {InstrumentDeviceProcessor} from "./InstrumentDeviceProcessor"
 
 /**
  * High level container representing a track or device chain in the engine.
+ *
+ * Each instance corresponds to an
+ * {@link @opendaw/studio-enums#AudioUnitType | AudioUnitType}.
  */
 export class AudioUnit implements Terminable {
     static ID: int = 0 | 0

@@ -5,6 +5,7 @@ import {int} from "@opendaw/lib-std"
  * Simple FFT based spectrum analyser used for visualisation.
  */
 export class SpectrumAnalyser {
+    /** Default FFT size used when no size is supplied. */
     static readonly DEFAULT_SIZE = 1024
 
     readonly #fftSize: number
@@ -17,6 +18,10 @@ export class SpectrumAnalyser {
 
     #index: number = 0
 
+    /**
+     * When set to `true` the previous spectrum values decay over time instead of
+     * being replaced immediately.
+     */
     decay: boolean = false
 
     /**
@@ -46,6 +51,11 @@ export class SpectrumAnalyser {
     /**
      * Accumulates samples and updates the spectrum once {@link #fftSize} samples
      * have been collected.
+     *
+     * @param left - Left channel samples.
+     * @param right - Right channel samples.
+     * @param fromIndex - Start index within the channel buffers.
+     * @param toIndex - End index (exclusive) within the channel buffers.
      */
     process(left: Float32Array, right: Float32Array, fromIndex: int, toIndex: int): void {
         for (let i = fromIndex; i < toIndex; ++i) {

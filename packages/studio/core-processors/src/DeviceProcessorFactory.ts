@@ -62,6 +62,8 @@ import { UnknownMidiEffectDeviceProcessor } from "./devices/midi-effects/Unknown
  * const processor = InstrumentDeviceProcessorFactory.create(context, box)!
  * processor.process()
  * ```
+ * Instrument processors correspond to
+ * {@link @opendaw/studio-enums#AudioUnitType.Instrument | AudioUnitType.Instrument}.
  */
 export namespace InstrumentDeviceProcessorFactory {
   export const create = (
@@ -104,6 +106,8 @@ export namespace InstrumentDeviceProcessorFactory {
  * ```ts
  * const processor = MidiEffectDeviceProcessorFactory.create(context, box)
  * ```
+ * These processors can appear before or after instruments according to
+ * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}.
  */
 export namespace MidiEffectDeviceProcessorFactory {
   export const create = (

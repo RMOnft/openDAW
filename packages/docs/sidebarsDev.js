@@ -6,6 +6,11 @@ module.exports = {
     { type: "doc", id: "performance" },
     { type: "doc", id: "security-privacy" },
     { type: "doc", id: "browser-support" },
+    {
+      type: "category",
+      label: "Configuration",
+      items: ["configuration/eslint"],
+    },
     { type: "doc", id: "licensing" },
     {
       type: "category",
@@ -43,6 +48,16 @@ module.exports = {
         { type: "doc", id: "extending/plugin-examples" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
+    ]
+    },
+    {
+      type: "category",
+      label: "Boxes",
+      items: [
+        { type: "doc", id: "boxes/overview" },
+        { type: "doc", id: "boxes/examples" },
+        { type: "doc", id: "boxes/diagram" },
+        { type: "doc", id: "boxes/faq" },
       ],
     },
   ],

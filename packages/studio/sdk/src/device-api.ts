@@ -1,21 +1,29 @@
 /**
- * Public interface implemented by device plugins.
+ * Interacts with input and output devices such as audio interfaces or MIDI
+ * controllers.
  *
- * The host creates an instance and calls {@link init} before the device
- * participates in the audio graph.
- *
- * @example
- * ```ts
- * class MyDevice implements DeviceApi {
- *   async init(context: unknown) {
- *     // set up resources or parameters here
- *   }
- * }
- * ```
+ * @public
  */
-export interface DeviceApi {
+export interface DeviceAPI {
   /**
-   * Invoked when the plugin is first instantiated by the host.
+   * Enumerate available input devices.
    */
-  init(context: unknown): void | Promise<void>;
+  listInputs(): Promise<string[]>;
+
+  /**
+   * Enumerate available output devices.
+   */
+  listOutputs(): Promise<string[]>;
+
+  /**
+   * Select the device that should be used for audio input.
+   * @param id - Identifier returned from {@link listInputs}.
+   */
+  setInput(id: string): Promise<void>;
+
+  /**
+   * Select the device that should be used for audio output.
+   * @param id - Identifier returned from {@link listOutputs}.
+   */
+  setOutput(id: string): Promise<void>;
 }

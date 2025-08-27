@@ -2,6 +2,7 @@
  * Window functions used for spectral analysis and smoothing.
  */
 export namespace Window {
+    /** Shapes of supported window functions. */
     export enum Type {Bartlett, Blackman, BlackmanHarris, Hamming, Hanning}
 
     /**
@@ -9,6 +10,7 @@ export namespace Window {
      *
      * @param type - Shape of the window.
      * @param n - Number of samples.
+     * @returns Array containing the window coefficients.
      */
     export const create = (type: Type, n: number): Float32Array => {
         const values = new Float32Array(n)

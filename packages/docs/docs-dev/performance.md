@@ -10,6 +10,9 @@ profiling. Performance tips for contributors:
 - Profile with the browser dev tools to spot layout thrashing or long tasks.
 - When adding features, measure rendering and audio latency to prevent regressions.
 
+For an overview of engine design choices that influence runtime behaviour, see
+the [architecture performance notes](./architecture/performance.md).
+
 ## Capturing performance traces in Chrome DevTools
 
 Chrome's Performance panel helps diagnose rendering or audio hiccups. To capture
@@ -27,4 +30,5 @@ a trace (see also the [Profiling guide](./build-and-run/profiling.md)):
    ![Save trace](../static/img/performance-save.svg) <!-- TODO: add screenshot -->
 
 Contributors are encouraged to document any performance benchmarks or profiling
-results in pull requests.
+results in pull requests. Screenshots or trace files greatly help reviewers
+understand the impact of a change.
