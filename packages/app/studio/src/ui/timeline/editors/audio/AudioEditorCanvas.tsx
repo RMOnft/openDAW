@@ -1,3 +1,7 @@
+/**
+ * Canvas rendering part of the {@link AudioEditor}. Draws the timeline grid and
+ * audio waveform for the currently edited event.
+ */
 import css from "./AudioEditorCanvas.sass?inline"
 import {Lifecycle} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
@@ -14,14 +18,25 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "AudioEditorCanvas")
 
+/**
+ * Construction options for {@link AudioEditorCanvas}.
+ */
 type Construct = {
+    /** Lifecycle controlling canvas helpers. */
     lifecycle: Lifecycle
+    /** Access to studio services. */
     service: StudioService
+    /** Range of the timeline to visualize. */
     range: TimelineRange
+    /** Snapping grid helper. */
     snapping: Snapping
+    /** Reader describing the currently edited audio event. */
     reader: AudioEventOwnerReader
 }
 
+/**
+ * Render the waveform and editing region onto a canvas element.
+ */
 export const AudioEditorCanvas = ({lifecycle, range, snapping, reader}: Construct) => {
     const canvas: HTMLCanvasElement = <canvas tabIndex={-1}/>
     const painter = lifecycle.own(new CanvasPainter(canvas, painter => {
