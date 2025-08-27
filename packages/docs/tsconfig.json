@@ -1,4 +1,6 @@
 {
+  // TypeScript config for the docs site. See docs-dev/documentation-site/structure.md
+  // Related files: package.json and docusaurus.config.ts
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {

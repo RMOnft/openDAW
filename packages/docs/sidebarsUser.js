@@ -1,3 +1,6 @@
+/** Sidebar for user guides.
+ * Referenced from docusaurus.config.ts; see docs-dev/documentation-site/structure.md
+ */
 module.exports = {
   userSidebar: [
     { type: "doc", id: "intro" },

@@ -1,3 +1,6 @@
+/** Sidebar for developer documentation.
+ * Referenced from docusaurus.config.ts; see docs-dev/documentation-site/structure.md
+ */
 module.exports = {
   devSidebar: [
     { type: "doc", id: "intro" },
