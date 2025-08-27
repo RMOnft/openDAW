@@ -57,5 +57,14 @@
   issue and send them to support using the built-in error report template.
 
 - Developers looking to diagnose issues in depth can consult the
-  [debugging guide](/dev/debugging/overview) and read about inter-thread
-  messaging in the [architecture docs](../docs-dev/architecture/messaging.md).
+  [debugging guide](/dev/debugging/overview).
+
+### App stuck on loading screen
+
+- Check your internet connection and reload the page.
+- Make sure a supported browser is used and that extensions aren't blocking the app.
+
+### I see a "Missing Feature" message
+
+- Update the browser to the latest version or try a different one.
+- If the message persists, report it to support with your browser details.

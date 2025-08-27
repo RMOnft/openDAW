@@ -1,15 +1,26 @@
-import css from "./ThreeDots.sass?inline"
-import {Html} from "@opendaw/lib-dom"
-import {createElement} from "@opendaw/lib-jsx"
+import css from "./ThreeDots.sass?inline";
+import { Html } from "@opendaw/lib-dom";
+import { createElement } from "@opendaw/lib-jsx";
 
-const className = Html.adoptStyleSheet(css, "ThreeDots")
+const className = Html.adoptStyleSheet(css, "ThreeDots");
 
+/**
+ * Small three dot loading indicator.
+ *
+ * Renders three animated circles used to signal asynchronous activity in the UI.
+ */
 export const ThreeDots = () => {
-    return (
-        <svg classList={className} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle class="spinner_I8Q1" cx="4" cy="12" r="1.5"/>
-            <circle class="spinner_I8Q1 spinner_vrS7" cx="12" cy="12" r="3"/>
-            <circle class="spinner_I8Q1" cx="20" cy="12" r="1.5"/>
-        </svg>
-    )
-}
+  return (
+    <svg
+      classList={className}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle class="spinner_I8Q1" cx="4" cy="12" r="1.5" />
+      <circle class="spinner_I8Q1 spinner_vrS7" cx="12" cy="12" r="3" />
+      <circle class="spinner_I8Q1" cx="20" cy="12" r="1.5" />
+    </svg>
+  );
+};
