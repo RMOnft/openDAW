@@ -43,7 +43,14 @@ export class EngineFacade implements Engine {
     /** Creates an empty facade without an attached engine client. */
     constructor() {}
 
-    /** Connects to the underlying {@link EngineWorklet} instance. */
+    /**
+     * Connects to the underlying {@link EngineWorklet} instance.
+     *
+     * Wiring up a new client re-subscribes all observable properties to forward
+     * state changes to the host application.
+     *
+     * @param client - Worklet instance to bind to this facade.
+     */
     setClient(client: EngineWorklet) {
         this.#client = Option.wrap(client)
         this.#lifecycle.terminate()
@@ -61,7 +68,11 @@ export class EngineFacade implements Engine {
         )
     }
 
-    /** Detaches and terminates the connected {@link EngineWorklet}. */
+    /**
+     * Detaches and terminates the currently connected {@link EngineWorklet}.
+     * After calling this the facade returns to an idle state and can later be
+     * attached to a new client.
+     */
     releaseClient(): void {
         this.#lifecycle.terminate()
         this.#client.ifSome(client => client.terminate())

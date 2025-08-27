@@ -9,6 +9,10 @@ import {UpdateClockRate} from "@opendaw/studio-adapters"
 
 /**
  * Automation update event distributed by the {@link UpdateClock}.
+ *
+ * The event carries the absolute transport position at which the update should
+ * occur. Consumers typically translate this into UI refreshes or other
+ * time‑based tasks.
  */
 export interface UpdateEvent extends Event {type: "update-event"}
 
@@ -27,9 +31,11 @@ export namespace UpdateEvent {
 export class UpdateClock extends AbstractProcessor {
     readonly #outputs: Array<EventBuffer> = []
 
+    /**
+     * @param context - Engine execution context that owns the processor.
+     */
     constructor(context: EngineContext) {
         super(context)
-
         this.own(this.context.registerProcessor(this))
     }
 
@@ -41,6 +47,11 @@ export class UpdateClock extends AbstractProcessor {
         return {terminate: () => Arrays.remove(this.#outputs, output)}
     }
 
+    /**
+     * Walks the render blocks and emits {@link UpdateEvent}s at the configured
+     * {@link UpdateClockRate}. Only blocks flagged as transporting will trigger
+     * updates.
+     */
     process({blocks}: ProcessInfo): void {
         blocks.forEach(({p0, p1, flags}, index: int) => {
             if (!Bits.every(flags, BlockFlag.transporting)) {return}

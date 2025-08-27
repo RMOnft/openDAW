@@ -1,3 +1,11 @@
+/**
+ * Predefined pointer identifiers used throughout the studio graph.
+ *
+ * Pointers reference named fields or collections so devices can connect
+ * to each other without sharing concrete instances.
+ *
+ * @public
+ */
 export enum Pointers {
     Timeline,
     Selection,
@@ -39,5 +47,5 @@ export enum Pointers {
     ValueEvents,
     ValueEventCollection,
     ValueInterpolation,
-    Sample,
-} 
+    Sample
+}

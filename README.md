@@ -21,7 +21,7 @@ a strong focus on **education** and data-privacy. Please consider supporting thi
 
 ## Open-Source
 
-We are committed to transparency and community-driven development. 
+We are committed to transparency and community-driven development.
 
 The source code for openDAW is available under GPL3 (links below).
 
@@ -58,35 +58,37 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 
 ## And big hugs to all our supporters!
 
-### openDAW Visionary — $25.00  
+### openDAW Visionary — $25.00
+
 - Polarity
-- kanaris  
-- Stephen Tai  
-- Thad Guidry  
-- Pathfinder  
+- kanaris
+- Stephen Tai
+- Thad Guidry
+- Pathfinder
 - One Sound Every Day (santino)
 
-### openDAW Supporter — $5.00  
-- Cal Lycus  
-- Jetdarc  
-- Truls Enstad  
-- p07a  
-- Ynot Etluhcs  
-- Mats Gisselson  
-- Dado  
-- centomila  
-- Ola  
-- SKYENCE  
-- BeatMax_Prediction  
-- Kim T  
-- Nyenoidz  
-- Bruce Hunter  
-- Steve Meiers  
-- 4ohm  
-- Yito  
-- Shawn Lukas  
-- Tommes  
-- David Thompson  
+### openDAW Supporter — $5.00
+
+- Cal Lycus
+- Jetdarc
+- Truls Enstad
+- p07a
+- Ynot Etluhcs
+- Mats Gisselson
+- Dado
+- centomila
+- Ola
+- SKYENCE
+- BeatMax_Prediction
+- Kim T
+- Nyenoidz
+- Bruce Hunter
+- Steve Meiers
+- 4ohm
+- Yito
+- Shawn Lukas
+- Tommes
+- David Thompson
 - Harry Gillich
 - OxVolt
 - Wojciech Miłkowski
@@ -94,21 +96,34 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - skyboundzoo
 
 ### openDAW Custom Pledge
+
 - lokomotywa ($2.47)
 
 ---
 
 ### Repositories
 
-* [openDAW](https://github.com/andremichelle/opendaw)
+- [openDAW](https://github.com/andremichelle/opendaw)
+
+### Documentation
+
+- [Localization Guide](packages/docs/docs-user/localization.md)
+- [Accessibility Guide](packages/docs/docs-user/accessibility.md)
+- [Developer i18n Notes](packages/docs/docs-dev/i18n.md)
+
+### Style Documentation
+
+- [Style Guidelines](styles/OpenDAW/style-guidelines.md)
+- [Developer Style Guide](packages/docs/docs-dev/style-guide.md)
+- [User Style Customization](packages/docs/docs-user/style-customization.md)
 
 ### Prepare, Clone, Installation, and Run
 
 openDAW tries to avoid external libraries and frameworks. Following is a list of the external libraries we currently use in the web studio:
 
-* [jszip](https://www.npmjs.com/package/jszip) (for openDAW project bundle file)
-* [markdown-it](https://www.npmjs.com/package/markdown-it) + [markdown-it-table](https://www.npmjs.com/package/markdown-it-table) (for help pages)
-* [d3-force](https://d3js.org/d3-force) (for graph debugging)
+- [jszip](https://www.npmjs.com/package/jszip) (for openDAW project bundle file)
+- [markdown-it](https://www.npmjs.com/package/markdown-it) + [markdown-it-table](https://www.npmjs.com/package/markdown-it-table) (for help pages)
+- [d3-force](https://d3js.org/d3-force) (for graph debugging)
 
 Before starting, ensure you have the following installed on your system:
 
@@ -130,12 +145,20 @@ Before starting, ensure you have the following installed on your system:
 
 ### Installation
 
-* `npm run cert` (only for the very first time)
-* `npm run clean` (to revert to clean slate, removes all `node_modules` and `dist` folders)
-* `npm install` (for the first time and after `npm run clean`)
-* `npm run build` (for the first time and after `npm run clean`)
-* `npm run dev:studio` | `npm run dev:headless` (start dev server)
-* Navigate to https://localhost:8080 (port is important > cors sample api)
+- `npm run cert` (only for the very first time)
+- `npm run clean` (to revert to clean slate, removes all `node_modules` and `dist` folders)
+- `npm install` (for the first time and after `npm run clean`)
+- `npm run build` (for the first time and after `npm run clean`)
+- `npm run dev:studio` | `npm run dev:headless` (start dev server)
+- Navigate to https://localhost:8080 (port is important > cors sample api)
+
+### Pipeline Overview
+
+The repository uses **Turbo** to orchestrate builds, tests, linting, and
+documentation tasks across all packages. **Lerna** manages package versions and
+publishing via scripts like `npm run publish-sdk`. API documentation is produced
+with **Typedoc**, and deployment targets are described in the Vercel and
+Netlify configuration files (currently disabled).
 
 ### Flow Charts
 
@@ -145,7 +168,7 @@ Before starting, ensure you have the following installed on your system:
 
 [![Custom Caption: Watch the Demo](https://img.youtube.com/vi/VPTXeJY6Eaw/0.jpg)](https://www.youtube.com/watch?v=VPTXeJY6Eaw)
 
-Watch Polarity's Video *"there's a new FREE DAW in town"*
+Watch Polarity's Video _"there's a new FREE DAW in town"_
 
 ## Get Involved
 
@@ -167,21 +190,21 @@ participate, visit our [Contribute](https://opendaw.org/contribute) page.
 
 ## Links
 
-* [opendaw.studio (prototype)](https://opendaw.studio)
-* [opendaw.org (website)](https://opendaw.org)
-* [openDAW on Discord](https://discord.opendaw.studio)
-* [openDAW SDK](https://www.npmjs.com/org/opendaw)
-* [openDAW on Patreon](https://www.patreon.com/join/openDAW)
-* [openDAW on ko-fi](https://ko-fi.com/opendaw)
-* [LinkedIn](https://www.linkedin.com/company/opendaw-org/)
-* [Instagram](https://www.instagram.com/opendaw.studio)
+- [opendaw.studio (prototype)](https://opendaw.studio)
+- [opendaw.org (website)](https://opendaw.org)
+- [openDAW on Discord](https://discord.opendaw.studio)
+- [openDAW SDK](https://www.npmjs.com/org/opendaw)
+- [openDAW on Patreon](https://www.patreon.com/join/openDAW)
+- [openDAW on ko-fi](https://ko-fi.com/opendaw)
+- [LinkedIn](https://www.linkedin.com/company/opendaw-org/)
+- [Instagram](https://www.instagram.com/opendaw.studio)
 
 ## Dual-Licensing Model
 
 openDAW is available **under two alternative license terms**:
 
 | Option                    | When to choose it                                                                                              | Obligations                                                                                                                                                                      |
-|---------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A. GPL v3 (or later)**  | You are happy for the entire work that includes openDAW to be released under GPL-compatible open-source terms. | – Must distribute complete corresponding source code under GPL.<br>– Must keep copyright & licence notices.<br>– May run openDAW privately in any software, open or closed (§0). |
 | **B. Commercial Licence** | You wish to incorporate openDAW into **closed-source** or otherwise licence-incompatible software.             | – Pay the agreed fee.<br>– No copyleft requirement for your own source code.<br>– Other terms as per the signed agreement.                                                       |
 

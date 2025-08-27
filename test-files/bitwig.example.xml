@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Example Bitwig project used as a test fixture -->
 <Project version="1.0">
     <Application name="Bitwig Studio" version="5.0"/>
     <Transport>
