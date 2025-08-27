@@ -1,16 +1,17 @@
-import css from "./AudioOutputDevices.sass?inline"
-import {Procedure} from "@opendaw/lib-std"
-import {Await, createElement} from "@opendaw/lib-jsx"
-import {Html} from "@opendaw/lib-dom"
-import {AudioOutputDevice} from "@/audio/AudioOutputDevice"
-import {AudioDevices} from "@/audio/AudioDevices"
+/** UI component that lists available audio output devices. */
+import css from "./AudioOutputDevices.sass?inline";
+import { Procedure } from "@opendaw/lib-std";
+import { Await, createElement } from "@opendaw/lib-jsx";
+import { Html } from "@opendaw/lib-dom";
+import { AudioOutputDevice } from "@/audio/AudioOutputDevice";
+import { AudioDevices } from "@/audio/AudioDevices";
 
-const className = Html.adoptStyleSheet(css, "AudioOutputDevices")
+const className = Html.adoptStyleSheet(css, "AudioOutputDevices");
 
 type Construct = {
-    output: AudioOutputDevice
-    provider: Procedure<MediaDeviceInfo>
-}
+  output: AudioOutputDevice;
+  provider: Procedure<MediaDeviceInfo>;
+};
 
 /**
  * Lists available audio output devices and lets the user choose one.

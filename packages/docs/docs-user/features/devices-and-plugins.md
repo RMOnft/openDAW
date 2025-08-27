@@ -27,3 +27,12 @@ Interested in building your own plugins? Check out the [plugin guide](../../docs
 
 - Right-click a control to create automation or modulation targets.
 - Parameters can be adjusted in real time and recorded during playback.
+
+## Developer docs
+
+Learn more about how openDAW interfaces with hardware and exports audio:
+
+- [Audio and MIDI overview](../../docs-dev/audio-midi/overview.md)
+- [Audio devices](../../docs-dev/audio-midi/audio-devices.md)
+- [MIDI devices](../../docs-dev/audio-midi/midi-devices.md)
+- [Offline rendering](../../docs-dev/audio-midi/offline-rendering.md)
