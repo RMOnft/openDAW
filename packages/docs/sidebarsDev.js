@@ -21,7 +21,7 @@ module.exports = {
         "xml/pitfalls",
         "xml/best-practices",
         "xml/troubleshooting",
-        ]
+      ],
     },
     {
       type: "category",
@@ -31,6 +31,18 @@ module.exports = {
         { type: "doc", id: "box-forge/schema-format" },
         { type: "doc", id: "box-forge/examples" },
         { type: "doc", id: "box-forge/integration" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Extending",
+      items: [
+        { type: "doc", id: "extending/opendaw-sdk" },
+        { type: "doc", id: "extending/plugin-guide" },
+        { type: "doc", id: "extending/plugin-api" },
+        { type: "doc", id: "extending/plugin-examples" },
+        { type: "doc", id: "extending/testing-plugins" },
+        { type: "doc", id: "extending/processor-guide" },
       ],
     },
   ],

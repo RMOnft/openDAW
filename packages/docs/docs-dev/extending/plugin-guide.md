@@ -16,3 +16,9 @@ flowchart LR
 3. Register the plugin so the Studio can load it.
 
 For DSP customization see the [Processor guide](./processor-guide.md).
+
+Further reading:
+
+- [Plugin API](./plugin-api.md) documents the public surface for plugin developers.
+- [Plugin examples](./plugin-examples.md) provides ready-to-run sample code.
+- [Testing plugins](./testing-plugins.md) explains how to validate and debug your work.
