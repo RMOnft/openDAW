@@ -1,3 +1,7 @@
+/**
+ * Navigation bar for the timeline.  It combines the loop area editor and the
+ * time axis and is typically rendered directly beneath the header.
+ */
 import css from "./TimelineNavigation.sass?inline"
 import {Lifecycle} from "@opendaw/lib-std"
 import {StudioService} from "@/service/StudioService.ts"

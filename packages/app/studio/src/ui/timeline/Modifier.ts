@@ -1,3 +1,8 @@
+/**
+ * Contract for drag-based modifications performed on the timeline. Implementations
+ * react to pointer movement and optionally commit or revert changes through the
+ * provided editing API.
+ */
 import {Dragging} from "@opendaw/lib-dom"
 import {Editing} from "@opendaw/lib-box"
 

@@ -1,3 +1,8 @@
+/**
+ * Utility for resolving pointer positions to specific region handles.  Used by
+ * editors to determine whether a drag should move a region, resize it or adjust
+ * its loop.
+ */
 import {
     AnyLoopableRegionBoxAdapter,
     AnyRegionBoxAdapter,

@@ -1,3 +1,7 @@
+/**
+ * Installs keyboard shortcuts for timeline editors.  Currently supports global
+ * delete and select-all actions acting on the provided selection and locator.
+ */
 import {Selection} from "@opendaw/lib-std"
 import {TimelineSelectableLocator} from "@/ui/timeline/TimelineSelectableLocator.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -5,6 +9,9 @@ import {Event} from "@opendaw/lib-dsp"
 import {Events, Keyboard} from "@opendaw/lib-dom"
 import {BoxAdapter} from "@opendaw/studio-adapters"
 
+/**
+ * Adds event listeners to handle global shortcuts on an editor element.
+ */
 export const attachShortcuts = <E extends Event & BoxAdapter>(element: Element,
                                                               editing: Editing,
                                                               selection: Selection<E>,
