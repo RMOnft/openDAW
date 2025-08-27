@@ -18,6 +18,7 @@ export type ProjectMeta = {
     notepad?: string
 } & JSONValue
 
+/** Utilities for working with {@link ProjectMeta} objects. */
 export namespace ProjectMeta {
     const created = new Date().toISOString()
 

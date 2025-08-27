@@ -47,11 +47,19 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         return this.#session.subscribe(observer)
     }
 
+    /**
+     * Save the current project. Unsaved sessions trigger {@link saveAs} to
+     * gather metadata.
+     */
     async save(): Promise<void> {
         return this.#session.getValue()
             .ifSome(session => session.saved() ? session.save() : this.saveAs())
     }
 
+    /**
+     * Save the current session under a new name, prompting the user for
+     * metadata.
+     */
     async saveAs(): Promise<void> {
         return this.#session.getValue().ifSome(async session => {
             const {status, value: meta} = await Promises.tryCatch(ProjectDialogs.showSaveDialog({
@@ -64,6 +72,7 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         })
     }
 
+    /** Open a dialog listing available projects and load the chosen one. */
     async browse(): Promise<void> {
         const {status, value} = await Promises.tryCatch(ProjectDialogs.showBrowseDialog(this.#service))
         if (status === "resolved") {
@@ -72,6 +81,12 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         }
     }
 
+    /**
+     * Load an existing project from persistent storage.
+     *
+     * @param uuid identifier of the project to load.
+     * @param meta previously stored metadata.
+     */
     async loadExisting(uuid: UUID.Format, meta: ProjectMeta) {
         console.debug(UUID.toString(uuid))
         const project = await Projects.loadProject(this.#service, uuid)
@@ -79,6 +94,11 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         this.#setSession(this.#service, uuid, project, meta, cover, true)
     }
 
+    /**
+     * Load a project template shipped with the application.
+     *
+     * @param name template identifier without extension.
+     */
     async loadTemplate(name: string): Promise<unknown> {
         console.debug(`load '${name}'`)
         const handler = showProcessMonolog("Loading Template...")
@@ -97,7 +117,11 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
             .finally(() => handler.close())
     }
 
-    async exportZip() {
+    /**
+     * Export the current project and its samples as a bundle and allow the user
+     * to save it as a file.
+     */
+    async exportZip(): Promise<void> {
         return this.#session.getValue().ifSome(async session => {
             const progress = new DefaultObservableValue(0.0)
             const processDialog = showProcessDialog("Bundling Project...", progress)
@@ -123,7 +147,10 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         })
     }
 
-    async importZip() {
+    /**
+     * Import a previously exported project bundle from disk.
+     */
+    async importZip(): Promise<void> {
         try {
             const [file] = await Files.open({types: [FilePickerAcceptTypes.ProjectBundleFileType]})
             const session = await Projects.importBundle(this.#service, await file.arrayBuffer())
@@ -135,7 +162,10 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         }
     }
 
-    async saveFile() {
+    /**
+     * Save the raw project file to disk without bundling samples.
+     */
+    async saveFile(): Promise<void> {
         this.#session.getValue().ifSome(async session => {
             const arrayBuffer = session.project.toArrayBuffer() as ArrayBuffer
             try {
@@ -151,8 +181,10 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
             }
         })
     }
-
-    async loadFile() {
+    /**
+     * Load a raw project file from disk and start a new session.
+     */
+    async loadFile(): Promise<void> {
         try {
             const [file] = await Files.open({types: [FilePickerAcceptTypes.ProjectFileType]})
             const project = Project.load(this.#service, await file.arrayBuffer())
@@ -164,14 +196,19 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         }
     }
 
+    /**
+     * Start a new session using an existing project instance.
+     */
     fromProject(project: Project, name: string): void {
         this.#setSession(this.#service, UUID.generate(), project, ProjectMeta.init(name), Option.None)
     }
 
+    /** Set the current session value. */
     #setSession(...args: ConstructorParameters<typeof ProjectSession>): void {
         this.#session.setValue(Option.wrap(this.#createSession(...args)))
     }
 
+    /** Factory method used for creating {@link ProjectSession} instances. */
     #createSession(...args: ConstructorParameters<typeof ProjectSession>): ProjectSession {
         return new ProjectSession(...args)
     }
