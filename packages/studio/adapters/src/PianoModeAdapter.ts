@@ -3,6 +3,14 @@ import {float, int, Observer, StringMapping, Subscription, ValueMapping} from "@
 import {FieldAdapter} from "./FieldAdapter"
 import {Propagation} from "@opendaw/lib-box"
 
+/**
+ * Adapter exposing the editable fields of {@link PianoMode} to the UI.
+ *
+ * @remarks
+ * The piano mode controls the visual appearance of the piano roll. The adapter
+ * wraps individual fields with {@link FieldAdapter}s so that widgets can bind
+ * to them easily.
+ */
 export class PianoModeAdapter {
     readonly #object: PianoMode
 
@@ -39,6 +47,9 @@ export class PianoModeAdapter {
             StringMapping.numeric({fractionDigits: 0}), "Transpose")
     }
 
+    /**
+     * Subscribes to changes on any field contained in the piano mode.
+     */
     subscribe(observer: Observer<this>): Subscription {
         return this.#object.box.subscribe(Propagation.Children, () => observer(this))
     }

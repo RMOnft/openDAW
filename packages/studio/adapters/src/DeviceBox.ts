@@ -2,22 +2,34 @@ import {Pointers} from "@opendaw/studio-enums"
 import {BooleanField, Box, Int32Field, PointerField, StringField} from "@opendaw/lib-box"
 import {isDefined, isInstanceOf, Nullish, panic} from "@opendaw/lib-std"
 
+/**
+ * Shared structure of all device boxes consumed by device processors.
+ *
+ * @see {@link @opendaw/studio-core-processors#DeviceProcessorFactory}
+ */
 export type DeviceBox = {
+    /** Pointer to the hosting track or chain. */
     host: PointerField
+    /** User facing name. */
     label: StringField
+    /** Indicates whether the device is active. */
     enabled: BooleanField
+    /** Persisted UI state. */
     minimized: BooleanField
 } & Box
 
+/** Box describing an instrument device. */
 export type InstrumentDeviceBox = {
     host: PointerField<Pointers.InstrumentHost>
 } & DeviceBox
 
+/** Box describing an audio or MIDI effect device. */
 export type EffectDeviceBox = {
     host: PointerField<Pointers.AudioEffectHost | Pointers.MidiEffectHost>
     index: Int32Field
 } & DeviceBox
 
+/** Helper functions for working with {@link DeviceBox} instances. */
 export namespace DeviceBoxUtils {
     export const isDeviceBox = (box: Box): box is DeviceBox =>
         "host" in box && isInstanceOf(box.host, PointerField) &&

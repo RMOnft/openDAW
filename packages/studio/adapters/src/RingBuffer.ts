@@ -2,7 +2,13 @@ import {Arrays, assert, int, panic, Procedure} from "@opendaw/lib-std"
 
 declare let document: any
 
+/**
+ * Utility for transferring planar audio data between threads using a shared
+ * {@link SharedArrayBuffer}.  The same structure is used by the
+ * {@link @opendaw/studio-core-processors#RecordingProcessor | RecordingProcessor}.
+ */
 export namespace RingBuffer {
+    /** Configuration for a ring buffer. */
     export interface Config {
         sab: SharedArrayBuffer
         numChunks: int
@@ -10,10 +16,15 @@ export namespace RingBuffer {
         bufferSize: int
     }
 
+    /** Writes chunks of audio into the buffer. */
     export interface Writer {write(channels: ReadonlyArray<Float32Array>): void}
 
+    /** Reads chunks from the buffer until {@link Reader.stop} is called. */
     export interface Reader {stop(): void}
 
+    /**
+     * Creates a reader that appends each chunk to the provided callback.
+     */
     export const reader = ({
                                sab,
                                numChunks,
@@ -58,6 +69,9 @@ export namespace RingBuffer {
         return {stop: () => running = false}
     }
 
+    /**
+     * Creates a writer for the given configuration.
+     */
     export const writer = ({sab, numChunks, numberOfChannels, bufferSize}: Config): Writer => {
         const pointers = new Int32Array(sab, 0, 2)
         const audio = new Float32Array(sab, 8)
@@ -81,7 +95,9 @@ export namespace RingBuffer {
         })
     }
 }
-
+/**
+ * Flattens an array of planar chunks into contiguous channel buffers.
+ */
 export const mergeChunkPlanes = (chunks: ReadonlyArray<ReadonlyArray<Float32Array>>,
                                  bufferSize: int,
                                  maxFrames: int = Number.MAX_SAFE_INTEGER): ReadonlyArray<Float32Array> => {

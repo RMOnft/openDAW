@@ -1,3 +1,10 @@
+/**
+ * Enumerates all SVG symbols available in the {@link packages/app/studio/src/ui/components/Icon.tsx | Icon} system.
+ *
+ * @remarks
+ * Adapters and UI components reference these values instead of dealing with raw
+ * paths.  New icons can be added here and consumed throughout the application.
+ */
 export enum IconSymbol {
     Rectangle,
     Checkbox,
@@ -114,7 +121,9 @@ export enum IconSymbol {
 }
 
 export namespace IconSymbol {
+    /** Returns the enum key for the given symbol. */
     export const toName = (symbol: IconSymbol): string => IconSymbol[symbol]
+    /** Looks up a symbol by its string name. */
     export const fromName = (name: keyof typeof IconSymbol | string): IconSymbol =>
         <IconSymbol>IconSymbol[name as keyof typeof IconSymbol] ?? IconSymbol.Rectangle
 }
