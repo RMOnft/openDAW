@@ -1,4 +1,5 @@
 {
-  "buildCommand": "npm run docs:build",
-  "outputDirectory": "packages/docs/build"
+  "//": "Vercel deployment disabled",
+  "buildCommand": "",
+  "outputDirectory": ""
 }

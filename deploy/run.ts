@@ -1,3 +1,4 @@
+// NOTE: Deployment script disabled
 import SftpClient from "ssh2-sftp-client"
 import * as fs from "fs"
 import * as path from "path"

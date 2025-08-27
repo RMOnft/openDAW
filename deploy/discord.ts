@@ -1,4 +1,5 @@
 (async () => {
+    // NOTE: Deployment script disabled
     const webhookUrl = process.env.DISCORD_WEBHOOK
     if (!webhookUrl) {
         console.error("Missing DISCORD_WEBHOOK")
