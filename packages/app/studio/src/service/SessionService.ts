@@ -22,6 +22,9 @@ import {Project} from "@opendaw/studio-core"
  * Handles the lifecycle of a project session, including loading, saving and
  * exporting bundles.
  *
+ * See {@link StudioService} for application orchestration and
+ * [SampleApi](./SampleApi.ts) for sample transfers.
+ *
  * ```mermaid
  * flowchart LR
  *   SessionService -->|creates| ProjectSession

@@ -2,6 +2,9 @@
 
 /**
  * Utilities for building a tiny demo project that plays a simple arpeggio.
+ *
+ * The exported {@link createExampleProject} helper is consumed by the
+ * headless {@code main.ts} entry point.
  */
 import {PPQN} from "@opendaw/lib-dsp"
 import {EffectFactories, InstrumentFactories, Project, ProjectEnv} from "@opendaw/studio-core"

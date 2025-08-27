@@ -24,6 +24,9 @@ const headers: RequestInit = {
 /**
  * REST API helpers for retrieving and uploading sample files.
  *
+ * Uses {@link network.limitFetch} to throttle HTTP requests. See
+ * [StudioService](./StudioService.ts) for how the API integrates with the app.
+ *
  * ```mermaid
  * sequenceDiagram
  *   participant U as Client
@@ -68,6 +71,7 @@ export namespace SampleApi {
     });
     return Object.freeze({ ...sample, cloud: FileRoot });
   };
+
 
   /**
    * Load a sample into an {@link AudioContext} and return decoded data and
@@ -133,6 +137,7 @@ export namespace SampleApi {
     numberOfFrames: buffer.length,
     numberOfChannels: buffer.numberOfChannels,
   });
+
 
   /**
    * Upload a sample to the remote server.
