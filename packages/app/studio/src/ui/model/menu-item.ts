@@ -1,3 +1,9 @@
+/**
+ * Minimal tree structure representing menu entries. Each {@link MenuItem}
+ * can lazily populate children and trigger actions when selected.
+ *
+ * @see ../../../../../docs/docs-dev/ui/menu/overview.md
+ */
 import {Arrays, Option, Procedure, Terminable} from "@opendaw/lib-std"
 
 import {IconSymbol} from "@opendaw/studio-adapters"

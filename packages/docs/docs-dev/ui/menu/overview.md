@@ -1,6 +1,8 @@
 # Menu Overview
 
-The menu system connects user actions to application features via a structured tree of `MenuItem` objects.
+The Studio builds menus from a tree of `MenuItem` objects. Items can lazily
+populate children, trigger actions and are rendered with the `Menu` component
+and opened by `MenuButton` controls.
 
 - [Automation](./automation.md)
 - [Debug](./debug.md)

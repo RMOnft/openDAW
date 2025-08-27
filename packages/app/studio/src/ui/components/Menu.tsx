@@ -1,3 +1,9 @@
+/**
+ * Floating menu component that renders a {@link MenuItem} tree and supports
+ * nested sub-menus, scrolling and keyboard navigation.
+ *
+ * @see ../../../../../docs/docs-dev/ui/menu/overview.md
+ */
 import css from "./Menu.sass?inline"
 import {DefaultMenuData, HeaderMenuData, MenuItem} from "@/ui/model/menu-item.ts"
 import {createElement, Frag} from "@opendaw/lib-jsx"
