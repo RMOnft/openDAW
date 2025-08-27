@@ -18,14 +18,23 @@ import {AdapterCollectionListener} from "./BoxAdapterCollection"
 import {IndexComparator} from "./IndexComparator"
 import {BoxAdapter} from "./BoxAdapter"
 
+/** Adapter that exposes an `index` field used for ordering. */
 export interface IndexedBoxAdapter extends BoxAdapter {
     indexField: Int32Field
 }
 
+/** Listener receiving notifications about collection changes. */
 export interface IndexedAdapterCollectionListener<A extends IndexedBoxAdapter> extends AdapterCollectionListener<A> {
     onReorder(adapter: A): void
 }
 
+/**
+ * Manages a set of adapters ordered by an index field.
+ *
+ * @remarks
+ * Internally a {@link SortedSet} keyed by {@link UUID} is used. Reordering
+ * is detected via {@link IndexComparator} and broadcast to listeners.
+ */
 export class IndexedBoxAdapterCollection<A extends IndexedBoxAdapter, P extends Pointers> implements Terminable {
     static create<A extends IndexedBoxAdapter, P extends Pointers>(field: Field<P>,
                                                                    provider: Func<Box, A>,
