@@ -1,1 +1,7 @@
-export const enum Chunk {MTHD = 0x4d546864, MTRK = 0x4d54726b}
+/**
+ * MIDI chunk identifiers used in Standard MIDI Files.
+ */
+export const enum Chunk {
+  MTHD = 0x4d546864,
+  MTRK = 0x4d54726b,
+}

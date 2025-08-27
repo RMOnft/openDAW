@@ -1,97 +1,122 @@
-import {byte, ByteArrayInput, int} from "@opendaw/lib-std"
-import {MidiFileFormat} from "./MidiFileFormat"
-import {Chunk} from "./Chunk"
-import {MidiTrack} from "./MidiTrack"
+import { byte, ByteArrayInput, int } from "@opendaw/lib-std";
+import { MidiFileFormat } from "./MidiFileFormat";
+import { Chunk } from "./Chunk";
+import { MidiTrack } from "./MidiTrack";
 
+/**
+ * Reads a Standard MIDI File from a {@link ByteArrayInput} stream.
+ */
 export class MidiFileDecoder {
-    readonly input: ByteArrayInput
+  /** Underlying byte input */
+  readonly input: ByteArrayInput;
 
-    #suppressWarnings: boolean = false
-    #sysMode: boolean = false
+  #suppressWarnings: boolean = false;
+  #sysMode: boolean = false;
 
-    constructor(input: ByteArrayInput) {this.input = input}
+  /**
+   * Create a decoder that reads from the given input.
+   */
+  constructor(input: ByteArrayInput) {
+    this.input = input;
+  }
 
-    decode(): MidiFileFormat {
-        this.input.littleEndian = false
-        const header = this.input.readInt()
-        if (header === Chunk.MTHD) {
-            if (this.input.readInt() !== 6) {
-                throw new Error("2nd int in header must be 6")
-            }
-        } else {
-            console.warn(`Unsupported midi format ${header} !== ${Chunk.MTHD}`)
-            throw new Error("Unsupported midi format")
-        }
-        const formatType = this.input.readShort()
-        const numTracks = this.input.readShort()
-        const timeDivision = this.input.readShort()
-        const tracks: MidiTrack[] = []
-        for (let index = 0; index < numTracks; index++) {
-            const trackChunk = this.input.readInt()
-            const trackLength = this.input.readInt()
-            const trackPosition = this.input.position
-            if (trackChunk === Chunk.MTRK) {
-                tracks[index] = MidiTrack.decode(this)
-            }
-            this.input.position = trackPosition + trackLength
-        }
-        if (0 < this.input.remaining()) {
-            console.warn(`${this.input.remaining()} bytes remaining.`)
-        }
-        return new MidiFileFormat(tracks, formatType, timeDivision)
+  /**
+   * Decode the entire MIDI file and return its format description.
+   */
+  decode(): MidiFileFormat {
+    this.input.littleEndian = false;
+    const header = this.input.readInt();
+    if (header === Chunk.MTHD) {
+      if (this.input.readInt() !== 6) {
+        throw new Error("2nd int in header must be 6");
+      }
+    } else {
+      console.warn(`Unsupported midi format ${header} !== ${Chunk.MTHD}`);
+      throw new Error("Unsupported midi format");
     }
-
-    readVarLen(): int {
-        let value: int = this.input.readByte() & 0xff
-        let c: int
-        if (0 < (value & 0x80)) {
-            value &= 0x7f
-            do {
-                c = this.input.readByte() & 0xff
-                value = (value << 7) + (c & 0x7f)
-            } while (0 < (c & 0x80))
-        }
-        return value
+    const formatType = this.input.readShort();
+    const numTracks = this.input.readShort();
+    const timeDivision = this.input.readShort();
+    const tracks: MidiTrack[] = [];
+    for (let index = 0; index < numTracks; index++) {
+      const trackChunk = this.input.readInt();
+      const trackLength = this.input.readInt();
+      const trackPosition = this.input.position;
+      if (trackChunk === Chunk.MTRK) {
+        tracks[index] = MidiTrack.decode(this);
+      }
+      this.input.position = trackPosition + trackLength;
     }
-
-    readSignature(): [int, int] {
-        const b0 = this.input.readByte() & 0xff
-        const b1 = this.input.readByte() & 0xff
-        const b2 = this.input.readByte() & 0xff
-        const b3 = this.input.readByte() & 0xff
-        if (!this.#suppressWarnings) {
-            if (24 !== b2) {
-                // Unsupported Metronome Pulse.
-            }
-            if (8 !== b3) {
-                // Unsupported Number of 32nd notes each quarter note.
-            }
-        }
-        return [b0, 1 << b1]
+    if (0 < this.input.remaining()) {
+      console.warn(`${this.input.remaining()} bytes remaining.`);
     }
+    return new MidiFileFormat(tracks, formatType, timeDivision);
+  }
 
-    readTempo(): number {
-        const b0 = this.input.readByte() & 0xff
-        const b1 = this.input.readByte() & 0xff
-        const b2 = this.input.readByte() & 0xff
-        const MICROSECONDS_PER_MINUTE = 60_000_000.0 as const
-        return MICROSECONDS_PER_MINUTE / ((b0 << 16) | (b1 << 8) | b2)
+  /** Read a variable-length integer as defined by the MIDI specification. */
+  readVarLen(): int {
+    let value: int = this.input.readByte() & 0xff;
+    let c: int;
+    if (0 < (value & 0x80)) {
+      value &= 0x7f;
+      do {
+        c = this.input.readByte() & 0xff;
+        value = (value << 7) + (c & 0x7f);
+      } while (0 < (c & 0x80));
     }
+    return value;
+  }
 
-    skipSysEx(value: int): void {
-        if (0xf0 === value) {
-            if (this.#sysMode) {throw new Error("System message already in progress")}
-            this.input.skip(this.readVarLen() - 1)
-            this.#sysMode = true
-        } else if (0xf7 === value) {
-            if (!this.#sysMode) {
-                this.input.skip(this.readVarLen() - 1)
-                this.#sysMode = true
-            } else {
-                this.#sysMode = false
-            }
-        }
+  /** Read a time signature meta-event payload. */
+  readSignature(): [int, int] {
+    const b0 = this.input.readByte() & 0xff;
+    const b1 = this.input.readByte() & 0xff;
+    const b2 = this.input.readByte() & 0xff;
+    const b3 = this.input.readByte() & 0xff;
+    if (!this.#suppressWarnings) {
+      if (24 !== b2) {
+        // Unsupported Metronome Pulse.
+      }
+      if (8 !== b3) {
+        // Unsupported Number of 32nd notes each quarter note.
+      }
     }
-    skip(count: int): void {this.input.skip(count)}
-    readByte(): byte {return this.input.readByte()}
+    return [b0, 1 << b1];
+  }
+
+  /** Read a tempo meta-event payload and return beats per minute. */
+  readTempo(): number {
+    const b0 = this.input.readByte() & 0xff;
+    const b1 = this.input.readByte() & 0xff;
+    const b2 = this.input.readByte() & 0xff;
+    const MICROSECONDS_PER_MINUTE = 60_000_000.0 as const;
+    return MICROSECONDS_PER_MINUTE / ((b0 << 16) | (b1 << 8) | b2);
+  }
+
+  /** Skip over a system exclusive message. */
+  skipSysEx(value: int): void {
+    if (0xf0 === value) {
+      if (this.#sysMode) {
+        throw new Error("System message already in progress");
+      }
+      this.input.skip(this.readVarLen() - 1);
+      this.#sysMode = true;
+    } else if (0xf7 === value) {
+      if (!this.#sysMode) {
+        this.input.skip(this.readVarLen() - 1);
+        this.#sysMode = true;
+      } else {
+        this.#sysMode = false;
+      }
+    }
+  }
+  /** Skip a number of bytes from the input. */
+  skip(count: int): void {
+    this.input.skip(count);
+  }
+
+  /** Read a raw byte from the input. */
+  readByte(): byte {
+    return this.input.readByte();
+  }
 }
