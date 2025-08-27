@@ -4,7 +4,11 @@ Thank you for your interest in contributing to openDAW! This guide outlines the 
 
 ## Pipeline Overview
 
-The monorepo uses **Turbo** to run build, test, and lint tasks across all packages. **Lerna** manages package versioning and publishing, while API docs are generated with **Typedoc**. Deployment configuration files for Vercel and Netlify describe how docs and apps would be deployed when enabled.
+The monorepo uses **Turbo** to run build, test, and lint tasks across all
+packages. **Lerna** manages package versioning and publishing; see the
+[versioning policy](packages/docs/docs-dev/build-and-run/versioning.md). API
+docs are generated with **Typedoc**. Deployment configuration files for Vercel
+and Netlify describe how docs and apps would be deployed when enabled.
 
 GitHub Actions provides continuous integration. Workflows handle deployment,
 documentation builds, quality checks, Discord notifications, and SFTP tests.

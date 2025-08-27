@@ -1,6 +1,7 @@
 {
   "//": "Root package manifest for the openDAW monorepo",
   "name": "opendaw",
+  "version//": "Version is managed by openDAW versioning policy; see packages/docs/docs-dev/build-and-run/versioning.md",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
