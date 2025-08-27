@@ -1,6 +1,9 @@
 # OpenDAW Studio
 
 This package contains the web-based user interface for the OpenDAW project.
+It uses a central colour system defined in
+[`src/colors.sass`](src/colors.sass) and exposed through the
+[design tokens](../../docs/docs-dev/style/design-tokens.md).
 
 For a guided overview of the interface, see the [UI tour](../../docs/docs-user/ui-tour.md).
 Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md). The [notepad feature](../../docs/docs-user/features/notepad.md) lets you store project notes using Markdown.

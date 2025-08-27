@@ -4,6 +4,7 @@ import {createElement} from "@opendaw/lib-jsx"
 import {IconSymbol} from "@opendaw/studio-adapters"
 import {Html} from "@opendaw/lib-dom"
 
+// Attach the component styles and capture the generated class name.
 const defaultClassName = Html.adoptStyleSheet(css, "Icon")
 
 /** Props for {@link Icon}. */
@@ -38,7 +39,7 @@ export interface IconCartridgeProps {
 /** Reactive icon that updates when its symbol changes. */
 export const IconCartridge = ({lifecycle, symbol, className, style}: IconCartridgeProps) => {
     const use: SVGUseElement = <use href=""/>
-    const updater = () => use.href.baseVal = `#${IconSymbol.toName(symbol.getValue())}`
+    const updater = () => (use.href.baseVal = `#${IconSymbol.toName(symbol.getValue())}`)
     updater()
     lifecycle.own(symbol.subscribe(updater))
     return (<svg classList={Html.buildClassList(defaultClassName, className)} style={style}>{use}</svg>)

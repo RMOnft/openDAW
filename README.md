@@ -128,6 +128,9 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 
 ### Style Documentation
 
+The Studio relies on a central colour system described by the following
+resources:
+
 - [Style Guidelines](styles/OpenDAW/style-guidelines.md)
 - [Developer Style Guide](packages/docs/docs-dev/style-guide.md)
 - [Design Tokens](packages/docs/docs-dev/style/design-tokens.md)
