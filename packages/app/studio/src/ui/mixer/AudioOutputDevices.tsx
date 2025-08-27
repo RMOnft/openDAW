@@ -12,6 +12,9 @@ type Construct = {
     provider: Procedure<MediaDeviceInfo>
 }
 
+/**
+ * Lists available audio output devices and lets the user choose one.
+ */
 export const AudioOutputDevices = ({output, provider}: Construct) => {
     return (
         <div className={className} style={{padding: "1em 0"}}>

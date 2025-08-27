@@ -70,5 +70,10 @@ module.exports = {
         { type: "doc", id: "boxes/faq" },
       ],
     },
+    {
+      type: "category",
+      label: "UI",
+      items: ["ui/mixer"],
+    },
   ],
 };

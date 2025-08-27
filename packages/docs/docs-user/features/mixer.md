@@ -35,4 +35,15 @@ You can group tracks together by routing them through a bus:
 This setup lets you process and control multiple tracks as one while preserving
 individual sends and automation.
 
+### Signal routing diagram
+
+```mermaid
+graph LR
+    T1[Track 1] --> B[Drum Bus]
+    T2[Track 2] --> B
+    B --> M[Master]
+    T1 -- Send --> R[Reverb]
+    R --> M
+```
+
 For a practical example see the [Mixing workflow](../workflows/mixing.md).
