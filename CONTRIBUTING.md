@@ -28,6 +28,7 @@ The monorepo uses **Turbo** to run build, test, and lint tasks across all packag
 - Prefer clear, self-documenting code and avoid unnecessary abstractions.
 - Write Markdown documentation using ATX headings (`#`, `##`, etc.) and keep line length reasonable.
 - Include tests or documentation updates alongside code changes when appropriate.
+- Review our [error handling notes](packages/docs/docs-dev/error-handling.md) when working with runtime failures.
 
 Following these steps helps maintain a clean git history and a stable codebase. We appreciate every contribution—thank you for helping improve openDAW!
 

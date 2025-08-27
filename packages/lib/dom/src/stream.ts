@@ -1,3 +1,4 @@
+
 /**
  * Utilities for working with `ReadableStream` objects.
  *
@@ -7,12 +8,15 @@
  * const buffer = await Stream.read(reader);
  * ```
  */
+
 import { int } from "@opendaw/lib-std";
 
 export namespace Stream {
   /**
-   * Reads all chunks from a `ReadableStreamDefaultReader` into a single
-   * `ArrayBuffer`.
+   * Reads an entire {@link ReadableStream} into a single {@link ArrayBuffer}.
+   *
+   * Error Handling: any failure while reading will reject the returned
+   * promise. Callers are responsible for handling stream errors.
    */
   export const read = async (
     reader: ReadableStreamDefaultReader<Uint8Array>,
