@@ -16,6 +16,9 @@ type Construct = {
     select: Procedure<[UUID.Format, ProjectMeta]>
 }
 
+/**
+ * List of saved projects allowing the user to select or delete entries.
+ */
 export const ProjectBrowser = ({service, select}: Construct) => {
     const now = new Date().getTime()
     return (

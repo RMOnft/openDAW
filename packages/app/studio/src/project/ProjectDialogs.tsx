@@ -10,8 +10,12 @@ import {EditableExportStemsConfiguration, ExportStemsConfigurator} from "@/servi
 import {Errors} from "@opendaw/lib-dom"
 import {Project} from "@opendaw/studio-core"
 
+/** Dialog helpers for project management tasks. */
 export namespace ProjectDialogs {
 
+    /**
+     * Prompt the user to save a project by entering a name and meta data.
+     */
     export const showSaveDialog = async ({headline, meta}: {
         headline: string,
         meta?: ProjectMeta
@@ -63,6 +67,10 @@ export namespace ProjectDialogs {
         return promise
     }
 
+    /**
+     * Display a dialog containing the {@link ProjectBrowser} component and
+     * resolve with the selected project.
+     */
     export const showBrowseDialog = async (service: StudioService): Promise<[UUID.Format, ProjectMeta]> => {
         const {resolve, reject, promise} = Promise.withResolvers<[UUID.Format, ProjectMeta]>()
         const dialog: HTMLDialogElement = (
@@ -84,6 +92,10 @@ export namespace ProjectDialogs {
         return promise
     }
 
+    /**
+     * Ask the user which stems should be exported for the given project and
+     * return the chosen configuration.
+     */
     export const showExportStemsDialog = async (project: Project): Promise<ExportStemsConfiguration> => {
         const {resolve, reject, promise} = Promise.withResolvers<ExportStemsConfiguration>()
         const terminator = new Terminator()
