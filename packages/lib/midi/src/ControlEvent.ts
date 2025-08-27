@@ -13,17 +13,23 @@ export class ControlEvent implements Event<ControlType> {
     a.ticks - b.ticks;
 
   constructor(
+    /** Absolute tick position */
     readonly ticks: int,
+    /** Event type identifier */
     readonly type: ControlType,
+    /** First data byte */
     readonly param0: byte,
+    /** Second data byte */
     readonly param1: byte,
   ) {}
 
   /**
    * Decode a control event from the stream if supported.
-   * @param decoder MIDI file decoder providing the bytes
-   * @param type status byte high nibble
-   * @param ticks absolute tick position
+   *
+   * @param decoder - MIDI file decoder providing the bytes
+   * @param type - status byte high nibble
+   * @param ticks - absolute tick position
+   * @returns the decoded event or {@code null} if unsupported
    */
   static decode(
     decoder: MidiFileDecoder,
@@ -59,6 +65,8 @@ export class ControlEvent implements Event<ControlType> {
 
   /**
    * Apply the visitor callback for this event type.
+   *
+   * @param visitor - visitor with callbacks for supported event kinds
    */
   accept(visitor: ControlEventVisitor): void {
     switch (this.type) {

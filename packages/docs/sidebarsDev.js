@@ -41,6 +41,16 @@ module.exports = {
     { type: "doc", id: "licensing" },
     {
       type: "category",
+      label: "MIDI",
+      items: [
+        "midi/overview",
+        "midi/events",
+        "midi/format",
+        "midi/examples",
+      ],
+    },
+    {
+      type: "category",
       label: "Architecture",
       items: [
         "architecture/overview",
