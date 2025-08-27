@@ -171,6 +171,14 @@ module.exports = {
             "ui/menu/shortcuts",
           ],
         },
+        {
+          type: "category",
+          label: "Metering",
+          items: [
+            "ui/metering/overview",
+            "ui/metering/rms-vs-peak",
+          ],
+        },
         "ui/mixer",
         {
           type: "category",

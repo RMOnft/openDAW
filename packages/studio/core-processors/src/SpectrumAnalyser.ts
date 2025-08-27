@@ -43,9 +43,18 @@ export class SpectrumAnalyser {
         this.#index = 0
     }
 
-    /** Returns the number of frequency bins. */
+    /**
+     * Returns the number of frequency bins produced by the FFT.
+     *
+     * @returns Number of bins.
+     */
     numBins(): int {return this.#numBins}
-    /** Buffer containing the current spectrum magnitude per bin. */
+
+    /**
+     * Provides access to the current spectrum magnitudes.
+     *
+     * @returns Buffer of length {@link numBins} containing the magnitudes.
+     */
     bins(): Float32Array {return this.#bins}
 
     /**
