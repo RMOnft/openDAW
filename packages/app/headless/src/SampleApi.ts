@@ -1,6 +1,8 @@
 /**
  * Utility functions for fetching and decoding sample data from the public
  * openDAW sample service.
+ *
+ * Network requests are throttled via {@link network.limitFetch}.
  */
 /* eslint-disable @typescript-eslint/no-namespace */
 import {Arrays, asDefined, panic, Procedure, unitValue, UUID} from "@opendaw/lib-std"
@@ -25,6 +27,8 @@ export namespace SampleApi {
 
     /**
      * Fetches the complete list of samples available on the service.
+     *
+     * @see network.limitFetch
      */
     export const all = async (): Promise<ReadonlyArray<Sample>> => {
         return await Promises.retry(() => fetch(`${ApiRoot}/list.php`, headers).then(x => x.json(), () => []))
@@ -32,6 +36,8 @@ export namespace SampleApi {
 
     /**
      * Retrieve a single sample's metadata.
+     *
+     * @see network.limitFetch
      */
     export const get = async (uuid: UUID.Format): Promise<Sample> => {
         const url = `${ApiRoot}/get.php?uuid=${UUID.toString(uuid)}`
@@ -43,6 +49,8 @@ export namespace SampleApi {
 
     /**
      * Download and decode a sample, reporting progress via the provided handler.
+     *
+     * @see network.limitFetch
      */
     export const load = async (context: AudioContext,
                                uuid: UUID.Format,
