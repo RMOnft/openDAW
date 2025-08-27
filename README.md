@@ -116,6 +116,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Feature Flags](packages/docs/docs-dev/architecture/feature-flags.md)
 - [Troubleshooting Guide](packages/docs/docs-user/troubleshooting.md)
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
+- [Notepad Guide](packages/docs/docs-user/features/notepad.md)
 
 ### Style Documentation
 
