@@ -24,6 +24,7 @@ export class Worklets {
         })
     }
 
+    /** Retrieves the `Worklets` instance for the given context. */
     static get(context: BaseAudioContext): Worklets {return asDefined(this.#map.get(context), "Worklets not installed")}
 
     static #map: WeakMap<BaseAudioContext, Worklets> = new WeakMap<AudioContext, Worklets>()
@@ -37,13 +38,13 @@ export class Worklets {
         return new MeterWorklet(this.#context, numberOfChannels)
     }
 
-    /** Creates the main {@link EngineWorklet} instance. */
+    /** Creates the main {@link EngineWorklet} responsible for playback. */
     createEngine(project: Project, exportConfiguration?: ExportStemsConfiguration): EngineWorklet {
         return new EngineWorklet(this.#context, project, exportConfiguration)
     }
 
     /**
-     * Creates a {@link RecordingWorklet} backed by a shared ring buffer.
+     * Creates a {@link RecordingWorklet} that buffers audio in a shared array.
      */
     createRecording(numberOfChannels: int, numChunks: int, outputLatency: number): RecordingWorklet {
         const audioBytes = numberOfChannels * numChunks * RenderQuantum * Float32Array.BYTES_PER_ELEMENT

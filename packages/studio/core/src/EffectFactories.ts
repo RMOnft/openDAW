@@ -17,7 +17,11 @@ import {
 import {IconSymbol} from "@opendaw/studio-adapters"
 import {EffectFactory} from "./EffectFactory"
 
+/**
+ * Built-in collection of effect factory definitions.
+ */
 export namespace EffectFactories {
+    /** Factory for the arpeggiator MIDI effect. */
     export const Arpeggio: EffectFactory = {
         defaultName: "Arpeggio",
         defaultIcon: IconSymbol.Stack,
@@ -31,6 +35,7 @@ export namespace EffectFactories {
         })
     }
 
+    /** Factory for simple pitch shifting of MIDI notes. */
     export const Pitch: EffectFactory = {
         defaultName: "Pitch",
         defaultIcon: IconSymbol.Note,
@@ -44,6 +49,7 @@ export namespace EffectFactories {
         })
     }
 
+    /** Factory for the Zeitgeist timing effect. */
     export const Zeitgeist: EffectFactory = {
         defaultName: "Zeitgeist",
         defaultIcon: IconSymbol.Zeitgeist,
@@ -67,6 +73,7 @@ export namespace EffectFactories {
         }
     }
 
+    /** Factory for stereo manipulation utilities. */
     export const StereoTool: EffectFactory = {
         defaultName: "Stereo Tool",
         defaultIcon: IconSymbol.Stereo,
@@ -81,6 +88,7 @@ export namespace EffectFactories {
             })
     }
 
+    /** Factory for a classic delay audio effect. */
     export const Delay: EffectFactory = {
         defaultName: "Delay",
         defaultIcon: IconSymbol.Time,
@@ -95,6 +103,7 @@ export namespace EffectFactories {
             })
     }
 
+    /** Factory for a reverb effect. */
     export const Reverb: EffectFactory = {
         defaultName: "Reverb",
         defaultIcon: IconSymbol.Cube,
@@ -110,6 +119,7 @@ export namespace EffectFactories {
             })
     }
 
+    /** Factory for the Revamp equalizer. */
     export const Revamp: EffectFactory = {
         defaultName: "Revamp",
         defaultIcon: IconSymbol.EQ,
@@ -144,6 +154,7 @@ export namespace EffectFactories {
             })
     }
 
+    /** Factory placeholder for user-created modular effects. */
     export const Modular: EffectFactory = {
         defaultName: "🔇 Create New Modular Audio Effect (inaudible yet)",
         defaultIcon: IconSymbol.Box,

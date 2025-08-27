@@ -2,7 +2,13 @@ import {AudioUnitType} from "@opendaw/studio-enums"
 import {TrackType} from "@opendaw/studio-adapters"
 import {Colors} from "./Colors"
 
+/**
+ * Helpers for resolving themed colors based on domain types.
+ */
 export namespace ColorCodes {
+    /**
+     * Returns a theme color string for the given audio unit type.
+     */
     export const forAudioType = (type?: AudioUnitType): string => {
         switch (type) {
             case AudioUnitType.Output:
@@ -18,6 +24,9 @@ export namespace ColorCodes {
         }
     }
 
+    /**
+     * Returns a hue value for representing track types.
+     */
     export const forTrackType = (type?: TrackType): number => {
         switch (type) {
             case TrackType.Audio:
@@ -31,3 +40,4 @@ export namespace ColorCodes {
         }
     }
 }
+
