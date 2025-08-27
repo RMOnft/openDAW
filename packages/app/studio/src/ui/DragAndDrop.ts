@@ -38,6 +38,7 @@ export namespace DragAndDrop {
    * @param element      The DOM element that initiates the drag.
    * @param provider     Supplies drag data when the drag starts.
    * @param classReceiver Optional element that receives the `dragging` CSS class.
+   * @returns Terminable subscription managing the listeners.
    */
   export const installSource = (
     element: HTMLElement,
@@ -76,7 +77,13 @@ export namespace DragAndDrop {
     leave(): void;
   }
 
-  /** Registers the element as a drop target. */
+  /**
+   * Registers the element as a drop target.
+   *
+   * @param element The DOM node that accepts drops.
+   * @param process Callbacks defining drop behaviour.
+   * @returns Terminable subscription managing the listeners.
+   */
   export const installTarget = (
     element: HTMLElement,
     process: Process,
@@ -170,6 +177,11 @@ export namespace DragAndDrop {
   /**
    * Computes the insertion index for a dragged item within a parent element.
    * Children participating in the calculation must carry the `data-drag` attribute.
+   *
+   * @param client Pointer coordinates of the drag.
+   * @param parent Container whose children are examined.
+   * @param limit Optional index range limiting the search.
+   * @returns Tuple of desired index and the element currently at that slot.
    */
   export const findInsertLocation = (
     { clientX }: Client,

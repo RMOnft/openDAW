@@ -13,6 +13,7 @@ component
   outline: none
   @include colors.panel-background
 
+  // Top row with location selector and search field
   > div.filter
     display: flex
     align-items: center
@@ -22,6 +23,7 @@ component
     margin-bottom: 0.5rem
     grid-column: 1 / -1
 
+  // Scrollable list of sample entries
   > div.content
     flex: 1 0 0
     display: grid
@@ -30,6 +32,7 @@ component
     align-content: start
     overflow: hidden
 
+  // Bottom row with preview volume slider
   > div.footer
     display: flex
     align-items: center
@@ -45,6 +48,7 @@ component
   header
     padding-left: 6px
 
+  // Header and entry grid share column layout
   header, div.scrollable
     display: grid
     grid-template-columns: subgrid
@@ -60,9 +64,11 @@ component
   div.scrollable
     overflow-y: scroll
 
+  // Loading indicator while samples are fetched
   div.loading
     display: flex
 
+  // Error message with retry button
   div.error
     display: flex
     flex-direction: column

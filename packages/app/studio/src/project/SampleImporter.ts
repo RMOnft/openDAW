@@ -10,6 +10,15 @@ import {Sample} from "@opendaw/studio-adapters"
  * ```
  */
 export type SampleImporter = {
+    /**
+     * Store a sample within the project.
+     *
+     * @param sample.uuid Unique identifier for the sample.
+     * @param sample.name User visible name.
+     * @param sample.arrayBuffer Raw audio data.
+     * @param sample.progressHandler Optional progress updates during encoding.
+     * @returns The imported sample descriptor.
+     */
     importSample(sample: {
         uuid: UUID.Format,
         name: string,

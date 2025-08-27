@@ -4,6 +4,12 @@ Import, export, and organize project files. Developers can dive deeper in the
 [project docs](../../docs-dev/projects/overview.md) and the
 [info panel reference](../../docs-dev/ui/info-panel/overview.md).
 
+## Browse and Organize Samples
+
+- Use the **Sample Browser** to switch between cloud and local libraries.
+- Search, preview and delete samples directly from the list.
+- Adjust preview volume with the slider in the browser footer.
+
 ## Save Projects
 
 1. **Write changes to the browser.** Press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose
