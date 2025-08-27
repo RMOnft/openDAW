@@ -27,6 +27,22 @@ module.exports = {
     },
     {
       type: "category",
+      label: "UI",
+      items: [
+        {
+          type: "category",
+          label: "Workspace",
+          items: [
+            "ui/workspace/overview",
+            "ui/workspace/resizing",
+            "ui/workspace/panels",
+            "ui/workspace/examples",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "XML",
       items: [
         "xml/overview",
