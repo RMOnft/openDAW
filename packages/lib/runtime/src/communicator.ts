@@ -10,14 +10,48 @@ import {ExecutorTuple} from "./promises"
  * Also read: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
  */
 export namespace Communicator {
+    /**
+     * Creates a proxy that sends calls over a {@link Messenger}.
+     *
+     * @example
+     * ```ts
+     * const protocol = Communicator.sender(messenger, dispatcher => ({
+     *   log: (msg: string) => dispatcher.dispatchAndForget(console.log, msg)
+     * }))
+     * protocol.log("hello")
+     * ```
+     *
+     * @param messenger - Messenger used to send messages.
+     * @param bind - Function that maps a {@link Dispatcher} to the protocol implementation.
+     * @returns A protocol object sending its calls to the other side.
+     */
     export const sender = <PROTOCOL>(messenger: Messenger, bind: (dispatcher: Dispatcher) => PROTOCOL): PROTOCOL =>
         bind(new Sender(messenger))
 
+    /**
+     * Executes a protocol received from the other side.
+     *
+     * @example
+     * ```ts
+     * const executor = Communicator.executor(messenger, {
+     *   sum: (a: number, b: number) => Promise.resolve(a + b)
+     * })
+     * ```
+     *
+     * @param messenger - Messenger to receive messages from.
+     * @param protocol - Implementation of the protocol.
+     * @returns An {@link Executor} that should be terminated when no longer needed.
+     */
     export const executor = <PROTOCOL>(messenger: Messenger, protocol: PROTOCOL): Executor<PROTOCOL> =>
         new Executor(messenger, protocol)
 
+    /**
+     * Dispatches function calls across a message boundary.
+     */
     export interface Dispatcher {
+        /** Sends a call without expecting a result. */
         dispatchAndForget: <F extends (..._: Parameters<F>) => void>(func: F, ...args: Parameters<F>) => void
+        /** Sends a call and resolves the returned {@link Promise}. */
         dispatchAndReturn: <F extends (..._: Parameters<F>) => Promise<R>, R>(func: F, ...args: Parameters<F>) => Promise<R>
     }
 
@@ -28,13 +62,18 @@ export namespace Communicator {
 
         #returnId: int = 0
 
+        /**
+         * @param messenger - Messenger used to send and receive calls.
+         */
         constructor(messenger: Messenger) {
             this.#messenger = messenger
             this.#subscription = messenger.subscribe(this.#messageHandler)
         }
 
+        /** @inheritdoc */
         terminate(): void {this.#subscription.terminate()}
 
+        /** @inheritdoc */
         readonly dispatchAndForget = <F extends (..._: Parameters<F>) => void>
         (func: F, ...args: Parameters<F>): void => this.#messenger.send({
             type: "send",
@@ -43,6 +82,7 @@ export namespace Communicator {
             args: Array.from(Iterables.map(args, arg => ({value: arg})))
         } satisfies Send<any>)
 
+        /** @inheritdoc */
         readonly dispatchAndReturn = <F extends (..._: Parameters<F>) => Promise<R>, R>
         (func: F, ...args: Parameters<F>): Promise<R> => new Promise<R>((resolve, reject) => {
             const entries = Iterables.reduce(args, (callbacks: [int, Function][], arg: any, index: int) => {
@@ -86,12 +126,17 @@ export namespace Communicator {
         readonly #protocol: PROTOCOL
         readonly #subscription: Subscription
 
+        /**
+         * @param messenger - Messenger that delivers calls.
+         * @param protocol - Implementation that executes the calls.
+         */
         constructor(messenger: Messenger, protocol: PROTOCOL) {
             this.#messenger = messenger
             this.#protocol = protocol
             this.#subscription = messenger.subscribe(this.#messageHandler)
         }
 
+        /** @inheritdoc */
         terminate(): void {this.#subscription.terminate()}
 
         readonly #messageHandler = (message: Send<PROTOCOL>) => {

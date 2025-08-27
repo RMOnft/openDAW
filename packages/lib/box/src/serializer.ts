@@ -1,8 +1,14 @@
 import {FieldKey, Fields} from "./field"
 import {assert, ByteArrayInput, ByteArrayOutput, DataInput, DataOutput} from "@opendaw/lib-std"
 
+/**
+ * Functions for serializing and deserializing field collections.
+ */
 export namespace Serializer {
     const MAGIC_HEADER = 0x464c4453
+    /**
+     * Writes the provided fields to the output stream.
+     */
     export const writeFields = <FIELDS extends Fields>(output: DataOutput, fields: FIELDS) => {
         const entries = Object.entries(fields)
         output.writeInt(MAGIC_HEADER)
@@ -17,6 +23,9 @@ export namespace Serializer {
         })
     }
 
+    /**
+     * Reads fields from the input stream into the provided collection.
+     */
     export const readFields = <FIELDS extends Fields>(input: DataInput, fields: FIELDS) => {
         assert(input.readInt() === MAGIC_HEADER, "Serializer header is corrupt")
         const numFields = input.readShort()

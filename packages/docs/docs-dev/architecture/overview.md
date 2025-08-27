@@ -71,3 +71,7 @@ sequenceDiagram
 Workers are installed once at application startup and provide services such as
 file access and waveform analysis before being terminated when no longer
 needed.
+
+For details about the studio runtime internals see the
+[studio core README](../../../studio/core/README.md).
+

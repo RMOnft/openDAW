@@ -5,11 +5,20 @@ import {AbstractProcessor} from "./AbstractProcessor"
 import {UpdateEvent} from "./UpdateClock"
 import {EngineContext} from "./EngineContext"
 
+/**
+ * Convenience base class for processors that output audio.
+ *
+ * It slices the render quantum into segments based on scheduled events and
+ * delegates audio rendering to {@link processAudio}.
+ */
 export abstract class AudioProcessor extends AbstractProcessor {
     protected constructor(context: EngineContext) {
         super(context)
     }
 
+    /**
+     * Processes all scheduled events and renders audio for each block.
+     */
     process({blocks}: ProcessInfo): void {
         blocks.forEach((block) => {
             this.introduceBlock(block)
@@ -42,11 +51,23 @@ export abstract class AudioProcessor extends AbstractProcessor {
         this.finishProcess()
     }
 
+    /**
+     * Renders audio samples for the given range of the current block.
+     */
     abstract processAudio(block: Block, fromIndex: int, toIndex: int): void
 
+    /**
+     * Hook executed before processing the first event in a block.
+     */
     introduceBlock(_block: Block): void {}
 
+    /**
+     * Handles non-update events routed to this processor.
+     */
     handleEvent(_event: Event): void {return panic(`${this} received an event but has no accepting method.`)}
 
+    /**
+     * Hook executed after all blocks have been processed.
+     */
     finishProcess(): void {}
 }

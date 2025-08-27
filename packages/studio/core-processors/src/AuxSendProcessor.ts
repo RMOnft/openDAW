@@ -7,6 +7,9 @@ import {AutomatableParameter} from "./AutomatableParameter"
 import {dbToGain, Ramp} from "@opendaw/lib-dsp"
 import {AudioProcessor} from "./AudioProcessor"
 
+/**
+ * Taps a source {@link AudioBuffer} and routes it to an auxiliary send.
+ */
 export class AuxSendProcessor extends AudioProcessor implements Processor, AudioInput {
     readonly #adapter: AuxSendBoxAdapter
 
@@ -21,6 +24,10 @@ export class AuxSendProcessor extends AudioProcessor implements Processor, Audio
     #needsUpdate: boolean = true
     #processing: boolean = false
 
+    /**
+     * @param context - shared engine context
+     * @param adapter - adapter providing parameter access to the send box
+     */
     constructor(context: EngineContext, adapter: AuxSendBoxAdapter) {
         super(context)
 
@@ -36,17 +43,26 @@ export class AuxSendProcessor extends AudioProcessor implements Processor, Audio
         this.readAllParameters()
     }
 
+    /** Clears the output buffer. */
     reset(): void {this.#audioOutput.clear()}
 
+    /** Exposes the backing adapter for external wiring. */
     get adapter(): AuxSendBoxAdapter {return this.#adapter}
 
+    /**
+     * Sets the audio source to be routed through the send.
+     */
     setAudioSource(source: AudioBuffer): Terminable {
         this.#source = Option.wrap(source)
         return {terminate: () => this.#source = Option.None}
     }
 
+    /** Buffer that receives the processed send output. */
     get audioOutput(): AudioBuffer {return this.#audioOutput}
 
+    /**
+     * Applies gain and panning to the source and writes into the output buffer.
+     */
     processAudio(_block: Block, fromIndex: number, toIndex: number): void {
         if (this.#source.isEmpty()) {return}
         if (this.#needsUpdate) {
@@ -77,6 +93,7 @@ export class AuxSendProcessor extends AudioProcessor implements Processor, Audio
         this.#processing = true
     }
 
+    /** Marks internal state dirty when a parameter changes. */
     parameterChanged(_parameter: AutomatableParameter): void {
         this.#needsUpdate = true
     }

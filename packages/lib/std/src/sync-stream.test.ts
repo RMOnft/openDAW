@@ -3,10 +3,10 @@ import {ByteArrayInput, ByteArrayOutput} from "./data"
 import {SyncStream} from "./sync-stream"
 import {Schema} from "./schema"
 
-/* ------------------------------------------------------------------ *
- * Minimal stub that fulfils the Schema.IO<T> contract.
- * We serialise a single signed 32-bit integer (4 bytes).
- * ------------------------------------------------------------------ */
+/**
+ * Minimal stub that fulfils the {@link Schema.IO} contract by
+ * serialising a single signed 32-bit integer.
+ */
 type Sample = { n: number }
 
 const makeIO = (): Schema.IO<Sample> => ({

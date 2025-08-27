@@ -9,6 +9,10 @@ import {AudioProcessor} from "./AudioProcessor"
 import {AutomatableParameter} from "./AutomatableParameter"
 import {RenderQuantum} from "./constants"
 
+/**
+ * Implements a mixer channel strip applying volume, panning and mute/solo
+ * logic to an incoming audio stream.
+ */
 export class ChannelStripProcessor extends AudioProcessor implements Processor, AudioInput, Terminable {
     readonly #adapter: AudioUnitBoxAdapter
 
@@ -30,6 +34,10 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
     #updateGain: boolean = true
     #processing: boolean = false
 
+    /**
+     * @param context - global engine context
+     * @param adapter - adapter exposing channel strip parameters
+     */
     constructor(context: EngineContext, adapter: AudioUnitBoxAdapter) {
         super(context)
 
@@ -51,6 +59,7 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
         this.readAllParameters()
     }
 
+    /** Resets peaks and output buffers. */
     reset(): void {
         this.#peaks.clear()
         this.#audioOutput.clear()
@@ -59,13 +68,20 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
         this.#processing = false
     }
 
+    /** Current mute state. */
     get isMute(): boolean {return this.#parameterMute.getValue()}
+    /** Current solo state. */
     get isSolo(): boolean {return this.#parameterSolo.getValue()}
+    /** Exposes the adapter to external clients. */
     get adapter(): AudioUnitBoxAdapter {return this.#adapter}
+    /** Buffer receiving the processed signal. */
     get audioOutput(): AudioBuffer {return this.#audioOutput}
 
     handleEvent(_event: Event): void {}
 
+    /**
+     * Applies gain/pan/mute logic and records peak information.
+     */
     processAudio(_block: Block, fromIndex: int, toIndex: int): void {
         if (this.#source.isEmpty()) {return}
         if (this.#updateGain) {
@@ -111,8 +127,10 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
         this.#processing = true
     }
 
+    /** Asserts that the output buffer does not contain invalid numbers. */
     finishProcess(): void {this.#audioOutput.assertSanity()}
 
+    /** Reacts to parameter automation changes. */
     parameterChanged(parameter: AutomatableParameter): void {
         if (parameter === this.#parameterVolume) {
             this.requestGainUpdate()
@@ -125,11 +143,18 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
         }
     }
 
+    /** Flags gain/panning values as dirty. */
     requestGainUpdate(): void {this.#updateGain = true}
 
     // TODO Optimise me some day. Updating the solo like might be a bit cumbersome?
+    /**
+     * Requests the solo state be reconsidered by the mixer.
+     */
     requestSoloUpdate(): void {this.#updateGain = true}
 
+    /**
+     * Sets the upstream audio buffer feeding this channel strip.
+     */
     setAudioSource(source: AudioBuffer): Terminable {
         this.#source = Option.wrap(source)
         return {terminate: () => this.#source = Option.None}

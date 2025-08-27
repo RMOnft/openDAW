@@ -46,4 +46,6 @@ stateDiagram-v2
 
 The shared worker is installed during application startup, becomes active while
 providing services to the audio engine and is terminated when the session ends.
+See the [studio core README](../../../studio/core/README.md) for an
+overview of the engine components involved in this flow.
 

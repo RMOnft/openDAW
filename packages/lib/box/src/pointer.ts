@@ -17,16 +17,25 @@ import {PointerHub} from "./pointer-hub"
 import {Field, FieldConstruct} from "./field"
 import {Propagation} from "./dispatchers"
 
+/**
+ * Pointer fields allow vertices to reference other vertices within the graph.
+ * They manage the pointer's target address and handle serialization.
+ */
 const _Unreferenceable = Symbol("Unreferenceable")
 
+/** Marker type used for fields that cannot be referenced. */
 export type UnreferenceableType = typeof _Unreferenceable
 
+/** Allowed identifier types for pointer categorization. */
 export type PointerTypes = number | string | UnreferenceableType
 
+/** Custom encoder that maps a pointer to a different address during serialization. */
 export interface SpecialEncoder {map(pointer: PointerField): Option<Address>}
 
+/** Custom decoder that maps serialized addresses back onto pointers. */
 export interface SpecialDecoder {map(pointer: PointerField, newAddress: Option<Address>): Option<Address>}
 
+/** Field referencing another vertex within the graph. */
 export class PointerField<P extends PointerTypes = PointerTypes> extends Field<UnreferenceableType, never> {
     static create<P extends PointerTypes>(construct: FieldConstruct<UnreferenceableType>,
                                           pointerType: P,

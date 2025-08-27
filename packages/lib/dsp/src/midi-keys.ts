@@ -1,5 +1,8 @@
 import {byte, int} from "@opendaw/lib-std"
 
+/**
+ * Constants and helpers for dealing with MIDI key numbers.
+ */
 export namespace MidiKeys {
     export const BlackKeyIndices = [1, 3, 6, 8, 10]
     export const BlackKeyBits = BlackKeyIndices.reduce((bits: int, keyIndex: int) => (bits |= 1 << keyIndex), 0)
@@ -11,7 +14,9 @@ export namespace MidiKeys {
         Spanish: ["Do", "Do#", "Re", "Re#", "Mi", "Fa", "Fa#", "Sol", "Sol#", "La", "La#", "Si"],
         Japanese: ["ド", "ド♯", "レ", "レ♯", "ミ", "ファ", "ファ♯", "ソ", "ソ♯", "ラ", "ラ♯", "シ"]
     }
+    /** Determines if a MIDI note is a black key. */
     export const isBlackKey = (note: int) => (BlackKeyBits & (1 << (note % 12))) !== 0
+    /** Returns a human readable string such as `C4`. */
     export const toFullString = (note: int): string => `${Names.English[note % 12]}${(Math.floor(note / 12) - 2)}`
 
     export interface Scale {
@@ -38,6 +43,7 @@ export namespace MidiKeys {
         equals(other: Scale): boolean {return this.#bits === other.bits}
     }
 
+    /** Common musical scales represented as bit masks. */
     export const StockScales: ReadonlyArray<PredefinedScale> = [
         new PredefinedScaleImpl("Major", 0, 2, 4, 5, 7, 9, 11),
         new PredefinedScaleImpl("Natural Minor", 0, 2, 3, 5, 7, 8, 10),

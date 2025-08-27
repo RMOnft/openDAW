@@ -4,6 +4,10 @@ import {asDefined, DataInput, DataOutput, Nullish, Option, safeExecute} from "@o
 import {Serializer} from "./serializer"
 import {VertexVisitor} from "./vertex"
 
+/**
+ * Field representing a nested object with its own set of fields.
+ * Used to build structured data inside a {@link Box}.
+ */
 export abstract class ObjectField<FIELDS extends Fields> extends Field<UnreferenceableType, FIELDS> {
     readonly #fields: FIELDS
 
