@@ -1,14 +1,14 @@
 /**
  * Captures global errors and reports them to the logging service.
  */
-import {EmptyExec, Terminable, Terminator, Warning} from "@opendaw/lib-std"
-import {AnimationFrame, Browser, Events} from "@opendaw/lib-dom"
-import {LogBuffer} from "@/errors/LogBuffer.ts"
-import {ErrorLog} from "@/errors/ErrorLog.ts"
-import {ErrorInfo} from "@/errors/ErrorInfo.ts"
-import {Surface} from "@/ui/surface/Surface.tsx"
-import {StudioService} from "@/service/StudioService.ts"
-import {showErrorDialog, showInfoDialog} from "@/ui/components/dialogs.tsx"
+import { EmptyExec, Terminable, Terminator, Warning } from "@opendaw/lib-std";
+import { AnimationFrame, Browser, Events } from "@opendaw/lib-dom";
+import { LogBuffer } from "@/errors/LogBuffer.ts";
+import { ErrorLog } from "@/errors/ErrorLog.ts";
+import { ErrorInfo } from "@/errors/ErrorInfo.ts";
+import { Surface } from "@/ui/surface/Surface.tsx";
+import { StudioService } from "@/service/StudioService.ts";
+import { showErrorDialog, showInfoDialog } from "@/ui/components/dialogs.tsx";
 
 /**
  * Global error handler for the Studio. Captures unexpected errors and
@@ -25,6 +25,13 @@ export class ErrorHandler {
     this.#service = service;
   }
 
+  /**
+   * Handles an error event by reporting it and showing a dialog.
+   *
+   * @param scope - Human-readable scope of the failing component.
+   * @param event - The captured error event.
+   * @returns `true` if the handler considers the error handled.
+   */
   processError(scope: string, event: Event): boolean {
     if ("reason" in event && event.reason instanceof Warning) {
       showInfoDialog({
@@ -75,6 +82,12 @@ export class ErrorHandler {
     return true;
   }
 
+  /**
+   * Installs global listeners on the given owner to catch uncaught errors.
+   *
+   * @param owner - Window or worker to attach listeners to.
+   * @param scope - Descriptive name of the owner for reporting.
+   */
   install(
     owner: WindowProxy | Worker | AudioWorkletNode,
     scope: string,
