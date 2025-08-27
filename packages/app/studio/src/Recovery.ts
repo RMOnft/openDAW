@@ -10,14 +10,25 @@ import { ProjectMeta } from "@/project/ProjectMeta.ts";
  * can be recovered after unexpected failures.
  */
 export class Recovery {
+  /** Directory within OPFS used to store temporary recovery data. */
   static readonly #RESTORE_FILE_PATH = ".backup";
 
   readonly #service: StudioService;
 
+  /**
+   * @param service Reference to the studio service used for loading and
+   *                instantiating projects.
+   */
   constructor(service: StudioService) {
     this.#service = service;
   }
 
+  /**
+   * Attempts to restore a previously backed‑up session.
+   *
+   * @returns An {@link Option} containing the restored session or
+   *          `Option.None` when no backup is present or an error occurs.
+   */
   async restoreSession(): Promise<Option<ProjectSession>> {
     const backupResult = await Promises.tryCatch(
       WorkerAgents.Opfs.list(Recovery.#RESTORE_FILE_PATH),
@@ -64,6 +75,11 @@ export class Recovery {
     return Option.wrap(session);
   }
 
+  /**
+   * Creates a command that writes the current session to the recovery
+   * folder. The command is wrapped in an {@link Option} and resolves to
+   * `None` when no session is active.
+   */
   createBackupCommand(): Option<Provider<Promise<void>>> {
     return this.#service.sessionService
       .getValue()

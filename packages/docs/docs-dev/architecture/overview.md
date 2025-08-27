@@ -3,7 +3,8 @@
 openDAW is composed of several packages such as
 [`@opendaw/app-studio`](../package-inventory.md#app) and
 [`@opendaw/studio-core`](../package-inventory.md#studio). The architecture is
-described using the C4 model.
+described using the C4 model. For a step‑by‑step look at how the
+application starts, see the [bootstrapping sequence](./bootstrap.md).
 
 ## Context
 
@@ -82,6 +83,7 @@ sequenceDiagram
     Main->>Worker: invoke protocols
     Main-->>Worker: terminate
 ```
+
 ![Worker flow diagram](../../../../assets/architecture/worker-flow.svg)
 
 Workers are installed once at application startup and provide services such as
@@ -90,7 +92,6 @@ needed.
 
 For details about the studio runtime internals see the
 [studio core README](../../../studio/core/README.md).
-
 
 Developers integrating the engine can start with the [SDK overview](../sdk/overview.md).
 
