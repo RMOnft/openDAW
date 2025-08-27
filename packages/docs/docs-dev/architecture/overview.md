@@ -54,7 +54,6 @@ C4Component
     Rel(studio, lib, "Uses")
 ```
 
-
 - **App** – Provides the user interface and coordinates system interactions. Implemented in
   [`@opendaw/app-studio`](../package-inventory.md#app).
 - **Studio** – Handles audio processing, scheduling, and engine control. Powered by
@@ -92,3 +91,6 @@ For details about the studio runtime internals see the
 [studio core README](../../../studio/core/README.md).
 
 
+Developers integrating the engine can start with the [SDK overview](../sdk/overview.md).
+
+Additional utilities for DOM interactions are described in the [DOM developer docs](../dom/overview.md).

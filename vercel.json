@@ -1,5 +1,5 @@
 {
-  "//": "Vercel deployment disabled",
-  "buildCommand": "",
-  "outputDirectory": ""
+  "//": "Example configuration for deploying to Vercel. Values are left blank to prevent accidental builds.",
+  "buildCommand": "", // Command that produces the build output, e.g. `npm run docs:build`
+  "outputDirectory": "" // Directory containing the generated site
 }
