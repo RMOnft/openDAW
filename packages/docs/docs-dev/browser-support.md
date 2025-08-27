@@ -2,8 +2,9 @@
 
 openDAW targets modern browsers with full Web Audio and WebAssembly support.
 Packages like [`@opendaw/app-studio`](./package-inventory.md#app) and
-[`@opendaw/lib-dsp`](./package-inventory.md#lib) rely on these APIs. The project
-is regularly tested on:
+[`@opendaw/lib-dsp`](./package-inventory.md#lib) rely on these APIs. Build
+configurations target Chrome 109+, Firefox 117+, Safari 16+, and Edge 109+.
+The project is regularly tested on:
 
 - **Chrome** (latest stable)
 - **Firefox** (latest stable)
