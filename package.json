@@ -1,4 +1,5 @@
 {
+  "//": "Root package manifest for the openDAW monorepo",
   "name": "opendaw",
   "version": "0.0.0",
   "private": true,
@@ -6,6 +7,7 @@
   "scripts": {
     "cert": "bash ./scripts/cert.sh",
     "clean": "bash ./scripts/clean.sh",
+    "install:deps": "node ./scripts/install_dependencies.js",
     "build": "turbo build",
     "dev:studio": "turbo run dev --filter=@opendaw/app-studio",
     "dev:headless": "turbo run dev --filter=@opendaw/app-headless",

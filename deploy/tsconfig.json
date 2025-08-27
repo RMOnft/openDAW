@@ -1,4 +1,5 @@
 {
+  "extends": "@opendaw/typescript-config/tsconfig.build.json",
   "//": "Deployment scripts disabled",
   "compilerOptions": {
     "target": "es2016",
