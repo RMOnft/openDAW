@@ -27,3 +27,7 @@
 - Hold ⌥ and drag to copy a region / clip
 - Hold ⌥⇧ and drag to copy a region / clip as mirrored
 - Click track header and hit ⌫ to delete track
+
+---
+
+Return to the [manuals overview](./index.md).

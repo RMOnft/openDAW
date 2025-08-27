@@ -8,11 +8,15 @@ Please join our [discord community](https://discord.com/invite/ZRm8du7vn4) for u
 
 ### General
 
-* Some features in openDAW may be unpolished or not functional yet.
-* No backward compatibility guaranteed. New studio versions may invalidate old project files.
+- Some features in openDAW may be unpolished or not functional yet.
+- No backward compatibility guaranteed. New studio versions may invalidate old project files.
 
 ### Audio Engine
 
-* Not optimised.
-* Clicks & Pops can occur, since there are no fadings to avoid discontinuities.
-* Fast automation or value changes can potentially crash the dsp, since there is no interpolation.
+- Not optimised.
+- Clicks & Pops can occur, since there are no fadings to avoid discontinuities.
+- Fast automation or value changes can potentially crash the dsp, since there is no interpolation.
+
+---
+
+For links from the documentation site, see the [manuals overview](../../../docs/docs-user/manuals/overview.md).

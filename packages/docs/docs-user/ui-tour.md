@@ -13,6 +13,8 @@ README for the full catalogue and licensing terms.
 
 Get oriented with the main areas of the interface.
 
+For feature-specific notes, see the [manuals overview](manuals/overview.md).
+
 ## Transport
 
 The top bar houses play, stop, record, tempo, and loop controls.

@@ -1,3 +1,7 @@
 # Browser Permissions
 
-openDAW requires grand access to your microphone. tbc...
+openDAW requires access to your microphone. More details coming soon.
+
+---
+
+Return to the [manuals overview](./index.md).
