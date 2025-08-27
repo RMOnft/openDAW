@@ -19,3 +19,5 @@ flowchart TD
 6. **Download or share.** Save the resulting file to your computer or send the bundle to a collaborator.
 
 Use this workflow whenever you need to back up a project or deliver a finished track. For collaboration tips see the [Collaboration workflow](collaboration.md). For technical details on stem export see the [Stems Configurator](../../docs-dev/services/stems.md).
+
+Managing your local project files is covered in the [File Management feature guide](../features/file-management.md).

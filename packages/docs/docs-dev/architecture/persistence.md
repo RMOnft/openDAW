@@ -20,3 +20,6 @@ flowchart TD
     P -->|references| S[SampleStorage]
 ```
 
+For day‑to‑day usage tips see the
+[file management guide](../../docs-user/features/file-management.md).
+

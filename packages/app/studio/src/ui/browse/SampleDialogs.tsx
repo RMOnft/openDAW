@@ -9,7 +9,12 @@ import { Errors, Files } from "@opendaw/lib-dom";
 import { SampleImporter } from "@/project/SampleImporter";
 import { FilePickerAcceptTypes } from "@/ui/FilePickerAcceptTypes";
 
-/** Dialog helpers for managing samples. */
+/**
+ * Dialog helpers for managing samples.
+ *
+ * @see SampleImporter
+ * @see SampleUtils.verify
+ */
 export namespace SampleDialogs {
   /** Open the browser's file picker for selecting sample files. */
   export const nativeFileBrowser = async (multiple: boolean = true) =>

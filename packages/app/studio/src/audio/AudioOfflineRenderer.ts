@@ -24,6 +24,16 @@ import JSZip from "jszip";
 import WorkletsUrl from "@opendaw/studio-core/processors.js?url";
 
 export namespace AudioOfflineRenderer {
+  /**
+   * Render the given project into an offline audio buffer and prompt the user
+   * to save it. When an {@link ExportStemsConfiguration} is supplied, each
+   * track is exported as an individual stem and packaged into a ZIP archive.
+   *
+   * @param source Project to render.
+   * @param meta Metadata describing the project for file names.
+   * @param optExportConfiguration Optional stem export settings.
+   * @param sampleRate Target sample rate of the rendered audio.
+   */
   export const start = async (
     source: Project,
     meta: ProjectMeta,
@@ -82,6 +92,9 @@ export namespace AudioOfflineRenderer {
     }
   };
 
+  /**
+   * Prompt the user to save a single WAV file rendered from the project.
+   */
   const saveWavFile = async (buffer: AudioBuffer, meta: ProjectMeta) => {
     const approveResult = await Promises.tryCatch(
       showApproveDialog({
@@ -103,6 +116,10 @@ export namespace AudioOfflineRenderer {
     }
   };
 
+  /**
+   * Create a ZIP archive containing individual stem files and prompt the user
+   * to save it.
+   */
   const saveZipFile = async (
     buffer: AudioBuffer,
     meta: ProjectMeta,
