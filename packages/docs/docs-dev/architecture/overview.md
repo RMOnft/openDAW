@@ -55,3 +55,19 @@ C4Component
 - **Studio** – Handles audio processing, scheduling, and engine control.
 - **Lib** – Supplies shared utilities and reusable logic across modules.
 - **Config** – Delivers runtime and build settings consumed by other components.
+
+## Worker Lifecycle
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Worker
+    Main->>Worker: install bundled script
+    Worker->>Worker: initialise services
+    Main->>Worker: invoke protocols
+    Main-->>Worker: terminate
+```
+
+Workers are installed once at application startup and provide services such as
+file access and waveform analysis before being terminated when no longer
+needed.

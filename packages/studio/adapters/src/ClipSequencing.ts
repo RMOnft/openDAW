@@ -8,6 +8,12 @@ export type Section = {
     sectionTo: ppqn
 }
 
+/**
+ * Contract for clip sequencing components running in a worker.
+ *
+ * Implementations like {@link ClipSequencingAudioContext} manage clip state
+ * off the main thread and yield the clips that should play for a given range.
+ */
 export interface ClipSequencing extends Terminable {
     iterate(trackKey: UUID.Format, a: ppqn, b: ppqn): Generator<Section>
 }

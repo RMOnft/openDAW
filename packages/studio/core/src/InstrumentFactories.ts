@@ -14,6 +14,12 @@ import {IconSymbol, TrackType} from "@opendaw/studio-adapters"
 import {InstrumentFactory} from "./InstrumentFactory"
 import {Pointers} from "@opendaw/studio-enums"
 
+/**
+ * Collection of built-in instrument factory descriptors.
+ *
+ * Several instruments rely on data prepared by background workers, such as
+ * file operations or waveform analysis handled through {@link WorkerAgents}.
+ */
 export namespace InstrumentFactories {
     export const Tape: InstrumentFactory = {
         defaultName: "Tape",

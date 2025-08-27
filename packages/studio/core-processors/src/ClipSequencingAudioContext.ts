@@ -17,6 +17,12 @@ class TrackState {
     constructor(readonly uuid: TrackKey) {}
 }
 
+/**
+ * Worker-side implementation of {@link ClipSequencing}.
+ *
+ * The class maintains clip scheduling state within the audio worklet thread
+ * and exposes sequencing updates back to the main thread via structured data.
+ */
 export class ClipSequencingAudioContext implements ClipSequencing {
     readonly #boxGraph: BoxGraph
     readonly #states: SortedSet<TrackKey, TrackState>

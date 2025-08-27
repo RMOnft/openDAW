@@ -4,6 +4,14 @@ import {PeakMeterProcessorOptions} from "@opendaw/studio-adapters"
 
 export type PeakSchema = { peak: Float32Array, rms: Float32Array }
 
+/**
+ * Audio worklet node that forwards peak and RMS information from its
+ * processor.
+ *
+ * The underlying processing happens off the main thread and communicates
+ * back via a {@link SyncStream} so UI components can observe meter values
+ * without blocking rendering.
+ */
 export class MeterWorklet extends AudioWorkletNode implements Terminable {
     readonly #terminator: Terminator = new Terminator()
     readonly #notifier: Notifier<PeakSchema> = this.#terminator.own(new Notifier<PeakSchema>())

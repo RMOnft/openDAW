@@ -13,6 +13,13 @@ export namespace UpdateEvent {
     export const isOfType = (event: Event): event is UpdateEvent => event.type === "update-event"
 }
 
+/**
+ * Audio engine processor that schedules periodic {@link UpdateEvent}s.
+ *
+ * The events are emitted within the worker thread and used to drive UI
+ * updates or other time-based tasks in the main thread at the rate
+ * specified by {@link UpdateClockRate}.
+ */
 export class UpdateClock extends AbstractProcessor {
     readonly #outputs: Array<EventBuffer> = []
 

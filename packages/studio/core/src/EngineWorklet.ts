@@ -34,6 +34,14 @@ import {BoxIO} from "@opendaw/studio-boxes"
 import {Project} from "./Project"
 import {Engine, NoteTrigger} from "./Engine"
 
+/**
+ * Wrapper around the engine audio worklet processor.
+ *
+ * The worklet communicates with both the main thread and the shared worker
+ * using {@link Messenger} channels. Heavy operations such as file access or
+ * waveform analysis are delegated to worker agents while audio rendering
+ * stays within the audio worklet context.
+ */
 export class EngineWorklet extends AudioWorkletNode implements Engine {
     static ID: int = 0 | 0
 
