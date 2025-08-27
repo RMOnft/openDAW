@@ -13,6 +13,12 @@ const className = Html.adoptStyleSheet(css, "footer");
 type Construct = { lifecycle: Lifecycle; service: StudioService };
 
 /**
+ * Application footer displaying session information and build metadata.
+ *
+ * @example
+ * ```tsx
+ * <Footer lifecycle={lifecycle} service={service} />
+ * ```
  * Footer component showing connection state, project metadata and runtime
  * statistics.
  */

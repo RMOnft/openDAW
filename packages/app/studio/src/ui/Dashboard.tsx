@@ -20,6 +20,10 @@ type Construct = {
 /**
  * Landing page presenting templates and recent projects.
  *
+ * @example
+ * ```tsx
+ * <Dashboard lifecycle={lifecycle} service={service} />
+ * ```
  * @param service Provides access to template loading and the project
  * browser.
  */
