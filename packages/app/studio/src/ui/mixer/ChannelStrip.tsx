@@ -29,15 +29,25 @@ import {ChannelStripView, ColorCodes, Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "ChannelStrip")
 
+/** Props for {@link ChannelStrip}. */
 type Construct = {
+    /** Lifecycle owner for managing resources. */
     lifecycle: Lifecycle
+    /** Shared studio service. */
     service: StudioService
+    /** Adapter representing the channel's audio unit. */
     adapter: AudioUnitBoxAdapter
+    /** Whether the strip is rendered in compact form. */
     compact: boolean
 }
 
 /**
  * Displays controls for a single track or bus including meters, sends and routing.
+ *
+ * @param lifecycle - Lifecycle owner for subscriptions.
+ * @param service - Access to project state and utilities.
+ * @param adapter - Audio unit backing this channel strip.
+ * @param compact - If `true`, renders a reduced version of the strip.
  */
 export const ChannelStrip = ({lifecycle, service, adapter, compact}: Construct) => {
     const {mute, panning, solo, volume} = adapter.namedParameter

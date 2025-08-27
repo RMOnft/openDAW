@@ -41,6 +41,16 @@ module.exports = {
     { type: "doc", id: "licensing" },
     {
       type: "category",
+      label: "MIDI",
+      items: [
+        "midi/overview",
+        "midi/events",
+        "midi/format",
+        "midi/examples",
+      ],
+    },
+    {
+      type: "category",
       label: "Architecture",
       items: [
         "architecture/overview",
@@ -61,6 +71,16 @@ module.exports = {
             "ui/workspace/resizing",
             "ui/workspace/panels",
             "ui/workspace/examples",
+          ],
+        },
+        {
+          type: "category",
+          label: "Typography",
+          items: [
+            "ui/typography/overview",
+            "ui/typography/font-loading",
+            "ui/typography/markdown",
+            "ui/typography/notepad",
           ],
         },
       ],
@@ -117,6 +137,14 @@ module.exports = {
           ],
         },
         "ui/browse",
+        {
+          type: "category",
+          label: "Files",
+          items: [
+            "ui/files/overview",
+            "ui/files/drag-and-drop",
+          ],
+        },
       ],
     },
     {
@@ -153,6 +181,14 @@ module.exports = {
             "ui/menu/shortcuts",
           ],
         },
+        {
+          type: "category",
+          label: "Metering",
+          items: [
+            "ui/metering/overview",
+            "ui/metering/rms-vs-peak",
+          ],
+        },
         "ui/mixer",
         {
           type: "category",
@@ -181,6 +217,16 @@ module.exports = {
         "services/shortcuts",
         "services/sync",
         "services/stems",
+      ],
+    },
+    {
+      type: "category",
+      label: "Std Library",
+      items: [
+        "std/overview",
+        "std/collections",
+        "std/observers",
+        "std/randomness",
       ],
     },
   ],

@@ -15,11 +15,12 @@ import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
 /**
- * Root application component wiring together the global header, footer and the
- * router that drives all workspace pages.
+ * Top-level React component for the Studio UI. It wires together the
+ * header, footer and page router while passing the shared
+ * {@link StudioService} to child pages.
  *
- * @param service - The main studio service providing session state.
- * @returns The root application element.
+ * @param service Central service providing project and session state.
+ * @returns Rendered application element.
  */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();

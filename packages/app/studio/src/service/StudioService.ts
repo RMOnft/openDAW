@@ -81,6 +81,9 @@ export type Session = {
  * Central service orchestrating workspace screens, project handling and the
  * audio engine.
  *
+ * See {@link SessionService} for session lifecycle management and
+ * [SampleApi](./SampleApi.ts) for network-backed sample retrieval.
+ *
  * ```mermaid
  * flowchart LR
  *   StudioService --> SessionService

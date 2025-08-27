@@ -76,6 +76,9 @@ learn how to build the project in [Build and Run](../build-and-run/setup.md).
 - **Lib** – Supplies shared utilities and reusable logic across modules.
 - **Config** – Delivers runtime and build settings consumed by other components.
 
+Communication between these parts is based on lightweight message channels; see
+the [messaging architecture](./messaging.md) for details.
+
 ## Worker Lifecycle
 
 ```mermaid

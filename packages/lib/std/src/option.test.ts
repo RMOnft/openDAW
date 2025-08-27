@@ -1,3 +1,4 @@
+/** Tests for the {@link Option} utility type. */
 import {describe, expect, it, vi} from "vitest"
 import {Option} from "./option"
 

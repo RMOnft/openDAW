@@ -16,6 +16,8 @@ export namespace MidiFile {
    * Create a decoder for the provided MIDI file buffer.
    *
    * @see {@link MidiFile.encoder} for the reverse operation
+   * @param buffer - raw bytes of the MIDI file
+   * @returns decoder instance for reading the file
    */
   export const decoder = (buffer: ArrayBuffer): MidiFileDecoder =>
     new MidiFileDecoder(new ByteArrayInput(buffer));
@@ -24,6 +26,7 @@ export namespace MidiFile {
    * Create a new encoder for generating MIDI files.
    *
    * @see {@link MidiFile.decoder} to read files back
+   * @returns encoder used to build a file
    */
   export const encoder = (): MidiFileEncoder => new MidiFileEncoder();
 
@@ -33,6 +36,9 @@ export namespace MidiFile {
   class MidiFileEncoder {
     /**
      * Write a variable-length integer to the output.
+     *
+     * @param output - destination byte stream
+     * @param value - integer to encode
      */
       static writeVarLen(output: ByteArrayOutput, value: number): void {
         const bytes: Array<byte> = [];
@@ -51,6 +57,8 @@ export namespace MidiFile {
     /**
      * Add a track to the encoder.
      *
+     * @param track - track to append
+     * @returns reference to this encoder for chaining
      * @see {@link MidiTrack}
      */
     addTrack(track: MidiTrack): this {
@@ -61,6 +69,7 @@ export namespace MidiFile {
     /**
      * Encode the added tracks into a MIDI file.
      *
+     * @returns byte stream containing the encoded file
      * @see {@link MidiFile.decoder} for reading the output
      */
     encode(): ByteArrayOutput {

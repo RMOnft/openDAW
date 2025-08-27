@@ -1,4 +1,5 @@
 {
+  "//": "Package manifest for the Headless app; runs core services without a UI.",
   "name": "@opendaw/app-headless",
   "private": true,
   "version//": "Version is managed by openDAW versioning policy; see packages/docs/docs-dev/build-and-run/versioning.md",

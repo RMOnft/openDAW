@@ -24,6 +24,10 @@ type Construct = {
  * Displays a small markdown-capable notepad. The panel allows users to toggle
  * between editing plain text and viewing rendered markdown. Text is persisted
  * in the current session metadata.
+ * Markdown based notepad embedded in the workspace.
+ *
+ * Allows users to jot down notes. Content is persisted in the session's
+ * metadata under the key `notepad`.
  */
 export const NotePadPanel = ({ lifecycle, service }: Construct) => {
   // Observable backing store for the markdown text.

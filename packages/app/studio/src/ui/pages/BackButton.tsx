@@ -1,5 +1,10 @@
 /**
  * Navigation button leading back to the studio root.
+ *
+ * @example
+ * ```tsx
+ * <BackButton />
+ * ```
  */
 import css from "./BackButton.sass?inline"
 import {Html} from "@opendaw/lib-dom"

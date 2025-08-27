@@ -25,7 +25,12 @@ type Construct = {
   service: StudioService;
 };
 
-/** Renders the VU meters and subscribes to peak data from the engine. */
+/**
+ * Renders the VU meters and subscribes to peak data from the engine.
+ *
+ * @param lifecycle - Lifecycle owner managing subscriptions.
+ * @param service - Studio service used to obtain the metering stream.
+ */
 export const VUMeterPanel = ({ lifecycle, service }: Construct) => {
   const peakL = lifecycle.own(new DefaultObservableValue(0.0));
   const peakR = lifecycle.own(new DefaultObservableValue(0.0));

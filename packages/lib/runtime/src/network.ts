@@ -3,11 +3,15 @@ import { Promises } from "./promises";
 /**
  * Network related helper functions.
  *
+ * Used by services such as the Studio's [SampleApi](../../../app/studio/src/service/SampleApi.ts)
+ * to throttle HTTP requests.
+ *
  * Security note: These utilities perform no validation or authentication.
  * Callers should only request trusted URLs and must verify responses before
  * using them.
  */
 export namespace network {
+  /** Limits the number of concurrent fetch requests. */
   const limit = new Promises.Limit<Response>(4);
 
   /**

@@ -12,6 +12,7 @@
  * - {@link OpfsWorker} implements file system access backed by the
  *   {@link OpfsProtocol}.
  */
+/** Symbol used to mark that the fusion utilities have been loaded. */
 const key = Symbol.for("@openDAW/lib-fusion")
 
 if ((globalThis as Record<PropertyKey, unknown>)[key]) {

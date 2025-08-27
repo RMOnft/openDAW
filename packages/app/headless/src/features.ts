@@ -2,6 +2,9 @@
  * Ensure the browser exposes all APIs required by the headless demo. This
  * function throws if a feature is missing so the caller can present a useful
  * error to the user.
+ *
+ * Used by the headless `main.ts` entry point before bootstrapping the audio
+ * engine.
  */
 import {requireProperty} from "@opendaw/lib-std"
 

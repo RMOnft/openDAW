@@ -10,6 +10,9 @@ import { Colors } from "@opendaw/studio-core";
 /** Class name used for the dashboard container. */
 const className = Html.adoptStyleSheet(css, "Dashboard");
 
+/**
+ * Dependencies required by the {@link Dashboard} component.
+ */
 type Construct = {
   /** Lifecycle of the containing panel. */
   lifecycle: Lifecycle;

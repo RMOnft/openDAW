@@ -11,13 +11,24 @@ import { FilePickerAcceptTypes } from "@/ui/FilePickerAcceptTypes";
 
 /** Dialog helpers for managing samples. */
 export namespace SampleDialogs {
-  /** Open the browser's file picker for selecting sample files. */
+  /**
+   * Open the browser's file picker for selecting sample files.
+   *
+   * @param multiple Allow selection of multiple files.
+   * @returns Result of the picker invocation.
+   */
   export const nativeFileBrowser = async (multiple: boolean = true) =>
     Promises.tryCatch(
       Files.open({ ...FilePickerAcceptTypes.WavFiles, multiple }),
     );
 
-  /** Prompt the user to locate a missing sample on disk. */
+  /**
+   * Prompt the user to locate a missing sample on disk.
+   *
+   * @param importer handler used to register the replacement sample.
+   * @param uuid identifier of the missing sample.
+   * @param name original name shown to the user.
+   */
   export const missingSampleDialog = async (
     importer: SampleImporter,
     uuid: UUID.Format,
@@ -89,7 +100,12 @@ export namespace SampleDialogs {
     return promise;
   };
 
-  /** Show a dialog to edit the name and bpm metadata of a sample. */
+  /**
+   * Show a dialog to edit the name and bpm metadata of a sample.
+   *
+   * @param sample The sample to mutate.
+   * @returns Updated sample after confirmation.
+   */
   export const showEditSampleDialog = async (
     sample: Sample,
   ): Promise<Sample> => {

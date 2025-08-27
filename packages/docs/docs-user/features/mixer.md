@@ -19,8 +19,9 @@ pre‑ or post‑fader depending on the desired behavior.
 ## Meter behavior
 
 Channel strips display peak and RMS meters so you can monitor levels at a
-glance. Meters glow red when clipping occurs, helping you manage gain staging
-across the project.
+glance. Peak meters react instantly to transients while RMS meters average
+energy over time to reflect perceived loudness. Meters glow red when clipping
+occurs, helping you manage gain staging across the project.
 
 ## Routing through a bus
 
