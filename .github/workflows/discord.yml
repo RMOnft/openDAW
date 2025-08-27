@@ -1,4 +1,6 @@
+# .github/workflows/discord.yml
 # NOTE: Workflow disabled
+# Sends build notifications to a Discord channel.
 name: Notify Discord
 
 on:

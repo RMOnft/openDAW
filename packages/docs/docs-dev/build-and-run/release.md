@@ -9,4 +9,5 @@ that:
 - `turbo run test` passes for all packages.
 
 Lerna will tag the repository and push the new versions upstream as part of the
-publish step.
+publish step. Releases can also be orchestrated by the
+[CI pipeline](./ci.md).
