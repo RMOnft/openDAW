@@ -1,3 +1,4 @@
+# Misc OS and tooling files
 .DS_Store
 .turbo
 .idea
@@ -5,22 +6,30 @@
 .cache
 *.log
 *.local
+
+# Dependency directories
 node_modules
+
+# Build output
 dist
 dist-ssr
 server/dist
 public/dist
 public/build-info.json
 lerna-debug.log
+
+# Generated test fixtures and certificates
 /packages/lib/box-forge/test/gen/**
 /packages/studio/adapters/src/index.ts
 /packages/app/studio/public/build-info.json
 /packages/app/localhost.pem
 /packages/app/localhost-key.pem
+
 # Docusaurus build artifacts
 /packages/docs/build
 /packages/docs/.docusaurus
 /packages/docs/api
+
 # Root documentation build artifacts
 /docs/build
 /docs/.docusaurus

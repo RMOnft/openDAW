@@ -4,6 +4,6 @@
   "excludeExternals": false,
   "excludeInternal": true,
   "excludePrivate": true,
-  "plugin": ["typedoc-plugin-missing-exports"],
-  "readme": "none"
+  "plugin": ["typedoc-plugin-missing-exports"], // include plugin to report missing exports
+  "readme": "none" // don't generate a landing page
 }

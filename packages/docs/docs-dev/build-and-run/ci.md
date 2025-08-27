@@ -12,4 +12,7 @@ GitHub Actions drives the repository's CI pipeline. The disabled workflows in
 
 The diagram below shows the basic CI flow from commit to deployment.
 
+For an overview of configuration files referenced by these workflows, see
+[repository configuration](./repo-config.md).
+
 ![CI flow diagram](../../../../assets/architecture/ci-flow.svg)

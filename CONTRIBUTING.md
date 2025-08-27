@@ -15,6 +15,21 @@ documentation builds, quality checks, Discord notifications, and SFTP tests.
 Although disabled, they document the intended automation. See the
 [CI guide](packages/docs/docs-dev/build-and-run/ci.md) for more details.
 
+## Configuration Overview
+
+Repository-level config files define linting, build tasks, documentation output,
+and deployment samples:
+
+- `.eslintrc.js` – root ESLint setup.
+- `.markdownlint.yml` – Markdown lint defaults.
+- `.vale.ini` – prose style rules.
+- `turbo.json` – task orchestration across packages.
+- `lerna.json` – package publishing defaults.
+- `typedoc.json` – API docs generation settings.
+- `package.json` & `package-lock.json` – workspace manifests.
+- `netlify.toml` & `vercel.json` – deployment examples.
+- `.gitignore` – files excluded from git.
+
 ## Pull Request Workflow
 
 1. **Fork and clone** the repository, then create a descriptive branch for your work.
