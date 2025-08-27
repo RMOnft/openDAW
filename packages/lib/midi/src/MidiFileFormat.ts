@@ -6,8 +6,11 @@ import { MidiTrack } from "./MidiTrack";
  */
 export class MidiFileFormat {
   constructor(
+    /** Array of decoded tracks */
     readonly tracks: ReadonlyArray<MidiTrack>,
+    /** MIDI file format type (0,1,2) */
     readonly formatType: int,
+    /** Ticks per quarter note or SMPTE division */
     readonly timeDivision: int,
   ) {}
 }
