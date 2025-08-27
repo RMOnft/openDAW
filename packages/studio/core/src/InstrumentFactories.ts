@@ -19,6 +19,8 @@ import {Pointers} from "@opendaw/studio-enums"
  *
  * Several instruments rely on data prepared by background workers, such as
  * file operations or waveform analysis handled through {@link WorkerAgents}.
+ * Host routing uses {@link @opendaw/studio-enums#Pointers | Pointers} to
+ * connect instruments with their audio destinations.
  */
 export namespace InstrumentFactories {
     /** Factory for the tape-style audio player device. */

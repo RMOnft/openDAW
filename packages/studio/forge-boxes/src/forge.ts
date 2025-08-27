@@ -1,3 +1,6 @@
+/**
+ * Entry point for forging box schemas into TypeScript classes.
+ */
 import {BoxForge} from "@opendaw/lib-box-forge"
 import {Pointers} from "@opendaw/studio-enums"
 import {StepAutomationBox} from "./schema/step-automation"

@@ -1,6 +1,6 @@
 {
-  // TypeScript configuration for deployment scripts. The scripts are currently
-  // disabled but keeping this config ensures they remain type safe.
+  "extends": "@opendaw/typescript-config/tsconfig.build.json",
+  "//": "Deployment scripts disabled",
   "compilerOptions": {
     // Target a modern Node.js runtime.
     "target": "es2016",
@@ -15,6 +15,7 @@
     // Rely on declaration files provided by dependencies without rechecking.
     "skipLibCheck": true
   },
-  // Only type-check the main deployment script.
-  "files": ["run.ts"]
+  "files": [
+    "run.ts"
+  ]
 }

@@ -54,7 +54,12 @@ import {InstrumentDeviceProcessor} from "./InstrumentDeviceProcessor"
 import {AudioEffectDeviceProcessor} from "./AudioEffectDeviceProcessor"
 import {UnknownMidiEffectDeviceProcessor} from "./devices/midi-effects/UnknownMidiEffectDeviceProcessor"
 
-/** Factory functions creating processor instances for instrument devices. */
+/**
+ * Factory functions creating processor instances for instrument devices.
+ *
+ * Instrument processors correspond to
+ * {@link @opendaw/studio-enums#AudioUnitType.Instrument | AudioUnitType.Instrument}.
+ */
 export namespace InstrumentDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): Nullish<InstrumentDeviceProcessor | AudioBusProcessor> =>
@@ -72,7 +77,12 @@ export namespace InstrumentDeviceProcessorFactory {
         })
 }
 
-/** Factory for processors wrapping MIDI-effect devices. */
+/**
+ * Factory for processors wrapping MIDI-effect devices.
+ *
+ * These processors can appear before or after instruments according to
+ * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}.
+ */
 export namespace MidiEffectDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): MidiEffectProcessor =>
@@ -88,7 +98,12 @@ export namespace MidiEffectDeviceProcessorFactory {
         }), `Could not create midi-effect for'${box.name}'`)
 }
 
-/** Factory for audio-effect device processors. */
+/**
+ * Factory for audio-effect device processors.
+ *
+ * Effect routing follows
+ * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting} semantics.
+ */
 export namespace AudioEffectDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): AudioEffectDeviceProcessor =>
