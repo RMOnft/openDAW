@@ -6,6 +6,8 @@ For a guided overview of the interface, see the [UI tour](../../docs/docs-user/u
 Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md). The [notepad feature](../../docs/docs-user/features/notepad.md) lets you store project notes using Markdown.
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
 
+Quickly launch commands using the Spotlight search palette with <kbd>Shift</kbd>+<kbd>Enter</kbd>. Read the [user guide](../../docs/docs-user/features/search.md) or see the [developer docs](../../docs/docs-dev/ui/spotlight/overview.md).
+
 The project notepad uses markdown and can be customized. See the
 [markdown editing guide](../../docs/docs-dev/ui/markdown/editing.md) for
 developer details. For instructions on using the feature in the Studio,

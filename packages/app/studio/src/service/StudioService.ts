@@ -118,6 +118,7 @@ export class StudioService implements ProjectEnv {
     readonly menu = initAppMenu(this)
     readonly sessionService = new SessionService(this)
     readonly panelLayout = new PanelContents(createPanelFactory(this))
+    /** Supplies searchable actions for the Spotlight command palette. */
     readonly spotlightDataSupplier = new SpotlightDataSupplier()
     readonly samplePlayback: SamplePlayback
     // noinspection JSUnusedGlobalSymbols
@@ -215,6 +216,7 @@ export class StudioService implements ProjectEnv {
             })
         }
 
+        // Register initial spotlight actions
         this.spotlightDataSupplier.registerAction("Create Synth", EmptyExec)
         this.spotlightDataSupplier.registerAction("Create Drumcomputer", EmptyExec)
         this.spotlightDataSupplier.registerAction("Create ModularSystem", EmptyExec)

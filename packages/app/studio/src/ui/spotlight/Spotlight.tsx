@@ -1,9 +1,13 @@
 /**
  * Lightweight command palette inspired overlay allowing quick execution of
  * actions by name.
+ *
+ * Integrates the {@link SearchInput} component to provide a draggable command
+ * palette overlay.
  */
 import css from "./Spotlight.sass?inline";
 import {
+  DefaultObservableValue,
   Nullable,
   Option,
   Point,
@@ -17,6 +21,7 @@ import {
   replaceChildren,
 } from "@opendaw/lib-jsx";
 import { Icon } from "@/ui/components/Icon.tsx";
+import { SearchInput } from "@/ui/components/SearchInput.tsx";
 import { Surface } from "@/ui/surface/Surface.tsx";
 import { IconSymbol } from "@opendaw/studio-adapters";
 import { Dragging, Events, Html, Keyboard } from "@opendaw/lib-dom";
@@ -76,9 +81,22 @@ export namespace Spotlight {
     service,
     position,
   }: Construct) => {
-    const inputField: HTMLInputElement = (
-      <input type="text" value="" placeholder="Search anything..." />
-    );
+    const query = new DefaultObservableValue("");
+    const inputField: HTMLInputElement = SearchInput({
+      lifecycle: terminator,
+      model: query,
+      placeholder: "Search anything...",
+      style: {
+        background: "none",
+        boxShadow: "none",
+        color: "inherit",
+        fontSize: "inherit",
+        fontWeight: "inherit",
+        fontFamily: "inherit",
+        padding: "0",
+        width: "100%",
+      },
+    });
     const result: HTMLElement = <div className="result hidden" />;
     const element: HTMLElement = (
       <div className={className} tabindex={-1}>
@@ -110,8 +128,8 @@ export namespace Spotlight {
           finally: () => inputField.focus(),
         });
       }),
-      Events.subscribe(inputField, "input", () => {
-        const results = service.spotlightDataSupplier.query(inputField.value);
+      query.subscribe((owner) => {
+        const results = service.spotlightDataSupplier.query(owner.getValue());
         const hasResults = results.length === 0;
         result.classList.toggle("hidden", hasResults);
         replaceChildren(
@@ -126,7 +144,7 @@ export namespace Spotlight {
       }),
       Events.subscribe(inputField, "keydown", (event) => {
         if (event.code === "Enter") {
-          const results = service.spotlightDataSupplier.query(inputField.value); // TODO keep from last search
+          const results = service.spotlightDataSupplier.query(query.getValue()); // TODO keep from last search
           if (results.length > 0) {
             results[0].exec();
             terminator.terminate();
