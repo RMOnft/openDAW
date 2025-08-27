@@ -1,0 +1,12 @@
+{
+  // Base TypeScript preset for openDAW packages.
+  // Example usage:
+  // {
+  //   "extends": "@opendaw/typescript-config/tsconfig.base.json",
+  //   "compilerOptions": {
+  //     "outDir": "./dist",
+  //     "rootDir": "./src"
+  //   }
+  // }
+  "extends": "./base.json"
+}

@@ -1,0 +1,13 @@
+{
+  // Preset for compiling libraries and Node scripts.
+  // Example usage:
+  // {
+  //   "extends": "@opendaw/typescript-config/tsconfig.build.json",
+  //   "include": ["src"],
+  //   "exclude": ["dist", "node_modules", "**/*.test.ts"]
+  // }
+  "extends": "./base.json",
+  "compilerOptions": {
+    "noEmit": false
+  }
+}

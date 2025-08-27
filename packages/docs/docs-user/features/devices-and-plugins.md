@@ -21,6 +21,8 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 - Traditional desktop formats like VST or Audio Unit may require additional support and are not guaranteed to work.
 - Different plugins may expose unique parameters; test them in your environment to confirm full compatibility.
 
+Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) in the developer documentation.
+
 ## Mapping parameters
 
 - Right-click a control to create automation or modulation targets.

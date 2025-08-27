@@ -2,6 +2,16 @@ import {BoxSchema, FieldRecord, mergeFields, reserveMany} from "@opendaw/lib-box
 import {Pointers} from "@opendaw/studio-enums"
 import {Objects} from "@opendaw/lib-std"
 
+/**
+ * Helper factory functions for creating device box schemas.
+ *
+ * ```mermaid
+ * graph TD
+ *   createInstrumentDevice --> Instrument
+ *   createAudioEffectDevice --> Effect
+ * ```
+ */
+
 const DefaultPointers = [Pointers.Device, Pointers.Selection]
 
 const MidiEffectDeviceAttributes = {
@@ -31,6 +41,9 @@ const AudioEffectDeviceAttributes = {
     ...reserveMany(6, 7, 8, 9)
 } as const satisfies FieldRecord<Pointers>
 
+/**
+ * Build a MIDI effect device schema by merging base attributes with extras.
+ */
 export const createMidiEffectDevice = <FIELDS extends FieldRecord<Pointers>>(
     name: string, fields: Objects.Disjoint<typeof MidiEffectDeviceAttributes, FIELDS>): BoxSchema<Pointers> => ({
     type: "box",
@@ -38,6 +51,9 @@ export const createMidiEffectDevice = <FIELDS extends FieldRecord<Pointers>>(
     pointerRules: {accepts: DefaultPointers, mandatory: false}
 })
 
+/**
+ * Create an instrument device schema that may accept additional pointers.
+ */
 export const createInstrumentDevice = <FIELDS extends FieldRecord<Pointers>>(
     name: string, fields: Objects.Disjoint<typeof InstrumentDeviceAttributes, FIELDS>,
     ...pointers: Array<Pointers>): BoxSchema<Pointers> => ({
@@ -46,6 +62,9 @@ export const createInstrumentDevice = <FIELDS extends FieldRecord<Pointers>>(
     pointerRules: {accepts: DefaultPointers.concat(pointers), mandatory: false}
 })
 
+/**
+ * Build an audio effect device schema.
+ */
 export const createAudioEffectDevice = <FIELDS extends FieldRecord<Pointers>>(
     name: string, fields: Objects.Disjoint<typeof AudioEffectDeviceAttributes, FIELDS>): BoxSchema<Pointers> => ({
     type: "box",

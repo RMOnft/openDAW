@@ -146,6 +146,14 @@ Before starting, ensure you have the following installed on your system:
 - `npm run dev:studio` | `npm run dev:headless` (start dev server)
 - Navigate to https://localhost:8080 (port is important > cors sample api)
 
+### Pipeline Overview
+
+The repository uses **Turbo** to orchestrate builds, tests, linting, and
+documentation tasks across all packages. **Lerna** manages package versions and
+publishing via scripts like `npm run publish-sdk`. API documentation is produced
+with **Typedoc**, and deployment targets are described in the Vercel and
+Netlify configuration files (currently disabled).
+
 ### Flow Charts
 
 <img width="6551" height="5971" alt="image" src="https://github.com/user-attachments/assets/09aaf742-6175-42ba-946b-a66e5f5dac72" />
