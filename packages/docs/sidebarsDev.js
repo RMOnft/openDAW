@@ -145,6 +145,15 @@ module.exports = {
             "ui/files/drag-and-drop",
           ],
         },
+        {
+          type: "category",
+          label: "Spotlight",
+          items: [
+            "ui/spotlight/overview",
+            "ui/spotlight/usage",
+            "ui/spotlight/faq",
+          ],
+        },
       ],
     },
     {

@@ -13,6 +13,8 @@
 and to **resurface the process of making music** by making **high-quality** creation tools accessible to everyone, with
 a strong focus on **education** and data-privacy. Please consider supporting this project on [Patreon](https://www.patreon.com/join/openDAW) or [ko-fi](https://ko-fi.com/opendaw).
 
+The Studio features a Spotlight command palette (<kbd>Shift</kbd>+<kbd>Enter</kbd>) for quickly running actions by name.
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/andremichelle/openDAW/refs/heads/main/assets/studio-teaser.png"/>
 </p>
@@ -120,6 +122,8 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
 - [Icon Library](packages/docs/docs-dev/ui/icons/overview.md)
 - [Notepad Guide](packages/docs/docs-user/features/notepad.md)
+- [Spotlight Developer Docs](packages/docs/docs-dev/ui/spotlight/overview.md)
+- [Search Feature](packages/docs/docs-user/features/search.md)
 - [Groove Examples](packages/docs/docs-learn/how-it-works/groove-examples.md)
 
 ### Style Documentation

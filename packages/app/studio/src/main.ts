@@ -93,6 +93,7 @@ requestAnimationFrame(async () => {
                         } else if (event.defaultPrevented) {return}
                     }),
                     ContextMenu.install(surface.owner),
+                    // Install Spotlight command palette
                     Spotlight.install(surface, service)
                 )
             }
