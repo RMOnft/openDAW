@@ -6,6 +6,16 @@ OPFS provides a sandboxed, persistent file system that is not visible to the
 user's operating system. It allows the application to save audio files and
 project state without requiring a network connection.
 
+```mermaid
+flowchart LR
+    A[Project Data] --> B[OPFS]
+    B --> C[Export Backup]
+```
+
+- **Project Data** – audio clips, arrangements, and other information created during a session.
+- **OPFS** – the browser's private filesystem used by openDAW for local persistence.
+- **Export Backup** – an archive of the OPFS contents that can be downloaded or synced elsewhere.
+
 ## Export
 
 Projects can be exported at any time. Exporting creates a portable archive that
