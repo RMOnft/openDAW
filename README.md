@@ -120,6 +120,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
 - [Icon Library](packages/docs/docs-dev/ui/icons/overview.md)
 - [Notepad Guide](packages/docs/docs-user/features/notepad.md)
+- [Groove Examples](packages/docs/docs-learn/how-it-works/groove-examples.md)
 
 ### Style Documentation
 

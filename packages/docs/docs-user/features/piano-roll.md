@@ -21,6 +21,8 @@ Drag the loop brace above the grid to repeat a region while editing.
 
 See the [Beat Making workflow](../workflows/beat.md) for a practical example.
 
+Listen to timing differences in the [groove examples](../../docs-learn/how-it-works/groove-examples.md).
+
 ## Developer documentation
 
 More technical details are available in the developer docs:

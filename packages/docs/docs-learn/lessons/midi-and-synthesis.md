@@ -44,6 +44,8 @@ flowchart LR
 
 By sending MIDI messages to a synth and tweaking its parameters you build an intuitive understanding of how electronic instruments create sound.
 
+For how timing variations shape feel, check out the [groove examples](../how-it-works/groove-examples.md).
+
 ## Quiz
 
 1. What does a MIDI clip contain?
