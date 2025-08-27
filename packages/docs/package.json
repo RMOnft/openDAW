@@ -48,5 +48,7 @@
   },
   "engines": {
     "node": ">=23"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }

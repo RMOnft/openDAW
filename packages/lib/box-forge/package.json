@@ -2,7 +2,7 @@
   "name": "@opendaw/lib-box-forge",
   "version": "0.0.20",
   "private": true,
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "exports": {
     ".": "./src/index.ts"
   },
@@ -25,5 +25,6 @@
   "devDependencies": {
     "@opendaw/eslint-config": "^0.0.18",
     "@opendaw/typescript-config": "^0.0.19"
-  }
+  },
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }
