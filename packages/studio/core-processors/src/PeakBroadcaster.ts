@@ -9,7 +9,9 @@ import {RenderQuantum} from "./constants"
  * {@link LiveStreamBroadcaster}.
  */
 export class PeakBroadcaster implements Terminable {
+    /** Exponential decay applied to stored peak values between samples. */
     static readonly PEAK_DECAY = Math.exp(-1.0 / (sampleRate * 0.250))
+    /** Length of the sliding RMS window in samples. */
     static readonly RMS_WINDOW = Math.floor(sampleRate * 0.100)
 
     readonly #broadcaster: LiveStreamBroadcaster
@@ -52,6 +54,11 @@ export class PeakBroadcaster implements Terminable {
 
     /**
      * Updates peak and RMS statistics for the given sample range.
+     *
+     * @param outL - Left channel samples.
+     * @param outR - Right channel samples.
+     * @param fromIndex - Start index within the provided buffers.
+     * @param toIndex - End index (exclusive) within the provided buffers.
      */
     process(outL: Float32Array, outR: Float32Array, fromIndex: int = 0, toIndex: int = RenderQuantum): void {
         const [rmsL, rmsR] = this.#rms
