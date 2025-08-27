@@ -1,3 +1,6 @@
+/**
+ * Service handling persistence and lifecycle operations for project sessions.
+ */
 import {ProjectSession} from "@/project/ProjectSession"
 import {
     DefaultObservableValue,

@@ -1,3 +1,7 @@
+/**
+ * Core application service responsible for wiring together workspace, audio
+ * engine and project handling utilities.
+ */
 import {
     assert,
     DefaultObservableValue,
@@ -71,6 +75,7 @@ range.showUnitInterval(0, PPQN.fromSignature(16, 1))
 
 const snapping = new Snapping(range)
 
+/** Lightweight representation of the active project session. */
 export type Session = {
     readonly uuid: Readonly<UUID.Format>
     readonly project: Project

@@ -1,3 +1,6 @@
+/**
+ * Root component that sets up routing and global UI elements for the studio.
+ */
 import { Terminator } from "@opendaw/lib-std";
 import { createElement, Frag, Router } from "@opendaw/lib-jsx";
 import { WorkspacePage } from "@/ui/workspace/WorkspacePage.tsx";

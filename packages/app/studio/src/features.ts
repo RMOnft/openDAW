@@ -1,3 +1,6 @@
+/**
+ * Runtime feature detection utilities for the Studio application.
+ */
 import { requireProperty } from "@opendaw/lib-std";
 
 /**

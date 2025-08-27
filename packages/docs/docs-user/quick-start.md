@@ -13,3 +13,5 @@ For writing or editing tips, consult the
 [Writing Guide](../docs-dev/style/writing-guide.md). For a technical
 overview of how the studio boots, see the
 [bootstrapping architecture doc](../docs-dev/architecture/bootstrap.md).
+To tweak default behaviour of the application, refer to the
+[Configuration Overview](../docs-dev/configuration/overview.md).
