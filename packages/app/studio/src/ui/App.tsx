@@ -15,15 +15,12 @@ import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
 /**
- * Root component wiring together routing, header and footer.
+ * Top-level React component for the Studio UI. It wires together the
+ * header, footer and page router while passing the shared
+ * {@link StudioService} to child pages.
  *
- * @example
- * ```tsx
- * render(App(service), mountNode);
- * ```
- * Root application component that wires global UI elements and sets up
- * the router. It renders the header, footer and the current page while
- * providing a default 404 fallback.
+ * @param service Central service providing project and session state.
+ * @returns Rendered application element.
  */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();

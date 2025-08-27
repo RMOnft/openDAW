@@ -1,9 +1,10 @@
 /**
- * Describes metadata emitted during the bundling process.
+ * Interface representing metadata about the current Studio build.
+ * Generated during the Vite build step (see `vite.config.ts`) and
+ * persisted to `public/build-info.json`. The data is fetched at
+ * runtime to validate caches and expose build details to the client.
  *
- * `vite.config.ts` serializes this structure into `build.json` which is
- * served from the `public` directory. The Studio reads the file at runtime
- * to validate caches and display build information to the user.
+ * @public
  */
 export type BuildInfo = {
   /** Unix timestamp of when the build was created. */

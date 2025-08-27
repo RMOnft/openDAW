@@ -1,7 +1,7 @@
 {
   "//": "Lerna manages versioning and publishing for workspace packages",
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version//": "Version is managed by openDAW versioning policy; see packages/docs/docs-dev/build-and-run/versioning.md",
+  "version//": "Version is managed by openDAW versioning policy; do not edit manually. See packages/docs/docs-dev/build-and-run/versioning.md",
   "version": "independent",
   "npmClient": "npm",
   "command": {
