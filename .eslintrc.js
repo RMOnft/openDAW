@@ -1,5 +1,6 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  extends: ["@opendaw/eslint-config/index.js"],
+  ignorePatterns: [".eslintrc.js"],
+  extends: ["@opendaw/eslint-config"],
 };

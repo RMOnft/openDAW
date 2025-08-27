@@ -21,3 +21,9 @@ start playback of the example project.
 - `src/main.ts` – entry point that wires everything together.
 - `public/subset.od` – serialized demo project that can be loaded instead of creating one at runtime.
 
+## Performance notes
+
+The headless build is ideal for profiling the engine without UI interference.
+See the [development performance guide](../../docs/docs-dev/performance.md) for
+tips on capturing traces and analysing bottlenecks.
+

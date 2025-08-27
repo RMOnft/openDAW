@@ -1,6 +1,10 @@
 /**
  * Vite configuration for the OpenDAW Studio application.
  * Supported Browsers: Chrome (latest), Firefox (latest), Safari (latest), Edge (Chromium)
+ *
+ * Security note: The dev server enables HTTPS and cross‑origin isolation to
+ * unlock advanced Web APIs. Review any plugins carefully and restrict file
+ * serving to avoid exposing sensitive workspace files.
  */
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";

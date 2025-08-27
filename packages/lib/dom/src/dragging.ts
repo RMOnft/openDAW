@@ -1,4 +1,20 @@
-// Supported Browsers: Chrome (latest), Firefox (latest), Safari (latest), Edge (Chromium)
+
+/**
+ * High level helpers for pointer‑based dragging interactions.
+ *
+ * The `attach` function wires pointer events to a target and reports
+ * movement to a user supplied `Process` implementation.
+ *
+ * @example
+ * ```ts
+ * import {Dragging} from "@opendaw/lib-dom";
+ * import {Option} from "@opendaw/lib-std";
+ *
+ * const detach = Dragging.attach(element, ev => Option.some({
+ *   update(e) { console.log(e.clientX, e.clientY); }
+ * }));
+ * ```
+ */
 import { Func, Option, Terminable, Terminator } from "@opendaw/lib-std";
 import { Browser } from "./browser";
 import { AnimationFrame } from "./frames";
@@ -7,13 +23,19 @@ import { Keyboard } from "./keyboard";
 
 export namespace Dragging {
   export interface Process {
+    /** Receives updated pointer information. */
     update(event: Event): void;
+    /** Invoked when the drag is cancelled. */
     cancel?(): void;
+    /** Called when drag is approved (pointer released normally). */
     approve?(): void;
+    /** Called after completion or cancellation. */
     finally?(): void;
+    /** Optional abort signal to terminate the drag externally. */
     abortSignal?: AbortSignal;
   }
 
+  /** Normalised pointer event passed to `Process.update`. */
   export interface Event {
     readonly clientX: number;
     readonly clientY: number;
@@ -22,12 +44,20 @@ export namespace Dragging {
     readonly ctrlKey: boolean;
   }
 
+  /** Additional configuration for `attach`. */
   export interface ProcessOptions {
+    /** Allow multiple simultaneous touches. */
     multiTouch?: boolean;
+    /** Trigger `update` immediately after pointer down. */
     immediate?: boolean;
+    /** Continue issuing `update` callbacks even without pointer moves. */
     permanentUpdates?: boolean;
   }
 
+  /**
+   * Attaches pointer listeners to `target` and creates a dragging lifecycle
+   * managed by a `Process` instance produced by `factory`.
+   */
   export const attach = <T extends PointerCaptureTarget>(
     target: T,
     factory: Func<PointerEvent, Option<Process>>,

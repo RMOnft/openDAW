@@ -1,20 +1,35 @@
 import {int} from "@opendaw/lib-std"
 
 /**
- * BPM detector (90-180 BPM) for a mono Float32Array.
- * Port of Mark Hills bpm(1) with a light "low-BPM penalty" to dodge ½-tempo aliases.
+ * BPM detection utilities.
+ *
+ * The detector is optimised for music with tempos in the 90‑180 BPM range and
+ * operates on mono PCM data. It is a port of Mark Hills' `bpm(1)` algorithm with
+ * a small penalty applied to very slow candidates to avoid half‑tempo aliases.
  */
 export namespace BPMTools {
+    /**
+     * Options controlling the tempo search space and analysis parameters.
+     * All fields are optional and fall back to sensible defaults.
+     */
     type Options = Partial<{
+        /** Number of samples between energy taps. */
         interval: number
+        /** Number of coarse scan steps across the search interval. */
         scanSteps: number
+        /** Autodiff samples per scan step. */
         scanSamples: number
+        /** Lower bound of the BPM search range. */
         minBPM: number
+        /** Upper bound of the BPM search range. */
         maxBPM: number
     }>
 
     /**
      * Estimates the tempo of an audio buffer.
+     *
+     * The implementation builds a smoothed amplitude envelope and evaluates
+     * periodicity scores across the requested BPM range.
      *
      * @param buf - Mono input samples.
      * @param sampleRate - Sampling rate of `buf`.

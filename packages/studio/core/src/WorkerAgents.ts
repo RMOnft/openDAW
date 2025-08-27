@@ -9,6 +9,10 @@ import {Communicator, Messenger} from "@opendaw/lib-runtime"
  * The application must call {@link WorkerAgents.install} with the URL of the
  * bundled worker script before any of the provided protocols can be used. Once
  * installed, the getters lazily connect to their respective message channels.
+ *
+ * Security note: Workers run with the same origin privileges as the main
+ * thread. Only install worker bundles from trusted sources to avoid executing
+ * untrusted code.
  */
 export class WorkerAgents {
     /**

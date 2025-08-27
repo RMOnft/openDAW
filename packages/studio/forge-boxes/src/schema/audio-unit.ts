@@ -2,6 +2,17 @@ import {AudioSendRouting, AudioUnitType, Pointers} from "@opendaw/studio-enums"
 import {DefaultParameterPointerRules} from "./defaults"
 import {BoxSchema} from "@opendaw/lib-box-forge"
 
+/**
+ * Describes an instrument or effect unit and its routing.
+ *
+ * ```mermaid
+ * graph LR
+ *   AudioUnitBox --> tracks
+ *   AudioUnitBox --> midi-effects
+ *   AudioUnitBox --> audio-effects
+ *   AudioUnitBox --> aux-sends
+ * ```
+ */
 export const AudioUnitBox: BoxSchema<Pointers> = {
     type: "box",
     class: {
@@ -54,6 +65,15 @@ export const AudioUnitBox: BoxSchema<Pointers> = {
     }, pointerRules: {accepts: [Pointers.Selection, Pointers.Automation], mandatory: false}
 }
 
+/**
+ * Represents an intermediary bus for routing audio.
+ *
+ * ```mermaid
+ * graph TD
+ *   AudioBusBox -->|input| AudioOutput
+ *   AudioBusBox -->|output| AudioOutput
+ * ```
+ */
 export const AudioBusBox: BoxSchema<Pointers> = {
     type: "box",
     class: {
@@ -75,6 +95,14 @@ export const AudioBusBox: BoxSchema<Pointers> = {
     }
 }
 
+/**
+ * Auxiliary send definition targeting another bus.
+ *
+ * ```mermaid
+ * graph TD
+ *   AuxSendBox -->|target-bus| AudioBus
+ * ```
+ */
 export const AuxSendBox: BoxSchema<Pointers> = {
     type: "box",
     class: {

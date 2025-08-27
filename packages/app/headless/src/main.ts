@@ -2,6 +2,10 @@
  * Main entry point for the headless openDAW demo. This script boots the audio
  * engine and plays a small example project once the user interacts with the
  * page.
+ *
+ * Security note: The demo relies on cross-origin isolation and local worker
+ * bundles. Serve this page over HTTPS and avoid loading untrusted scripts to
+ * prevent privilege escalation.
  */
 import "./style.css"
 import {assert, Progress, UUID} from "@opendaw/lib-std"
