@@ -92,3 +92,4 @@ For details about the studio runtime internals see the
 [studio core README](../../../studio/core/README.md).
 
 
+Developers integrating the engine can start with the [SDK overview](../sdk/overview.md).
