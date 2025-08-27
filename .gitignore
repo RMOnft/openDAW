@@ -21,3 +21,7 @@ lerna-debug.log
 /packages/docs/build
 /packages/docs/.docusaurus
 /packages/docs/api
+# Root documentation build artifacts
+/docs/build
+/docs/.docusaurus
+/docs/api
