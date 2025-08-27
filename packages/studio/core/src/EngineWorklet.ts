@@ -1,3 +1,6 @@
+/**
+ * Engine implementation running inside an audio worklet context.
+ */
 import {
   Arrays,
   byte,

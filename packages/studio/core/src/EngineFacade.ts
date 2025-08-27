@@ -1,3 +1,6 @@
+/**
+ * High level wrapper around {@link EngineWorklet} for application code.
+ */
 import {
     byte,
     DefaultObservableValue,
