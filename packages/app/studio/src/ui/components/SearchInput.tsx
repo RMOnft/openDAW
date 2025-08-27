@@ -47,3 +47,11 @@ export const SearchInput = ({lifecycle, model, placeholder, style}: Construct) =
     lifecycle.own(model.subscribe(owner => input.value = owner.getValue()))
     return input
 }
+
+/** Property table for {@link SearchInput}. */
+export const SearchInputPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<string>", description: "Observable search string."},
+    {prop: "placeholder", type: "string", description: "Placeholder text when empty."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline style for the element."}
+] as const

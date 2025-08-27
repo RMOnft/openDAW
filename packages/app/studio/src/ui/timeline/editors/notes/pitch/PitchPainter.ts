@@ -1,3 +1,6 @@
+/**
+ * Painter responsible for rendering pitch editor content onto a canvas.
+ */
 import {int, linear, Option, Procedure} from "@opendaw/lib-std"
 import {CanvasPainter} from "@/ui/canvas/painter.ts"
 import {PitchPositioner} from "@/ui/timeline/editors/notes/pitch/PitchPositioner.ts"
@@ -11,6 +14,9 @@ import {renderTimeGrid} from "@/ui/timeline/editors/TimeGridRenderer.ts"
 import {NoteModifier} from "@/ui/timeline/editors/notes/NoteModifier.ts"
 import {NoteEventOwnerReader} from "@/ui/timeline/editors/EventOwnerReader.ts"
 
+/**
+ * Construction parameters for {@link createNotePitchPainter}.
+ */
 type Construct = {
     canvas: HTMLCanvasElement,
     positioner: PitchPositioner,
@@ -21,6 +27,9 @@ type Construct = {
     reader: NoteEventOwnerReader
 }
 
+/**
+ * Factory for a painter that draws notes, scales and guides for the pitch editor.
+ */
 export const createNotePitchPainter =
     ({canvas, positioner, scale, range, snapping, modifyContext, reader}: Construct): Procedure<CanvasPainter> =>
         painter => {

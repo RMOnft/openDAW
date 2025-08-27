@@ -16,4 +16,5 @@ const warped = groove.warp(240);
 ```
 
 See the [API docs](https://opendaw.org/docs/api/dsp/) for related types.
+Audio demonstrations are available in the [groove examples](../../docs-learn/how-it-works/groove-examples.md).
 

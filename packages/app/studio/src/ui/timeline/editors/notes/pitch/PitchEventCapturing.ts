@@ -1,3 +1,6 @@
+/**
+ * Utilities for capturing pitch editor mouse events and mapping them to notes.
+ */
 import {ElementCapturing} from "@/ui/canvas/capturing.ts"
 import {isDefined, Nullable} from "@opendaw/lib-std"
 import {PointerRadiusDistance} from "@/ui/timeline/constants.ts"
@@ -7,11 +10,17 @@ import {NoteEventBoxAdapter} from "@opendaw/studio-adapters"
 
 import {NoteEventOwnerReader} from "@/ui/timeline/editors/EventOwnerReader.ts"
 
+/**
+ * Result of mapping a pointer location to a note editing handle.
+ */
 export type PitchCaptureTarget =
     | { type: "note-end", event: NoteEventBoxAdapter }
     | { type: "note-position", event: NoteEventBoxAdapter }
     | { type: "loop-duration", reader: NoteEventOwnerReader }
 
+/**
+ * Creates an {@link ElementCapturing} instance for the pitch editor canvas.
+ */
 export const createPitchEventCapturing = (element: Element,
                                           positioner: PitchPositioner,
                                           range: TimelineRange,

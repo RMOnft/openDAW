@@ -124,6 +124,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Notepad Guide](packages/docs/docs-user/features/notepad.md)
 - [Spotlight Developer Docs](packages/docs/docs-dev/ui/spotlight/overview.md)
 - [Search Feature](packages/docs/docs-user/features/search.md)
+- [Groove Examples](packages/docs/docs-learn/how-it-works/groove-examples.md)
 
 ### Style Documentation
 

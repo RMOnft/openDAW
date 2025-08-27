@@ -26,9 +26,14 @@ import {dbToGain} from "@opendaw/lib-dsp"
 import {RootBox, TimelineBox} from "@opendaw/studio-boxes"
 import {BoxGraph, Editing} from "@opendaw/lib-box"
 import {BoxDebugView} from "../components/BoxDebugView"
+import {BoxesDebugView} from "../components/BoxesDebugView"
 import {ProgressBar} from "@/ui/components/ProgressBar.tsx"
+import {PeakMeter} from "../components/PeakMeter"
 import {TextInput} from "../components/TextInput"
 import {SearchInput} from "../components/SearchInput"
+import {TextButton} from "../components/TextButton"
+import {FlexSpacer} from "../components/FlexSpacer"
+import {InsertMarker} from "../components/InsertMarker"
 import {Html} from "@opendaw/lib-dom"
 import {Colors} from "@opendaw/studio-core"
 import {Knob} from "@/ui/components/Knob.tsx"
@@ -74,6 +79,16 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
                     </Button>
                     <label>ProgressBar</label>
                     <ProgressBar lifecycle={lifecycle} progress={new DefaultObservableValue(0.5)}/>
+                    <label>TextButton</label>
+                    <TextButton onClick={() => {}}>Example</TextButton>
+                    <label>FlexSpacer</label>
+                    <div style={{display: "flex", width: "6rem"}}>
+                        <Icon symbol={IconSymbol.Play}/>
+                        <FlexSpacer/>
+                        <Icon symbol={IconSymbol.Stop}/>
+                    </div>
+                    <label>InsertMarker</label>
+                    <InsertMarker/>
                     <label>Checkbox</label>
                     <Checkbox lifecycle={lifecycle}
                               model={checkbox}
@@ -158,6 +173,7 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
                     <div>
                         <VUMeterDesign.Default model={new DefaultObservableValue(dbToGain(-6))}/>
                         <VUMeterDesign.Modern model={new DefaultObservableValue(dbToGain(-6))}/>
+                        <PeakMeter lifecycle={lifecycle} peaks={peaks}/>
                         <TrackPeakMeter lifecycle={lifecycle} peaksInDb={peaks}/>
                     </div>
                 </div>
@@ -165,6 +181,7 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
             <div>
                 <h1>Debug</h1>
                 <div style={{display: "flex", flexDirection: "column"}}>
+                    <BoxesDebugView boxGraph={boxGraph}/>
                     <BoxDebugView box={timelineBox}/>
                     <BoxDebugView box={rootBox}/>
                 </div>

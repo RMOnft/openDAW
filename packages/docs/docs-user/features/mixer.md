@@ -9,6 +9,12 @@ pan, mute and solo. Insert slots let you add effects, and send knobs make it
 easy to route the signal elsewhere. Adjusting a strip's fader changes the level
 that continues to the next stage in the mix.
 
+### Muting and soloing
+
+Use the **mute** button to silence a track without removing it from the mix.
+Toggling **solo** isolates one or more tracks while temporarily muting the rest
+so you can focus on specific parts of the arrangement.
+
 ## Sends and returns
 
 Sends on each channel allow a portion of the signal to be routed to return
@@ -48,3 +54,4 @@ graph LR
 ```
 
 For a practical example see the [Mixing workflow](../workflows/mixing.md).
+

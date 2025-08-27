@@ -1,3 +1,6 @@
+/**
+ * Note event representation used by the UI with extra metadata.
+ */
 import {NoteEvent, ppqn} from "@opendaw/lib-dsp"
 import {int} from "@opendaw/lib-std"
 

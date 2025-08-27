@@ -13,6 +13,9 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Displays the range slider beneath the primary and audio tracks.
+ */
 export const TracksFooter = ({lifecycle, service}: Construct) => {
     return (
         <div className={className}>
@@ -24,3 +27,4 @@ export const TracksFooter = ({lifecycle, service}: Construct) => {
         </div>
     )
 }
+

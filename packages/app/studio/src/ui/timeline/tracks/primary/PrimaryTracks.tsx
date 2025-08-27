@@ -12,6 +12,13 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Hosts primary timeline tracks such as markers.
+ *
+ * @remarks
+ * The component observes the visibility flag and mounts or
+ * removes track components on demand.
+ */
 export const PrimaryTracks = ({lifecycle, service}: Construct) => {
     const {timeline: {primaryVisible}} = service
     const element: Element = (<div className={className}/>)

@@ -6,6 +6,7 @@ import {createElement} from "@opendaw/lib-jsx"
 
 const className = Html.adoptStyleSheet(css, "InsertMarker")
 
+/** Visual cue used while inserting elements. */
 export const InsertMarker = () => {
     return (
         <div className={className}>

@@ -7,6 +7,10 @@ Guidance on saving and importing projects lives in the [file management guide](.
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
 
 Quickly launch commands using the Spotlight search palette with <kbd>Shift</kbd>+<kbd>Enter</kbd>. Read the [user guide](../../docs/docs-user/features/search.md) or see the [developer docs](../../docs/docs-dev/ui/spotlight/overview.md).
+Exchange projects with other DAWs via the `.dawproject` format using the
+[DAWproject workflow](../../docs/docs-user/workflows/dawproject.md). Implementation
+details for developers live in the
+[Studio serialization guide](../../docs/docs-dev/serialization/studio-dawproject.md).
 
 The project notepad uses markdown and can be customized. See the
 [markdown editing guide](../../docs/docs-dev/ui/markdown/editing.md) for
@@ -26,3 +30,7 @@ The workspace layout is defined in `src/ui/workspace`. New screens can be added 
 For implementation details on the timeline, see the developer docs for
 [clips](../../docs/docs-dev/ui/timeline/clips.md) and
 [regions](../../docs/docs-dev/ui/timeline/regions.md).
+Additional information is available for
+[tracks](../../docs/docs-dev/ui/timeline/tracks.md),
+[markers](../../docs/docs-dev/ui/timeline/markers.md) and the
+[timeline footer](../../docs/docs-dev/ui/timeline/footer.md).

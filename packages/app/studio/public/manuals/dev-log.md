@@ -2,6 +2,8 @@
 
 See the [manuals overview](./index.md) for a list of guides.
 
+Audio groove examples are available [here](../../../../docs/docs-learn/how-it-works/groove-examples.md).
+
 ## TODO
 
 - PianoModePanel

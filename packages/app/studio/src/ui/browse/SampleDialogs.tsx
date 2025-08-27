@@ -1,3 +1,6 @@
+/**
+ * Collection of dialogs used for importing, locating and editing samples.
+ */
 import { Dialog } from "@/ui/components/Dialog";
 import { IconSymbol, Sample } from "@opendaw/studio-adapters";
 import { Surface } from "@/ui/surface/Surface";
