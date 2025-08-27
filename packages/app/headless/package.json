@@ -4,6 +4,7 @@
   "version": "0.0.20",
   "type": "module",
   "license": "LGPL-3.0-or-later",
+  "description": "Example headless build of openDAW. Entry point: src/main.ts",
   "scripts": {
     "dev": "vite --clearScreen false",
     "build": "tsc && vite build",
