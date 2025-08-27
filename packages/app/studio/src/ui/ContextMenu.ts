@@ -4,12 +4,19 @@ import { Menu } from "@/ui/components/Menu.tsx";
 import { Surface } from "@/ui/surface/Surface.tsx";
 import { Events, Html } from "@opendaw/lib-dom";
 
+/** Lightweight context-menu infrastructure for the studio. */
 export namespace ContextMenu {
   export const CONTEXT_MENU_EVENT_TYPE = "--context-menu" as const;
 
+  /**
+   * Accumulates menu items while a context menu is being built.
+   * The collector is provided to event handlers via {@link subscribe}.
+   */
   export interface Collector {
+    /** Append menu items to the current context menu. */
     addItems(...items: MenuItem[]): this;
 
+    /** Pointer position of the invoking event. */
     get client(): Client;
   }
 
@@ -48,6 +55,7 @@ export namespace ContextMenu {
     }
   }
 
+  /** Installs a global listener that dispatches a custom `--context-menu` event. */
   export const install = (owner: WindowProxy): Subscription => {
     return Events.subscribe(
       owner,
@@ -85,6 +93,10 @@ export namespace ContextMenu {
     );
   };
 
+  /**
+   * Subscribes to the custom context-menu event on a target element and allows
+   * the callback to populate menu items using the provided {@link Collector}.
+   */
   export const subscribe = (
     target: EventTarget,
     collect: (collector: Collector) => void,
