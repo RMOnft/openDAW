@@ -2,14 +2,34 @@
 
 ## Prerequisites
 
-Before starting, install these tools:
+Before starting, install the following tools for your platform.
 
-- [Git](https://git-scm.com/) – used for cloning the repository and managing submodules.
-- [mkcert](https://github.com/FiloSottile/mkcert#installation) – creates a local certificate for HTTPS development.
-- [Node.js](https://nodejs.org/) **>= 23** – runs the development servers and installs dependencies.
-- [Sass](https://sass-lang.com/) – ensure Sass binaries are available for style compilation.
-- [TypeScript](https://www.typescriptlang.org/) – required for compiling TypeScript sources.
-- [OpenSSL](https://openssl-library.org/) – needed for generating local development certificates (usually preinstalled).
+### Windows
+
+- [Git](https://git-scm.com/) – install [Git for Windows](https://gitforwindows.org/) or use WSL.
+- [mkcert](https://github.com/FiloSottile/mkcert#installation) – in PowerShell run `choco install mkcert` and then `mkcert -install`.
+- [Node.js](https://nodejs.org/) **>= 23** – download from the Node.js site or install with `choco install nodejs`.
+- [Sass](https://sass-lang.com/) – `npm install -g sass`.
+- [TypeScript](https://www.typescriptlang.org/) – `npm install -g typescript`.
+- [OpenSSL](https://openssl-library.org/) – bundled with Git for Windows or install with `choco install openssl`.
+
+### macOS
+
+- [Git](https://git-scm.com/) – install via Xcode command line tools: `xcode-select --install`.
+- [mkcert](https://github.com/FiloSottile/mkcert#installation) – `brew install mkcert` (add `nss` for Firefox) and then `mkcert -install`.
+- [Node.js](https://nodejs.org/) **>= 23** – install with Homebrew (`brew install node`) or `nvm install 23`.
+- [Sass](https://sass-lang.com/) – `npm install -g sass`.
+- [TypeScript](https://www.typescriptlang.org/) – `npm install -g typescript`.
+- [OpenSSL](https://openssl-library.org/) – preinstalled or `brew install openssl` if needed.
+
+### Linux
+
+- [Git](https://git-scm.com/) – use your distribution's package manager, e.g. `sudo apt install git`.
+- [mkcert](https://github.com/FiloSottile/mkcert#installation) – install with `sudo apt install mkcert libnss3-tools` and run `mkcert -install`.
+- [Node.js](https://nodejs.org/) **>= 23** – install using `nvm install 23` or a distribution package.
+- [Sass](https://sass-lang.com/) – `npm install -g sass`.
+- [TypeScript](https://www.typescriptlang.org/) – `npm install -g typescript`.
+- [OpenSSL](https://openssl-library.org/) – usually preinstalled; otherwise `sudo apt install openssl`.
 
 ## Steps
 
