@@ -16,6 +16,10 @@ export namespace SampleUtils {
      * Ensure all audio file boxes reference existing samples and prompt the
      * user to replace missing ones.
      *
+     * @param boxGraph Graph containing the boxes to inspect.
+     * @param importer Utility used to load replacement samples.
+     * @param audioManager Manager responsible for caching sample data.
+     *
      * @example
      * ```ts
      * await SampleUtils.verify(project.boxGraph, importer, manager)

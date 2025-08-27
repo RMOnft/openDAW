@@ -12,6 +12,15 @@ module.exports = {
     { type: "doc", id: "browser-support" },
     {
       type: "category",
+      label: "Debugging",
+      items: [
+        "debugging/overview",
+        "debugging/error-logging",
+        "debugging/graph-runtime",
+      ],
+    },
+    {
+      type: "category",
       label: "Configuration",
       items: ["configuration/eslint"],
     },
@@ -23,6 +32,7 @@ module.exports = {
         "architecture/overview",
         "architecture/audio-path",
         "architecture/browser-compat",
+        "architecture/headless-vs-studio",
       ],
     },
     {

@@ -19,3 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+The font files `rubik.woff2` and `OpenSans-Regular.ttf` located in `packages/app/studio/public/fonts` are licensed under the [SIL Open Font License 1.1](https://scripts.sil.org/OFL). These fonts are distributed under their own licenses and are not covered by the MIT License above. See `packages/app/studio/public/fonts/README.md` for details.

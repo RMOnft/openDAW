@@ -40,3 +40,6 @@
 
 - When an unexpected error dialog appears, note the steps that led to the
   issue and send them to support using the built-in error report template.
+
+- Developers looking to diagnose issues in depth can consult the
+  [debugging guide](/dev/debugging/overview).
