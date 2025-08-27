@@ -1,7 +1,11 @@
 import {Arrays, asDefined, assert} from "@opendaw/lib-std"
 
+/** Directed edge between two vertices. */
 export type Edge<V> = [V, V]
 
+/**
+ * Minimal directed graph used for audio-processing graphs.
+ */
 export class Graph<V> {
     readonly #vertices: Array<V>
     readonly #predecessors: Map<V, Array<V>>
@@ -11,6 +15,7 @@ export class Graph<V> {
         this.#predecessors = new Map<V, Array<V>>()
     }
 
+    /** Registers a vertex. */
     addVertex(vertex: V): void {
         assert(!this.#vertices.includes(vertex), "Vertex already exists")
         this.#vertices.push(vertex)
@@ -18,22 +23,26 @@ export class Graph<V> {
         this.#predecessors.set(vertex, [])
     }
 
+    /** Removes a vertex and its edges. */
     removeVertex(vertex: V): void {
         Arrays.remove(this.#vertices, vertex)
         const found = this.#predecessors.delete(vertex)
         assert(found, "Predecessor does not exists")
     }
 
+    /** Returns the predecessors of a vertex. */
     getPredecessors(vertex: V): ReadonlyArray<V> {return this.#predecessors.get(vertex) ?? Arrays.empty()}
     predecessors(): Map<V, V[]> {return this.#predecessors}
     vertices(): ReadonlyArray<V> {return this.#vertices}
 
+    /** Adds a directed edge. */
     addEdge([source, target]: Edge<V>): void {
         const vertexPredecessors = asDefined(this.#predecessors.get(target), `[add] Edge has unannounced vertex. (${target})`)
         assert(!vertexPredecessors.includes(source), `${source} is already marked.`)
         vertexPredecessors.push(source)
     }
 
+    /** Removes a directed edge. */
     removeEdge([source, target]: Edge<V>): void {
         const vertexPredecessors = asDefined(this.#predecessors.get(target), `[remove] Edge has unannounced vertex. (${target})`)
         assert(vertexPredecessors.includes(source), `${source} is not marked.`)
@@ -43,6 +52,9 @@ export class Graph<V> {
     isEmpty(): boolean {return this.#vertices.length === 0}
 }
 
+/**
+ * Computes a topological order of a {@link Graph} and detects loops.
+ */
 export class TopologicalSort<V> {
     readonly #graph: Graph<V>
     readonly #sorted: Array<V>
@@ -59,12 +71,15 @@ export class TopologicalSort<V> {
         this.#successors = new Map<V, Set<V>>()
     }
 
+    /** Updates the internal order; call after mutating the graph. */
     update(): void {
         this.#prepare()
         this.#graph.vertices().forEach(vertex => this.#visit(vertex))
     }
 
+    /** Sorted vertices after {@link update}. */
     sorted(): ReadonlyArray<V> {return this.#sorted}
+    /** Indicates whether the graph contains cycles. */
     hasLoops(): boolean {return this.#withLoops.size !== 0}
 
     #prepare(): void {

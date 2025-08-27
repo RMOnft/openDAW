@@ -1,5 +1,11 @@
 import {clamp, int, PI_QUART} from "@opendaw/lib-std"
 
+/**
+ * Utilities for manipulating stereo audio using simple matrix operations.
+ *
+ * The stereo matrix applies a transform of the form
+ * \( [L'\;R'] = M \cdot [L\;R] \) where `M` contains per–channel gains.
+ */
 export namespace StereoMatrix {
     export type Matrix = {
         ll: number // L -> L
@@ -20,8 +26,23 @@ export namespace StereoMatrix {
 
     export type Channels = [Float32Array, Float32Array]
 
+    /**
+     * Creates a matrix filled with zeros.
+     */
     export const zero = (): Matrix => ({ll: 0.0, lr: 0.0, rl: 0.0, rr: 0.0})
+
+    /**
+     * Creates an identity matrix that leaves the signal unchanged.
+     */
     export const identity = (): Matrix => ({ll: 1.0, lr: 0.0, rl: 0.0, rr: 1.0})
+
+    /**
+     * Updates a matrix in-place according to the supplied parameters.
+     *
+     * @param m - Matrix to mutate.
+     * @param param1 - Mixing parameters.
+     * @param param2 - Panning law to apply.
+     */
     export const update = (m: Matrix,
                            {gain, panning, invertL, invertR, stereo, swap}: Params,
                            mixing: Mixing = Mixing.EqualPower): void => {
@@ -57,6 +78,15 @@ export namespace StereoMatrix {
         }
     }
 
+    /**
+     * Converts a panning value into left/right gains.
+     *
+     * For equal-power mixing the gains follow
+     * \(L = \cos((x+1)\pi/4)\) and \(R = \sin((x+1)\pi/4)\).
+     *
+     * @param panning - Position in the stereo field `[-1,1]`.
+     * @param mixing - Linear or equal-power law.
+     */
     export const panningToGains = (panning: number, mixing: Mixing): [number, number] => {
         const x = clamp(panning, -1.0, 1.0)
         switch (mixing) {
@@ -73,9 +103,25 @@ export namespace StereoMatrix {
         }
     }
 
+    /**
+     * Applies the matrix to a single stereo frame.
+     * @param m - Matrix to apply.
+     * @param l - Left sample.
+     * @param r - Right sample.
+     * @returns Transformed `[left,right]` frame.
+     */
     export const applyFrame = (m: Matrix, l: number, r: number): [number, number] =>
         [m.ll * l + m.rl * r, m.lr * l + m.rr * r]
 
+    /**
+     * Processes a range of frames and writes the result into `target`.
+     *
+     * @param m - Transformation matrix.
+     * @param source - Source stereo channels.
+     * @param target - Destination stereo channels.
+     * @param fromIndex - Start index (inclusive).
+     * @param toIndex - End index (exclusive).
+     */
     export const processFrames = (m: Matrix,
                                   source: Channels, target: Channels,
                                   fromIndex: int, toIndex: int): void => {
@@ -89,6 +135,14 @@ export namespace StereoMatrix {
         }
     }
 
+    /**
+     * Replaces a range of frames in-place using the matrix.
+     *
+     * @param m - Matrix to apply.
+     * @param param1 - Channels to transform.
+     * @param fromIndex - Start frame.
+     * @param toIndex - End frame (exclusive).
+     */
     export const replaceFrames = (m: Matrix, [ch0, ch1]: Channels, fromIndex: int, toIndex: int): void => {
         for (let i = fromIndex; i < toIndex; i++) {
             const l = ch0[i]

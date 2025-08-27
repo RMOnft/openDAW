@@ -13,6 +13,14 @@ export namespace BPMTools {
         maxBPM: number
     }>
 
+    /**
+     * Estimates the tempo of an audio buffer.
+     *
+     * @param buf - Mono input samples.
+     * @param sampleRate - Sampling rate of `buf`.
+     * @param options - Configuration such as search bounds.
+     * @returns Detected BPM.
+     */
     export function detect(buf: Float32Array, sampleRate: number, options: Options = {}): number {
         const {
             interval = 64,      // samples between energy taps
