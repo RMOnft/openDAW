@@ -4,6 +4,9 @@ _This package is part of the openDAW SDK_
 
 Utilities for reading, writing and interpreting MIDI data.
 
+See the [serialization guide](../../docs/docs-dev/serialization/midi.md) for
+an overview of how MIDI structures map onto binary files and other formats.
+
 ## Decoding a MIDI file
 
 ```ts
@@ -47,6 +50,11 @@ if (MidiData.isNoteOn(message)) {
   osc.generate(buffer, freq / 44100, Waveform.sine, 0, buffer.length);
 }
 ```
+
+## Documentation
+
+- [Serialization mapping](../../docs/docs-dev/serialization/midi.md)
+- [Project-wide overview](../../docs/docs-dev/serialization/overview.md)
 
 ## Test fixtures
 
