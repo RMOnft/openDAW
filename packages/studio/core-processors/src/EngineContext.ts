@@ -10,6 +10,9 @@ import { BoxAdaptersContext, EngineToClient } from "@opendaw/studio-adapters";
 /**
  * Shared services and registries exposed to processors within the engine.
  *
+ * Security note: Implementations should only expose this context to trusted
+ * processors. Granting access to untrusted code could allow manipulation of
+ * the audio graph or leakage of sensitive project data.
  * Error Handling: implementations may throw if requested resources are
  * unavailable. Callers should handle such cases when interacting with the
  * context.

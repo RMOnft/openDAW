@@ -1,6 +1,7 @@
 module.exports = {
   userSidebar: [
     { type: "doc", id: "intro" },
+    { type: "doc", id: "security" },
     {
       type: "category",
       label: "Features",
