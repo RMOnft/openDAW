@@ -1,21 +1,19 @@
----
-title: Notepad
----
+# Notepad
 
-openDAW includes a simple notepad for keeping project notes. The panel is
-available from the workspace and supports basic
-[Markdown](../../../../app/studio/src/ui/Markdown.tsx) formatting.
+Capture lyrics, ideas or session notes directly within a project.
 
-## Editing
+## Open the notepad
 
-- Toggle edit mode using the pencil button in the corner.
-- While editing, press <kbd>Ctrl</kbd>+<kbd>S</kbd> (or
-  <kbd>Cmd</kbd>+<kbd>S</kbd> on macOS) to save your changes.
-- Content is limited to 10&nbsp;000 characters. Extra text is truncated
-  automatically.
+1. Add or focus a **Notepad** panel in the workspace.
+2. The panel displays the current project's notes or a helpful template.
 
-## Persistence
+## Edit notes
 
-Notes are stored inside the project file and restored the next time you open the
-session.
+1. Click the pencil icon in the upper‑right corner of the panel to toggle edit mode.
+2. Type using plain text or markdown formatting.
+3. Leave edit mode or press <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd> on macOS) to save.
 
+## Tips
+
+- Notes are stored with the project and reopen automatically.
+- You can use standard markdown features like headings, lists and links.

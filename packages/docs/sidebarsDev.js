@@ -201,6 +201,11 @@ module.exports = {
             "ui/modular/faq",
           ],
         },
+        {
+          type: "category",
+          label: "Markdown",
+          items: ["ui/markdown/editing"],
+        },
       ],
     },
     {
