@@ -35,7 +35,9 @@ const className = Html.adoptStyleSheet(css, "Samples");
 
 /** Construction parameters for {@link SampleBrowser}. */
 type Construct = {
+  /** Lifecycle into which subscriptions are registered. */
   lifecycle: Lifecycle;
+  /** Access to studio services such as sample playback. */
   service: StudioService;
 };
 
@@ -44,7 +46,9 @@ const location = new DefaultObservableValue(SampleLocation.Cloud);
 
 /**
  * Browser and management UI for audio samples, allowing local or cloud
- * sources and providing preview and deletion options.
+ * sources and providing preview, deletion and volume control.
+ *
+ * Keyboard delete removes selected local samples.
  */
 export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own({ terminate: () => service.samplePlayback.eject() });
@@ -56,6 +60,7 @@ export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own(location.subscribe(() => reload.get().update()));
   const filter = new DefaultObservableValue("");
   const searchInput = <SearchInput lifecycle={lifecycle} model={filter} />;
+  // Global volume slider controlling sample preview loudness
   const slider: HTMLInputElement = (
     <input type="range" min="0.0" max="1.0" step="0.001" />
   );
@@ -189,6 +194,7 @@ export const SampleBrowser = ({ lifecycle, service }: Construct) => {
         location.getValue() === SampleLocation.Local
       ) {
         await sampleService.deleteSelected();
+        // Refresh list after deletion to reflect current state
         reload.get().update();
       }
     }),

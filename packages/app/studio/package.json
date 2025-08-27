@@ -1,5 +1,5 @@
 {
-  "//": "Package manifest for the Studio app; includes a plugin to enable cross-origin isolation in development.",
+  "//": "Package manifest for the Studio app; uses a dev plugin for cross-origin isolation and generates build info for cache validation.",
   "name": "@opendaw/app-studio",
   "private": true,
   "version//": "Version is managed by openDAW versioning policy; see packages/docs/docs-dev/build-and-run/versioning.md",

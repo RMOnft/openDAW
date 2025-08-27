@@ -3,7 +3,21 @@ import { isDefined, Nullable, Procedure, Subscription } from "@opendaw/lib-std";
 
 type KnownEventMap = WindowEventMap & MIDIInputEventMap & MIDIPortEventMap;
 
+/**
+ * Strongly typed helpers for subscribing to DOM events.
+ */
 export class Events {
+  /**
+   * Subscribes to a well known DOM event and returns a {@link Subscription}
+   * that can be terminated later.
+   *
+   * @example
+   * ```ts
+   * const sub = Events.subscribe(window, "resize", () => console.log("resized"));
+   * // ...later
+   * sub.terminate();
+   * ```
+   */
   static subscribe<K extends keyof KnownEventMap>(
     eventTarget: EventTarget,
     type: K,
@@ -21,6 +35,9 @@ export class Events {
     };
   }
 
+  /**
+   * Subscribes to an arbitrary event by name.
+   */
   static subscribeAny<E extends Event>(
     eventTarget: EventTarget,
     type: string,
@@ -40,6 +57,10 @@ export class Events {
 
   static DOUBLE_DOWN_THRESHOLD = 200 as const;
 
+  /**
+   * Subscribes to consecutive `pointerdown` events that occur within
+   * {@link DOUBLE_DOWN_THRESHOLD} milliseconds.
+   */
   static subscribeDblDwn = (
     eventTarget: EventTarget,
     listener: (event: PointerEvent) => void,
@@ -59,9 +80,15 @@ export class Events {
     );
   };
 
+  /**
+   * Convenience handler that calls `preventDefault` on the event.
+   */
   static readonly PreventDefault: Procedure<Event> = (event) =>
     event.preventDefault();
 
+  /**
+   * Checks whether the given target is a text input element.
+   */
   static readonly isTextInput = (target: Nullable<EventTarget>): boolean =>
     target instanceof HTMLInputElement ||
     target instanceof HTMLTextAreaElement ||

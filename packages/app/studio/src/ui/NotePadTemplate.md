@@ -1,3 +1,5 @@
+<!-- Default text shown when the project notepad is empty. Feel free to edit or remove. -->
+
 # Introducing the OpenDAW Project Notepad
 
 ## A Space for Your Thoughts, Lyrics, and Ideas
@@ -11,10 +13,10 @@ write down everything that matters for your project.
 
 The Project Notepad is a flexible and intuitive tool designed to support your creative process. You can use it to:
 
-* Write lyrics
-* Store musical ideas
-* Keep session notes
-* Share project details
+- Write lyrics
+- Store musical ideas
+- Keep session notes
+- Share project details
 
 ## How To?
 

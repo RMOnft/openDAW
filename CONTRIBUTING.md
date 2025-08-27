@@ -8,7 +8,9 @@ The monorepo uses **Turbo** to run build, test, and lint tasks across all
 packages. **Lerna** manages package versioning and publishing; see the
 [versioning policy](packages/docs/docs-dev/build-and-run/versioning.md). API
 docs are generated with **Typedoc**. Deployment configuration files for Vercel
-and Netlify describe how docs and apps would be deployed when enabled.
+and Netlify describe how docs and apps would be deployed when enabled. For a
+high-level view of application start-up and recovery, refer to the
+[bootstrapping guide](packages/docs/docs-dev/architecture/bootstrap.md).
 
 GitHub Actions provides continuous integration. Workflows handle deployment,
 documentation builds, quality checks, Discord notifications, and SFTP tests.

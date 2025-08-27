@@ -36,6 +36,21 @@
 - Check browser permissions and allow access when prompted.
 - Verify that the correct input device is selected in audio settings.
 
+### openDAW reports that a feature is missing
+
+- Some browsers lack APIs required by the Studio. If you see a warning
+  about a missing feature, upgrade to the latest version of Chrome,
+  Edge, Firefox or Safari.
+- Older versions of the above browsers may also omit support for
+  required features. Updating usually resolves the issue.
+
+### I see an "Update available" banner
+
+- The application fetched a newer build. Reload the page to switch to
+  the latest version.
+- If the message persists after reloading, try clearing the browser
+  cache.
+
 ### Reporting errors
 
 - When an unexpected error dialog appears, note the steps that led to the
@@ -43,3 +58,13 @@
 
 - Developers looking to diagnose issues in depth can consult the
   [debugging guide](/dev/debugging/overview).
+
+### App stuck on loading screen
+
+- Check your internet connection and reload the page.
+- Make sure a supported browser is used and that extensions aren't blocking the app.
+
+### I see a "Missing Feature" message
+
+- Update the browser to the latest version or try a different one.
+- If the message persists, report it to support with your browser details.

@@ -1,3 +1,4 @@
+/** Tests for object utility helpers. */
 import {describe, expect, it} from "vitest"
 import {Objects} from "./objects"
 

@@ -1,8 +1,11 @@
+// Styling for rendered markdown blocks.
+// Ensures that text remains selectable even when nested inside components.
 @use "@/mixins"
 
 component
   @include mixins.markdown
 
+  // Allow selection of all elements inside the markdown container.
   *
     user-select: text !important
     -webkit-user-select: text !important

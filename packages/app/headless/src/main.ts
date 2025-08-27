@@ -3,6 +3,10 @@
  * engine and plays a small example project once the user interacts with the
  * page.
  *
+ * Relies on {@link testFeatures} to ensure required browser APIs are present
+ * and uses {@link SampleApi} to fetch audio data for
+ * {@link createExampleProject}.
+ *
  * Security note: The demo relies on cross-origin isolation and local worker
  * bundles. Serve this page over HTTPS and avoid loading untrusted scripts to
  * prevent privilege escalation.

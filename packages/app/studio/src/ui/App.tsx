@@ -18,8 +18,12 @@ import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
 /**
- * Main application component establishing the router and persistent layout
- * chrome. It is expected to be mounted once at the root of the document.
+ * Top-level React component for the Studio UI. It wires together the
+ * header, footer and page router while passing the shared
+ * {@link StudioService} to child pages.
+ *
+ * @param service Central service providing project and session state.
+ * @returns Rendered application element.
  */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();

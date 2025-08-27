@@ -3,6 +3,11 @@
 /**
  * Tests for {@link Html.buildClassList}, validating class list construction
  * with optional values.
+ *
+ * @example
+ * ```ts
+ * Html.buildClassList("foo", condition && "bar");
+ * ```
  */
 import { describe, expect, it } from "vitest";
 import { Html } from "./html";

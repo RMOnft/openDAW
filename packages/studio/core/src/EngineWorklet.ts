@@ -46,8 +46,10 @@ import { Engine, NoteTrigger } from "./Engine";
  * and must be handled by callers awaiting engine readiness.
  */
 export class EngineWorklet extends AudioWorkletNode implements Engine {
+  /** Monotonic identifier assigned to each worklet instance. */
   static ID: int = 0 | 0;
 
+  /** Unique id of this worklet instance. */
   readonly id = EngineWorklet.ID++;
 
   readonly #terminator: Terminator = new Terminator();
@@ -219,52 +221,68 @@ export class EngineWorklet extends AudioWorkletNode implements Engine {
     );
   }
 
+  /** Starts playback. */
   play(): void {
     this.#commands.play();
   }
+  /** Stops playback optionally resetting the transport. */
   stop(reset: boolean = false): void {
     this.#commands.stop(reset);
   }
+  /** Sets the playback position in pulses per quarter note. */
   setPosition(position: ppqn): void {
     this.#commands.setPosition(position);
   }
+  /** Begins recording; optionally count in before starting. */
   startRecording(countIn: boolean): void {
     this.#commands.startRecording(countIn);
   }
+  /** Stops the current recording session. */
   stopRecording(): void {
     this.#commands.stopRecording();
   }
+  /** Immediately silences the engine. */
   panic(): void {
     this.#commands.panic();
   }
 
+  /** Observable playback state. */
   get isPlaying(): ObservableValue<boolean> {
     return this.#isPlaying;
   }
+  /** True while the engine is recording. */
   get isRecording(): ObservableValue<boolean> {
     return this.#isRecording;
   }
+  /** Indicates that the engine is counting in before recording. */
   get isCountingIn(): ObservableValue<boolean> {
     return this.#isCountingIn;
   }
+  /** Total number of beats to count in before playback starts. */
   get countInBeatsTotal(): ObservableValue<int> {
     return this.#countInBeatsTotal;
   }
+  /** Remaining beats of the active count in. */
   get countInBeatsRemaining(): ObservableValue<number> {
     return this.#countInBeatsRemaining;
   }
+  /** Current transport position in pulses per quarter note. */
   get position(): ObservableValue<ppqn> {
     return this.#position;
   }
+  /** Timestamp reported by the processor used for syncing. */
   get playbackTimestamp(): MutableObservableValue<number> {
     return this.#playbackTimestamp;
   }
+  /** Enables or disables the metronome. */
   get metronomeEnabled(): MutableObservableValue<boolean> {
     return this.#metronomeEnabled;
   }
+  /** Currently active marker or `null` if none. */
   get markerState(): ObservableValue<Nullable<[UUID.Format, int]>> {
     return this.#markerState;
   }
+  /** Project instance the engine operates on. */
   get project(): Project {
     return this.#project;
   }

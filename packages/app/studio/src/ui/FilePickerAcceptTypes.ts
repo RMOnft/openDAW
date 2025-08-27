@@ -37,3 +37,4 @@ export namespace FilePickerAcceptTypes {
         accept: {"application/octet-stream": [".dawproject"]}
     }
 }
+

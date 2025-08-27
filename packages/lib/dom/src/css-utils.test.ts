@@ -1,6 +1,11 @@
 /**
  * Unit tests for {@link CssUtils.calc}, ensuring CSS expressions are parsed and
  * evaluated correctly.
+ *
+ * @example
+ * ```ts
+ * CssUtils.calc("50% - 1em", 200, 16);
+ * ```
  */
 import { describe, expect, it } from "vitest";
 import { CssUtils } from "./css-utils";
