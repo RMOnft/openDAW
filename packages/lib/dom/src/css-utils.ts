@@ -1,6 +1,17 @@
 import {panic} from "@opendaw/lib-std"
 
+/**
+ * Miscellaneous CSS helper utilities.
+ */
 export namespace CssUtils {
+    /**
+     * Evaluates a simple CSS `calc` expression using `size` (px) and `em`.
+     *
+     * @example
+     * ```ts
+     * CssUtils.calc("50% - 1em", 200, 16); // => 84
+     * ```
+     */
     export const calc = (term: string, size: number, em: number): number => {
         const regex = /([0-9]*\.?[0-9]+)([a-zA-Z%]*)/g
         let result = term
@@ -24,8 +35,10 @@ export namespace CssUtils {
 
     const customCursors: Map<number, string> = new Map()
 
+    /** Registers a custom cursor data URI. */
     export const registerCustomCursor = (identifier: number, data: string) => customCursors.set(identifier, data)
 
+    /** Applies either a named or registered cursor to the document. */
     export const setCursor = (identifier: CssUtils.Cursor | number, doc: Document = document) => {
         doc.documentElement.style.cursor = typeof identifier === "number"
             ? customCursors.get(identifier) ?? "auto"
@@ -70,3 +83,4 @@ export namespace CssUtils {
         | "zoom-in"
         | "zoom-out"
 }
+
