@@ -6,7 +6,13 @@ import {RecordingWorklet} from "./RecordingWorklet"
 import {Project} from "./Project"
 import {RenderQuantum} from "./RenderQuantum"
 
+/**
+ * Factory and registry for AudioWorklet-based helpers used by the studio.
+ */
 export class Worklets {
+    /**
+     * Installs worklet processors into the provided audio context.
+     */
     static async install(context: BaseAudioContext, workletURL: string): Promise<Worklets> {
         return context.audioWorklet.addModule(workletURL).then(() => {
             const worklets = new Worklets(context)
@@ -15,6 +21,7 @@ export class Worklets {
         })
     }
 
+    /** Retrieves the `Worklets` instance for the given context. */
     static get(context: BaseAudioContext): Worklets {return asDefined(this.#map.get(context), "Worklets not installed")}
 
     static #map: WeakMap<BaseAudioContext, Worklets> = new WeakMap<AudioContext, Worklets>()
@@ -23,14 +30,19 @@ export class Worklets {
 
     constructor(context: BaseAudioContext) {this.#context = context}
 
+    /** Creates a {@link MeterWorklet} for level monitoring. */
     createMeter(numberOfChannels: int): MeterWorklet {
         return new MeterWorklet(this.#context, numberOfChannels)
     }
 
+    /** Creates the main {@link EngineWorklet} responsible for playback. */
     createEngine(project: Project, exportConfiguration?: ExportStemsConfiguration): EngineWorklet {
         return new EngineWorklet(this.#context, project, exportConfiguration)
     }
 
+    /**
+     * Creates a {@link RecordingWorklet} that buffers audio in a shared array.
+     */
     createRecording(numberOfChannels: int, numChunks: int, outputLatency: number): RecordingWorklet {
         const audioBytes = numberOfChannels * numChunks * RenderQuantum * Float32Array.BYTES_PER_ELEMENT
         const pointerBytes = Int32Array.BYTES_PER_ELEMENT * 2
@@ -39,3 +51,4 @@ export class Worklets {
         return new RecordingWorklet(this.#context, buffer, outputLatency)
     }
 }
+
