@@ -4,24 +4,24 @@
 @use "@/colors"
 
 component
-  flex: 1 0 0
-  width: 100%
-  height: 100%
-  display: grid
-  grid-template-columns: var(--timeline-header-width) 0 1fr
-  grid-template-rows: 2rem 1fr 14px
-  gap: 1px
-  overflow: hidden
-  --clips-count: 1
-  --clips-width: 48px
-  --cursor-height: 1px
+  flex: 1 0 0 // allow timeline to grow within flex layout
+  width: 100% // fill available width
+  height: 100% // fill available height
+  display: grid // grid layout for header, tracks and footer
+  grid-template-columns: var(--timeline-header-width) 0 1fr // header, clips, tracks
+  grid-template-rows: 2rem 1fr 14px // header, content, footer
+  gap: 1px // thin separators between sections
+  overflow: hidden // prevent scrollbars
+  --clips-count: 1 // number of clip columns (adjusted via JS)
+  --clips-width: 48px // width of each clip column
+  --cursor-height: 1px // updated dynamically for playback cursor
 
   &.clips-visible
-    grid-template-columns: var(--timeline-header-width) repeat(var(--clips-count), var(--clips-width)) 1fr
+    grid-template-columns: var(--timeline-header-width) repeat(var(--clips-count), var(--clips-width)) 1fr // show clips column
 
   &:not(.clips-visible)
-    column-gap: 0
+    column-gap: 0 // remove gap when clips column hidden
     --clips-count: 0 !important
 
   &.primary-tracks-visible
-    grid-template-rows: 2rem auto 1fr 14px
+    grid-template-rows: 2rem auto 1fr 14px // add extra row when primary tracks visible

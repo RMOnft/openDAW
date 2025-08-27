@@ -3,10 +3,10 @@
 @use "@/mixins"
 
 component
-  height: 2rem
-  display: grid
-  grid-template-columns: subgrid
-  grid-template-rows: repeat(2, 1fr)
-  grid-column: -2 / -1
-  @include colors.panel-background
-  @include mixins.clips-aware
+  height: 2rem // matches header height
+  display: grid // layout loop editor and time axis
+  grid-template-columns: subgrid // align with outer grid
+  grid-template-rows: repeat(2, 1fr) // two rows: editor and axis
+  grid-column: -2 / -1 // span remaining columns
+  @include colors.panel-background // use standard panel styling
+  @include mixins.clips-aware // adjusts for optional clips column
