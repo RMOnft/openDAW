@@ -204,5 +204,15 @@ module.exports = {
         "services/stems",
       ],
     },
+    {
+      type: "category",
+      label: "Std Library",
+      items: [
+        "std/overview",
+        "std/collections",
+        "std/observers",
+        "std/randomness",
+      ],
+    },
   ],
 };

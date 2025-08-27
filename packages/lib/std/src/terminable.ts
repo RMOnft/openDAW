@@ -2,11 +2,16 @@ import {Arrays} from "./arrays"
 import {EmptyExec, Exec, Func} from "./lang"
 import {Observer} from "./observers"
 
+/** Object that can release resources. */
 export interface Terminable {terminate(): void}
 
+/** Entity that manages one or more {@link Terminable} instances. */
 export interface TerminableOwner {
+    /** Register a terminable to be disposed with the owner. */
     own<T extends Terminable>(terminable: T): T
+    /** Register multiple terminables at once. */
     ownAll<T extends Terminable>(...terminables: Array<T>): void
+    /** Creates a child {@link Terminator} linked to this owner. */
     spawn(): Terminator
 }
 
@@ -21,6 +26,10 @@ export const Terminable = Object.freeze({
         ({terminate: (): void => {while (terminables.length > 0) {terminables.pop()!.terminate()}}})
 } as const)
 
+/**
+ * Default implementation that tracks registered terminables and
+ * disposes them when terminated.
+ */
 export class Terminator implements TerminableOwner, Terminable {
     readonly #terminables: Terminable[] = []
 
@@ -39,15 +48,21 @@ export class Terminator implements TerminableOwner, Terminable {
         return this.own(terminator)
     }
 
+    /** Terminates all registered resources in reverse order. */
     terminate(): void {while (this.#terminables.length > 0) {this.#terminables.pop()!.terminate()}}
 }
 
+/** Simple flag based implementation of {@link Terminable}. */
 export class VitalSigns implements Terminable {
     #terminated: boolean = false
     get isTerminated(): boolean {return this.#terminated}
     terminate(): void {this.#terminated = true}
 }
 
+/**
+ * Helper to manage nested subscriptions. Each new value disposes the
+ * previous subscription chain before creating a new one.
+ */
 export class CascadingSubscriptions {
     #current: Terminator
 
