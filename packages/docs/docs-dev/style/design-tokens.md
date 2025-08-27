@@ -1,6 +1,10 @@
 # Design Tokens
 
-These tokens define the visual language for the studio. Values are implemented in [`colors.sass`](../../../app/studio/src/colors.sass).
+Design tokens provide a single source of truth for colours and layout metrics
+used throughout the Studio. The CSS custom properties live in
+[`colors.sass`](../../../app/studio/src/colors.sass) and are surfaced to
+TypeScript via [`Colors.ts`](../../../studio/core/src/Colors.ts) and
+[`ColorCodes.ts`](../../../studio/core/src/ColorCodes.ts).
 
 ## Colors
 
