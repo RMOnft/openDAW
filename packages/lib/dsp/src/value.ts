@@ -2,14 +2,21 @@ import {BinarySearch, Comparator, Curve, int, Iterables, Nullable, panic, unitVa
 import {Event, EventCollection} from "./events"
 import {ppqn} from "./ppqn"
 
+/**
+ * Helper types and functions for working with automation value events. These
+ * utilities provide interpolation and quantisation helpers that operate on
+ * collections of timestamped values.
+ */
 export type Interpolation = | { type: "none" } | { type: "linear" } | { type: "curve", slope: unitValue }
 
+/** Factory helpers for {@link Interpolation} variants. */
 export const Interpolation = {
     None: {type: "none"},
     Linear: {type: "linear"},
     Curve: (slope: unitValue) => ({type: "curve", slope}) as const
 } as const
 
+/** Event representing a value change with an interpolation mode. */
 export interface ValueEvent extends Event {
     readonly type: "value-event"
 
@@ -19,6 +26,9 @@ export interface ValueEvent extends Event {
 }
 
 export namespace ValueEvent {
+    /**
+     * Sorts value events first by position and then by index.
+     */
     export const Comparator: Comparator<ValueEvent> = (a: ValueEvent, b: ValueEvent) => {
         const positionDiff = a.position - b.position
         if (positionDiff !== 0) {return positionDiff}
@@ -27,6 +37,9 @@ export namespace ValueEvent {
         return a === b ? 0 : panic(`${a} and ${b} are identical in terms of comparison`)
     }
 
+    /**
+     * Iterates over events in the given range [fromPosition, toPosition].
+     */
     export function* iterateWindow<E extends ValueEvent>(events: EventCollection<E>,
                                                          fromPosition: ppqn,
                                                          toPosition: ppqn): Generator<E> {
@@ -37,6 +50,10 @@ export namespace ValueEvent {
         }
     }
 
+    /**
+     * Returns the event immediately following `precursor` or `null` if none
+     * exists.
+     */
     export const nextEvent = <E extends ValueEvent>(events: EventCollection<E>, precursor: E): Nullable<E> => {
         const sorted = events.asArray()
         const index = BinarySearch.rightMost(sorted, precursor, ValueEvent.Comparator)
@@ -44,7 +61,11 @@ export namespace ValueEvent {
     }
 
     /**
-     * Computes a value at a given position
+     * Computes the interpolated value at the given position.
+     *
+     * @param events - Collection of value events ordered by position.
+     * @param position - Query position in PPQN units.
+     * @param fallback - Value to return when no events exist.
      */
     export const valueAt = <E extends ValueEvent>(events: EventCollection<E>,
                                                   position: ppqn,
@@ -67,9 +88,8 @@ export namespace ValueEvent {
     }
 
     /**
-     * Quantize an automation in equal segments but also include min/max values.
-     * This is used for the ValueClipPainter to draw circular automation curves.
-     * It has been tested in the AutomationPage.
+     * Quantises a value automation into `numSteps` evenly spaced points while
+     * ensuring local minima and maxima are preserved.
      */
     export function* quantise<E extends ValueEvent>(events: EventCollection<E>,
                                                     position: ppqn,
