@@ -18,3 +18,8 @@ data format description, and additional examples.
 
 - [DAWproject parameter mapping](../../docs/docs-dev/serialization/dawproject.md)
 - [Serialization overview](../../docs/docs-dev/serialization/overview.md)
+
+## Test fixtures
+
+Example project files for experimentation live in [`test-files`](../../test-files). A developer overview
+of these fixtures is available in the [testing docs](../../docs/docs-dev/testing/test-files.md).

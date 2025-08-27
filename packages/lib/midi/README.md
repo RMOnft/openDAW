@@ -55,3 +55,8 @@ if (MidiData.isNoteOn(message)) {
 
 - [Serialization mapping](../../docs/docs-dev/serialization/midi.md)
 - [Project-wide overview](../../docs/docs-dev/serialization/overview.md)
+
+## Test fixtures
+
+Sample MIDI and DAW project files can be found in [`test-files`](../../test-files). See the
+[test file overview](../../docs/docs-dev/testing/test-files.md) for details on available fixtures.

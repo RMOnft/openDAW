@@ -17,6 +17,9 @@ export type AnyLoopableRegionBoxAdapter = AnyRegionBoxAdapter // TODO Clarify
 
 /**
  * Type guards for working with unions of adapter types.
+ *
+ * These helpers operate on adapters that ultimately reference boxes
+ * addressed by {@link @opendaw/studio-enums#Pointers | Pointers}.
  */
 export const UnionAdapterTypes = {
     /** Returns true when the adapter wraps a region box. */
