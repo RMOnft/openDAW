@@ -1,4 +1,4 @@
-# NOTE: Netlify deployment disabled
+# NOTE: Netlify configuration placeholder for docs deployment; build step disabled
 #[build]
 #  command = "npm run docs:build"
 #  publish = "packages/docs/build"
