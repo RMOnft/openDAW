@@ -21,7 +21,8 @@ a strong focus on **education** and data-privacy. Please consider supporting thi
 
 ## Open-Source
 
-We are committed to transparency and community-driven development.
+We are committed to transparency and community-driven development. See the
+[project roadmap](ROADMAP.md) for upcoming milestones.
 
 The source code for openDAW is available under the [MIT License](LICENSE).
 

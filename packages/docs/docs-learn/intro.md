@@ -3,7 +3,8 @@
 The learning hub gathers tutorials and background material for openDAW.
 Start with **[DAW Basics 101](./daw-basics-101.md)** to learn core concepts
 like tracks, the mixer, and automation. Lessons build on each other, so work
-through them in order or jump to topics using the sidebar.
+through them in order or jump to topics using the sidebar. Upcoming lessons
+are outlined in the [project roadmap](../../../ROADMAP.md).
 
 Interested in contributing lessons? Check the
 [Writing Guide](../docs-dev/style/writing-guide.md) for style tips.
@@ -42,4 +43,3 @@ learning path or explore individual subjects as needed.
    - [ ] MIDI and Synthesis
    - [ ] Latency and Buffers
    - [x] Exporting and Sharing
-

@@ -1,6 +1,6 @@
 # DAW Basics 101
 
-A Digital Audio Workstation (DAW) is software for recording, editing, and mixing audio. It lets you capture performances, arrange clips on a timeline, and apply effects to shape the final sound.
+A Digital Audio Workstation (DAW) is software for recording, editing, and mixing audio. It lets you capture performances, arrange clips on a timeline, and apply effects to shape the final sound. For upcoming lessons, see the [project roadmap](../../../ROADMAP.md).
 
 ## Core Concepts
 
@@ -40,4 +40,3 @@ For writing guidance or to suggest edits, see the
    - [ ] Frequency
    - [ ] File size
    - [x] Time
-

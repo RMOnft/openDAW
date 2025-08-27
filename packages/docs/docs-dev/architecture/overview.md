@@ -4,7 +4,8 @@ openDAW is composed of several packages such as
 [`@opendaw/app-studio`](../package-inventory.md#app) and
 [`@opendaw/studio-core`](../package-inventory.md#studio). The architecture is
 described using the C4 model. For a step‑by‑step look at how the
-application starts, see the [bootstrapping sequence](./bootstrap.md).
+application starts, see the [bootstrapping sequence](./bootstrap.md). Refer to
+the [project roadmap](../../../../ROADMAP.md) for milestone context.
 
 Static assets like the abstract SVG set in
 `packages/app/studio/public/viscious-speed` are bundled with the app; see that
