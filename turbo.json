@@ -35,6 +35,14 @@
       "dependsOn": [
         "^build"
       ]
+    },
+    "docs:build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "packages/docs/build/**"
+      ]
     }
   }
 }

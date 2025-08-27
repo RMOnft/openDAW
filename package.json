@@ -12,19 +12,22 @@
     "test": "turbo run test --concurrency=1",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "publish-sdk": "lerna publish"
+    "publish-sdk": "lerna publish",
+    "docs:dev": "npm --workspace packages/docs run start",
+    "docs:build": "npm --workspace packages/docs run build"
   },
   "devDependencies": {
     "@types/ssh2-sftp-client": "^9.0.5",
-    "ssh2-sftp-client": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "ts-node": "^10.1.0",
     "lerna": "^8.2.3",
     "prettier": "^3.6.2",
+    "ssh2-sftp-client": "^12.0.1",
+    "ts-node": "^10.1.0",
     "turbo": "^2.5.5",
+    "typedoc": "^0.28.11",
     "typescript": "^5.9.2",
     "vitest": "^3.1.3"
   },
