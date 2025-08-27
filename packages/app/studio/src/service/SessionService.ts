@@ -18,6 +18,16 @@ import {FilePickerAcceptTypes} from "@/ui/FilePickerAcceptTypes.ts"
 import {Errors, Files} from "@opendaw/lib-dom"
 import {Project} from "@opendaw/studio-core"
 
+/**
+ * Handles the lifecycle of a project session, including loading, saving and
+ * exporting bundles.
+ *
+ * ```mermaid
+ * flowchart LR
+ *   SessionService -->|creates| ProjectSession
+ *   SessionService -->|uses| Projects
+ * ```
+ */
 export class SessionService implements MutableObservableValue<Option<ProjectSession>> {
     readonly #service: StudioService
     readonly #session: DefaultObservableValue<Option<ProjectSession>>

@@ -70,5 +70,16 @@ module.exports = {
         { type: "doc", id: "boxes/faq" },
       ],
     },
+    {
+      type: "category",
+      label: "Services",
+      items: [
+        "services/overview",
+        "services/sessions",
+        "services/shortcuts",
+        "services/sync",
+        "services/stems",
+      ],
+    },
   ],
 };
