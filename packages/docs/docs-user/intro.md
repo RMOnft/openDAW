@@ -4,5 +4,16 @@ This guide helps you get started with openDAW and deepen your skills.
 
 - [Quick Start](quick-start.md) — set up the project and begin making music in minutes.
 - [UI Tour](ui-tour.md) — explore the interface and learn where everything lives.
-- **Features** — dive into core components such as tracks, the mixer, devices, and file management.
-- **Workflows** — follow step-by-step guides for tasks like recording, beat making, and exporting.
+- **Features**
+  - [Tracks](features/tracks.md) — arrange audio and MIDI clips.
+  - [Piano Roll](features/piano-roll.md) — edit notes and velocities.
+  - [Mixer](features/mixer.md) — balance levels and route audio.
+  - [Devices and Plugins](features/devices-and-plugins.md) — add instruments and effects.
+  - [File Management](features/file-management.md) — save, import, and export projects.
+- **Workflows**
+  - [Beat Making](workflows/beat.md)
+  - [Recording and Effects](workflows/record-and-fx.md)
+  - [Automation and Modulation](workflows/automation-modulation.md)
+  - [Mixing](workflows/mixing.md)
+  - [Exporting](workflows/exporting.md)
+  - [Collaboration](workflows/collaboration.md)
