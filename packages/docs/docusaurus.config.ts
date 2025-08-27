@@ -82,6 +82,11 @@ const config: Config = {
         { href: 'https://github.com/example/openDAW', label: 'GitHub', position: 'right' },
       ],
     },
+    algolia: {
+      appId: 'YOUR_APP_ID',
+      apiKey: 'YOUR_API_KEY',
+      indexName: 'openDAW',
+    },
     prism: { theme: prismThemes.github, darkTheme: prismThemes.dracula },
   },
 };
