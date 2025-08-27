@@ -17,8 +17,8 @@ html, body
   flex-direction: column
   row-gap: 1px
   fill: white
-  color: var(--color-bright)
-  background-color: var(--background)
+  color: var(--color-bright) // Default text colour
+  background-color: var(--background) // Global background colour
   touch-action: none
 
 h1, h2, h3, h4, h5
@@ -70,7 +70,7 @@ table
 
   th
     font-size: 1em
-    color: var(--color-green)
+    color: var(--color-green) // Header text colour
 
 input.default, textarea.default
   appearance: none
@@ -101,7 +101,7 @@ input[type="range"]
     -webkit-appearance: none
     width: 12px
     height: 12px
-    background: var(--color-shadow)
+    background: var(--color-shadow) // Slider thumb colour
     border-radius: 50%
     cursor: pointer
     margin-top: -4px
@@ -116,7 +116,7 @@ input[type="range"]
   &::-moz-range-thumb
     width: 12px
     height: 12px
-    background: var(--color-shadow)
+    background: var(--color-shadow) // Slider thumb colour
     border-radius: 50%
     border: none
     cursor: pointer
@@ -137,12 +137,12 @@ input[type="range"]
   &::-ms-thumb
     width: 12px
     height: 12px
-    background: var(--color-shadow)
+    background: var(--color-shadow) // Slider thumb colour
     border-radius: 50%
     cursor: pointer
 
 .spinner_GuJz
-  fill: var(--color-green)
+  fill: var(--color-green) // Spinner accent colour
   transform-origin: center
   animation: spinner_STY6 3s linear infinite
 

@@ -13,3 +13,6 @@ Use this guide when contributing documentation.
   validator used when creating projects.
 
 These practices align with our Markdown linting and Vale configuration.
+
+For naming conventions of colours and other UI variables, refer to the [Design Tokens](./design-tokens.md) guide.
+

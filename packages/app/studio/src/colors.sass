@@ -1,39 +1,43 @@
 // Color palette variables; see styles/OpenDAW/style-guidelines.md
 \:root
   color-scheme: dark
-  --color-blue: hsl(189, 100%, 65%)
-  --color-green: hsl(150, 77%, 69%)
-  --color-yellow: hsl(60, 100%, 84%)
-  --color-cream: hsl(65, 27%, 83%)
-  --color-red: hsl(354, 100%, 73%)
-  --color-orange: hsl(31, 100%, 73%)
-  --color-purple: hsl(314, 100%, 78%)
-  --color-bright: hsl(197, 0%, 100%)
-  --color-gray: hsl(197, 31%, 85%)
-  --color-dark: hsl(197, 17%, 62%)
-  --color-shadow: hsl(197, 10%, 39%)
-  --color-black: hsl(197, 10%, 14%)
-  --background: hsl(197, 6%, 8%)
-  --panel-background-bright: hsl(197, 14%, 14%)
-  --panel-background: hsl(197, 14%, 11%)
-  --panel-background-dark: hsl(197, 14%, 8%)
-  --color: var(--color-gray)
-  --lane-height: 3rem
-  --timeline-header-width: 18rem
+  --color-blue: hsl(189, 100%, 65%) // Accent blue used for links and active states
+  --color-green: hsl(150, 77%, 69%) // Confirmation and success highlight
+  --color-yellow: hsl(60, 100%, 84%) // Warning and caution tone
+  --color-cream: hsl(65, 27%, 83%) // Neutral cream for subtle surfaces
+  --color-red: hsl(354, 100%, 73%) // Error and destructive action color
+  --color-orange: hsl(31, 100%, 73%) // Secondary accent orange
+  --color-purple: hsl(314, 100%, 78%) // Decorative purple accent
+  --color-bright: hsl(197, 0%, 100%) // Brightest text color
+  --color-gray: hsl(197, 31%, 85%) // Default interface text color
+  --color-dark: hsl(197, 17%, 62%) // Muted text or disabled elements
+  --color-shadow: hsl(197, 10%, 39%) // Shadow and border color
+  --color-black: hsl(197, 10%, 14%) // Deepest shadow tone
+  --background: hsl(197, 6%, 8%) // Global application background
+  --panel-background-bright: hsl(197, 14%, 14%) // Elevated panel surface
+  --panel-background: hsl(197, 14%, 11%) // Default panel surface
+  --panel-background-dark: hsl(197, 14%, 8%) // Sunken panel surface
+  --color: var(--color-gray) // Fallback text color token
+  --lane-height: 3rem // Standard height of sequencer lanes
+  --timeline-header-width: 18rem // Width of timeline header area
 
-$BRIGHTENER: rgba(white, 0.02)
-$DARKENER: rgba(black, 0.04)
+$BRIGHTENER: rgba(white, 0.02) // Overlay to slightly increase brightness
+$DARKENER: rgba(black, 0.04) // Overlay to slightly decrease brightness
 
 @mixin panel-background-bright
+  // Applies the bright panel background color
   background-color: var(--panel-background-bright) !important
 
 @mixin panel-background
+  // Applies the default panel background color
   background-color: var(--panel-background)
 
 @mixin panel-background-dark
+  // Applies the dark panel background color
   background-color: var(--panel-background-dark) !important
 
 @mixin panel-background-chess
+  // Checkerboard pattern used for transparency indicators
   background-image: linear-gradient(45deg, var(--panel-background-bright) 25%, var(--panel-background) 25%, var(--panel-background) 50%, var(--panel-background-bright) 50%, var(--panel-background-bright) 75%, var(--panel-background) 75%, var(--panel-background) 100%)
   background-size: 5.66px 5.66px
   background-color: var(--panel-background-bright)
