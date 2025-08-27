@@ -112,6 +112,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Developer i18n Notes](packages/docs/docs-dev/i18n.md)
 - [Documentation Site Guide](packages/docs/docs-dev/documentation-site/overview.md)
 - [Headless mode workflow](packages/docs/docs-user/workflows/headless-mode.md) – feature parity with Studio service, see [headless vs studio](packages/docs/docs-dev/architecture/headless-vs-studio.md)
+- [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
 
 ### Style Documentation
 
@@ -213,4 +214,6 @@ participate, visit our [Contribute](https://opendaw.org/contribute) page.
 ## License
 
 This project is licensed under the [MIT License](LICENSE)
+
+The bundled fonts (`rubik.woff2` and `OpenSans-Regular.ttf` in packages/app/studio/public/fonts) are provided under the [SIL Open Font License 1.1](https://scripts.sil.org/OFL). See [fonts/README.md](packages/app/studio/public/fonts/README.md) for details.
 

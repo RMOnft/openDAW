@@ -2,9 +2,9 @@
 
 ## Toolchain
 
-* [Vite](https://vite.dev)
-* [Typescript](https://www.typescriptlang.org)
-* [Sass](https://sass-lang.com)
+- [Vite](https://vite.dev)
+- [Typescript](https://www.typescriptlang.org)
+- [Sass](https://sass-lang.com)
 
 ## Libraries
 
@@ -15,7 +15,7 @@ Each in-house library has a clear, focused purpose. [github repository](https://
 ### Dependency Table
 
 | Library       | Dependencies                        |
-|---------------|-------------------------------------|
+| ------------- | ----------------------------------- |
 | **std**       | none                                |
 | **dsp**       | std                                 |
 | **dom**       | std                                 |
@@ -27,18 +27,22 @@ Each in-house library has a clear, focused purpose. [github repository](https://
 
 ### In-House Runtime
 
-* std (Core)
-* dsp (DSP & Sequencing)
-* dom (DOM Integration)
-* jsx ([JSX](https://en.wikipedia.org/wiki/JSX_(JavaScript)) Integration)
-* runtime (Runtime and Scheduling)
+- std (Core)
+- dsp (DSP & Sequencing)
+- dom (DOM Integration)
+- jsx ([JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) Integration)
+- runtime (Runtime and Scheduling)
 
 ### In-House Data Management
 
-* box (Runtime Immutable Data Graph)
-* box-forge (Box Code Generator)
+- box (Runtime Immutable Data Graph)
+- box-forge (Box Code Generator)
 
 ### External
 
-* [jszip](https://www.npmjs.com/package/jszip) (Pack & Unpack Zip-Files)
-* [markdown-it](https://www.npmjs.com/package/markdown-it) (Markdown parser)
+- [jszip](https://www.npmjs.com/package/jszip) (Pack & Unpack Zip-Files)
+- [markdown-it](https://www.npmjs.com/package/markdown-it) (Markdown parser)
+
+---
+
+Return to the [manuals overview](./index.md).
