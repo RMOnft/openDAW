@@ -2,6 +2,10 @@ import { Promises } from "./promises"
 
 /**
  * Network related helper functions.
+ *
+ * Security note: These utilities perform no validation or authentication.
+ * Callers should only request trusted URLs and must verify responses before
+ * using them.
  */
 export namespace network {
     const limit = new Promises.Limit<Response>(4)

@@ -1,6 +1,9 @@
 // noinspection PlatformDetectionJS
 
 export namespace Browser {
+    // Security note: User-agent strings and location information can be
+    // spoofed by an attacker. These helpers should only be used for feature
+    // hints and must not gate security‑sensitive logic.
     const hasLocation = typeof self !== "undefined" && "location" in self && typeof self.location !== undefined
     const hasNavigator = typeof self !== "undefined" && "navigator" in self && typeof self.navigator !== undefined
     export const isLocalHost = () => hasLocation && location.host.includes("localhost")

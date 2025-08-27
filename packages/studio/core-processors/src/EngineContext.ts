@@ -9,6 +9,10 @@ import {BoxAdaptersContext, EngineToClient} from "@opendaw/studio-adapters"
 
 /**
  * Shared services and registries exposed to processors within the engine.
+ *
+ * Security note: Implementations should only expose this context to trusted
+ * processors. Granting access to untrusted code could allow manipulation of
+ * the audio graph or leakage of sensitive project data.
  */
 export interface EngineContext extends BoxAdaptersContext, Terminable {
     /** Live broadcast channel for metering and analysis data. */
