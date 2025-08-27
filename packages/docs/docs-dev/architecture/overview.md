@@ -55,3 +55,6 @@ C4Component
 - **Studio** – Handles audio processing, scheduling, and engine control.
 - **Lib** – Supplies shared utilities and reusable logic across modules.
 - **Config** – Delivers runtime and build settings consumed by other components.
+
+For details about the studio runtime internals see the
+[studio core README](../../../studio/core/README.md).

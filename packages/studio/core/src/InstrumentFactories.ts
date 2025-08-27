@@ -14,7 +14,15 @@ import {IconSymbol, TrackType} from "@opendaw/studio-adapters"
 import {InstrumentFactory} from "./InstrumentFactory"
 import {Pointers} from "@opendaw/studio-enums"
 
+/**
+ * Predefined {@link InstrumentFactory} implementations used by the studio.
+ * Each factory constructs a specific instrument device and sets up sensible
+ * defaults.
+ *
+ * @public
+ */
 export namespace InstrumentFactories {
+    /** Factory for the tape-style audio player device. */
     export const Tape: InstrumentFactory = {
         defaultName: "Tape",
         defaultIcon: IconSymbol.Tape,
@@ -32,6 +40,7 @@ export namespace InstrumentFactories {
             })
     }
 
+    /** Factory for a simple sample-based instrument. */
     export const Nano: InstrumentFactory = {
         defaultName: "Nano",
         defaultIcon: IconSymbol.NanoWave,
@@ -52,6 +61,7 @@ export namespace InstrumentFactories {
         }
     }
 
+    /** Factory for the drum-computer style Playfield instrument. */
     export const Playfield: InstrumentFactory = {
         defaultName: "Playfield",
         defaultIcon: IconSymbol.Playfield,
@@ -87,6 +97,7 @@ export namespace InstrumentFactories {
         }
     }
 
+    /** Factory for the Vaporisateur subtractive synthesizer. */
     export const Vaporisateur: InstrumentFactory = {
         defaultName: "Vaporisateur",
         defaultIcon: IconSymbol.Piano,
@@ -106,7 +117,9 @@ export namespace InstrumentFactories {
             })
     }
 
+    /** Mapping of named factories for convenient lookup. */
     export const Named = {Vaporisateur, Playfield, Nano, Tape}
+    /** Keys of the {@link Named} mapping. */
     export type Keys = keyof typeof Named
 
     const useFile = (boxGraph: BoxGraph, fileUUID: UUID.Format, name: string) => boxGraph.findBox<AudioFileBox>(fileUUID)

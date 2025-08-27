@@ -18,6 +18,12 @@ import {Engine, NoteTrigger} from "./Engine"
 import {EngineWorklet} from "./EngineWorklet"
 import {Project} from "./Project"
 
+/**
+ * High level wrapper around {@link EngineWorklet} that exposes observable
+ * playback state and delegates engine commands.
+ *
+ * @public
+ */
 export class EngineFacade implements Engine {
     readonly #terminator: Terminator = new Terminator()
     readonly #lifecycle: Terminator = this.#terminator.own(new Terminator())
@@ -34,8 +40,10 @@ export class EngineFacade implements Engine {
 
     #client: Option<EngineWorklet> = Option.None
 
+    /** Creates an empty facade without an attached engine client. */
     constructor() {}
 
+    /** Connects to the underlying {@link EngineWorklet} instance. */
     setClient(client: EngineWorklet) {
         this.#client = Option.wrap(client)
         this.#lifecycle.terminate()
@@ -53,16 +61,22 @@ export class EngineFacade implements Engine {
         )
     }
 
+    /** Detaches and terminates the connected {@link EngineWorklet}. */
     releaseClient(): void {
         this.#lifecycle.terminate()
         this.#client.ifSome(client => client.terminate())
         this.#client = Option.None
     }
 
+    /** Starts playback if a client is attached. */
     play(): void {this.#client.ifSome(client => client.play())}
+    /** Stops playback; optionally resets the transport. */
     stop(reset: boolean = false): void {this.#client.ifSome(client => client.stop(reset))}
+    /** Sets the playback position. */
     setPosition(position: ppqn): void {this.#client.ifSome(client => client.setPosition(position))}
+    /** Begins recording; optionally performs a count-in. */
     startRecording(countIn: boolean): void {this.#client.ifSome(client => client.startRecording(countIn))}
+    /** Stops recording if active. */
     stopRecording(): void {this.#client.ifSome(client => client.stopRecording())}
 
     get position(): ObservableValue<ppqn> {return this.#position}
@@ -74,31 +88,43 @@ export class EngineFacade implements Engine {
     get countInBeatsTotal(): ObservableValue<int> {return this.#countInBeatsTotal}
     get countInBeatsRemaining(): ObservableValue<int> {return this.#countInBeatsRemaining}
     get markerState(): DefaultObservableValue<Nullable<[UUID.Format, int]>> {return this.#markerState}
+    /** Currently attached project instance. */
     get project(): Project {return this.#client.unwrap("No engine").project}
 
+    /** Resolves once the underlying engine reports readiness. */
     isReady(): Promise<void> {return this.#client.mapOr(client => client.isReady(), Promise.resolve())}
+    /** Queries whether the engine has finished loading resources. */
     queryLoadingComplete(): Promise<boolean> {
         return this.#client.mapOr(client => client.queryLoadingComplete(), Promise.resolve(false))
     }
+    /** Sends an all-notes-off message to attached devices. */
     panic(): void {this.#client.ifSome(client => client.panic())}
+    /** Sample rate of the audio context, or 44.1 kHz if no client is attached. */
     sampleRate(): number {return this.#client.isEmpty() ? 44_100 : this.#client.unwrap().context.sampleRate}
+    /** Subscribes to clip sequencing notifications from the engine. */
     subscribeClipNotification(observer: Observer<ClipNotification>): Subscription {
         return this.#client.unwrap("No engine").subscribeClipNotification(observer)
     }
+    /** Subscribes to note trigger events from the engine. */
     subscribeNotes(observer: Observer<NoteTrigger>): Subscription {
         return this.#client.unwrap("No engine").subscribeNotes(observer)
     }
+    /** Sends a note-on event to a specific instrument. */
     noteOn(uuid: UUID.Format, pitch: byte, velocity: unitValue): void {
         this.#client.unwrap("No engine").noteOn(uuid, pitch, velocity)
     }
+    /** Sends a note-off event to a specific instrument. */
     noteOff(uuid: UUID.Format, pitch: byte): void {this.#client.unwrap("No engine").noteOff(uuid, pitch)}
+    /** Schedules clips for playback. */
     scheduleClipPlay(clipIds: ReadonlyArray<UUID.Format>): void {
         this.#client.unwrap("No engine").scheduleClipPlay(clipIds)
     }
+    /** Cancels scheduled clip playback for the given tracks. */
     scheduleClipStop(trackIds: ReadonlyArray<UUID.Format>): void {
         this.#client.unwrap("No engine").scheduleClipStop(trackIds)
     }
 
+    /** Releases resources held by the facade and its client. */
     terminate(): void {
         this.releaseClient()
         this.#terminator.terminate()

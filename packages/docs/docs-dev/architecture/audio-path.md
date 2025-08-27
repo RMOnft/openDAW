@@ -34,3 +34,6 @@ stateDiagram-v2
 
 Events enter the **queued** state when the app submits them to the scheduler. At their scheduled time they move to the **running** state as the scheduler dispatches them to the audio engine. Once an event has been processed by the audio engine it reaches the **completed** state, leaving the scheduler's active set.
 
+See the [studio core README](../../../studio/core/README.md) for an
+overview of the engine components involved in this flow.
+
