@@ -20,6 +20,11 @@ import {BoxAdapters} from "../BoxAdapters"
 import {ModuleMultiplierAdapter} from "./modules/multiplier"
 import {ModularAudioInputAdapter} from "./modules/audio-input"
 
+/**
+ * Common interface implemented by adapters for all modular synth modules.
+ * Module adapters expose their parameters and connectors so the UI and routing
+ * system can interact with them in a uniform way.
+ */
 export interface ModuleAdapter extends BoxAdapter, Selectable {
     get attributes(): ModuleAttributes
     get parameters(): ParameterAdapterSet
@@ -28,7 +33,9 @@ export interface ModuleAdapter extends BoxAdapter, Selectable {
     get outputs(): ReadonlyArray<ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Output>>
 }
 
+/** Helper functions for working with {@link ModuleAdapter} instances. */
 export namespace Modules {
+    /** Determines if the given vertex belongs to a module box. */
     export const isVertexOfModule = (vertex: Vertex): boolean => vertex.box.accept<BoxVisitor<true>>({
         visitModuleGainBox: (): true => true,
         visitModuleDelayBox: (): true => true,
@@ -37,6 +44,10 @@ export namespace Modules {
         visitModularAudioOutputBox: (): true => true
     }) ?? false
 
+    /**
+     * Retrieves the adapter for the given module box from a collection of
+     * {@link BoxAdapters}.
+     */
     export const adapterFor = (adapters: BoxAdapters, box: Box): ModuleAdapter => asDefined(box.accept<BoxVisitor<ModuleAdapter>>({
         visitModuleGainBox: (box: ModuleGainBox): ModuleAdapter => adapters.adapterFor(box, ModuleGainAdapter),
         visitModuleDelayBox: (box: ModuleDelayBox): ModuleAdapter => adapters.adapterFor(box, ModuleDelayAdapter),

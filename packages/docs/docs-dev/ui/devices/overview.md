@@ -8,4 +8,5 @@ specialised topics below.
 * [Device panel](./panel.md) – how editors are mounted and reordered.
 * [Effects](./effects.md) – implementation details for audio and midi effects.
 * [Instruments](./instruments.md) – instrument specific editors and helpers.
+* [Parameter adapters](../../extending/parameter-adapters.md) – exposing device controls to automation.
 

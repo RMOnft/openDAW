@@ -7,6 +7,7 @@ import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldA
 import {Direction, ModuleConnectorAdapter} from "../connector"
 import {BoxAdaptersContext} from "../../BoxAdaptersContext"
 
+/** Adapter for the gain module. */
 export class ModuleGainAdapter extends AbstractModuleAdapter<ModuleGainBox> implements ModuleAdapter {
     readonly #parameterGain: AutomatableParameterFieldAdapter<number>
     readonly #voltageInput: ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input>
@@ -23,8 +24,11 @@ export class ModuleGainAdapter extends AbstractModuleAdapter<ModuleGainBox> impl
         this.#voltageOutput = ModuleConnectorAdapter.create(context.boxAdapters, box.voltageOutput, Direction.Output, "Output")
     }
 
+    /** Gain parameter measured in decibels. */
     get parameterGain(): AutomatableParameterFieldAdapter<number> {return this.#parameterGain}
+    /** Incoming voltage connection. */
     get voltageInput(): ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input> {return this.#voltageInput}
+    /** Outgoing voltage connection. */
     get voltageOutput(): ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Output> {return this.#voltageOutput}
 
     get inputs(): ReadonlyArray<ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input>> {
