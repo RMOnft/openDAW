@@ -12,6 +12,15 @@ module.exports = {
     { type: "doc", id: "browser-support" },
     {
       type: "category",
+      label: "Debugging",
+      items: [
+        "debugging/overview",
+        "debugging/error-logging",
+        "debugging/graph-runtime",
+      ],
+    },
+    {
+      type: "category",
       label: "Configuration",
       items: ["configuration/eslint"],
     },
@@ -92,7 +101,7 @@ module.exports = {
             "ui/timeline/performance",
           ],
         },
-        "ui/browse"
+        "ui/browse",
       ],
     },
     {
@@ -119,8 +128,10 @@ module.exports = {
             { type: "doc", id: "ui/piano-roll/faq" },
           ],
         },
-  "ui/mixer"
-},{
+        "ui/mixer",
+      ],
+    },
+    {
       type: "category",
       label: "Services",
       items: [
