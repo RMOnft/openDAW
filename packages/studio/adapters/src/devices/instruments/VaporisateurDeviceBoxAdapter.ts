@@ -8,6 +8,7 @@ import {TrackType} from "../../timeline/TrackType"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 
+/** Adapter for the Vaporisateur instrument device box. */
 export class VaporisateurDeviceBoxAdapter implements InstrumentDeviceBoxAdapter {
     readonly type = "instrument"
     readonly accepts = "midi"

@@ -1,3 +1,7 @@
+/**
+ * Utility service wrapping {@link StudioService} to perform common sample
+ * operations used by the browser UI.
+ */
 import { asDefined, DefaultObservableValue, UUID } from "@opendaw/lib-std";
 import { PPQN } from "@opendaw/lib-dsp";
 import { Promises } from "@opendaw/lib-runtime";
@@ -21,6 +25,10 @@ import { SampleApi } from "@/service/SampleApi";
 /**
  * Convenience wrapper around {@link StudioService} for managing samples in the
  * browser view.
+ *
+ * Ties together {@link SampleApi} for cloud access and {@link SampleStorage}
+ * for OPFS backed persistence, exposing higher level actions used by the
+ * {@link SampleBrowser} UI.
  */
 export class SampleService {
   readonly #service: StudioService;

@@ -1,3 +1,6 @@
+/**
+ * Collection of dialogs used for importing, locating and editing samples.
+ */
 import { Dialog } from "@/ui/components/Dialog";
 import { IconSymbol, Sample } from "@opendaw/studio-adapters";
 import { Surface } from "@/ui/surface/Surface";
@@ -11,6 +14,9 @@ import { FilePickerAcceptTypes } from "@/ui/FilePickerAcceptTypes";
 
 /**
  * Dialog helpers for managing samples.
+ *
+ * Exposed utilities are used by {@link SampleService} and
+ * {@link SampleBrowser} to locate missing files or edit metadata.
  *
  * @see SampleImporter
  * @see SampleUtils.verify

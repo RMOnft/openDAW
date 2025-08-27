@@ -13,6 +13,7 @@ module.exports = {
       items: [
         'how-it-works/storage-model',
         'how-it-works/latency-and-buffers',
+        'how-it-works/groove-examples',
       ],
     },
     {

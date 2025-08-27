@@ -18,6 +18,7 @@ data format description, and additional examples.
 
 - [DAWproject parameter mapping](../../docs/docs-dev/serialization/dawproject.md)
 - [Serialization overview](../../docs/docs-dev/serialization/overview.md)
+ - [Studio DAWproject serialization](../../docs/docs-dev/serialization/studio-dawproject.md)
 
 ## Test fixtures
 

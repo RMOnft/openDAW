@@ -31,6 +31,9 @@ interface Package {
  * shared {@link Lock}.
  */
 export class LiveStreamBroadcaster {
+    /**
+     * Creates a broadcaster backed by a named messenger channel.
+     */
     static create(messenger: Messenger, name: string): LiveStreamBroadcaster {
         return new LiveStreamBroadcaster(messenger.channel(name))
     }
@@ -92,6 +95,7 @@ export class LiveStreamBroadcaster {
         }
     }
 
+    /** Registers a float provider to be broadcast on each flush. */
     broadcastFloat(address: Address, provider: Provider<float>): Terminable {
         return this.#storeChunk(new class implements Package {
             readonly type: PackageType = PackageType.Float
@@ -101,6 +105,7 @@ export class LiveStreamBroadcaster {
         })
     }
 
+    /** Registers an integer provider to be broadcast on each flush. */
     broadcastInteger(address: Address, provider: Provider<int>): Terminable {
         return this.#storeChunk(new class implements Package {
             readonly type: PackageType = PackageType.Integer
@@ -110,6 +115,7 @@ export class LiveStreamBroadcaster {
         })
     }
 
+    /** Broadcasts a `Float32Array` after invoking the supplied update hook. */
     broadcastFloats(address: Address, values: Float32Array, update: Exec): Terminable {
         return this.#storeChunk(new class implements Package {
             readonly type: PackageType = PackageType.FloatArray
@@ -123,6 +129,7 @@ export class LiveStreamBroadcaster {
         })
     }
 
+    /** Broadcasts an `Int32Array` after invoking the supplied update hook. */
     broadcastIntegers(address: Address, values: Int32Array, update: Exec): Terminable {
         return this.#storeChunk(new class implements Package {
             readonly type: PackageType = PackageType.IntegerArray
@@ -136,6 +143,7 @@ export class LiveStreamBroadcaster {
         })
     }
 
+    /** Broadcasts a raw byte array after invoking the supplied update hook. */
     broadcastByteArray(address: Address, values: Int8Array, update: Exec): Terminable {
         return this.#storeChunk(new class implements Package {
             readonly type: PackageType = PackageType.ByteArray

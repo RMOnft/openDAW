@@ -8,6 +8,11 @@ import {ParameterFieldAdapters} from "./ParameterFieldAdapters"
 import {BoxAdapters} from "./BoxAdapters"
 import {SampleManager} from "./sample/SampleManager"
 
+/**
+ * Shared services and utilities available to all box adapters. Implementations
+ * provide access to the current graph, streaming interfaces and factories
+ * needed when constructing adapter instances.
+ */
 export interface BoxAdaptersContext extends Terminable {
     get boxGraph(): BoxGraph
     get boxAdapters(): BoxAdapters

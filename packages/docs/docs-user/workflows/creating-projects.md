@@ -8,3 +8,7 @@
 
 Projects are stored locally in your browser. Make sure to export regularly if
 you plan to work across devices.
+
+For an overview of how the engine manages playback and recording, see the
+[engine sequence diagrams](../../docs-dev/architecture/engine.md).
+

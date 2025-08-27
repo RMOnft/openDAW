@@ -5,14 +5,27 @@ import {FileReferenceSchema, MetaDataSchema, ProjectSchema} from "@opendaw/lib-d
 import {Project} from "../Project"
 import {DawProjectExporter} from "./DawProjectExporter"
 
+/**
+ * Helpers for reading and writing `.dawproject` zip archives used by Studio.
+ *
+ * The namespace exposes {@link decode} for turning a buffer into its XML
+ * representation and {@link encode} for writing a {@link Project} back to the
+ * DAWproject format.
+ */
 export namespace DawProject {
+    /** Metadata describing a binary resource contained in the archive. */
     export type Resource = { uuid: UUID.Format, path: string, name: string, buffer: ArrayBuffer }
 
+    /** Random access to resources stored inside the project archive. */
     export interface ResourceProvider {
         fromPath(path: string): Resource
         fromUUID(uuid: UUID.Format): Resource
     }
 
+    /**
+     * Decode a DAWproject archive into its metadata, project XML and resource
+     * lookup helpers.
+     */
     export const decode = async (buffer: ArrayBuffer | NonSharedBuffer): Promise<{
         metaData: MetaDataSchema,
         project: ProjectSchema,
@@ -43,6 +56,10 @@ export namespace DawProject {
         }
     }
 
+    /**
+     * Encode the current {@link Project} and associated metadata into a
+     * `.dawproject` zip archive.
+     */
     export const encode = (project: Project, metaData: MetaDataSchema): Promise<ArrayBuffer> => {
         const zip = new JSZip()
         const projectSchema = DawProjectExporter.write(project, {

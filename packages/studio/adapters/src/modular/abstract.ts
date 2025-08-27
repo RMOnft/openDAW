@@ -8,6 +8,11 @@ import {ParameterAdapterSet} from "../ParameterAdapterSet"
 import {Direction, ModuleConnectorAdapter} from "./connector"
 import {ModularAdapter} from "./modular"
 
+/**
+ * Base implementation for concrete {@link ModuleAdapter} classes. It wires the
+ * underlying module box into the adapter context and provides common
+ * functionality such as parameter management and selection handling.
+ */
 export abstract class AbstractModuleAdapter<BOX extends Box & {
     attributes: ModuleAttributes
 }> implements ModuleAdapter {
@@ -36,11 +41,19 @@ export abstract class AbstractModuleAdapter<BOX extends Box & {
         throw new Error("Method not implemented.")
     }
 
+    /** Registers a {@link Terminable} to be disposed with this adapter. */
     own<T extends Terminable>(terminable: T): T {return this.#terminator.own(terminable)}
+
+    /** Convenience variant of {@link own} for multiple terminables. */
     ownAll<T extends Terminable>(...terminables: ReadonlyArray<T>) {this.#terminator.ownAll(...terminables)}
 
+    /** Marks the module as selected by the user. */
     onSelected(): void {this.#selected = true}
+
+    /** Marks the module as deselected. */
     onDeselected(): void {this.#selected = false}
+
+    /** Whether the module is currently selected. */
     isSelected(): boolean {return this.#selected}
 
     get box(): Box<PointerTypes, any> {return this.#box}

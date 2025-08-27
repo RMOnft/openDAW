@@ -1,3 +1,8 @@
+/**
+ * Trigger button spawning a {@link Menu} when activated.
+ *
+ * @see ../../../../../docs/docs-dev/ui/menu/overview.md
+ */
 import css from "./MenuButton.sass?inline"
 import {createElement, JsxValue} from "@opendaw/lib-jsx"
 import {MenuItem} from "@/ui/model/menu-item.ts"

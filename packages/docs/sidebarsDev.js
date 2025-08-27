@@ -57,6 +57,8 @@ module.exports = {
         "architecture/audio-path",
         "architecture/browser-compat",
         "architecture/headless-vs-studio",
+        "architecture/persistence",
+        "architecture/opfs-samples",
       ],
     },
     {
@@ -119,6 +121,7 @@ module.exports = {
         { type: "doc", id: "extending/plugin-guide" },
         { type: "doc", id: "extending/plugin-api" },
         { type: "doc", id: "extending/plugin-examples" },
+        { type: "doc", id: "extending/device-boxes" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
       ],
@@ -143,6 +146,15 @@ module.exports = {
           items: [
             "ui/files/overview",
             "ui/files/drag-and-drop",
+          ],
+        },
+        {
+          type: "category",
+          label: "Spotlight",
+          items: [
+            "ui/spotlight/overview",
+            "ui/spotlight/usage",
+            "ui/spotlight/faq",
           ],
         },
       ],

@@ -8,6 +8,7 @@ import {TrackType} from "../../timeline/TrackType"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 
+/** Adapter exposing the Nano instrument's parameters. */
 export class NanoDeviceBoxAdapter implements InstrumentDeviceBoxAdapter {
     readonly type = "instrument"
     readonly accepts = "midi"

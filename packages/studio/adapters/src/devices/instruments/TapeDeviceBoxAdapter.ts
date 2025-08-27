@@ -8,6 +8,7 @@ import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 import {TrackType} from "../../timeline/TrackType"
 
+/** Adapter for the Tape instrument device. */
 export class TapeDeviceBoxAdapter implements InstrumentDeviceBoxAdapter {
     readonly type = "instrument"
     readonly accepts = "audio"

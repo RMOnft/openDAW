@@ -7,11 +7,14 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "BoxesDebugView")
 
-type Construct = {
+/** Props for {@link BoxesDebugView}. */
+export interface BoxesDebugViewProps {
+    /** Graph to enumerate boxes from. */
     boxGraph: BoxGraph
 }
 
-export const BoxesDebugView = ({boxGraph}: Construct) => {
+/** Lists boxes with their dependencies for debugging. */
+export const BoxesDebugView = ({boxGraph}: BoxesDebugViewProps) => {
     return (
         <div className={className}>
             <h2>Boxes</h2>
@@ -36,3 +39,8 @@ export const BoxesDebugView = ({boxGraph}: Construct) => {
         </div>
     )
 }
+
+/** Property table for {@link BoxesDebugView}. */
+export const BoxesDebugViewPropTable = [
+    {prop: "boxGraph", type: "BoxGraph", description: "Graph to enumerate boxes from."}
+] as const

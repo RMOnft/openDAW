@@ -1,3 +1,6 @@
+/**
+ * Interfaces to services provided by the shared worker process.
+ */
 import {FloatArray, int, Lazy, Option, Procedure} from "@opendaw/lib-std"
 import type {OpfsProtocol, SamplePeakProtocol} from "@opendaw/lib-fusion"
 import {Entry} from "@opendaw/lib-fusion"
@@ -68,3 +71,4 @@ export class WorkerAgents {
                 })
     }
 }
+

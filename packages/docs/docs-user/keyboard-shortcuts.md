@@ -2,7 +2,7 @@
 
 Replace `⌘` with `Ctrl` on Windows and Linux.
 
-For menu locations of these commands, see the [menu overview](/manuals/docs-dev/ui/menu/overview) and [menu shortcuts](/manuals/docs-dev/ui/menu/shortcuts).
+For menu locations of these commands, see the [menu overview](../docs-dev/ui/menu/overview.md) and [menu shortcuts](../docs-dev/ui/menu/shortcuts.md).
 
 ## Misc
 

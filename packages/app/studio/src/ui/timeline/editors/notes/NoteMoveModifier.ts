@@ -1,3 +1,6 @@
+/**
+ * Modifier that moves notes across time and pitch, optionally copying them.
+ */
 import {clamp, int, Notifier, Observer, Option, Selection, Terminable, unitValue} from "@opendaw/lib-std"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -27,6 +30,9 @@ class SelectedModifyStrategy implements NoteModifyStrategy {
     }
 }
 
+/**
+ * Construction parameters for {@link NoteMoveModifier}.
+ */
 type Construct = Readonly<{
     element: Element
     selection: Selection<NoteEventBoxAdapter>
@@ -37,6 +43,9 @@ type Construct = Readonly<{
     reference: NoteEventBoxAdapter
 }>
 
+/**
+ * Handles moving or copying notes during drag operations.
+ */
 export class NoteMoveModifier implements NoteModifier {
     static create(construct: Construct): NoteMoveModifier {return new NoteMoveModifier(construct)}
 

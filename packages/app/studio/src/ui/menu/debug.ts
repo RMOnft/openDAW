@@ -4,6 +4,8 @@ import { showDebugBoxDialog } from "@/ui/components/dialogs.tsx";
 
 /**
  * Menu helpers exposing development diagnostics.
+ *
+ * @see ../../../../../docs/docs-dev/ui/menu/debug.md
  */
 export namespace DebugMenus {
   /**

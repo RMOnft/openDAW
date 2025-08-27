@@ -1,12 +1,20 @@
+/**
+ * Shared strategy interfaces for note editing modifiers.
+ */
 import {EventCollection, ppqn} from "@opendaw/lib-dsp"
 import {Coordinates, int, Option, unitValue} from "@opendaw/lib-std"
 
 import {NoteEventOwnerReader} from "@/ui/timeline/editors/EventOwnerReader.ts"
 import {UINoteEvent} from "@/ui/timeline/editors/notes/UINoteEvent.ts"
 
+/** Represents a point in time/value space. */
 export type Point = Coordinates<number, unitValue> // time, value
+/** Represents a line used for property overlays. */
 export type Line = [Point, Point]
 
+/**
+ * Strategy collection describing how a modifier exposes its behaviour to the UI.
+ */
 export interface NoteModifyStrategies {
     showOrigin(): boolean
     showCreation(): Option<UINoteEvent>
@@ -27,6 +35,9 @@ export namespace NoteModifyStrategies {
     })
 }
 
+/**
+ * Strategy describing how to read note attributes when a modifier is active.
+ */
 export interface NoteModifyStrategy {
     readPosition(note: UINoteEvent): ppqn
     readComplete(note: UINoteEvent): ppqn

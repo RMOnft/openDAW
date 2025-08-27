@@ -1,5 +1,7 @@
 # Quick Start
 
+See the [project roadmap](../../../ROADMAP.md) for planned features.
+
 1. **Open the studio.** Launch the openDAW application in your browser.
 2. **Create a project.** From the dashboard choose **New Project** to start with an empty session.
 3. **Add a track.** Click the **+** button in the track list and select an instrument or audio track.

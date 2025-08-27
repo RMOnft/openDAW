@@ -10,6 +10,16 @@ This document outlines the conventions used for CSS and Sass across the project.
 - Panel backgrounds are available via `--panel-background`, `--panel-background-bright`, and `--panel-background-dark`.
 - Group related variables together and document new entries when introduced.
 
+### Color System
+
+The studio's colour palette is defined in `colors.sass` and surfaced to
+TypeScript via `Colors.ts` and `ColorCodes.ts`. When adding new colour tokens:
+
+- Use descriptive names and document their intent in `colors.sass`.
+- Update `Colors.ts` so components can access the resolved value.
+- If the colour maps to a specific domain concept (e.g. an audio unit type),
+  extend `ColorCodes.ts` accordingly.
+
 ## Naming
 
 - Class names, mixins, and variables use kebab-case (`.help-section`, `@mixin width-available`).

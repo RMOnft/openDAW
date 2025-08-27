@@ -1,3 +1,9 @@
+/**
+ * Top level editor for note events on the timeline.
+ *
+ * Combines pitch editing, property lanes and menu integration to provide a
+ * full featured piano roll style editing environment.
+ */
 import css from "./NoteEditor.sass?inline"
 import {Events, Html, Keyboard} from "@opendaw/lib-dom"
 import {DefaultObservableValue, int, Lifecycle, Procedure} from "@opendaw/lib-std"
@@ -25,6 +31,9 @@ import {createPitchMenu} from "@/ui/timeline/editors/notes/pitch/PitchMenu.ts"
 
 const className = Html.adoptStyleSheet(css, "NoteEditor")
 
+/**
+ * Arguments required to construct a {@link NoteEditor} instance.
+ */
 type Construct = {
     lifecycle: Lifecycle
     service: StudioService
@@ -34,6 +43,9 @@ type Construct = {
     reader: NoteEventOwnerReader
 }
 
+/**
+ * Renders the note editor and wires up pitch and property sub editors.
+ */
 export const NoteEditor =
     ({lifecycle, service, menu: {editMenu, viewMenu}, range, snapping, reader}: Construct) => {
         const {project} = service

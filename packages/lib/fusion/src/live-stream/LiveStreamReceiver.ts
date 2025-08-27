@@ -118,6 +118,10 @@ class ByteArrayPackage extends ArrayPackage<Int8Array> {
     }
 }
 
+/**
+ * Receives packages produced by a {@link LiveStreamBroadcaster}. Subscribers
+ * can register for specific addresses to be notified when new data arrives.
+ */
 export class LiveStreamReceiver implements Terminable {
     static ID: int = 0 | 0
 
@@ -177,26 +181,32 @@ export class LiveStreamReceiver implements Terminable {
         this.#bytes.terminate()
     }
 
+    /** Subscribes to a single float value at the given address. */
     subscribeFloat(address: Address, procedure: Procedure<int>): Subscription {
         return this.#float.subscribe(address, procedure)
     }
 
+    /** Subscribes to a single integer value at the given address. */
     subscribeInteger(address: Address, procedure: Procedure<float>): Subscription {
         return this.#integer.subscribe(address, procedure)
     }
 
+    /** Subscribes to a `Float32Array` at the given address. */
     subscribeFloats(address: Address, procedure: Procedure<Float32Array>): Subscription {
         return this.#floats.subscribe(address, procedure)
     }
 
+    /** Subscribes to an `Int32Array` at the given address. */
     subscribeIntegers(address: Address, procedure: Procedure<Int32Array>): Subscription {
         return this.#integers.subscribe(address, procedure)
     }
 
+    /** Subscribes to a byte array at the given address. */
     subscribeByteArray(address: Address, procedure: Procedure<Int8Array>): Subscription {
         return this.#bytes.subscribe(address, procedure)
     }
 
+    /** Disconnects from the messenger and clears subscriptions. */
     terminate(): void {this.#disconnect()}
 
     /**

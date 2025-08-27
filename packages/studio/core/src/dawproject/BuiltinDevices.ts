@@ -5,7 +5,13 @@ import {ifDefined, int, UUID} from "@opendaw/lib-std"
 import {Pointers} from "@opendaw/studio-enums"
 import {semitoneToHz} from "@opendaw/lib-dsp"
 
+/**
+ * Helpers for constructing built-in device boxes from DAWproject schemas.
+ */
 export namespace BuiltinDevices {
+    /**
+     * Create a Revamp equalizer device from a DAWproject {@link EqualizerSchema}.
+     */
     export const equalizer = (boxGraph: BoxGraph,
                               equalizer: EqualizerSchema,
                               field: Field<Pointers.MidiEffectHost> | Field<Pointers.AudioEffectHost>,

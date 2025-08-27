@@ -1,2 +1,4 @@
-/** Types of payloads that can be streamed between broadcaster and receiver. */
+/**
+ * Identifies the kind of data contained in a live-stream package.
+ */
 export enum PackageType {Float, FloatArray, Integer, IntegerArray, ByteArray}

@@ -1,3 +1,7 @@
+/**
+ * Top-level container that hosts all clip lanes and coordinates selection,
+ * drag-and-drop operations and context menus.
+ */
 import css from "./ClipsArea.sass?inline"
 import {clamp, int, Lifecycle, Option, Selection, ValueAxis} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"

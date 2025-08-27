@@ -1,9 +1,9 @@
 // Overlay rectangle drawn during drag selection on the timeline.
 component
-  top: 0
+  top: 0 // position overlay at top-left of host element
   left: 0
-  width: 100%
-  height: 100%
-  position: absolute
-  pointer-events: none
-  z-index: 9999
+  width: 100% // span entire width of the timeline viewport
+  height: 100% // span entire height
+  position: absolute // overlay floats above timeline contents
+  pointer-events: none // allow interactions to pass through
+  z-index: 9999 // ensure rectangle sits on top of other elements

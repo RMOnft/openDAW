@@ -5,17 +5,26 @@ import {createElement} from "@opendaw/lib-jsx"
 
 const defaultClassName = Html.adoptStyleSheet(css, "NumberInput")
 
-type Construct = {
+/** Props for {@link NumberInput}. */
+export interface NumberInputProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Observable numeric model. */
     model: MutableObservableValue<number>
+    /** Maps numbers to and from strings. */
     mapper?: StringMapping<number>
+    /** Highlight negative values if true. */
     negativeWarning?: boolean
+    /** Additional CSS class name. */
     className?: string
+    /** Maximum number of characters to display. */
     maxChars?: int
+    /** Step value for arrow key adjustments. */
     step?: number
 }
 
-export const NumberInput = ({lifecycle, model, negativeWarning, className, maxChars, mapper, step}: Construct) => {
+/** Editable numeric field with keyboard controls. */
+export const NumberInput = ({lifecycle, model, negativeWarning, className, maxChars, mapper, step}: NumberInputProps) => {
     step ??= 1.0
     maxChars ??= 3
     mapper ??= StringMapping.numeric({})
@@ -119,3 +128,14 @@ export const NumberInput = ({lifecycle, model, negativeWarning, className, maxCh
     updateDigits()
     return element
 }
+
+/** Property table for {@link NumberInput}. */
+export const NumberInputPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<number>", description: "Observable numeric model."},
+    {prop: "mapper", type: "StringMapping<number>", description: "Maps numbers to and from strings."},
+    {prop: "negativeWarning", type: "boolean", description: "Highlight when value is negative."},
+    {prop: "className", type: "string", description: "Additional CSS class name."},
+    {prop: "maxChars", type: "int", description: "Maximum number of characters to display."},
+    {prop: "step", type: "number", description: "Step value for arrow key adjustments."}
+] as const
