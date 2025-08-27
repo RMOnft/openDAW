@@ -18,6 +18,9 @@ type Construct = {
     output: AudioOutputDevice
 }
 
+/**
+ * Selector used to choose the browser's audio output device if supported.
+ */
 export const AudioOutputSelector = ({lifecycle, output}: Construct) => {
     if (!output.switchable) {
         return (

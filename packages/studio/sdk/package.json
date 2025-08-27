@@ -1,7 +1,7 @@
 {
   "name": "@opendaw/studio-sdk",
   "version": "0.0.20",
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
@@ -34,5 +34,6 @@
     "@opendaw/studio-core": "^0.0.20",
     "@opendaw/studio-enums": "^0.0.20"
   },
-  "gitHead": "498716ab88a9a6bba7f8e1c034703cdc749ef8b0"
+  "gitHead": "498716ab88a9a6bba7f8e1c034703cdc749ef8b0",
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }

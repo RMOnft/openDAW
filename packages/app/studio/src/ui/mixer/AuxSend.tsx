@@ -20,6 +20,9 @@ type Construct = {
     adapter: AuxSendBoxAdapter
 }
 
+/**
+ * Control representing a single auxiliary send with pan and gain knobs.
+ */
 export const AuxSend = ({lifecycle, editing, adapter}: Construct) => {
     const tooltip = Inject.attribute(adapter.targetBus.labelField.getValue())
     lifecycle.own(adapter.targetBus.labelField.subscribe(owner => tooltip.value = owner.getValue()))

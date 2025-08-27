@@ -1,3 +1,6 @@
+/**
+ * Displays aggregated error reports and associated logs.
+ */
 import css from "./ErrorsPage.sass?inline"
 import {Await, createElement, Group, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

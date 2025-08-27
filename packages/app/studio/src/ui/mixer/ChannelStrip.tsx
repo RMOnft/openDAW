@@ -36,6 +36,9 @@ type Construct = {
     compact: boolean
 }
 
+/**
+ * Displays controls for a single track or bus including meters, sends and routing.
+ */
 export const ChannelStrip = ({lifecycle, service, adapter, compact}: Construct) => {
     const {mute, panning, solo, volume} = adapter.namedParameter
     const {project, midiLearning} = service

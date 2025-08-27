@@ -1,4 +1,5 @@
 {
+  "//": "Docs site package manifest; see docs-dev/documentation-site/overview.md and tsconfig.json",
   "name": "packages-docs",
   "version": "0.0.0",
   "private": true,
@@ -48,5 +49,7 @@
   },
   "engines": {
     "node": ">=23"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }

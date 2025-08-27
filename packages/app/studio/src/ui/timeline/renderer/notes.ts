@@ -3,6 +3,11 @@ import {LoopableRegion} from "@opendaw/lib-dsp"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 import {RegionBound, RegionColors} from "@/ui/timeline/renderer/env.ts"
 
+/**
+ * Renders note events for a region as horizontal bars within the supplied
+ * bounds. Notes are queried for the visible range only to keep rendering
+ * efficient.
+ */
 export const renderNotes = (context: CanvasRenderingContext2D,
                             range: TimelineRange,
                             region: NoteRegionBoxAdapter,

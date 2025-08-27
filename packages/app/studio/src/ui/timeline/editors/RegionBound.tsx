@@ -1,3 +1,8 @@
+/**
+ * Canvas based overlay displaying the currently edited region and its
+ * loop boundaries. It also provides hit testing information so the
+ * region can be moved or resized by the user.
+ */
 import css from "./RegionBound.sass?inline"
 import {Lifecycle, Option, Terminable, Terminator} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
@@ -12,12 +17,17 @@ import {Context2d, Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "RegionBound")
 
+/** Configuration for constructing {@link RegionBound}. */
 type Construct = {
     lifecycle: Lifecycle
     service: StudioService
     range: TimelineRange
 }
 
+/**
+ * Displays the region bounds for the active selection. It listens to
+ * changes on the edited region and redraws the overlay accordingly.
+ */
 export const RegionBound = ({lifecycle, service, range}: Construct) => {
     const regionSubscriber = lifecycle.own(new Terminator())
     const editingRegion = service.project.userEditingManager.timeline

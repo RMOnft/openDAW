@@ -45,15 +45,29 @@ class UnselectedStrategy implements RegionModifyStrategy {
     }
 }
 
+/**
+ * Construction data used when starting a region move operation.
+ */
 type Construct = Readonly<{
+    /** Element representing the timeline area. */
     element: Element
+    /** Snapping configuration for movement. */
     snapping: Snapping
+    /** Pulse position where the drag started. */
     pointerPulse: ppqn
+    /** Track index where the drag started. */
     pointerIndex: int
+    /** Region under the pointer when the drag started. */
     reference: AnyRegionBoxAdapter
 }>
 
+/**
+ * Handles moving (and optionally copying) of regions across the timeline.
+ */
 export class RegionMoveModifier implements RegionModifyStrategies {
+    /**
+     * Creates a move modifier when a selection exists.
+     */
     static create(trackManager: TracksManager, selection: Selection<AnyRegionBoxAdapter>, construct: Construct): Option<RegionMoveModifier> {
         return selection.isEmpty()
             ? Option.None

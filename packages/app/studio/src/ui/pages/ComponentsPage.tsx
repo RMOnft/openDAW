@@ -1,3 +1,6 @@
+/**
+ * Interactive showcase of reusable UI components.
+ */
 import css from "./ComponentsPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

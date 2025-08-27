@@ -7,7 +7,7 @@ A Digital Audio Workstation (DAW) is software for recording, editing, and mixing
 - **Tracks** – containers for audio or MIDI data that you can record, edit, and process.
 - **Timeline** – the horizontal workspace where clips are arranged in time.
 - **Mixer** – combines tracks, sets their levels, and routes them to outputs.
-- **Plug-ins** – processors or instruments inserted on tracks to modify or generate sound.
+- **Plugins** – processors or instruments inserted on tracks to modify or generate sound.
 - **Automation** – recorded changes to parameters such as volume or effect settings over time.
 
 ## Signal Flow
@@ -26,6 +26,9 @@ flowchart LR
 ## Next Steps
 
 Continue to the next lesson to learn how to create tracks, record audio, and use basic effects.
+
+For writing guidance or to suggest edits, see the
+[Writing Guide](../docs-dev/style/writing-guide.md).
 
 ## Quiz
 

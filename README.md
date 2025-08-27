@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-<a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="nofollow"><img src="https://img.shields.io/badge/license-GPLv3-blue.svg" alt="License: GPLv3"></a>
+<a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://discord.gg/ZRm8du7vn4" rel="nofollow"><img src="https://img.shields.io/discord/1241019312328675399?label=Discord&logo=discord&logoColor=white" alt="discord server"></a>
 <a href="https://github.com/andremichelle/opendaw" rel="nofollow"><img src="https://img.shields.io/github/stars/andremichelle/opendaw" alt="stars"></a>
 </p>
@@ -23,7 +23,7 @@ a strong focus on **education** and data-privacy. Please consider supporting thi
 
 We are committed to transparency and community-driven development.
 
-The source code for openDAW is available under GPL3 (links below).
+The source code for openDAW is available under the [MIT License](LICENSE).
 
 ### Built on Trust and Transparency
 
@@ -110,12 +110,14 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Localization Guide](packages/docs/docs-user/localization.md)
 - [Accessibility Guide](packages/docs/docs-user/accessibility.md)
 - [Developer i18n Notes](packages/docs/docs-dev/i18n.md)
+- [Documentation Site Guide](packages/docs/docs-dev/documentation-site/overview.md)
 
 ### Style Documentation
 
 - [Style Guidelines](styles/OpenDAW/style-guidelines.md)
 - [Developer Style Guide](packages/docs/docs-dev/style-guide.md)
 - [User Style Customization](packages/docs/docs-user/style-customization.md)
+- [Writing Guide](packages/docs/docs-dev/style/writing-guide.md)
 
 ### Prepare, Clone, Installation, and Run
 
@@ -160,6 +162,14 @@ publishing via scripts like `npm run publish-sdk`. API documentation is produced
 with **Typedoc**, and deployment targets are described in the Vercel and
 Netlify configuration files (currently disabled).
 
+Continuous integration runs on **GitHub Actions**. Workflows exist for
+deployment, documentation generation, quality checks, Discord notifications, and
+SFTP connectivity tests. They are currently disabled but serve as references for
+future automation. See the [CI guide](packages/docs/docs-dev/build-and-run/ci.md)
+for details.
+
+![CI flow diagram](assets/architecture/ci-flow.svg)
+
 ### Flow Charts
 
 <img width="6551" height="5971" alt="image" src="https://github.com/user-attachments/assets/09aaf742-6175-42ba-946b-a66e5f5dac72" />
@@ -199,20 +209,7 @@ participate, visit our [Contribute](https://opendaw.org/contribute) page.
 - [LinkedIn](https://www.linkedin.com/company/opendaw-org/)
 - [Instagram](https://www.instagram.com/opendaw.studio)
 
-## Dual-Licensing Model
-
-openDAW is available **under two alternative license terms**:
-
-| Option                    | When to choose it                                                                                              | Obligations                                                                                                                                                                      |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A. GPL v3 (or later)**  | You are happy for the entire work that includes openDAW to be released under GPL-compatible open-source terms. | – Must distribute complete corresponding source code under GPL.<br>– Must keep copyright & licence notices.<br>– May run openDAW privately in any software, open or closed (§0). |
-| **B. Commercial Licence** | You wish to incorporate openDAW into **closed-source** or otherwise licence-incompatible software.             | – Pay the agreed fee.<br>– No copyleft requirement for your own source code.<br>– Other terms as per the signed agreement.                                                       |
-
-> **How to obtain the Commercial License**  
-> Email `andre.michelle@opendaw.org` with your company name, product description, and expected distribution volume.
-
-If you redistribute openDAW or a derivative work **without** a commercial license, the GPL v3 terms apply automatically.
-
 ## License
 
-[GPL v3](https://www.gnu.org/licenses/gpl-3.0.txt) © 2025 André Michelle
+This project is licensed under the [MIT License](LICENSE)
+

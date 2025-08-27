@@ -1,6 +1,11 @@
 import {Events} from "@opendaw/lib-dom"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 
+/**
+ * Enables horizontal scrolling of the timeline using the mouse wheel.
+ * Small wheel movements within a threshold are ignored to prevent
+ * accidental scrolling.
+ */
 export const attachWheelScroll = (element: Element, range: TimelineRange) =>
     Events.subscribe(element, "wheel", (event: WheelEvent) => {
         const deltaX = event.deltaX

@@ -1,3 +1,6 @@
+/**
+ * List of manual links displayed in the ManualPage sidebar.
+ */
 export const Manuals: ReadonlyArray<[string, string]> = [
     ["⇱", "/manuals/"],
     ["Browser Support", "/manuals/browser-support"],

@@ -9,6 +9,7 @@ import { Icon } from "@/ui/components/Icon.tsx";
 import { RadioGroup } from "@/ui/components/RadioGroup.tsx";
 import { IconSymbol } from "@opendaw/studio-adapters";
 
+/** Utility dialogs used by the Studio UI. */
 const Icons = [
   IconSymbol.AudioBus,
   IconSymbol.Waveform,

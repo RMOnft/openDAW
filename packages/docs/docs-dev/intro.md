@@ -6,6 +6,8 @@ to [build and run](./build-and-run/setup.md) the project, explore its
 [architecture](./architecture/overview.md), and ensure quality with
 [testing and QA](./testing-and-qa/index.md).
 
+For writing and formatting conventions, see the [Writing Guide](./style/writing-guide.md).
+
 ## Table of Contents
 
 - [Build and Run](./build-and-run/setup.md)

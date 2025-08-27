@@ -21,7 +21,13 @@ import {AudioClipBoxAdapter} from "@opendaw/studio-adapters"
 import {AudioFileBoxAdapter} from "@opendaw/studio-adapters"
 import {TrackBoxAdapter} from "@opendaw/studio-adapters"
 
+/**
+ * Wraps a clip adapter and exposes it through the {@link EventOwnerReader}
+ * interface used by editors. Specific factory methods construct the
+ * appropriate reader for audio, note and value clips.
+ */
 export class ClipReader<CONTENT> implements EventOwnerReader<CONTENT> {
+    /** Creates a reader for audio clip boxes. */
     static forAudioClipBoxAdapter(clip: AudioClipBoxAdapter): AudioEventOwnerReader {
         return new class extends ClipReader<never> implements AudioEventOwnerReader {
             constructor(clip: AudioClipBoxAdapter) {super(clip)}
@@ -31,10 +37,12 @@ export class ClipReader<CONTENT> implements EventOwnerReader<CONTENT> {
         }(clip)
     }
 
+    /** Creates a reader for note clip boxes. */
     static forNoteClipBoxAdapter(adapter: NoteClipBoxAdapter): NoteEventOwnerReader {
         return new ClipReader<NoteEventCollectionBoxAdapter>(adapter)
     }
 
+    /** Creates a reader for value clip boxes. */
     static forValueClipBoxAdapter(adapter: ValueClipBoxAdapter): ValueEventOwnerReader {
         return new ClipReader<ValueEventCollectionBoxAdapter>(adapter)
     }

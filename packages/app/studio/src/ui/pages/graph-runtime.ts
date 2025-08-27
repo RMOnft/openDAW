@@ -1,4 +1,6 @@
-// graph-runtime.ts
+/**
+ * Force-directed graph runtime used by GraphPage.
+ */
 import ForceGraph from "force-graph"
 import * as d3 from "d3-force"
 import {SimulationNodeDatum} from "d3-force"

@@ -1,3 +1,6 @@
+/** Sidebar for developer documentation.
+ * Referenced from docusaurus.config.ts; see docs-dev/documentation-site/structure.md
+ */
 module.exports = {
   devSidebar: [
     { type: "doc", id: "intro" },
@@ -78,12 +81,54 @@ module.exports = {
     },
     {
       type: "category",
+      label: "UI",
+      items: [
+        {
+          type: "category",
+          label: "Timeline",
+          items: [
+            "ui/timeline/editors",
+            "ui/timeline/renderers",
+            "ui/timeline/performance",
+          ],
+        },
+        "ui/browse"
+      ],
+    },
+    {
+      type: "category",
       label: "Boxes",
       items: [
         { type: "doc", id: "boxes/overview" },
         { type: "doc", id: "boxes/examples" },
         { type: "doc", id: "boxes/diagram" },
         { type: "doc", id: "boxes/faq" },
+      ],
+    },
+    {
+      type: "category",
+      label: "UI",
+      items: [
+        {
+          type: "category",
+          label: "Piano Roll",
+          items: [
+            { type: "doc", id: "ui/piano-roll/overview" },
+            { type: "doc", id: "ui/piano-roll/visualizers" },
+            { type: "doc", id: "ui/piano-roll/metronome" },
+            { type: "doc", id: "ui/piano-roll/faq" },
+          ],
+        },
+  "ui/mixer"
+},{
+      type: "category",
+      label: "Services",
+      items: [
+        "services/overview",
+        "services/sessions",
+        "services/shortcuts",
+        "services/sync",
+        "services/stems",
       ],
     },
   ],

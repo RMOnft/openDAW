@@ -10,7 +10,17 @@ import {showInfoDialog} from "@/ui/components/dialogs"
 import {SampleImporter} from "@/project/SampleImporter"
 import {SampleApi} from "@/service/SampleApi"
 
+/** Utility functions for working with audio samples. */
 export namespace SampleUtils {
+    /**
+     * Ensure all audio file boxes reference existing samples and prompt the
+     * user to replace missing ones.
+     *
+     * @example
+     * ```ts
+     * await SampleUtils.verify(project.boxGraph, importer, manager)
+     * ```
+     */
     export const verify = async (boxGraph: BoxGraph, importer: SampleImporter, audioManager: SampleManager) => {
         const boxes = boxGraph.boxes().filter((box) => box instanceof AudioFileBox)
         if (boxes.length > 0) {

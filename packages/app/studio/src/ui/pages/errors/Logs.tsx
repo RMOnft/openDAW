@@ -1,3 +1,6 @@
+/**
+ * Displays buffered log entries relative to an error time.
+ */
 import css from "./Logs.sass?inline"
 import {Html} from "@opendaw/lib-dom"
 import {isDefined, TimeSpan} from "@opendaw/lib-std"
