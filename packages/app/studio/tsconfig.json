@@ -8,7 +8,14 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@opendaw/app-studio/configs": ["./src/ui/configs.ts"],
+      "@opendaw/app-studio/features": ["./src/features.ts"],
+      "@opendaw/app-studio/FilePickerAcceptTypes": ["./src/ui/FilePickerAcceptTypes.ts"],
+      "@opendaw/app-studio/service/SessionService": ["./src/service/SessionService.ts"],
+      "@opendaw/app-studio/service/StudioService": ["./src/service/StudioService.ts"],
+      "@opendaw/app-studio/project/ProjectDialogs": ["./src/project/ProjectDialogs.tsx"],
+      "@opendaw/app-studio/ui/App": ["./src/ui/App.tsx"]
     },
     "allowImportingTsExtensions": true
   }

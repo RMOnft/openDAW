@@ -1,3 +1,6 @@
+/**
+ * Collection of dialogs used for common project management operations.
+ */
 import {Dialog} from "@/ui/components/Dialog"
 import {ExportStemsConfiguration, IconSymbol} from "@opendaw/studio-adapters"
 import {Surface} from "@/ui/surface/Surface"

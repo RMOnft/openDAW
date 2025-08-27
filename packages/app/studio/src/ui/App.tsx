@@ -1,3 +1,6 @@
+/**
+ * Root component that sets up routing and global UI elements for the studio.
+ */
 import { Terminator } from "@opendaw/lib-std";
 import { createElement, Frag, Router } from "@opendaw/lib-jsx";
 import { WorkspacePage } from "@/ui/workspace/WorkspacePage.tsx";
@@ -14,6 +17,10 @@ import { ErrorsPage } from "@/ui/pages/ErrorsPage.tsx";
 import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
+/**
+ * Main application component establishing the router and persistent layout
+ * chrome. It is expected to be mounted once at the root of the document.
+ */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();
   return (

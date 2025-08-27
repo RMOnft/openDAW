@@ -7,6 +7,15 @@
   "description": "Web-based digital audio workstation UI for OpenDAW",
   "type": "module",
   "license": "MIT",
+  "exports": {
+    "./configs": "./src/ui/configs.ts",
+    "./features": "./src/features.ts",
+    "./FilePickerAcceptTypes": "./src/ui/FilePickerAcceptTypes.ts",
+    "./service/SessionService": "./src/service/SessionService.ts",
+    "./service/StudioService": "./src/service/StudioService.ts",
+    "./project/ProjectDialogs": "./src/project/ProjectDialogs.tsx",
+    "./ui/App": "./src/ui/App.tsx"
+  },
   "scripts": {
     "dev": "vite --clearScreen false",
     "build": "tsc && vite build",
