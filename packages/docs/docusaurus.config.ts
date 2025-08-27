@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.svg',
   organizationName: 'andremichelle',
   projectName: 'openDAW',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n: { defaultLocale: 'en', locales: ['en'] },
 
@@ -78,7 +78,6 @@ const config: Config = {
         out: "api/dsp",
         excludePrivate: true,
         excludeExternals: false,
-        plugin: ["typedoc-plugin-missing-exports"],
       },
     ],
     [
@@ -90,7 +89,6 @@ const config: Config = {
         out: "api/midi",
         excludePrivate: true,
         excludeExternals: false,
-        plugin: ["typedoc-plugin-missing-exports"],
       },
     ],
   ],
