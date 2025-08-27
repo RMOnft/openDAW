@@ -11,3 +11,7 @@ cover common scenarios and are used across packages for development and regressi
 | `automation.dawproject` | Includes parameter automation curves. |
 | `audio-regions.dawproject` | Contains audio regions with linked media. |
 | `bitwig.example.xml` | Minimal Bitwig project used for parser tests. |
+
+See the [persistence overview](../architecture/persistence.md) for how project files
+are stored and the [file management guide](../../../../docs-user/features/file-management.md)
+for user-level instructions.

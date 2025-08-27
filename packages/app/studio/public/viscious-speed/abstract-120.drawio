@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="abstract-120">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" vertex="1" style="shape=image;html=1;image=abstract-120.svg">
+          <mxGeometry width="256" height="256" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

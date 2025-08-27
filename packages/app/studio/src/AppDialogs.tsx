@@ -20,32 +20,48 @@ import {Colors} from "@opendaw/studio-core"
  * granted.
  */
 export const showStoragePersistDialog = (): Promise<void> => {
-    const {resolve, promise} = Promise.withResolvers<void>()
-    const dialog: HTMLDialogElement = (
-        <Dialog headline="Firefox Must Allow Storage Access"
-                icon={IconSymbol.System}
-                cancelable={false}
-                buttons={[{
-                    text: "Allow",
-                    primary: true,
-                    onClick: handler => Promises.tryCatch(navigator.storage.persist()).then(({status, value}) => {
-                        if (status === "resolved" && value) {
-                            console.debug("Firefox now persists storage.")
-                            handler.close()
-                            resolve()
-                        }
-                    })
-                }]}>
-            <div style={{padding: "1em 0"}}>
-                <h2 style={{color: Colors.red}}>Data loss is probable if you do not take action.</h2>
-                <p>To make this a permanent friendship, please go to:</p>
-                <p style={{color: Colors.yellow}}>Preferences - Privacy & Security - Cookies & Site Data - Manage
-                    Exceptions...</p>
-                <p>and add opendaw.studio to the list. You will never be bothered again.</p>
-            </div>
-        </Dialog>
-    )
-    Surface.get().body.appendChild(dialog)
-    dialog.showModal()
-    return promise
-}
+  const { resolve, promise } = Promise.withResolvers<void>();
+  // Construct the dialog element with a single "Allow" button
+  const dialog: HTMLDialogElement = (
+    <Dialog
+      headline="Firefox Must Allow Storage Access"
+      icon={IconSymbol.System}
+      cancelable={false}
+      buttons={[
+        {
+          text: "Allow",
+          primary: true,
+          onClick: (handler) =>
+            Promises.tryCatch(navigator.storage.persist()).then(
+              ({ status, value }) => {
+                if (status === "resolved" && value) {
+                  console.debug("Firefox now persists storage.");
+                  handler.close();
+                  resolve();
+                }
+              },
+            ),
+        },
+      ]}
+    >
+      <div style={{ padding: "1em 0" }}>
+        <h2 style={{ color: Colors.red }}>
+          Data loss is probable if you do not take action.
+        </h2>
+        <p>To make this a permanent friendship, please go to:</p>
+        <p style={{ color: Colors.yellow }}>
+          Preferences - Privacy & Security - Cookies & Site Data - Manage
+          Exceptions...
+        </p>
+        <p>
+          and add opendaw.studio to the list. You will never be bothered again.
+        </p>
+      </div>
+    </Dialog>
+  );
+  // Display the modal and return a promise that resolves once the user
+  // grants persistence or dismisses the dialog.
+  Surface.get().body.appendChild(dialog);
+  dialog.showModal();
+  return promise;
+};

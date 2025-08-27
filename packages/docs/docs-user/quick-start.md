@@ -10,4 +10,6 @@
 For language options see the [Localization guide](localization.md). Accessibility features are outlined in the [Accessibility guide](accessibility.md).
 
 For writing or editing tips, consult the
-[Writing Guide](../docs-dev/style/writing-guide.md).
+[Writing Guide](../docs-dev/style/writing-guide.md). For a technical
+overview of how the studio boots, see the
+[bootstrapping architecture doc](../docs-dev/architecture/bootstrap.md).

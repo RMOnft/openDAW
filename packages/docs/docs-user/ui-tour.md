@@ -7,7 +7,13 @@ open additional tooling such as the mixer or project browser.
 The tour walks through the default layout and highlights common entry points
 for editing audio, managing devices and browsing samples.
 
+The interface uses abstract SVG art from the
+`packages/app/studio/public/viscious-speed` collection; see that folder's
+README for the full catalogue and licensing terms.
+
 Get oriented with the main areas of the interface.
+
+For feature-specific notes, see the [manuals overview](manuals/overview.md).
 
 ## Transport
 

@@ -26,7 +26,12 @@ export class SampleService {
   readonly #service: StudioService;
   readonly #selection: HTMLSelection;
 
-  /** Create a new SampleService bound to a studio service and selection. */
+  /**
+   * Create a new SampleService bound to a studio service and selection.
+   *
+   * @param service underlying studio service.
+   * @param selection helper exposing the current DOM selection.
+   */
   constructor(service: StudioService, selection: HTMLSelection) {
     this.#service = service;
     this.#selection = selection;
@@ -79,12 +84,17 @@ export class SampleService {
   }
 
   /** Delete all currently selected samples. */
-  async deleteSelected() {
+  async deleteSelected(): Promise<void> {
     return this.deleteSamples(...this.#samples());
   }
 
-  /** Delete the given samples after checking their usage and confirmation. */
-  async deleteSamples(...samples: ReadonlyArray<Sample>) {
+  /**
+   * Delete the given samples after checking their usage and asking for
+   * confirmation.
+   *
+   * @param samples samples to remove from local storage.
+   */
+  async deleteSamples(...samples: ReadonlyArray<Sample>): Promise<void> {
     const processDialog = showProcessDialog(
       "Checking Sample Usages",
       new DefaultObservableValue(0.5),
