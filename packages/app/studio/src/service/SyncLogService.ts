@@ -6,7 +6,9 @@ import {StudioService} from "@/service/StudioService"
 import {Commit, SyncLogReader, SyncLogWriter} from "@opendaw/studio-core"
 
 /**
- * Service helpers for writing and appending project SyncLog files.
+ * Service helpers for writing and appending project SyncLog files. Intended to
+ * be used alongside the {@link SessionService} to persist collaborative
+ * session history.
  *
  * ```mermaid
  * flowchart LR

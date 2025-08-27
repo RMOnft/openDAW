@@ -21,6 +21,11 @@ import {Protocol} from "./Protocol"
 import {Lock} from "./Lock"
 import {Flags} from "./Flags"
 
+/**
+ * Consumes live stream updates produced by a {@link LiveStreamBroadcaster}.
+ * The receiver reacts to structural changes, manages subscriptions and
+ * dispatches incoming values to listeners on every animation frame.
+ */
 interface Package<T> extends Terminable {
     dispatch(address: Address, input: ByteArrayInput): void
     subscribe(address: Address, procedure: Procedure<T>): Subscription
@@ -145,8 +150,9 @@ export class LiveStreamReceiver implements Terminable {
     }
 
     /**
-     * Connects the receiver to a messenger channel and starts processing
-     * incoming updates. Returns a {@link Terminable} to disconnect.
+     * Connects the receiver to a messenger channel and starts dispatching
+     * frames. The returned terminable tears down the connection and stops
+     * processing when invoked.
      */
     connect(messenger: Messenger): Terminable {
         assert(!this.#connected, "Already connected")
@@ -203,6 +209,10 @@ export class LiveStreamReceiver implements Terminable {
     /** Disconnects from the messenger and clears subscriptions. */
     terminate(): void {this.#disconnect()}
 
+    /**
+     * Called for every animation frame; checks the shared lock and dispatches
+     * the latest data package to all registered handlers when available.
+     */
     #dispatch(): void {
         if (this.#optLock.isEmpty() || this.#memory.isEmpty()) {return}
         const lock = this.#optLock.unwrap()
@@ -214,11 +224,16 @@ export class LiveStreamReceiver implements Terminable {
         }
     }
 
+    /** Rebuilds dispatch procedures when the stream structure changes. */
     #updateStructure(input: ByteArrayInput): void {
         Arrays.clear(this.#procedures)
         this.#parseStructure(input)
     }
 
+    /**
+     * Reads a data block and executes the stored procedures in order. Outdated
+     * versions are skipped until a matching structure arrives.
+     */
     #dispatchData(input: ByteArrayInput): boolean {
         const version = input.readInt()
         if (version !== this.#structureVersion) {
@@ -231,6 +246,10 @@ export class LiveStreamReceiver implements Terminable {
         return true
     }
 
+    /**
+     * Parses a structure update and prepares dispatch procedures for each
+     * registered address/type pair.
+     */
     #parseStructure(input: ByteArrayInput): void {
         if (input.readInt() !== Flags.ID) {throw new Error("no valid id")}
         const version = input.readInt()

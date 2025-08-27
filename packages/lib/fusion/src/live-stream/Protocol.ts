@@ -1,12 +1,18 @@
 /**
- * Messaging contract used between the broadcaster and receiver. All methods
- * forward updates over a shared channel without awaiting a response.
+ * Defines the messaging contract between a {@link LiveStreamBroadcaster}
+ * and a {@link LiveStreamReceiver}. Implementations forward shared memory
+ * references and update packets across thread boundaries.
  */
 export interface Protocol {
-    /** Shares the lock that synchronises read/write access to data buffers. */
+    /** Share the lock used to coordinate access to the data buffer. */
     sendShareLock(lock: SharedArrayBuffer): void
-    /** Sends the data buffer containing audio frames. */
+
+    /** Transfer a new data buffer containing the actual stream values. */
     sendUpdateData(data: ArrayBufferLike): void
-    /** Sends structural information about the current stream layout. */
+
+    /**
+     * Send an updated structure description describing the layout of the
+     * forthcoming data packages.
+     */
     sendUpdateStructure(structure: ArrayBufferLike): void
 }

@@ -79,8 +79,9 @@ For a deeper look at timing, see the [audio path](./audio-path.md) and the
 - **Config** – Delivers runtime and build settings consumed by other components.
 
 Communication between these parts is based on lightweight message channels; see
-the [messaging architecture](./messaging.md) for details. Concrete worker
-protocols are described in the [Fusion docs](../fusion/overview.md).
+the [messaging architecture](./messaging.md) for details. For real-time
+collaboration features, explore the [Live Stream service](../services/live-stream.md)
+and the user-facing [collaboration guide](../../docs-user/features/collaboration.md).
 
 ## Worker Lifecycle
 

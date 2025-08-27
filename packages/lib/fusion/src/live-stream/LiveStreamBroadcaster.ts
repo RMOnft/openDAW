@@ -25,9 +25,10 @@ interface Package {
 }
 
 /**
- * Broadcasts typed data packages over a {@link Messenger} channel. Packages
- * are written into a shared buffer and synchronised with connected
- * {@link LiveStreamReceiver} instances using a simple lock.
+ * Serialises values provided by various publishers into a shared buffer and
+ * forwards updates to a {@link LiveStreamReceiver}. The broadcaster owns the
+ * data buffer and controls when receivers may read from it by toggling a
+ * shared {@link Lock}.
  */
 export class LiveStreamBroadcaster {
     /**
@@ -61,8 +62,10 @@ export class LiveStreamBroadcaster {
     }
 
     /**
-     * Flushes any pending structural updates and, when permitted by the shared
-     * lock, writes the latest package data to the output buffer.
+     * Flushes the pending packages into the shared buffer. When the structure
+     * changes, the receiver is first notified with a new layout description and
+     * data buffer. Actual values are written only when the consumer signals that
+     * it is ready by setting the {@link Lock} to {@link Lock.WRITE}.
      */
     flush(): void {
         const update = this.#updateAvailable()
@@ -71,9 +74,9 @@ export class LiveStreamBroadcaster {
                 this.#sender.sendShareLock(this.#lock)
                 this.#lockShared = true
             }
-                this.#sender.sendUpdateStructure(update.unwrap())
-                const capacity = this.#computeCapacity()
-                if (this.#output.remaining < capacity) {
+            this.#sender.sendUpdateStructure(update.unwrap())
+            const capacity = this.#computeCapacity()
+            if (this.#output.remaining < capacity) {
                 const size = nextPowOf2(capacity)
                 const data = new SharedArrayBuffer(size)
                 this.#output = ByteArrayOutput.use(data)
@@ -82,8 +85,9 @@ export class LiveStreamBroadcaster {
             }
         }
         if (this.#sabOption.isEmpty()) {return}
-        // If main-thread is not interested, no data will ever be sent again, since it will not set the lock to CAN_WRITE.
-        // No lock is necessary since the other side skips reading until we set the lock to CAN_READ.
+        // If main-thread is not interested, no data will ever be sent again,
+        // since it will not set the lock to CAN_WRITE. No lock is necessary since
+        // the other side skips reading until we set the lock to CAN_READ.
         if (Atomics.load(this.#lockArray, 0) === Lock.WRITE) {
             this.#flushData(this.#output)
             this.#output.position = 0
@@ -173,7 +177,7 @@ export class LiveStreamBroadcaster {
         return this.#capacity
     }
 
-    /** Clears any registered packages and releases internal resources. */
+    /** Clears all stored packages and resets state. */
     terminate(): void {
         Arrays.clear(this.#packages)
         this.#availableUpdate = Option.None
@@ -181,6 +185,7 @@ export class LiveStreamBroadcaster {
         this.#capacity = 0
     }
 
+    /** Writes the version and all package payloads into the buffer. */
     #flushData(output: ByteArrayOutput): void {
         assert(!this.#invalid && this.#availableUpdate.isEmpty(), "Cannot flush while update is available")
         const requiredCapacity = this.#computeCapacity()
@@ -191,10 +196,12 @@ export class LiveStreamBroadcaster {
         output.writeInt(Flags.END)
     }
 
+    /** Computes the sum of capacities for all registered packages. */
     #sumRequiredCapacity(): int {
         return this.#packages.reduce((sum, pack) => sum + pack.capacity, 0)
     }
 
+    /** Registers a package and returns a handle to remove it again. */
     #storeChunk(pack: Package): Terminable {
         this.#packages.push(pack)
         this.#invalidate()
@@ -206,11 +213,13 @@ export class LiveStreamBroadcaster {
         }
     }
 
+    /** Marks the structure as outdated. */
     #invalidate(): void {
         this.#capacity = -1
         this.#invalid = true
     }
 
+    /** Builds a structure description listing all packages and their types. */
     #compileStructure(): ArrayBufferLike {
         const output = ByteArrayOutput.create()
         output.writeInt(Flags.ID)
