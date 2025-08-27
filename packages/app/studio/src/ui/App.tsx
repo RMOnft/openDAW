@@ -14,6 +14,13 @@ import { ErrorsPage } from "@/ui/pages/ErrorsPage.tsx";
 import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
+/**
+ * Root application component wiring together the global header, footer and the
+ * router that drives all workspace pages.
+ *
+ * @param service - The main studio service providing session state.
+ * @returns The root application element.
+ */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();
   return (

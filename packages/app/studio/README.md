@@ -6,6 +6,11 @@ For a guided overview of the interface, see the [UI tour](../../docs/docs-user/u
 Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md).
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
 
+The project notepad uses markdown and can be customized. See the
+[markdown editing guide](../../docs/docs-dev/ui/markdown/editing.md) for
+developer details. For instructions on using the feature in the Studio,
+read the [notepad user guide](../../docs/docs-user/features/notepad.md).
+
 For individual topics, browse the in-app [manuals](public/manuals/index.md).
 
 ## Component Hierarchy

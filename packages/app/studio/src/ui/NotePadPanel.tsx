@@ -9,19 +9,32 @@ import { Checkbox } from "@/ui/components/Checkbox";
 import { renderMarkdown } from "@/ui/Markdown";
 import { Events, Html, Keyboard } from "@opendaw/lib-dom";
 
+/** CSS module class applied to the notepad container. */
 const className = Html.adoptStyleSheet(css, "NotePadPanel");
 
+/** Construction parameters for the {@link NotePadPanel} component. */
 type Construct = {
+  /** Parent lifecycle that manages subscriptions. */
   lifecycle: Lifecycle;
+  /** Shared studio service used to persist notepad content. */
   service: StudioService;
 };
 
+/**
+ * Displays a small markdown-capable notepad. The panel allows users to toggle
+ * between editing plain text and viewing rendered markdown. Text is persisted
+ * in the current session metadata.
+ */
 export const NotePadPanel = ({ lifecycle, service }: Construct) => {
+  // Observable backing store for the markdown text.
   const markdownText = new DefaultObservableValue("");
+  // Observable toggling between edit and preview modes.
   const editMode = new DefaultObservableValue(false);
+  // Element representing the editable or rendered content.
   const notepad: HTMLElement = (
     <div className="content" role="region" aria-label="Notepad" />
   );
+  // Persist the current notepad text into the session metadata.
   const saveNotepad = () => {
     const innerText = notepad.innerText;
     if (innerText === template) {
@@ -30,6 +43,7 @@ export const NotePadPanel = ({ lifecycle, service }: Construct) => {
     markdownText.setValue(innerText);
     service.session.updateMetaData("notepad", innerText);
   };
+  // Re-render the notepad depending on edit mode state.
   const update = () => {
     Html.empty(notepad);
     const text = markdownText.getValue();

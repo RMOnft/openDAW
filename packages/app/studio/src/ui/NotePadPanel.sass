@@ -1,3 +1,5 @@
+// Styles for the project notepad panel, combining general markdown rules with
+// a panel background to match the rest of the workspace.
 @use "@/colors"
 @use "@/mixins"
 
@@ -18,5 +20,6 @@ component
     padding: 1em
     max-width: 100%
 
+    // Preserve user line breaks while editing markdown.
     &[contentEditable]
       white-space: break-spaces

@@ -7,15 +7,25 @@ import { ProjectBrowser } from "@/project/ProjectBrowser";
 import { showProcessMonolog } from "@/ui/components/dialogs";
 import { Colors } from "@opendaw/studio-core";
 
+/** Class name used for the dashboard container. */
 const className = Html.adoptStyleSheet(css, "Dashboard");
 
 type Construct = {
+  /** Lifecycle of the containing panel. */
   lifecycle: Lifecycle;
+  /** Reference to the studio service for project operations. */
   service: StudioService;
 };
 
-/** Landing page presenting templates and recent projects. */
+/**
+ * Landing page presented when no project is open. Provides shortcuts to
+ * templates, lists recent projects and displays build metadata.
+ *
+ * @param service - Studio service used for project interaction.
+ * @returns The dashboard element.
+ */
 export const Dashboard = ({ service }: Construct) => {
+  // Calculate how long ago the application was built to show in the footer.
   const time = TimeSpan.millis(
     new Date(service.buildInfo.date).getTime() - new Date().getTime(),
   ).toUnitString();
