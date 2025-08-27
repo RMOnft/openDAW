@@ -16,6 +16,7 @@ Import, export, and organize project files.
    all referenced samples into a single `.odb` file.
 3. **Download and share.** Save the bundle locally or send it to a
    collaborator for restoration on another machine.
+4. See the [Exporting workflow](../workflows/exporting.md) for a step‑by‑step guide.
 
 ## Import Audio Samples
 
@@ -39,3 +40,7 @@ Import, export, and organize project files.
   your device.
 - **Keep backups.** Clearing site data or hitting storage limits removes local
   sessions. Regularly export `.odb` bundles to avoid losing work.
+
+## Collaborate and Share
+
+Use project bundles to collaborate. Export a bundle and send it to another user who can open it and continue working. The [Collaboration workflow](../workflows/collaboration.md) covers best practices.

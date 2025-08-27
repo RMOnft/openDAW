@@ -7,12 +7,23 @@ import {EventBuffer} from "./EventBuffer"
 import {Fragmentor} from "@opendaw/lib-dsp"
 import {UpdateClockRate} from "@opendaw/studio-adapters"
 
+/**
+ * Automation update event distributed by the {@link UpdateClock}.
+ */
 export interface UpdateEvent extends Event {type: "update-event"}
 
 export namespace UpdateEvent {
+    /** Type guard for {@link UpdateEvent}. */
     export const isOfType = (event: Event): event is UpdateEvent => event.type === "update-event"
 }
 
+/**
+ * Audio engine processor that schedules periodic {@link UpdateEvent}s.
+ *
+ * The events are emitted within the worker thread and used to drive UI
+ * updates or other time-based tasks in the main thread at the rate
+ * specified by {@link UpdateClockRate}.
+ */
 export class UpdateClock extends AbstractProcessor {
     readonly #outputs: Array<EventBuffer> = []
 
@@ -24,6 +35,7 @@ export class UpdateClock extends AbstractProcessor {
 
     reset(): void {this.eventInput.clear()}
 
+    /** Adds another event buffer that should receive update events. */
     addEventOutput(output: EventBuffer): Terminable {
         this.#outputs.push(output)
         return {terminate: () => Arrays.remove(this.#outputs, output)}

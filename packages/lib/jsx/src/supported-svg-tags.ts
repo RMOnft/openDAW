@@ -1,5 +1,8 @@
-// We cannot support tags that are used in html as well.
-// TSX builds its DOM from the bottom up, meaning you have no information about the scope (html or svg).
+/**
+ * Set of SVG tag names that can be safely created by the JSX factory. Tags
+ * that overlap with HTML are intentionally omitted because JSX cannot infer
+ * the correct namespace when constructing elements from the bottom up.
+ */
 export const SupportedSvgTags = new Set([
     // "a",
     "altGlyph",

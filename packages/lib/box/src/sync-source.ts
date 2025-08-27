@@ -1,9 +1,14 @@
+/**
+ * Bridges a {@link BoxGraph} to an external synchronization endpoint by
+ * sending updates as they occur.
+ */
 import {Arrays, EmptyExec, panic, Terminable, Terminator} from "@opendaw/lib-std"
 import {Communicator, Messenger} from "@opendaw/lib-runtime"
 import {BoxGraph} from "./graph"
 import {Update} from "./updates"
 import {Synchronization, UpdateTask} from "./sync"
 
+/** Sends graph updates to a remote {@link Synchronization} channel. */
 export class SyncSource<M> implements Terminable {
     static readonly DEBUG_CHECKSUM = false
 

@@ -1,3 +1,4 @@
+/** Addressing utilities for locating vertices in a box graph. */
 import {
     Arrays,
     assert,
@@ -14,9 +15,14 @@ import {
 } from "@opendaw/lib-std"
 import {FieldKey, FieldKeys} from "./field"
 
+/** JSON representation of an {@link Address}. */
 export type AddressJSON = { uuid: Array<int>, fields: Array<int> }
+/** Tuple layout used for efficient address storage. */
 export type AddressLayout = [UUID.Format, FieldKeys]
 
+/**
+ * Immutable address pointing to a vertex within a graph.
+ */
 export class Address implements Comparable<Address> {
     static newSet<T>(keyExtractor: Func<T, Address>) {
         return new SortedSet<Address, T>(keyExtractor, Address.Comparator)
@@ -125,6 +131,7 @@ export class Address implements Comparable<Address> {
     }
 }
 
+/** Objects exposing an {@link Address}. */
 export interface Addressable {get address(): Address}
 
 export namespace Addressable {
@@ -150,6 +157,7 @@ export namespace Addressable {
     }
 }
 
+/** Generates sequential IDs for addresses to use in DOM attributes or logs. */
 export class AddressIdEncoder {
     readonly #ids: SortedSet<Address, { address: Address, id: string }>
     #idCount: int

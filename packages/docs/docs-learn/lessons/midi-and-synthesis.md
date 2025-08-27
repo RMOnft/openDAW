@@ -43,3 +43,15 @@ flowchart LR
 6. **Experiment further** – Change note lengths, velocities or instrument presets to explore how MIDI data affects synthesis.
 
 By sending MIDI messages to a synth and tweaking its parameters you build an intuitive understanding of how electronic instruments create sound.
+
+## Quiz
+
+1. What does a MIDI clip contain?
+   - [x] Note data
+   - [ ] Audio samples
+   - [ ] Effect presets
+2. Which message tells a synth to start playing a note?
+   - [ ] noteOff
+   - [x] noteOn
+   - [ ] velocityChange
+

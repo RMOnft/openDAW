@@ -1,3 +1,6 @@
+/**
+ * Core interfaces describing vertices within a box graph.
+ */
 import {DataInput, DataOutput, Nullish, Option} from "@opendaw/lib-std"
 import {Addressable} from "./address"
 import {Box} from "./box"
@@ -9,13 +12,16 @@ import {ArrayField} from "./array"
 import {BoxGraph} from "./graph"
 import {ObjectField} from "./object"
 
+/** Rules governing which pointer types may target a vertex. */
 export interface PointerRules<P extends PointerTypes> {
     readonly accepts: ReadonlyArray<P>
     readonly mandatory: boolean
 }
 
+/** Convenience rule indicating that no pointers are accepted. */
 export const NoPointers: PointerRules<never> = Object.freeze({mandatory: false, accepts: []})
 
+/** Visitor interface for traversing vertex structures. */
 export interface VertexVisitor<RETURN = void> {
     visitArrayField?(field: ArrayField): RETURN
     visitObjectField?<FIELDS extends Fields>(field: ObjectField<FIELDS>): RETURN
@@ -24,10 +30,12 @@ export interface VertexVisitor<RETURN = void> {
     visitField?(field: Field): RETURN
 }
 
+/** Type implemented by structures that can accept a vertex visitor. */
 export interface Visitable {
     accept<VISITOR extends VertexVisitor<any>>(visitor: VISITOR): VISITOR extends VertexVisitor<infer R> ? Nullish<R> : void
 }
 
+/** Common interface for all vertices participating in a {@link BoxGraph}. */
 export interface Vertex<P extends PointerTypes = PointerTypes, F extends Fields = any> extends Addressable, Visitable {
     get box(): Box
     get graph(): BoxGraph

@@ -1,6 +1,9 @@
 # Performance
 
-openDAW runs entirely in the browser and aims to stay responsive even with complex projects. Performance tips for contributors:
+openDAW runs entirely in the browser and aims to stay responsive even with
+complex projects. Packages like [`@opendaw/lib-dsp`](./package-inventory.md#lib)
+and [`@opendaw/app-studio`](./package-inventory.md#app) benefit from regular
+profiling. Performance tips for contributors:
 
 - Avoid heavy allocations in the audio thread; prefer pre-allocated buffers.
 - Use Web Workers or AudioWorklets for CPU‑intensive tasks.
@@ -9,7 +12,8 @@ openDAW runs entirely in the browser and aims to stay responsive even with compl
 
 ## Capturing performance traces in Chrome DevTools
 
-Chrome's Performance panel helps diagnose rendering or audio hiccups. To capture a trace:
+Chrome's Performance panel helps diagnose rendering or audio hiccups. To capture
+a trace (see also the [Profiling guide](./build-and-run/profiling.md)):
 
 1. **Open DevTools** – Press `F12` or `Cmd+Option+I` / `Ctrl+Shift+I` in Chrome.
    ![Open DevTools](../static/img/performance-open-devtools.svg) <!-- TODO: add screenshot -->
@@ -22,4 +26,5 @@ Chrome's Performance panel helps diagnose rendering or audio hiccups. To capture
 5. **Save the trace (optional)** – Use the export icon to save a `.json` trace file for sharing in pull requests.
    ![Save trace](../static/img/performance-save.svg) <!-- TODO: add screenshot -->
 
-Contributors are encouraged to document any performance benchmarks or profiling results in pull requests.
+Contributors are encouraged to document any performance benchmarks or profiling
+results in pull requests.

@@ -1,14 +1,20 @@
 // noinspection PointlessArithmeticExpressionJS
 
+/**
+ * Utilities for building a tiny demo project that plays a simple arpeggio.
+ */
 import {PPQN} from "@opendaw/lib-dsp"
 import {EffectFactories, InstrumentFactories, Project, ProjectEnv} from "@opendaw/studio-core"
 
 const {Bar, Quarter} = PPQN
 
+/**
+ * Create a minimal project demonstrating instrument and effect creation.
+ */
 export const createExampleProject = (env: ProjectEnv): Project => {
     const project = Project.new(env)
     const {api, editing} = project
-    // @ts-ignore
+    // @ts-expect-error: demo code ignores return values from insertEffect
     const {boxA, boxB, boxC} = editing.modify(() => {
         const {to} = project.timelineBoxAdapter.box.loopArea
         to.setValue(Bar)

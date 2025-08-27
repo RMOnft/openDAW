@@ -3,6 +3,7 @@
 
 import {int} from "@opendaw/lib-std"
 
+/** Musical position expressed in pulses per quarter note. */
 export type ppqn = number
 
 const Quarter = 960 as const
@@ -30,6 +31,7 @@ const pulsesToSeconds = (pulses: ppqn, bpm: number): number => (pulses * 60.0 / 
 const samplesToPulses = (samples: number, bpm: number, sampleRate: number): ppqn => secondsToPulses(samples / sampleRate, bpm)
 const pulsesToSamples = (pulses: ppqn, bpm: number, sampleRate: number): number => pulsesToSeconds(pulses, bpm) * sampleRate
 
+/** Utility conversions for {@link ppqn} timing. */
 export const PPQN = {
     Bar,
     Quarter,

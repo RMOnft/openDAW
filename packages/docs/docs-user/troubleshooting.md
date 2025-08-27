@@ -22,6 +22,16 @@
 - Close other browser tabs or applications to free resources.
 - Lower the audio buffer size only if your system can handle it.
 
+### Audio drops out or lags
+
+- Increase the audio buffer size in settings to give the CPU more time.
+- Ensure no other applications are using significant CPU resources.
+
 ### How do I reset openDAW to defaults?
 
 - Delete cached data in the browser's site settings and reload openDAW.
+
+### Browser denies microphone access
+
+- Check browser permissions and allow access when prompted.
+- Verify that the correct input device is selected in audio settings.

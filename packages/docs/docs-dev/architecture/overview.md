@@ -1,6 +1,9 @@
 # Architecture Overview
 
-The architecture of openDAW is described using the C4 model.
+openDAW is composed of several packages such as
+[`@opendaw/app-studio`](../package-inventory.md#app) and
+[`@opendaw/studio-core`](../package-inventory.md#studio). The architecture is
+described using the C4 model.
 
 ## Context
 
@@ -51,7 +54,41 @@ C4Component
     Rel(studio, lib, "Uses")
 ```
 
+
+- **App** – Provides the user interface and coordinates system interactions. Implemented in
+  [`@opendaw/app-studio`](../package-inventory.md#app).
+- **Studio** – Handles audio processing, scheduling, and engine control. Powered by
+  [`@opendaw/studio-core`](../package-inventory.md#studio).
+- **Lib** – Supplies shared utilities and reusable logic across modules from packages like
+  [`@opendaw/lib-runtime`](../package-inventory.md#lib).
+- **Config** – Delivers runtime and build settings consumed by other components through
+  [`@opendaw/eslint-config`](../package-inventory.md#config) and related packages.
+
+For a deeper look at timing, see the [audio path](./audio-path.md), and
+learn how to build the project in [Build and Run](../build-and-run/setup.md).
+
 - **App** – Provides the user interface and coordinates system interactions.
 - **Studio** – Handles audio processing, scheduling, and engine control.
 - **Lib** – Supplies shared utilities and reusable logic across modules.
 - **Config** – Delivers runtime and build settings consumed by other components.
+
+## Worker Lifecycle
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Worker
+    Main->>Worker: install bundled script
+    Worker->>Worker: initialise services
+    Main->>Worker: invoke protocols
+    Main-->>Worker: terminate
+```
+
+Workers are installed once at application startup and provide services such as
+file access and waveform analysis before being terminated when no longer
+needed.
+
+For details about the studio runtime internals see the
+[studio core README](../../../studio/core/README.md).
+
+

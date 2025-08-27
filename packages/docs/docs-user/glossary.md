@@ -23,3 +23,11 @@ An instrument or effect unit inserted on a track. Read more in [Devices and Plug
 ## Track
 
 A lane in the arrangement that holds clips and devices. Learn more in [Tracks](features/tracks.md).
+
+## Bus
+
+An auxiliary track used to group signals or host shared effects. Create and manage buses in the [Mixer](features/mixer.md).
+
+## Device Chain
+
+Ordered list of instruments and effects on a track. See [Devices and Plugins](features/devices-and-plugins.md).

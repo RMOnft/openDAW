@@ -54,6 +54,7 @@ import {InstrumentDeviceProcessor} from "./InstrumentDeviceProcessor"
 import {AudioEffectDeviceProcessor} from "./AudioEffectDeviceProcessor"
 import {UnknownMidiEffectDeviceProcessor} from "./devices/midi-effects/UnknownMidiEffectDeviceProcessor"
 
+/** Factory functions creating processor instances for instrument devices. */
 export namespace InstrumentDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): Nullish<InstrumentDeviceProcessor | AudioBusProcessor> =>
@@ -71,6 +72,7 @@ export namespace InstrumentDeviceProcessorFactory {
         })
 }
 
+/** Factory for processors wrapping MIDI-effect devices. */
 export namespace MidiEffectDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): MidiEffectProcessor =>
@@ -86,6 +88,7 @@ export namespace MidiEffectDeviceProcessorFactory {
         }), `Could not create midi-effect for'${box.name}'`)
 }
 
+/** Factory for audio-effect device processors. */
 export namespace AudioEffectDeviceProcessorFactory {
     export const create = (context: EngineContext,
                            box: Box): AudioEffectDeviceProcessor =>

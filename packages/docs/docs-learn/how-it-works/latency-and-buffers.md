@@ -5,6 +5,14 @@ contains a fixed number of samples that the audio hardware consumes at regular
 intervals. The time between these hardware callbacks determines the base
 latency of the system.
 
+```mermaid
+flowchart LR
+    UserInput[User Input] --> Engine
+    Engine --> Buffer[Audio Buffer]
+    Buffer --> Hardware[Audio Hardware]
+    Hardware --> Output[Speakers]
+```
+
 ## Buffer size and latency
 
 Smaller buffers reduce latency because the audio thread delivers audio to the
@@ -28,3 +36,15 @@ graph, are queued into buffers, and finally emerge from the speakers after the
 hardware has processed them. Monitoring external signals adds another trip
 through the converters. Understanding this round-trip time is essential when
 recording or synchronising with other gear.
+
+## Quiz
+
+1. What is the trade-off when using smaller audio buffers?
+   - [ ] More stable playback but higher latency
+   - [x] Lower latency but increased risk of glitches
+   - [ ] No change in latency or performance
+2. Which component ultimately turns buffered audio into sound?
+   - [ ] Mixer
+   - [ ] Sequencer
+   - [x] Audio hardware
+

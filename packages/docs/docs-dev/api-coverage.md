@@ -2,9 +2,11 @@
 
 Documentation coverage measured with `typedoc-plugin-coverage`:
 
-- `@opendaw/lib-runtime`: 0%
-- `@opendaw/lib-dsp`: 0%
-- `@opendaw/lib-midi`: 2%
+- [`@opendaw/lib-runtime`](./package-inventory.md#lib) – 0%
+- [`@opendaw/lib-dsp`](./package-inventory.md#lib) – 0%
+- [`@opendaw/lib-midi`](./package-inventory.md#lib) – 2%
+
+See the full list of packages in the [package inventory](./package-inventory.md).
 
 ## Running `typedoc-plugin-coverage`
 
@@ -54,3 +56,6 @@ A typical `coverage.json` looks like:
 - Include descriptions, parameter/return tags, and examples as needed.
 - Re‑run the coverage command to ensure the percentage increases and the
   `notDocumented` list shrinks.
+
+Contributions to improve coverage are welcome—see
+[Contributing](./contributing.md) for guidelines.

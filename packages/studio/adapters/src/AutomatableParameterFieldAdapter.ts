@@ -31,6 +31,26 @@ const ExternalControlTypes = [
     Pointers.MidiControl,
     Pointers.ParameterController] as const
 
+/**
+ * Bridges a {@link PrimitiveField} with the automation system.
+ *
+ * @remarks
+ * Instances listen for automation, modulation and MIDI control pointers and
+ * expose the resulting value as a {@link Parameter}.  They also connect to the
+ * {@link TrackBoxAdapter} that owns the field to evaluate automation curves.
+ *
+ * The underlying processing is performed by the
+ * {@link @opendaw/studio-core-processors#AutomatableParameter | AutomatableParameter}
+ * processor which emits value changes on the audio thread.
+ *
+ * @example
+ * ```ts
+ * const adapter = new AutomatableParameterFieldAdapter(
+ *   ctx, field, ValueMapping.linear(0, 1), StringMapping.unitInterval, "Gain"
+ * )
+ * adapter.registerMidiControl()
+ * ```
+ */
 export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any> implements Parameter<T>, Terminable {
     readonly #context: BoxAdaptersContext
     readonly #field: PrimitiveField<T, Pointers.Automation>
@@ -109,6 +129,11 @@ export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any> i
         }
     }
 
+    /**
+     * Marks the parameter as being controlled by incoming MIDI data.
+     *
+     * @returns handle to stop the control relationship
+     */
     registerMidiControl(): Terminable {
         this.#controlSource.proxy.onControlSourceAdd("midi")
         this.#midiControlled = true
@@ -129,6 +154,9 @@ export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any> i
     get address(): Address {return this.#field.address}
     get track(): Option<TrackBoxAdapter> {return this.#trackBoxAdapter}
 
+    /**
+     * Computes the parameter value at a specific timeline position, including automation.
+     */
     valueAt(position: ppqn): T {
         const optTrack = this.#trackBoxAdapter
         if (optTrack.nonEmpty()) {

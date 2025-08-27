@@ -20,12 +20,27 @@ import {
 import {Propagation} from "./dispatchers"
 import {VertexVisitor} from "./vertex"
 
+/**
+ * Primitive field implementations for boolean, numeric, string and byte values.
+ * These fields expose serialization logic and observable change notifications
+ * used by the {@link BoxGraph} to propagate updates.
+ */
+
+/**
+ * Union of values that can be stored in a {@link PrimitiveField}.
+ */
 export type PrimitiveValues = float | int | string | boolean | Readonly<Int8Array>
 
+/**
+ * Enumeration of supported primitive field types.
+ */
 export enum PrimitiveType {
     Boolean = "boolean", Float32 = "float32", Int32 = "int32", String = "string", Bytes = "bytes"
 }
 
+/**
+ * Serialization contract for primitive field values.
+ */
 export interface ValueSerialization<V extends PrimitiveValues = PrimitiveValues> {
     get type(): PrimitiveType
     encode(output: DataOutput, value: V): void
@@ -66,7 +81,10 @@ export const ValueSerialization = {
         }
     }
 } as const satisfies Record<PrimitiveType, ValueSerialization>
-
+/**
+ * Base implementation for fields storing primitive values.
+ * Handles clamping, equality checks and propagating updates within the graph.
+ */
 export abstract class PrimitiveField<
     V extends PrimitiveValues = PrimitiveValues,
     P extends PointerTypes = UnreferenceableType
@@ -122,6 +140,7 @@ export abstract class PrimitiveField<
     reset(): void {this.setValue(this.#initValue)}
 }
 
+/** Field storing a boolean value. */
 export class BooleanField<E extends PointerTypes = UnreferenceableType> extends PrimitiveField<boolean, E> {
     static create<E extends PointerTypes = UnreferenceableType>(
         construct: FieldConstruct<E>,
@@ -137,6 +156,7 @@ export class BooleanField<E extends PointerTypes = UnreferenceableType> extends 
     write(output: DataOutput): void {output.writeBoolean(this.getValue())}
 }
 
+/** Field storing a 32-bit floating point value. */
 export class Float32Field<E extends PointerTypes = UnreferenceableType> extends PrimitiveField<float, E> {
     static create<E extends PointerTypes = UnreferenceableType>(
         construct: FieldConstruct<E>,
@@ -151,6 +171,7 @@ export class Float32Field<E extends PointerTypes = UnreferenceableType> extends 
     write(output: DataOutput): void {output.writeFloat(this.getValue())}
 }
 
+/** Field storing a 32-bit integer value. */
 export class Int32Field<E extends PointerTypes = UnreferenceableType> extends PrimitiveField<int, E> {
     static create<E extends PointerTypes = UnreferenceableType>(
         construct: FieldConstruct<E>,
@@ -165,6 +186,7 @@ export class Int32Field<E extends PointerTypes = UnreferenceableType> extends Pr
     write(output: DataOutput): void {output.writeInt(this.getValue())}
 }
 
+/** Field storing a UTF-16 string. */
 export class StringField<E extends PointerTypes = UnreferenceableType> extends PrimitiveField<string, E> {
     static create<E extends PointerTypes = UnreferenceableType>(
         construct: FieldConstruct<E>,
@@ -179,6 +201,7 @@ export class StringField<E extends PointerTypes = UnreferenceableType> extends P
     write(output: DataOutput): void {output.writeString(this.getValue())}
 }
 
+/** Field storing arbitrary byte arrays. */
 export class ByteArrayField<E extends PointerTypes = UnreferenceableType> extends PrimitiveField<Readonly<Int8Array>, E> {
     static create<E extends PointerTypes = UnreferenceableType>(
         construct: FieldConstruct<E>,

@@ -28,3 +28,15 @@ To avoid data loss, openDAW periodically creates a backup of the OPFS data. The
 backup can be written to IndexedDB or synchronised with a backend service when
 the user is online. Restoring from a backup repopulates the OPFS directory so
 that work can continue even after clearing browser storage.
+
+## Quiz
+
+1. What browser feature does openDAW use to store project data locally?
+   - [x] Origin Private File System (OPFS)
+   - [ ] LocalStorage
+   - [ ] Cookies
+2. Why might you export a backup of your project?
+   - [ ] To increase latency
+   - [x] To protect against data loss
+   - [ ] To change the audio sample rate
+

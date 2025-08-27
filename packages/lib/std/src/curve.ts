@@ -2,27 +2,38 @@ import {int, unitValue} from "./lang"
 import {clamp} from "./math"
 
 /**
- * original: http://werner.yellowcouch.org/Papers/fastenv12/index.html
+ * Utilities for generating exponential curves.
+ * Original algorithm: http://werner.yellowcouch.org/Papers/fastenv12/index.html
  */
 export namespace Curve {
     export interface Definition {
+        /** Curve slope in [0,1]. */
         slope: unitValue
+        /** Number of discrete steps to evaluate. */
         steps: int
+        /** Start value of the curve. */
         y0: number
+        /** End value of the curve. */
         y1: number
     }
 
     export interface Coefficients {
+        /** Multiplicative factor used in the recursive form. */
         m: number
+        /** Additive factor used in the recursive form. */
         q: number
     }
 
     const EPLISON = 1.0e-15 as const
 
+    /** Calculates the curve value at step {@link x}. */
     export const valueAt = ({slope, steps, y0, y1}: Definition, x: number): number =>
         normalizedAt(x / steps, slope) * (y1 - y0) + y0
 
-    // https://www.desmos.com/calculator/9lwjajcfkw
+    /**
+     * Evaluates the normalized curve value for progress `x` in [0,1].
+     * See https://www.desmos.com/calculator/9lwjajcfkw for a visualization.
+     */
     export const normalizedAt = (x: unitValue, slope: unitValue): unitValue => {
         if (slope > 0.499999 && slope < 0.500001) {
             return x
@@ -32,11 +43,13 @@ export namespace Curve {
         }
     }
 
+    /** Inverse function of {@link normalizedAt}. */
     export const inverseAt = (y: unitValue, slope: unitValue): unitValue => {
         const p = clamp(slope, EPLISON, 1.0 - EPLISON)
         return Math.log((y * (1.0 - 2.0 * p) / (p * p)) + 1.0) / (2.0 * Math.log((1.0 - p) / p))
     }
 
+    /** Computes {@link Coefficients} for the recursive form of the curve. */
     export const coefficients = (definition: Definition): Coefficients => {
         const f1 = valueAt(definition, 1.0)
         const f2 = valueAt(definition, 2.0)
@@ -45,11 +58,17 @@ export namespace Curve {
         return {m, q}
     }
 
+    /**
+     * Generates {@link steps} values of the curve from {@link y0} to {@link y1}.
+     */
     export function* walk(slope: number, steps: int, y0: number, y1: number): Generator<number> {
         const {m, q} = coefficients({slope, steps, y0, y1} satisfies Curve.Definition)
         for (let i = 0, v = y0; i < steps; i++) {yield v = m * v + q}
     }
 
+    /**
+     * Generator producing normalized values between 0 and 1.
+     */
     export function* walkNormalized(slope: number, steps: int): Generator<unitValue> {
         const d = 1.0 / steps
         const f1 = normalizedAt(d, slope)
@@ -58,10 +77,12 @@ export namespace Curve {
         for (let i = 0, v = 0.0; i < steps; i++) {yield v = m * v + f1}
     }
 
+    /** Builds a {@link Definition} from midpoint value {@link ym}. */
     export const byHalf = (steps: number, y0: number, ym: number, y1: number): Definition => ({
         slope: slopeByHalf(y0, ym, y1), steps, y0, y1
     })
 
+    /** Calculates slope from midpoint {@link ym}. */
     export const slopeByHalf = (y0: number, ym: number, y1: number): number =>
         Math.abs(y1 - y0) < 0.000001 ? 0.5 : (ym - y0) / (y1 - y0)
 }
