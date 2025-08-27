@@ -1,4 +1,5 @@
 {
+  "//": "Typedoc configuration for generating API documentation",
   "excludeExternals": false,
   "excludePrivate": true,
   "excludeInternal": true,

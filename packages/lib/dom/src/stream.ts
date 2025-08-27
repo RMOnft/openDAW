@@ -1,3 +1,14 @@
+
+/**
+ * Utilities for working with `ReadableStream` objects.
+ *
+ * @example
+ * ```ts
+ * const reader = response.body!.getReader();
+ * const buffer = await Stream.read(reader);
+ * ```
+ */
+
 import { int } from "@opendaw/lib-std";
 
 export namespace Stream {

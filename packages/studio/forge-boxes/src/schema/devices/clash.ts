@@ -2,6 +2,16 @@ import {BoxSchema} from "@opendaw/lib-box-forge"
 import {Pointers} from "@opendaw/studio-enums"
 import {createInstrumentDevice} from "./builder"
 
+/**
+ * Clash delay effect used for rhythmic echoes.
+ *
+ * ```mermaid
+ * graph TD
+ *   DeviceClashBox --> patterns
+ *   patterns --> steps
+ * ```
+ */
+
 const ParameterPointerRules = {
     accepts: [Pointers.Modulation, Pointers.Automation, Pointers.StepAutomation],
     mandatory: false

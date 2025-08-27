@@ -47,3 +47,8 @@ if (MidiData.isNoteOn(message)) {
   osc.generate(buffer, freq / 44100, Waveform.sine, 0, buffer.length);
 }
 ```
+
+## Test fixtures
+
+Sample MIDI and DAW project files can be found in [`test-files`](../../test-files). See the
+[test file overview](../../docs/docs-dev/testing/test-files.md) for details on available fixtures.
