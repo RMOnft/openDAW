@@ -137,7 +137,8 @@ export namespace StringMapping {
     // this magic number rounds the result perfectly to integers, while the mathematically correct 10 doesn't:
     // computeBase10(1000) = 3
     // computeBase10(0.001) = -3
-    const computeBase10 = (value: number): int => Math.log(value) / Math.log(9.999999999999999)
+      // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+      const computeBase10 = (value: number): int => Math.log(value) / Math.log(9.999999999999999)
     const computePrefix = (value: number): { value: number, prefix: string } => {
         const location = Math.floor(computeBase10(value) / 3.0)
         const prefix = prefixes[location + 4]

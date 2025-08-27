@@ -21,9 +21,7 @@ import {ppqn} from "./ppqn"
  * Scheduling primitives for time-based musical events.  Positions are
  * expressed in {@link ppqn} (pulses per quarter note).
  */
-export interface Event {
-
-export interface Event {
+  export interface Event {
     /** Discriminator for the event type. */
     readonly type: string
 

@@ -42,7 +42,9 @@ export namespace Strings {
         } else {
             return desiredName
         }
-        while (existingSet.has(test = `${desiredName} ${counter++}`)) {}
+        while (existingSet.has(test = `${desiredName} ${counter++}`)) {
+            // continue searching for available name
+        }
         return test
     }
 }

@@ -44,7 +44,7 @@ type ExtractProperties<T extends Element> = Partial<{
 
 declare global {
     namespace JSX {
-        // @ts-ignore
+        // @ts-expect-error: JSX intrinsic elements are merged from multiple maps
         type IntrinsicElements =
             & { [K in keyof Omit<SVGElementTagNameMap, "a">]: ExtractProperties<Omit<SVGElementTagNameMap, "a">[K]> }
             & { [K in keyof Omit<HTMLElementTagNameMap, "a">]: ExtractProperties<Omit<HTMLElementTagNameMap, "a">[K]> }

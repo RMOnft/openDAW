@@ -18,13 +18,13 @@
 
 export namespace Browser {
   const hasLocation =
-    typeof self !== "undefined" &&
-    "location" in self &&
-    typeof self.location !== undefined;
+      typeof self !== "undefined" &&
+      "location" in self &&
+      typeof self.location !== "undefined";
   const hasNavigator =
-    typeof self !== "undefined" &&
-    "navigator" in self &&
-    typeof self.navigator !== undefined;
+      typeof self !== "undefined" &&
+      "navigator" in self &&
+      typeof self.navigator !== "undefined";
   /** Determines whether the current host is a localhost instance. */
   export const isLocalHost = () =>
     hasLocation && location.host.includes("localhost");

@@ -34,8 +34,8 @@ export namespace MidiFile {
     /**
      * Write a variable-length integer to the output.
      */
-    static writeVarLen(output: ByteArrayOutput, value: number): void {
-      let bytes: Array<byte> = [];
+      static writeVarLen(output: ByteArrayOutput, value: number): void {
+        const bytes: Array<byte> = [];
       while (value > 0x7f) {
         bytes.push((value & 0x7f) | 0x80);
         value >>= 7;

@@ -93,7 +93,7 @@ export class MainThreadSampleLoader implements SampleLoader {
     }
 
     #get(): void {
-        let version = this.#version
+        const version = this.#version
         SampleStorage.load(this.#uuid, this.#manager.context)
             .then(
                 ([data, peaks, meta]) => {
@@ -117,7 +117,7 @@ export class MainThreadSampleLoader implements SampleLoader {
     }
 
     async #fetch(): Promise<void> {
-        let version: int = this.#version
+        const version: int = this.#version
         const [fetchProgress, peakProgress] = Progress.split(progress => this.#setState({
             type: "progress",
             progress: 0.1 + 0.9 * progress

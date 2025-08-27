@@ -44,8 +44,12 @@ describe("SyncStream", () => {
         })
 
         /* -------------------------  perform I/O  ------------------------------ */
-        while (!writer.tryWrite()) {}
-        while (!reader.tryRead()) {}
+        while (!writer.tryWrite()) {
+            // wait for writer
+        }
+        while (!reader.tryRead()) {
+            // wait for reader
+        }
         expect(spy).toHaveBeenCalled()
     })
 

@@ -498,12 +498,12 @@ class ClassWriter<E extends PointerTypes> {
       case "float32":
       case "boolean":
       case "string":
-      case "bytes":
-        const className = asDefined(
-          PrimitiveFields[type],
-          `Unknown type: ${type}`,
-        );
-        return {
+        case "bytes": {
+          const className = asDefined(
+            PrimitiveFields[type],
+            `Unknown type: ${type}`,
+          );
+          return {
           fieldKey,
           fieldName,
           fieldValue: field.value,
@@ -520,9 +520,10 @@ class ClassWriter<E extends PointerTypes> {
                 ? ""
                 : `"${field.value}"`
               : field.value,
-          ],
-        };
-      case "pointer":
+            ],
+          };
+        }
+        case "pointer":
         this.#usesPointerType = true;
         return {
           fieldKey,
@@ -537,15 +538,15 @@ class ClassWriter<E extends PointerTypes> {
             String(field.mandatory),
           ],
         };
-      case "array":
-        const element = this.#printField(fieldKey, field.element);
-        if (!isDefined(element)) {
-          return null;
-        }
-        this.#imports.add(element.importPath, element.className);
-        const elementEdgeConstrainsPrinter =
-          this.#printReferencablePointerRules(field.element);
-        return {
+        case "array": {
+          const element = this.#printField(fieldKey, field.element);
+          if (!isDefined(element)) {
+            return null;
+          }
+          this.#imports.add(element.importPath, element.className);
+          const elementEdgeConstrainsPrinter =
+            this.#printReferencablePointerRules(field.element);
+          return {
           fieldKey,
           fieldName,
           importPath: BOX_LIBRARY,
@@ -564,9 +565,10 @@ class ClassWriter<E extends PointerTypes> {
                   ...element.ctorParams.slice(1),
                 ]})`,
             field.length,
-          ],
-        };
-      case "object": {
+            ],
+          };
+        }
+        case "object": {
         this.#generator.writeClass(field.class, FieldClassOption, NoPointers);
         const className = field.class.name;
         return {

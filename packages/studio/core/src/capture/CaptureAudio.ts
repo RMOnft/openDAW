@@ -59,7 +59,7 @@ export class CaptureAudio extends Capture<CaptureAudioBox> {
         return this.#stream.flatMap(stream => Option.wrap(stream.getAudioTracks().at(0)))
     }
 
-    async prepareRecording({}: RecordingContext): Promise<void> {
+    async prepareRecording(_: RecordingContext): Promise<void> {
         return this.#streamGenerator()
     }
 

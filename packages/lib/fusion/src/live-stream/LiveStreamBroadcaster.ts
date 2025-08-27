@@ -59,9 +59,9 @@ export class LiveStreamBroadcaster {
                 this.#sender.sendShareLock(this.#lock)
                 this.#lockShared = true
             }
-            this.#sender.sendUpdateStructure(update.unwrap())
-            let capacity = this.#computeCapacity()
-            if (this.#output.remaining < capacity) {
+                this.#sender.sendUpdateStructure(update.unwrap())
+                const capacity = this.#computeCapacity()
+                if (this.#output.remaining < capacity) {
                 const size = nextPowOf2(capacity)
                 const data = new SharedArrayBuffer(size)
                 this.#output = ByteArrayOutput.use(data)
@@ -137,12 +137,10 @@ export class LiveStreamBroadcaster {
     }
 
     #updateAvailable(): Option<ArrayBufferLike> {
-        if (this.#invalid) {
-            try {
+            if (this.#invalid) {
                 this.#availableUpdate = Option.wrap(this.#compileStructure())
-            } catch (reason: unknown) {throw reason}
-            this.#invalid = false
-        }
+                this.#invalid = false
+            }
         if (this.#availableUpdate.nonEmpty()) {
             const option = this.#availableUpdate
             this.#availableUpdate = Option.None
@@ -167,7 +165,7 @@ export class LiveStreamBroadcaster {
 
     #flushData(output: ByteArrayOutput): void {
         assert(!this.#invalid && this.#availableUpdate.isEmpty(), "Cannot flush while update is available")
-        let requiredCapacity = this.#computeCapacity()
+        const requiredCapacity = this.#computeCapacity()
         assert(output.remaining >= requiredCapacity, "Insufficient data")
         output.writeInt(this.#version)
         output.writeInt(Flags.START)

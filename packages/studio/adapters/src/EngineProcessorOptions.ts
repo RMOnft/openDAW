@@ -22,6 +22,7 @@ export namespace ExportStemsConfiguration {
             some: (configuration) => Object.keys(configuration).length
         })
 
+    // eslint-disable-next-line no-control-regex
     export const sanitizeFileName = (name: string): string => name.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").trim()
 
     export const sanitizeExportNamesInPlace = (configuration: ExportStemsConfiguration): void => {

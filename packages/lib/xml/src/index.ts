@@ -16,6 +16,7 @@ import {
  * @packageDocumentation
  * @see {@link ../../../docs/docs-dev/serialization/xml.md | XML serialization guide}
  */
+/* eslint-disable @typescript-eslint/no-namespace */
 export namespace Xml {
   type Meta =
     | { type: "class"; name: string; clazz: Class }
@@ -29,7 +30,7 @@ export namespace Xml {
   type MetaMap = Map<PropertyKey, Meta>;
 
   const ClassMap = new Map<string, Class>();
-  const MetaClassMap = new WeakMap<Function, MetaMap>();
+  const MetaClassMap = new WeakMap<Class<unknown>, MetaMap>();
 
   /** XML declaration prepended when serializing documents. */
   export const Declaration =
@@ -91,7 +92,7 @@ export namespace Xml {
       name: string,
       validator?: AttributeValidator<unknown>,
     ): PropertyDecorator =>
-    (target: Object, propertyKey: PropertyKey) =>
+    (target: object, propertyKey: PropertyKey) =>
       WeakMaps.createIfAbsent(
         MetaClassMap,
         target.constructor,
@@ -108,7 +109,7 @@ export namespace Xml {
    */
   export const Element =
     (name: string, clazz: Class): PropertyDecorator =>
-    (target: Object, propertyKey: PropertyKey) =>
+    (target: object, propertyKey: PropertyKey) =>
       WeakMaps.createIfAbsent(
         MetaClassMap,
         target.constructor,
@@ -124,7 +125,7 @@ export namespace Xml {
    */
   export const ElementRef =
     (clazz: Class, nodeName?: string): PropertyDecorator =>
-    (target: Object, propertyKey: PropertyKey) =>
+    (target: object, propertyKey: PropertyKey) =>
       WeakMaps.createIfAbsent(
         MetaClassMap,
         target.constructor,
@@ -143,7 +144,7 @@ export namespace Xml {
    * @see Xml.element to create instances of registered classes
    */
   export const Class = (tagName: string): ClassDecorator => {
-    return (constructor: Function): void => {
+    return (constructor: Class<unknown>): void => {
       assert(
         !ClassMap.has(tagName),
         `${tagName} is already registered as a class.`,
@@ -163,7 +164,10 @@ export namespace Xml {
    * @see Xml.Class for registering tagged classes
    * @see Xml.toElement for serialisation
    */
-  export const element = <T extends {}>(object: T, clazz: Class<T>): T => {
+  export const element = <T extends Record<string, any>>(
+    object: T,
+    clazz: Class<T>,
+  ): T => {
     assert(clazz.length === 0, "constructor cannot have arguments");
     return Object.freeze(
       Object.create(
@@ -190,7 +194,7 @@ export namespace Xml {
     object: Record<string, any>,
   ): Element => {
     const doc = document.implementation.createDocument(null, null);
-    const getClassTagName = (constructor: Function): string => {
+    const getClassTagName = (constructor: Class<unknown>): string => {
       const tagMeta = MetaClassMap.get(constructor)?.get("class");
       if (tagMeta?.type === "class") {
         return tagMeta.name;
@@ -220,7 +224,7 @@ export namespace Xml {
             value.forEach((item) => {
               if (!isDefined(item)) return;
               const itemTagName = getClassTagName(item.constructor);
-              wrapper.appendChild(visit(itemTagName, item));
+                wrapper.appendChild(visit(itemTagName, item as any));
             });
             element.appendChild(wrapper);
           } else if (typeof value === "string") {
@@ -228,7 +232,7 @@ export namespace Xml {
             child.textContent = value;
             element.appendChild(child);
           } else {
-            element.appendChild(visit(meta.name, value));
+              element.appendChild(visit(meta.name, value as any));
           }
         } else if (meta.type === "element-ref") {
           if (!Array.isArray(value))
@@ -272,7 +276,7 @@ export namespace Xml {
 
   export const pretty = (element: Element): string => {
     const PADDING = "  "; // 2 spaces
-    const reg = /(>)(<)(\/*)/g;
+      const reg = /(>)(<)(\/*)/g;
     const xml = new XMLSerializer()
       .serializeToString(element)
       .replace(reg, "$1\n$2$3");
@@ -281,12 +285,12 @@ export namespace Xml {
       .split("\n")
       .map((line) => {
         let indent: int = 0;
-        if (line.match(/.+<\/\w[^>]*>$/)) {
-          indent = 0;
-        } else if (line.match(/^<\/\w/) && pad > 0) {
-          pad -= 1;
-        } else if (line.match(/^<\w[^>]*[^\/]>.*$/)) {
-          indent = 1;
+          if (line.match(/.+<\/\w[^>]*>$/)) {
+            indent = 0;
+          } else if (line.match(/^<\/\w/) && pad > 0) {
+            pad -= 1;
+          } else if (line.match(/^<\w[^>]*[^/]>.*$/)) {
+            indent = 1;
         } else {
           indent = 0;
         }
@@ -297,12 +301,14 @@ export namespace Xml {
       .join("\n");
   };
 
-  export const resolveMeta = (
-    target: Function,
-    propertyKey: PropertyKey,
-  ): Nullish<Meta> => collectMeta(target)?.get(propertyKey);
+    export const resolveMeta = (
+      target: Class<unknown>,
+      propertyKey: PropertyKey,
+    ): Nullish<Meta> => collectMeta(target)?.get(propertyKey);
 
-  export const collectMeta = (target: Function): Nullish<MetaMap> => {
+    export const collectMeta = (
+      target: Class<unknown>,
+    ): Nullish<MetaMap> => {
     const metaMap: MetaMap = new Map<PropertyKey, Meta>();
     while (isDefined(target)) {
       const meta = MetaClassMap.get(target);
@@ -341,23 +347,25 @@ export namespace Xml {
    * @param xml - XML source
    * @param clazz - Class to instantiate
    */
-  export const parse = <T extends {}>(xml: string, clazz: Class<T>): T => {
-    const deserialize = <T extends {}>(
+  export const parse = <T extends Record<string, any>>(
+    xml: string,
+    clazz: Class<T>,
+  ): T => {
+    const deserialize = <U extends Record<string, any>>(
       element: Element,
       clazz: Class<unknown>,
-    ): T => {
-      const instance = Object.create(clazz.prototype) as T;
+    ): U => {
+      const instance = Object.create(clazz.prototype) as U;
       const classMeta = asDefined(Xml.collectMeta(clazz));
-      const classMetaDict: Record<keyof T, Meta> = Array.from(classMeta).reduce(
-        (acc: any, [key, metaInfo]) => {
-          acc[key] = metaInfo;
-          return acc;
-        },
-        {},
-      );
+      const classMetaDict = Array.from(classMeta).reduce<
+        Record<PropertyKey, Meta>
+      >((acc, [key, metaInfo]) => {
+        acc[key] = metaInfo;
+        return acc;
+      }, {});
       const keys = [...classMeta.keys()].filter(
         (key) => key !== "class",
-      ) as Array<keyof T>;
+      ) as Array<keyof U>;
 
       for (const key of keys) {
         const meta: Meta = classMetaDict[key];
