@@ -14,6 +14,7 @@ component
   @include colors.panel-background
 
   > div.filter
+    // Search bar and location toggle
     display: flex
     align-items: center
     font-size: 1rem
@@ -23,6 +24,7 @@ component
     grid-column: 1 / -1
 
   > div.content
+    // Scrollable list area showing individual samples
     flex: 1 0 0
     display: grid
     grid-template-columns: 1fr auto auto auto
@@ -31,6 +33,7 @@ component
     overflow: hidden
 
   > div.footer
+    // Volume control section
     display: flex
     align-items: center
     height: 1.25rem

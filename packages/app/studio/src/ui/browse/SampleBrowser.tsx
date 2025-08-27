@@ -56,6 +56,7 @@ export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own(location.subscribe(() => reload.get().update()));
   const filter = new DefaultObservableValue("");
   const searchInput = <SearchInput lifecycle={lifecycle} model={filter} />;
+  // Global volume slider controlling sample preview loudness
   const slider: HTMLInputElement = (
     <input type="range" min="0.0" max="1.0" step="0.001" />
   );
@@ -189,6 +190,7 @@ export const SampleBrowser = ({ lifecycle, service }: Construct) => {
         location.getValue() === SampleLocation.Local
       ) {
         await sampleService.deleteSelected();
+        // Refresh list after deletion to reflect current state
         reload.get().update();
       }
     }),
