@@ -1,3 +1,8 @@
+/**
+ * Features section displayed on the docs home page.
+ * Styling is defined in styles.module.css and global rules live in ../../css/custom.css.
+ * See docs-dev/documentation-site/styling.md for guidelines.
+ */
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
