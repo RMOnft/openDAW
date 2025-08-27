@@ -8,6 +8,16 @@ import {AudioDevices} from "@opendaw/studio-core"
 import {SyncLogService} from "@/service/SyncLogService"
 import {IconSymbol} from "@opendaw/studio-adapters"
 
+/**
+ * Builds the dynamic application menu and wires entries to the
+ * {@link StudioService}.
+ *
+ * ```mermaid
+ * graph TD
+ *   A[Menu] --> B[File]
+ *   A --> C[Debug]
+ * ```
+ */
 export const initAppMenu = (service: StudioService) => {
     return MenuItem.root()
         .setRuntimeChildrenProcedure(parent => {

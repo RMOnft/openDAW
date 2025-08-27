@@ -1,81 +1,121 @@
-import {int, isDefined, Nullable, Nullish, Subscription, Terminable, Terminator} from "@opendaw/lib-std"
-import {ElementCapturing} from "@/ui/canvas/capturing.ts"
-import {Surface} from "@/ui/surface/Surface.tsx"
-import {CssUtils, Events} from "@opendaw/lib-dom"
+import {
+  int,
+  isDefined,
+  Nullable,
+  Nullish,
+  Subscription,
+  Terminable,
+  Terminator,
+} from "@opendaw/lib-std";
+import { ElementCapturing } from "@/ui/canvas/capturing.ts";
+import { Surface } from "@/ui/surface/Surface.tsx";
+import { CssUtils, Events } from "@opendaw/lib-dom";
 
+/**
+ * Event data passed to cursor providers. It mirrors pointer properties and
+ * keyboard modifiers that influence the chosen cursor.
+ */
 export type CursorEvent = {
-    clientX: number
-    clientY: number
-    altKey: boolean
-    shiftKey: boolean
-    ctrlKey: boolean
-    metaKey: boolean
-    buttons: int
-    type: string
-}
+  clientX: number;
+  clientY: number;
+  altKey: boolean;
+  shiftKey: boolean;
+  ctrlKey: boolean;
+  metaKey: boolean;
+  buttons: int;
+  type: string;
+};
 
+/**
+ * A provider computes the cursor for the current pointer state or returns
+ * `null` to reset to the default cursor. Optionally a `leave` callback can be
+ * supplied for cleanup.
+ */
 export type CursorProvider<TYPE> = {
-    get: (capture: TYPE, event: CursorEvent) => Nullish<CssUtils.Cursor | number>
-    leave?: () => void // cleanup, if you synchronized someting to certain cursors
-}
+  get: (capture: TYPE, event: CursorEvent) => Nullish<CssUtils.Cursor | number>;
+  leave?: () => void; // cleanup, if you synchronized something to certain cursors
+};
 
-export const installCursor = <TARGET>(element: Element,
-                                      capturing: ElementCapturing<TARGET>,
-                                      provider: CursorProvider<Nullable<TARGET>>): Terminable => {
-    let clientX: number = 0.0
-    let clientY: number = 0.0
-    let buttons: int = 0
-    let captured: boolean = false
-    let keyboardSubscription: Subscription = Terminable.Empty
+/** Installs dynamic cursor handling on an element. */
+export const installCursor = <TARGET>(
+  element: Element,
+  capturing: ElementCapturing<TARGET>,
+  provider: CursorProvider<Nullable<TARGET>>,
+): Terminable => {
+  let clientX: number = 0.0;
+  let clientY: number = 0.0;
+  let buttons: int = 0;
+  let captured: boolean = false;
+  let keyboardSubscription: Subscription = Terminable.Empty;
 
-    const lifecycle = new Terminator()
-    const changeCursor = (event: CursorEvent) => {
-        const identifier = provider.get(capturing.captureEvent(event), event) ?? "auto"
-        Surface.forEach(surface => CssUtils.setCursor(identifier, surface.owner.document))
+  const lifecycle = new Terminator();
+  const changeCursor = (event: CursorEvent) => {
+    const identifier =
+      provider.get(capturing.captureEvent(event), event) ?? "auto";
+    Surface.forEach((surface) =>
+      CssUtils.setCursor(identifier, surface.owner.document),
+    );
+  };
+  const keyboardListener = (event: KeyboardEvent) => {
+    if (!event.repeat && !captured) {
+      changeCursor({
+        clientX,
+        clientY,
+        buttons,
+        altKey: event.altKey,
+        shiftKey: event.shiftKey,
+        ctrlKey: event.ctrlKey,
+        metaKey: event.metaKey,
+        type: event.type,
+      });
     }
-    const keyboardListener = (event: KeyboardEvent) => {
-        if (!event.repeat && !captured) {
-            changeCursor({
-                clientX,
-                clientY,
-                buttons,
-                altKey: event.altKey,
-                shiftKey: event.shiftKey,
-                ctrlKey: event.ctrlKey,
-                metaKey: event.metaKey,
-                type: event.type
-            })
-        }
-    }
-    lifecycle.own(Events.subscribe(element, "pointerenter", () => {
-        const eventTarget = Surface.get(element).owner
-        keyboardSubscription.terminate()
-        keyboardSubscription = Terminable.many(
-            Events.subscribe(eventTarget, "keydown", keyboardListener), Events.subscribe(eventTarget, "keyup", keyboardListener)
-        )
-    }))
-    lifecycle.own(Events.subscribe(element, "pointermove", (event: PointerEvent) => {
-        clientX = event.clientX
-        clientY = event.clientY
-        buttons = event.buttons
-        if (event.buttons === 0) {
-            changeCursor(event)
-        }
-    }))
-    lifecycle.own(Events.subscribe(element, "gotpointercapture", () => captured = true))
-    lifecycle.own(Events.subscribe(element, "lostpointercapture", (event: PointerEvent) => {
-        captured = false
-        changeCursor(event)
-    }))
-    lifecycle.own(Events.subscribe(element, "pointerup", (event: PointerEvent) => changeCursor(event)))
-    lifecycle.own(Events.subscribe(element, "pointerleave", (event: PointerEvent) => {
-        if (event.buttons > 0) {return}
-        keyboardSubscription.terminate()
-        if (isDefined(provider.leave)) {
-            provider.leave()
-        }
-        CssUtils.setCursor("auto")
-    }))
-    lifecycle.own({terminate: () => keyboardSubscription.terminate()})
-    return lifecycle
-}
+  };
+  lifecycle.own(
+    Events.subscribe(element, "pointerenter", () => {
+      const eventTarget = Surface.get(element).owner;
+      keyboardSubscription.terminate();
+      keyboardSubscription = Terminable.many(
+        Events.subscribe(eventTarget, "keydown", keyboardListener),
+        Events.subscribe(eventTarget, "keyup", keyboardListener),
+      );
+    }),
+  );
+  lifecycle.own(
+    Events.subscribe(element, "pointermove", (event: PointerEvent) => {
+      clientX = event.clientX;
+      clientY = event.clientY;
+      buttons = event.buttons;
+      if (event.buttons === 0) {
+        changeCursor(event);
+      }
+    }),
+  );
+  lifecycle.own(
+    Events.subscribe(element, "gotpointercapture", () => (captured = true)),
+  );
+  lifecycle.own(
+    Events.subscribe(element, "lostpointercapture", (event: PointerEvent) => {
+      captured = false;
+      changeCursor(event);
+    }),
+  );
+  lifecycle.own(
+    Events.subscribe(element, "pointerup", (event: PointerEvent) =>
+      changeCursor(event),
+    ),
+  );
+  lifecycle.own(
+    Events.subscribe(element, "pointerleave", (event: PointerEvent) => {
+      if (event.buttons > 0) {
+        return;
+      }
+      keyboardSubscription.terminate();
+      if (isDefined(provider.leave)) {
+        provider.leave();
+      }
+      CssUtils.setCursor("auto");
+    }),
+  );
+  lifecycle.own({ terminate: () => keyboardSubscription.terminate() });
+  return lifecycle;
+};

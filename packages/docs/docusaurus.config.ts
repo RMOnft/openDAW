@@ -1,3 +1,6 @@
+// Docusaurus configuration for the documentation site.
+// For an overview of the documentation setup see docs-dev/documentation-site/overview.md
+// Sidebars are maintained in sidebarsDev.js, sidebarsUser.js and sidebarsLearn.js
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 

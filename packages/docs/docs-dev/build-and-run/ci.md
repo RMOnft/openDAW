@@ -1,10 +1,15 @@
 # Continuous Integration
 
-The project uses **Turbo** tasks in continuous integration to verify builds,
-linting, tests, and documentation generation. CI services execute commands such
-as `turbo run lint`, `turbo run build`, and `turbo run test` to ensure
-consistency across packages.
+GitHub Actions drives the repository's CI pipeline. The disabled workflows in
+`.github/workflows` illustrate how automation will eventually run:
 
-Deployment configuration files `vercel.json` and `netlify.toml` define how
-previews or documentation could be deployed. These deployments are currently
-disabled but provide a template for future automation.
+- `deploy.yml` – uploads the built studio via SFTP.
+- `deploy-docs.yml` – publishes documentation to GitHub Pages.
+- `docs.yml` – builds documentation and verifies links.
+- `docs-quality.yml` – lints Markdown and checks prose.
+- `discord.yml` – sends notifications to Discord.
+- `test-sftp.yml` – checks SFTP credentials.
+
+The diagram below shows the basic CI flow from commit to deployment.
+
+![CI flow diagram](../../../../assets/architecture/ci-flow.svg)

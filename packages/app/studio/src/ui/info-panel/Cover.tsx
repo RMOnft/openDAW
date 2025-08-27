@@ -14,6 +14,14 @@ type Construct = {
     model: MutableObservableOption<ArrayBuffer>
 }
 
+/**
+ * Displays and lets the user replace a project cover image.
+ *
+ * @example
+ * ```tsx
+ * <Cover lifecycle={lifecycle} model={coverModel}/>
+ * ```
+ */
 export const Cover = ({lifecycle, model}: Construct) => {
     const placeholder = "/cover.png"
     const editIcon: Element = <Icon symbol={IconSymbol.EditBox} className="edit-icon"/>

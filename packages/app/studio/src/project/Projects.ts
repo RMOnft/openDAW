@@ -17,18 +17,34 @@ import {ProjectDecoder} from "@opendaw/studio-adapters"
 import {SampleUtils} from "@/project/SampleUtils"
 import {Project, SampleStorage, MainThreadSampleLoader, WorkerAgents} from "@opendaw/studio-core"
 
+/**
+ * Helpers for constructing file paths used to persist projects.
+ */
 export namespace ProjectPaths {
+    /** Base folder for all projects. */
     export const Folder = "projects/v1"
     export const ProjectFile = "project.od"
     export const ProjectMetaFile = "meta.json"
     export const ProjectCoverFile = "image.bin"
+    /** Path to the serialized project file. */
     export const projectFile = (uuid: UUID.Format): string => `${(projectFolder(uuid))}/${ProjectFile}`
+    /** Path to the metadata file. */
     export const projectMeta = (uuid: UUID.Format): string => `${(projectFolder(uuid))}/${ProjectMetaFile}`
+    /** Path to the optional cover image. */
     export const projectCover = (uuid: UUID.Format): string => `${(projectFolder(uuid))}/${ProjectCoverFile}`
+    /** Folder containing all files for a given project. */
     export const projectFolder = (uuid: UUID.Format): string => `${Folder}/${UUID.toString(uuid)}`
 }
 
 export namespace Projects {
+    /**
+     * Store the given project and its metadata.
+     *
+     * @example
+     * ```ts
+     * await Projects.saveProject(session)
+     * ```
+     */
     export const saveProject = async ({uuid, project, meta, cover}: ProjectSession): Promise<void> => {
         return Promise.all([
             WorkerAgents.Opfs.write(ProjectPaths.projectFile(uuid), new Uint8Array(project.toArrayBuffer())),
@@ -40,11 +56,17 @@ export namespace Projects {
         ]).then(EmptyExec)
     }
 
+    /**
+     * Load a project's cover image from storage.
+     */
     export const loadCover = async (uuid: UUID.Format): Promise<Option<ArrayBuffer>> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectCover(uuid))
             .then(array => Option.wrap(array.buffer as ArrayBuffer), () => Option.None)
     }
 
+    /**
+     * Load and decode a project from disk.
+     */
     export const loadProject = async (service: StudioService, uuid: UUID.Format): Promise<Project> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectFile(uuid))
             .then(async array => {
@@ -55,6 +77,9 @@ export namespace Projects {
             })
     }
 
+    /**
+     * List all stored projects with their metadata.
+     */
     export const listProjects = async (): Promise<ReadonlyArray<{ uuid: UUID.Format, meta: ProjectMeta }>> => {
         return WorkerAgents.Opfs.list(ProjectPaths.Folder)
             .then(files => Promise.all(files.filter(file => file.kind === "directory")
@@ -65,6 +90,9 @@ export namespace Projects {
                 })))
     }
 
+    /**
+     * Determine which samples are used by all stored projects.
+     */
     export const listUsedSamples = async (): Promise<Set<string>> => {
         const uuids: Array<string> = []
         const files = await WorkerAgents.Opfs.list(ProjectPaths.Folder)
@@ -80,8 +108,14 @@ export namespace Projects {
         return new Set<string>(uuids)
     }
 
+    /**
+     * Delete a project and all associated files.
+     */
     export const deleteProject = async (uuid: UUID.Format) => WorkerAgents.Opfs.delete(ProjectPaths.projectFolder(uuid))
 
+    /**
+     * Create a distributable bundle containing the project and samples.
+     */
     export const exportBundle = async ({uuid, project, meta, cover}: ProjectSession,
                                        progress: MutableObservableValue<unitValue>): Promise<ArrayBuffer> => {
         const zip = new JSZip()
@@ -95,7 +129,7 @@ export namespace Projects {
         let boxIndex = 0
         const blob = await Promise.all(boxes
             .map(async ({address: {uuid}}) => {
-                const handler: MainThreadSampleLoader = project.sampleManager.getOrCreate(uuid) as MainThreadSampleLoader // TODO get rid of cast
+                const handler: MainThreadSampleLoader = project.sampleManager.getOrCreate(uuid) as MainThreadSampleLoader // TODO remove cast
                 const folder: JSZip = asDefined(samples.folder(UUID.toString(uuid)), "Could not create folder for sample")
                 return handler.pipeFilesInto(folder).then(() => progress.setValue(++boxIndex / boxes.length * 0.75))
             })).then(() => zip.generateAsync({
@@ -107,6 +141,9 @@ export namespace Projects {
         return blob.arrayBuffer()
     }
 
+    /**
+     * Import a bundle created by {@link exportBundle} and return a new session.
+     */
     export const importBundle = async (service: StudioService, arrayBuffer: ArrayBuffer): Promise<ProjectSession> => {
         const zip = await JSZip.loadAsync(arrayBuffer)
         if (await asDefined(zip.file("version")).async("text") !== "1") {throw "Unknown bundle version"}

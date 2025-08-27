@@ -26,6 +26,10 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Renders the main mixer view with channel strips for each audio unit.
+ * Handles scrolling, ordering and selection of channels.
+ */
 export const Mixer = ({lifecycle, service}: Construct) => {
     const project = service.project
     const headers: HTMLElement = (

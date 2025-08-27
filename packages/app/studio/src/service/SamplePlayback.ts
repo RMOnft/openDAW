@@ -22,6 +22,18 @@ export type PlaybackEvent = {
     reason: string
 }
 
+/**
+ * Lightweight preview player for samples. It handles buffering, playback and
+ * emits state changes to subscribed UI components.
+ *
+ * ```mermaid
+ * stateDiagram-v2
+ *   [*] --> idle
+ *   idle --> buffering
+ *   buffering --> playing
+ *   playing --> idle
+ * ```
+ */
 export class SamplePlayback {
     readonly #context: AudioContext
     readonly #audio: HTMLAudioElement

@@ -5,6 +5,9 @@ Start with **[DAW Basics 101](./daw-basics-101.md)** to learn core concepts
 like tracks, the mixer, and automation. Lessons build on each other, so work
 through them in order or jump to topics using the sidebar.
 
+Interested in contributing lessons? Check the
+[Writing Guide](../docs-dev/style/writing-guide.md) for style tips.
+
 ```mermaid
 graph LR
     Basics["DAW Basics"] --> Arrangement["Arrangement Basics"]

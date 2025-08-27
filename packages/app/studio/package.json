@@ -4,7 +4,7 @@
   "version": "0.0.20",
   "description": "Web-based digital audio workstation UI for OpenDAW",
   "type": "module",
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "scripts": {
     "dev": "vite --clearScreen false",
     "build": "tsc && vite build",
@@ -40,5 +40,6 @@
     "vite": "^7.0.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-cross-origin-isolation": "^0.1.6"
-  }
+  },
+  "homepage": "https://github.com/andremichelle/openDAW/blob/main/LICENSE"
 }

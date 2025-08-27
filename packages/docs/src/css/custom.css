@@ -2,6 +2,9 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
+ * See docs-dev/documentation-site/styling.md for styling guidelines.
+ * Component specific styles live alongside their components such as
+ * ../components/HomepageFeatures/styles.module.css
  */
 
 /* You can override the default Infima variables here. */

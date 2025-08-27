@@ -1,3 +1,8 @@
+/**
+ * Landing page for the documentation site.
+ * See docs-dev/documentation-site/structure.md for layout guidance.
+ * Uses the HomepageFeatures component.
+ */
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';

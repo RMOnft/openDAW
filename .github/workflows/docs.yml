@@ -1,5 +1,6 @@
 # .github/workflows/docs.yml
 # NOTE: Workflow disabled
+# Builds documentation and verifies links on pull requests.
 name: Build docs and check links
 
 on:

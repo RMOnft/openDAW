@@ -1,10 +1,12 @@
+# .github/workflows/docs-quality.yml
 # NOTE: Workflow disabled
+# Lints Markdown, runs Vale, and checks links for documentation.
 name: Docs QA
 
 on:
   pull_request:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
 
 jobs:
   docs:
@@ -20,8 +22,8 @@ jobs:
       - name: Vale
         uses: errata-ai/vale-action@v2
         with:
-          files: '**/*.md'
+          files: "**/*.md"
       - name: Link check
         uses: lycheeverse/lychee-action@v1
         with:
-          args: '--no-progress .'
+          args: "--no-progress ."

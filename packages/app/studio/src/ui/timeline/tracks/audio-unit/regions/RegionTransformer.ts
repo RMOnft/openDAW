@@ -7,6 +7,10 @@ import {asDefined, UUID} from "@opendaw/lib-std"
 import {AnyClipBox} from "@opendaw/studio-adapters"
 
 export namespace RegionTransformer {
+    /**
+     * Converts a region into a standalone clip. Optionally copies associated
+     * event collections instead of reusing the original ones.
+     */
     export const toClip = (region: AnyRegionBoxAdapter, copyEvents: boolean = true): AnyClipBox => {
         const trackBoxAdapter = region.trackBoxAdapter.unwrap()
         const index = trackBoxAdapter.clips.collection.getMinFreeIndex()

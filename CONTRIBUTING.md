@@ -6,6 +6,11 @@ Thank you for your interest in contributing to openDAW! This guide outlines the 
 
 The monorepo uses **Turbo** to run build, test, and lint tasks across all packages. **Lerna** manages package versioning and publishing, while API docs are generated with **Typedoc**. Deployment configuration files for Vercel and Netlify describe how docs and apps would be deployed when enabled.
 
+GitHub Actions provides continuous integration. Workflows handle deployment,
+documentation builds, quality checks, Discord notifications, and SFTP tests.
+Although disabled, they document the intended automation. See the
+[CI guide](packages/docs/docs-dev/build-and-run/ci.md) for more details.
+
 ## Pull Request Workflow
 
 1. **Fork and clone** the repository, then create a descriptive branch for your work.
@@ -29,6 +34,7 @@ The monorepo uses **Turbo** to run build, test, and lint tasks across all packag
 - Write Markdown documentation using ATX headings (`#`, `##`, etc.) and keep line length reasonable.
 - Include tests or documentation updates alongside code changes when appropriate.
 - Review our [error handling notes](packages/docs/docs-dev/error-handling.md) when working with runtime failures.
+- Refer to the [Writing Guide](packages/docs/docs-dev/style/writing-guide.md) for tone and formatting tips when updating documentation.
 
 Following these steps helps maintain a clean git history and a stable codebase. We appreciate every contribution—thank you for helping improve openDAW!
 

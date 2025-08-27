@@ -1,3 +1,6 @@
+/** Sidebar for user guides.
+ * Referenced from docusaurus.config.ts; see docs-dev/documentation-site/structure.md
+ */
 module.exports = {
   userSidebar: [
     { type: "doc", id: "intro" },
@@ -12,6 +15,7 @@ module.exports = {
         "features/piano-roll",
         "features/devices-and-plugins",
         "features/file-management",
+        "features/browse",
       ],
     },
   ],

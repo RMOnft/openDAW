@@ -20,16 +20,31 @@ import {Project} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "Clip")
 
+/**
+ * Construction parameters for {@link Clip}.
+ */
 type Construct = {
+    /** Studio level services providing engine access. */
     service: StudioService
+    /** Lifecycle used to manage subscriptions. */
     lifecycle: Lifecycle
+    /** The current project instance. */
     project: Project
+    /** Adapter describing the clip to render. */
     adapter: AnyClipBoxAdapter
+    /** CSS grid column where the clip should be placed. */
     gridColumn: string
 }
 
+/**
+ * Playback state of a clip.
+ */
 export enum ClipState {Idle, Waiting, Playing}
 
+/**
+ * Renders a timeline clip and keeps its visual state in sync with playback
+ * notifications and selection changes.
+ */
 export const Clip = ({lifecycle, service, project, adapter, gridColumn}: Construct) => {
     const canvas: HTMLCanvasElement = (<canvas/>)
     const progress: HTMLElement = (<div className="progress"/>)

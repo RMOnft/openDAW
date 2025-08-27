@@ -1,6 +1,14 @@
 import {Progress, UUID} from "@opendaw/lib-std"
 import {Sample} from "@opendaw/studio-adapters"
 
+/**
+ * Interface for importing audio samples into a project.
+ *
+ * @example
+ * ```ts
+ * await importer.importSample({uuid, name: "kick", arrayBuffer})
+ * ```
+ */
 export type SampleImporter = {
     importSample(sample: {
         uuid: UUID.Format,
