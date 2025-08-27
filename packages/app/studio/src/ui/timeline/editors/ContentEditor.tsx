@@ -1,3 +1,9 @@
+/**
+ * Root timeline editor that swaps in type‑specific editors
+ * (audio, note and value) based on the selected clip or region.
+ * It also provides shared UI elements such as the time axis and
+ * snapping controls.
+ */
 import css from "./ContentEditor.sass?inline"
 import {Lifecycle, Option, Terminator} from "@opendaw/lib-std"
 import {createElement, Frag, replaceChildren} from "@opendaw/lib-jsx"
@@ -48,11 +54,19 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "ContentEditor")
 
+/**
+ * Dependencies required to construct a {@link ContentEditor}.
+ */
 type Construct = {
     lifecycle: Lifecycle
     service: StudioService
 }
 
+/**
+ * Creates the content editor element which reacts to the user
+ * selection on the main timeline. Depending on the selected box,
+ * the matching specialised editor is rendered.
+ */
 export const ContentEditor = ({lifecycle, service}: Construct) => {
     const range = new TimelineRange({padding: 12})
     range.minimum = PPQN.SemiQuaver * 2

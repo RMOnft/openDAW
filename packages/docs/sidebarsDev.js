@@ -62,6 +62,22 @@ module.exports = {
     },
     {
       type: "category",
+      label: "UI",
+      items: [
+        {
+          type: "category",
+          label: "Timeline",
+          items: [
+            "ui/timeline/editors",
+            "ui/timeline/renderers",
+            "ui/timeline/performance",
+          ],
+        },
+        "ui/browse"
+      ],
+    },
+    {
+      type: "category",
       label: "Boxes",
       items: [
         { type: "doc", id: "boxes/overview" },
@@ -84,6 +100,16 @@ module.exports = {
             { type: "doc", id: "ui/piano-roll/faq" },
           ],
         },
+  "ui/mixer"
+},{
+      type: "category",
+      label: "Services",
+      items: [
+        "services/overview",
+        "services/sessions",
+        "services/shortcuts",
+        "services/sync",
+        "services/stems",
       ],
     },
   ],

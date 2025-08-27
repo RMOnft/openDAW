@@ -18,6 +18,9 @@ type Construct = {
     adapter: AudioUnitBoxAdapter
 }
 
+/**
+ * Dropdown menu for selecting the output bus of a channel strip.
+ */
 export const ChannelOutputSelector = ({lifecycle, project, adapter}: Construct) => {
     const label: HTMLElement = (<div className="label"/>)
     const symbol = lifecycle.own(new DefaultObservableValue(IconSymbol.NoAudio))

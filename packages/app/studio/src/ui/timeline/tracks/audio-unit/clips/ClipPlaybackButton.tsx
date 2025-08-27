@@ -10,13 +10,23 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "ClipPlaybackButton")
 
+/**
+ * Construction options for {@link ClipPlaybackButton}.
+ */
 type Construct = {
+    /** Lifecycle controlling subscriptions. */
     lifecycle: Lifecycle
+    /** Studio service used to schedule playback. */
     service: StudioService
+    /** Clip associated with the button. */
     adapter: AnyClipBoxAdapter
+    /** Observable state of the clip. */
     state: DefaultObservableValue<ClipState>
 }
 
+/**
+ * Small play/stop button rendered on top of a clip.
+ */
 export const ClipPlaybackButton = ({lifecycle, service, adapter, state}: Construct) => {
     const iconModel = new DefaultObservableValue(IconSymbol.Play)
     const element: HTMLElement = (

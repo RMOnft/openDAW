@@ -1,3 +1,9 @@
+/**
+ * Combines a labelled knob with automation and MIDI learn support.
+ *
+ * The component wraps the generic LabelKnob and adds relative dragging as well
+ * as parameter context menus.
+ */
 import css from "./ParameterLabelKnob.sass?inline"
 import {Lifecycle, unitValue, ValueGuide} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
