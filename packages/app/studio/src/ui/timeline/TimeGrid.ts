@@ -2,12 +2,18 @@ import {PPQN} from "@opendaw/lib-dsp"
 import {int, quantizeFloor} from "@opendaw/lib-std"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 
+/** Utilities for iterating over timeline grid divisions. */
 export namespace TimeGrid {
     export type Signature = [int, int]
+    /** Optional parameters for {@link fragment}. */
     export type Options = { minLength?: number }
     export type Fragment = { bars: int, beats: int, ticks: int, isBar: boolean, isBeat: boolean, pulse: number }
     export type Designer = (fragment: Fragment) => void
 
+    /**
+     * Iterates over grid fragments within the given range and calls `designer`
+     * for each division.
+     */
     export const fragment = ([nominator, denominator]: Signature,
                              range: TimelineRange, designer: Designer, options?: Options): void => {
         const unitsPerPixel = range.unitsPerPixel

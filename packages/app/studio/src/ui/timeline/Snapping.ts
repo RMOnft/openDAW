@@ -3,14 +3,24 @@ import {ppqn, PPQN} from "@opendaw/lib-dsp"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 import {MenuItem, MenuRootData} from "@/ui/model/menu-item"
 
+/**
+ * Represents a selectable snapping resolution.
+ */
 export interface SnapUnit {
+    /** Display name shown in the UI */
     get name(): string
+    /** Pulses per quarter note represented by this unit */
     get ppqn(): int
 }
 
 const SMART_MIN_PIXEL = 16 as const
 
+/**
+ * Maintains the current snap setting and exposes helper methods for converting
+ * between pixel and pulse values.
+ */
 export class Snapping implements Observable<Snapping> {
+    /** Builds a menu for selecting a {@link SnapUnit}. */
     static readonly createMenuRoot = (snapping: Snapping): MenuItem<MenuRootData> => MenuItem.root()
         .setRuntimeChildrenProcedure(parent => parent.addMenuItem(...snapping.units
             .map((unit: SnapUnit, index: int) => MenuItem.default({label: unit.name, checked: unit === snapping.unit})

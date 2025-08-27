@@ -18,6 +18,18 @@ type Construct = {
     service: StudioService
 }
 
+/**
+ * Renders the main timeline view for the studio.
+ *
+ * @remarks
+ * Combines the header, navigation and track displays into a single grid
+ * element and wires up resize and playback observers.
+ *
+ * @example
+ * ```tsx
+ * <Timeline lifecycle={lifecycle} service={studioService} />
+ * ```
+ */
 export const Timeline = ({lifecycle, service}: Construct) => {
     const {timeline, engine} = service
     const {snapping, clips, followPlaybackCursor, primaryVisible} = timeline
