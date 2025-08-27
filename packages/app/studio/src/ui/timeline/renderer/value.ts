@@ -3,6 +3,11 @@ import {RegionColors} from "@/ui/timeline/renderer/env.ts"
 import {LoopableRegion, ValueEvent} from "@opendaw/lib-dsp"
 import {asDefined, assert, Curve, Func, unitValue} from "@opendaw/lib-std"
 
+/**
+ * Draws automation or other continuous value streams. Events are expanded
+ * into a Path2D that is filled and stroked according to the supplied
+ * colour and alpha parameters.
+ */
 export const renderValueStream = (context: CanvasRenderingContext2D,
                                   range: TimelineRange,
                                   generator: Generator<ValueEvent>,

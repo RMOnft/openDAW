@@ -1,3 +1,9 @@
+/**
+ * Provides a generic wrapper around device editors.
+ *
+ * The component renders a device header, delegates menu and control creation,
+ * and wires up drag-and-drop reordering for effect devices.
+ */
 import css from "./DeviceEditor.sass?inline"
 import {Lifecycle, ObservableValue, Procedure, Provider} from "@opendaw/lib-std"
 import {createElement, Group, JsxValue} from "@opendaw/lib-jsx"

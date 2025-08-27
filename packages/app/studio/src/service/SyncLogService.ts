@@ -5,6 +5,15 @@ import {Promises} from "@opendaw/lib-runtime"
 import {StudioService} from "@/service/StudioService"
 import {Commit, SyncLogReader, SyncLogWriter} from "@opendaw/studio-core"
 
+/**
+ * Service helpers for writing and appending project SyncLog files.
+ *
+ * ```mermaid
+ * flowchart LR
+ *   A[start] -->|start| B[New SyncLog]
+ *   A2[existing] -->|append| B
+ * ```
+ */
 export namespace SyncLogService {
     export const start = async (service: StudioService) => {
         if (!isDefined(window.showSaveFilePicker)) {return}

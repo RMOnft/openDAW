@@ -20,3 +20,11 @@ Select notes and apply quantize to snap them to the grid. Quantize settings are 
 Drag the loop brace above the grid to repeat a region while editing.
 
 See the [Beat Making workflow](../workflows/beat.md) for a practical example.
+
+## Developer documentation
+
+More technical details are available in the developer docs:
+[Overview](../../docs-dev/ui/piano-roll/overview.md),
+[Visualizers](../../docs-dev/ui/piano-roll/visualizers.md),
+[Metronome](../../docs-dev/ui/piano-roll/metronome.md) and
+[FAQ](../../docs-dev/ui/piano-roll/faq.md).

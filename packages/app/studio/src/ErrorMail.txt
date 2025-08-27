@@ -1,3 +1,5 @@
+# Error report template for contacting support
+
 Hello openDAW Support,
 
 I'd like to report a bug encountered while using openDAW. Below are the details:

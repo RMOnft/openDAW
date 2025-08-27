@@ -6,11 +6,19 @@ import {ClipWidth} from "@/ui/timeline/tracks/audio-unit/clips/constants.ts"
 import {TrackContext} from "@/ui/timeline/tracks/audio-unit/TrackContext.ts"
 import {ExtraSpace} from "@/ui/timeline/tracks/audio-unit/Constants"
 
+/**
+ * Result returned by {@link ClipCapturing} indicating the clip or track
+ * located at the given coordinates.
+ */
 export type ClipCaptureTarget =
     | { type: "clip", clip: AnyClipBoxAdapter }
     | { type: "track", track: TrackContext, clipIndex: int }
 
 export namespace ClipCapturing {
+    /**
+     * Creates an {@link ElementCapturing} instance that resolves timeline clips
+     * and tracks based on pointer coordinates.
+     */
     export const create = (element: Element, manager: TracksManager) =>
         new ElementCapturing<ClipCaptureTarget>(element, {
             capture: (x: number, y: number): Nullable<ClipCaptureTarget> => {

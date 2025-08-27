@@ -1,3 +1,9 @@
+/**
+ * Simple peak level meter used inside device editors.
+ *
+ * Subscribes to the live audio stream and renders SVG bars representing peak
+ * values for the addressed bus or channel.
+ */
 import css from "./DevicePeakMeter.sass?inline"
 import {Arrays, int, Lifecycle, Terminator, ValueMapping} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
@@ -15,6 +21,9 @@ type Construct = {
     address: Address
 }
 
+/**
+ * Compact peak meter used inside the device panel to visualize output levels.
+ */
 export const DevicePeakMeter = ({lifecycle, receiver, address}: Construct) => {
     const element: HTMLDivElement = (<div className={className}/>)
     const peaks = new Float32Array(2)
