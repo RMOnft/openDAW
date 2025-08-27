@@ -58,7 +58,7 @@ module.exports = {
         { type: "doc", id: "extending/plugin-examples" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
-    ]
+      ],
     },
     {
       type: "category",
@@ -68,6 +68,22 @@ module.exports = {
         { type: "doc", id: "boxes/examples" },
         { type: "doc", id: "boxes/diagram" },
         { type: "doc", id: "boxes/faq" },
+      ],
+    },
+    {
+      type: "category",
+      label: "UI",
+      items: [
+        {
+          type: "category",
+          label: "Piano Roll",
+          items: [
+            { type: "doc", id: "ui/piano-roll/overview" },
+            { type: "doc", id: "ui/piano-roll/visualizers" },
+            { type: "doc", id: "ui/piano-roll/metronome" },
+            { type: "doc", id: "ui/piano-roll/faq" },
+          ],
+        },
       ],
     },
   ],
