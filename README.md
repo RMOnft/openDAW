@@ -214,3 +214,5 @@ participate, visit our [Contribute](https://opendaw.org/contribute) page.
 
 This project is licensed under the [MIT License](LICENSE)
 
+The bundled fonts (`rubik.woff2` and `OpenSans-Regular.ttf` in packages/app/studio/public/fonts) are provided under the [SIL Open Font License 1.1](https://scripts.sil.org/OFL). See [fonts/README.md](packages/app/studio/public/fonts/README.md) for details.
+
