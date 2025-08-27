@@ -41,6 +41,9 @@ type Construct = {
 
 type Context = { deviceHost: DeviceHost, instrument: ObservableValue<Option<AudioUnitInputAdapter>> }
 
+/**
+ * Hosts device editors and the channel strip for the currently selected track.
+ */
 export const DevicePanel = ({lifecycle, service}: Construct) => {
     const midiEffectsContainer: HTMLElement = <div className="midi-container"/>
     const instrumentContainer: HTMLElement = <div className="source-container"/>

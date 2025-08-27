@@ -21,6 +21,9 @@ type Construct = {
     address: Address
 }
 
+/**
+ * Compact peak meter used inside the device panel to visualize output levels.
+ */
 export const DevicePeakMeter = ({lifecycle, receiver, address}: Construct) => {
     const element: HTMLDivElement = (<div className={className}/>)
     const peaks = new Float32Array(2)

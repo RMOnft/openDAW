@@ -72,6 +72,10 @@ module.exports = {
     },
     {
       type: "category",
+      label: "UI",
+      items: ["ui/mixer"],
+},{
+      type: "category",
       label: "Services",
       items: [
         "services/overview",
