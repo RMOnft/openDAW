@@ -7,5 +7,21 @@ module.exports = {
     { type: "doc", id: "security-privacy" },
     { type: "doc", id: "browser-support" },
     { type: "doc", id: "licensing" },
+    {
+      type: "category",
+      label: "XML",
+      items: [
+        "xml/overview",
+        "xml/parsing",
+        "xml/serialization",
+        "xml/namespaces",
+        "xml/validation",
+        "xml/examples",
+        "xml/integration",
+        "xml/pitfalls",
+        "xml/best-practices",
+        "xml/troubleshooting",
+      ],
+    },
   ],
 };
