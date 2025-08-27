@@ -1,5 +1,11 @@
 # openDAW Roadmap
 
+## Pipeline Overview
+
+Turbo coordinates workspace tasks such as builds, tests, and documentation
+generation, while Lerna handles package versioning and publishing. Deployment
+configs for Vercel and Netlify document how releases will be delivered.
+
 ## Near term
 
 - Publish core documentation set and initial diagrams.

@@ -2,6 +2,10 @@
 
 Thank you for your interest in contributing to openDAW! This guide outlines the preferred workflow for submitting pull requests and the coding style that keeps the project consistent.
 
+## Pipeline Overview
+
+The monorepo uses **Turbo** to run build, test, and lint tasks across all packages. **Lerna** manages package versioning and publishing, while API docs are generated with **Typedoc**. Deployment configuration files for Vercel and Netlify describe how docs and apps would be deployed when enabled.
+
 ## Pull Request Workflow
 
 1. **Fork and clone** the repository, then create a descriptive branch for your work.
