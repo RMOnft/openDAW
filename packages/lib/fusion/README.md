@@ -8,6 +8,9 @@ Web-based audio workstation fusion utilities for TypeScript projects.
 
 See the [API documentation](https://opendaw.org/docs/api/fusion/) for detailed reference.
 
+For developer guides covering worker protocols and usage patterns see the
+[Fusion docs](../docs/docs-dev/fusion/overview.md).
+
 ## File System Operations
 
 * **OpfsWorker.ts** - Origin Private File System worker implementation

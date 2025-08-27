@@ -10,22 +10,33 @@ import {
     Unhandled
 } from "@opendaw/lib-std"
 
+/**
+ * Describes a collection of waveform peaks organised in multiple stages. Each
+ * stage represents a different resolution of the waveform, allowing fast
+ * lookups based on screen density.
+ */
 export interface Peaks {
     readonly stages: ReadonlyArray<Peaks.Stage>
     readonly data: ReadonlyArray<Int32Array>
     readonly numFrames: int
     readonly numChannels: int
 
+    /** Returns the stage best matching the desired units per pixel. */
     nearest(unitsPerPixel: number): Nullable<Peaks.Stage>
 }
 
 export namespace Peaks {
+    /**
+     * Metadata for a single stage of peak data.
+     */
     export class Stage {
         constructor(readonly shift: int, readonly numPeaks: int, readonly dataOffset: int) {}
 
+        /** Number of original samples represented by a single peak. */
         unitsEachPeak(): int {return 1 << this.shift}
     }
 
+    /** Extracts one of the two float values encoded in the packed peak. */
     export const unpack = (bits: int, index: 0 | 1): float => {
         switch (index) {
             case 0:
@@ -38,7 +49,12 @@ export namespace Peaks {
     }
 }
 
+/**
+ * Concrete implementation of {@link Peaks} backed by packed `Float16`
+ * integers. Instances can be serialised to or from a binary representation.
+ */
 export class SamplePeaks implements Peaks {
+    /** Reads a `SamplePeaks` object from the provided binary input. */
     static from(input: ByteArrayInput): Peaks {
         assert(input.readString() === "PEAKS", "Wrong header")
         const numStages = input.readInt()
@@ -64,6 +80,10 @@ export class SamplePeaks implements Peaks {
 
     static readonly None = new SamplePeaks([], [], 0, 0)
 
+    /**
+     * Computes a set of shifts that yields an efficient multi-stage
+     * representation for the given number of frames and target width.
+     */
     static readonly findBestFit = (numFrames: int, width: int = 1200): Uint8Array => {
         const ratio = numFrames / width
         if (ratio <= 1.0) {
@@ -80,6 +100,7 @@ export class SamplePeaks implements Peaks {
                 readonly numFrames: int,
                 readonly numChannels: int) {}
 
+    /** @inheritdoc */
     nearest(unitsPerPixel: number): Nullable<Peaks.Stage> {
         if (this.stages.length === 0) {return null}
         const shift = Math.floor(Math.log(Math.abs(unitsPerPixel)) / Math.LN2)
@@ -92,6 +113,7 @@ export class SamplePeaks implements Peaks {
         return this.stages[0]
     }
 
+    /** Serialises the peaks into a binary `ArrayBuffer`. */
     toArrayBuffer(): ArrayBufferLike {
         const output = ByteArrayOutput.create()
         output.writeString("PEAKS")

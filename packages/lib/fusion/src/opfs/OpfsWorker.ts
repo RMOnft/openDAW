@@ -3,11 +3,22 @@ import {Communicator, Messenger, Promises} from "@opendaw/lib-runtime"
 import {Entry, OpfsProtocol} from "./OpfsProtocol"
 import "../types"
 
+/**
+ * Implements Origin Private File System (OPFS) operations inside a worker.
+ *
+ * The {@link init} function wires the worker to a {@link Messenger} channel
+ * and exposes the {@link OpfsProtocol} so the main thread can perform file
+ * system tasks without direct access to privileged APIs.
+ */
 export namespace OpfsWorker {
     const DEBUG = false
     const readLimiter = new Promises.Limit<Uint8Array>(1)
     const writeLimiter = new Promises.Limit<void>(1)
 
+    /**
+     * Registers the worker on the given messenger and starts listening for
+     * {@link OpfsProtocol} commands.
+     */
     export const init = (messenger: Messenger) =>
         Communicator.executor(messenger.channel("opfs"), new class implements OpfsProtocol {
             async write(path: string, data: Uint8Array): Promise<void> {
@@ -65,6 +76,10 @@ export namespace OpfsWorker {
             }
         })
 
+    /**
+     * Splits a POSIX style path into individual segments while removing
+     * leading and trailing slashes.
+     */
     const pathToSegments = (path: string): ReadonlyArray<string> => {
         const noSlashes = path.replace(/^\/+|\/+$/g, "")
         return noSlashes === "" ? [] : noSlashes.split("/")
