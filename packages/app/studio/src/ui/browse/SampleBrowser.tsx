@@ -1,3 +1,8 @@
+/**
+ * Browser and management UI for audio samples. Allows switching between
+ * local and cloud sources, previewing samples and performing basic
+ * management tasks.
+ */
 import css from "./SampleBrowser.sass?inline";
 import {
   clamp,

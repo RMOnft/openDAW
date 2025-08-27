@@ -1,3 +1,6 @@
+/**
+ * Handles context menu installation for pitch editor canvases.
+ */
 import {ContextMenu} from "@/ui/ContextMenu.ts"
 import {ElementCapturing} from "@/ui/canvas/capturing.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -8,6 +11,7 @@ import {createPitchMenu} from "@/ui/timeline/editors/notes/pitch/PitchMenu.ts"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {EventCollection} from "@opendaw/lib-dsp"
 
+/** Parameters for {@link installContextMenu}. */
 type Construct = {
     element: Element
     capturing: ElementCapturing<PitchCaptureTarget>
@@ -17,6 +21,9 @@ type Construct = {
     events: EventCollection<NoteEventBoxAdapter>
 }
 
+/**
+ * Subscribes a context menu to the pitch editor element.
+ */
 export const installContextMenu = ({element, capturing, snapping, editing, selection, events}: Construct) =>
     ContextMenu.subscribe(element, (collector: ContextMenu.Collector) => {
         const target = capturing.captureEvent(collector.client)

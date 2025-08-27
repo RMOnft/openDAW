@@ -11,6 +11,9 @@ import {TimelineRange} from "@/ui/timeline/TimelineRange"
 import {Markers} from "@/ui/timeline/tracks/primary/marker/Markers"
 
 export namespace MarkerContextMenu {
+    /**
+     * Installs a context menu for marker interactions on the given element.
+     */
     export const install = (element: Element,
                             range: TimelineRange,
                             capturing: ElementCapturing<MarkerBoxAdapter>,

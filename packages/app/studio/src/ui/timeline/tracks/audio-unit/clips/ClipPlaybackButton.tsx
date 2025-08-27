@@ -1,3 +1,6 @@
+/**
+ * Small overlay button to control playback of an individual clip.
+ */
 import css from "./ClipPlaybackButton.sass?inline"
 import {DefaultObservableValue, Lifecycle} from "@opendaw/lib-std"
 import {AnyClipBoxAdapter, IconSymbol} from "@opendaw/studio-adapters"

@@ -1,3 +1,7 @@
+/**
+ * Factory responsible for installing and creating audio worklet nodes
+ * used by the studio engine.
+ */
 import {asDefined, int} from "@opendaw/lib-std"
 import {ExportStemsConfiguration, RingBuffer} from "@opendaw/studio-adapters"
 import {EngineWorklet} from "./EngineWorklet"
@@ -7,12 +11,11 @@ import {Project} from "./Project"
 import {RenderQuantum} from "./RenderQuantum"
 
 /**
- * Factory and registry for AudioWorklet-based helpers used by the studio.
+ * Manages installation and instantiation of worklet nodes for metering,
+ * engine control and recording.
  */
 export class Worklets {
-    /**
-     * Installs worklet processors into the provided audio context.
-     */
+    /** Loads the bundled worklet processors into the given audio context. */
     static async install(context: BaseAudioContext, workletURL: string): Promise<Worklets> {
         return context.audioWorklet.addModule(workletURL).then(() => {
             const worklets = new Worklets(context)
@@ -30,7 +33,7 @@ export class Worklets {
 
     constructor(context: BaseAudioContext) {this.#context = context}
 
-    /** Creates a {@link MeterWorklet} for level monitoring. */
+    /** Creates a {@link MeterWorklet} for monitoring levels. */
     createMeter(numberOfChannels: int): MeterWorklet {
         return new MeterWorklet(this.#context, numberOfChannels)
     }

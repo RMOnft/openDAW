@@ -1,3 +1,7 @@
+/**
+ * REST API helpers for retrieving and uploading sample metadata and audio
+ * data. Used by both the browser-based studio and headless tools.
+ */
 import {
   Arrays,
   asDefined,

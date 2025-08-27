@@ -1,3 +1,6 @@
+/**
+ * Locates note events within the pitch editor for selection purposes.
+ */
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 import {ElementCapturing} from "@/ui/canvas/capturing.ts"
 import {TimelineCoordinates, TimelineSelectableLocator} from "@/ui/timeline/TimelineSelectableLocator.ts"
@@ -7,6 +10,9 @@ import {PitchCaptureTarget} from "@/ui/timeline/editors/notes/pitch/PitchEventCa
 
 import {NoteEventOwnerReader} from "@/ui/timeline/editors/EventOwnerReader.ts"
 
+/**
+ * Factory for a selection locator that works with the pitch editor.
+ */
 export const createPitchSelectionLocator = (owner: NoteEventOwnerReader,
                                             range: TimelineRange,
                                             valueAxis: ValueAxis,

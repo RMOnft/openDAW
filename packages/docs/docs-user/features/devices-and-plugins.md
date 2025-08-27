@@ -41,3 +41,6 @@ Learn more about how openDAW interfaces with hardware and exports audio:
 - [Audio devices](../../docs-dev/audio-midi/audio-devices.md)
 - [MIDI devices](../../docs-dev/audio-midi/midi-devices.md)
 - [Offline rendering](../../docs-dev/audio-midi/offline-rendering.md)
+- [Audio effects](../../docs-dev/dsp/devices/audio-effects.md)
+- [MIDI effects](../../docs-dev/dsp/devices/midi-effects.md)
+- [Instruments](../../docs-dev/dsp/devices/instruments.md)
