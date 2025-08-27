@@ -1,4 +1,7 @@
-import { isDefined } from "@opendaw/lib-std";
+/**
+ * Helpers to normalize error information from various event types.
+ */
+import {isDefined} from "@opendaw/lib-std"
 
 /** Normalized representation of diverse error events. */
 export type ErrorInfo = {

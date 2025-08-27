@@ -1,3 +1,6 @@
+/**
+ * Renders documentation manuals and navigation.
+ */
 import css from "./ManualPage.sass?inline"
 import {Await, createElement, LocalLink, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

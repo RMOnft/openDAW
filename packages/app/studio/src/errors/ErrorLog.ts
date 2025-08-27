@@ -1,7 +1,10 @@
-import { int } from "@opendaw/lib-std";
-import { BuildInfo } from "@/BuildInfo.ts";
-import { LogBuffer } from "@/errors/LogBuffer.ts";
-import { ErrorInfo } from "@/errors/ErrorInfo.ts";
+/**
+ * Structured payload sent when reporting an error.
+ */
+import {int} from "@opendaw/lib-std"
+import {BuildInfo} from "@/BuildInfo.ts"
+import {LogBuffer} from "@/errors/LogBuffer.ts"
+import {ErrorInfo} from "@/errors/ErrorInfo.ts"
 
 /** Payload sent when reporting runtime errors from the Studio. */
 export type ErrorLog = {

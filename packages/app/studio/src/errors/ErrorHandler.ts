@@ -1,11 +1,14 @@
-import { EmptyExec, Terminable, Terminator, Warning } from "@opendaw/lib-std";
-import { AnimationFrame, Browser, Events } from "@opendaw/lib-dom";
-import { LogBuffer } from "@/errors/LogBuffer.ts";
-import { ErrorLog } from "@/errors/ErrorLog.ts";
-import { ErrorInfo } from "@/errors/ErrorInfo.ts";
-import { Surface } from "@/ui/surface/Surface.tsx";
-import { StudioService } from "@/service/StudioService.ts";
-import { showErrorDialog, showInfoDialog } from "@/ui/components/dialogs.tsx";
+/**
+ * Captures global errors and reports them to the logging service.
+ */
+import {EmptyExec, Terminable, Terminator, Warning} from "@opendaw/lib-std"
+import {AnimationFrame, Browser, Events} from "@opendaw/lib-dom"
+import {LogBuffer} from "@/errors/LogBuffer.ts"
+import {ErrorLog} from "@/errors/ErrorLog.ts"
+import {ErrorInfo} from "@/errors/ErrorInfo.ts"
+import {Surface} from "@/ui/surface/Surface.tsx"
+import {StudioService} from "@/service/StudioService.ts"
+import {showErrorDialog, showInfoDialog} from "@/ui/components/dialogs.tsx"
 
 /**
  * Global error handler for the Studio. Captures unexpected errors and

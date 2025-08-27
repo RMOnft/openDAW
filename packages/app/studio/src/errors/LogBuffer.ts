@@ -1,4 +1,7 @@
-import { int } from "@opendaw/lib-std";
+/**
+ * Captures recent console output for inclusion in error reports.
+ */
+import {int} from "@opendaw/lib-std"
 
 /**
  * Captures a bounded history of console messages in production so they can be

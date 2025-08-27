@@ -32,3 +32,13 @@ Displays the device chain for the active track, allowing you to add and tweak in
 ## Mixer
 
 Shows channel strips for each track. Toggle the panel with `M` or switch to the dedicated mixer view via `⇧2`.
+
+## Developer Pages
+
+For internal tooling and diagnostics see:
+
+- [Automation](../docs-dev/ui/pages/automation.md)
+- [Components](../docs-dev/ui/pages/components.md)
+- [Diagnostics](../docs-dev/ui/pages/diagnostics.md)
+- [Icons](../docs-dev/ui/pages/icons.md)
+- [Manuals](../docs-dev/ui/pages/manuals.md)
