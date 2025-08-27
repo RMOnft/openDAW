@@ -2,6 +2,8 @@
 
 Replace `⌘` with `Ctrl` on Windows and Linux.
 
+For menu locations of these commands, see the [menu overview](/manuals/docs-dev/ui/menu/overview) and [menu shortcuts](/manuals/docs-dev/ui/menu/shortcuts).
+
 ## Misc
 
 - `SPACE`: Toggle playback

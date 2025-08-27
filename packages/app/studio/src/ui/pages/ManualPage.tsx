@@ -14,11 +14,8 @@ import {Html} from "@opendaw/lib-dom"
 const className = Html.adoptStyleSheet(css, "ManualPage")
 
 export const ManualPage: PageFactory<StudioService> = ({service, path}: PageContext<StudioService>) => {
-    const extractSecondSegment = (path: string) => {
-        const match = path.match(/^\/[^\/]+\/([^\/]+)\/?$/)
-        return match ? match[1] : null
-    }
-    const page: Nullable<string> = extractSecondSegment(path)
+    const page = path.replace(/^\/manuals\/?/, "")
+    const file: Nullable<string> = page.length > 0 ? page : null
     return (
         <div className={className}>
             <aside>
@@ -28,7 +25,7 @@ export const ManualPage: PageFactory<StudioService> = ({service, path}: PageCont
                 </nav>
             </aside>
             <div className="manual">
-                <Await factory={() => fetch(`${page ?? "index"}.md?uuid=${service.buildInfo.uuid}`).then(x => x.text())}
+                <Await factory={() => fetch(`${file ?? "index"}.md?uuid=${service.buildInfo.uuid}`).then(x => x.text())}
                        failure={(error) => `Unknown request (${error.reason})`}
                        loading={() => <ThreeDots/>}
                        success={text => <Markdown text={text}/>}
