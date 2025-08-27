@@ -52,3 +52,6 @@ Import, export, and organize project files. Developers can dive deeper in the
 ## Collaborate and Share
 
 Use project bundles to collaborate. Export a bundle and send it to another user who can open it and continue working. The [Collaboration workflow](../workflows/collaboration.md) covers best practices.
+
+Detailed steps for exporting audio or bundles are available in the
+[exporting and sharing workflow](../workflows/exporting-and-sharing.md).

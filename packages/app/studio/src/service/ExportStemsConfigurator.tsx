@@ -12,14 +12,22 @@ import {ColorCodes, Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "ExportStemsConfigurator")
 
-export type EditableExportStemsConfiguration = ExportStemsConfiguration & Record<string, {
-    readonly type: AudioUnitType
-    label: string
-    include: boolean
-}>
+/**
+ * Mutable view of {@link ExportStemsConfiguration} used by the UI. Each entry
+ * represents a track and stores additional flags for inclusion and naming.
+ */
+export type EditableExportStemsConfiguration = ExportStemsConfiguration &
+    Record<string, {
+        readonly type: AudioUnitType
+        label: string
+        include: boolean
+    }>
 
+/** Parameters expected by {@link ExportStemsConfigurator}. */
 type Construct = {
+    /** Lifecycle used to clean up subscriptions. */
     lifecycle: Lifecycle
+    /** Configuration object mutated by the component. */
     configuration: EditableExportStemsConfiguration
 }
 

@@ -1,5 +1,9 @@
 // Styles for the ExportStemsConfigurator component.
 //
+// The layout uses a five column CSS grid where the first column holds the
+// track label followed by three check boxes and a text input for the file
+// name. The header mirrors this structure so the columns line up.
+//
 // ```mermaid
 // flowchart LR
 //   header --> list
@@ -30,5 +34,5 @@ component
     max-height: 12em
     overflow: hidden scroll
 
-    > div.name
-      font-size: 0.75em
+      > div.name
+        font-size: 0.75em

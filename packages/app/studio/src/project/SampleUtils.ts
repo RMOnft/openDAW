@@ -10,7 +10,12 @@ import { showInfoDialog } from "@/ui/components/dialogs";
 import { SampleImporter } from "@/project/SampleImporter";
 import { SampleApi } from "@/service/SampleApi";
 
-/** Utility functions for working with audio samples. */
+/**
+ * Utility functions for working with audio samples.
+ *
+ * @see SampleImporter
+ * @see SampleDialogs
+ */
 export namespace SampleUtils {
   /**
    * Ensure all audio file boxes reference existing samples and prompt the

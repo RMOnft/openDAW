@@ -8,6 +8,9 @@ import { Sample } from "@opendaw/studio-adapters";
  * ```ts
  * await importer.importSample({uuid, name: "kick", arrayBuffer})
  * ```
+ *
+ * @see SampleUtils.verify
+ * @see SampleDialogs.missingSampleDialog
  */
 export type SampleImporter = {
   /**

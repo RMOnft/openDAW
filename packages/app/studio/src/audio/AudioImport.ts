@@ -7,18 +7,36 @@ import { SampleStorage, WorkerAgents } from "@opendaw/studio-core";
 import { SamplePeaks } from "@opendaw/lib-fusion";
 
 export namespace AudioImporter {
+  /**
+   * Data required to create a {@link Sample} entry.
+   *
+   * The {@link arrayBuffer} contains the raw audio file data and will be
+   * detached once decoding begins. The optional {@link uuid} can be provided to
+   * avoid hashing large files during repeated imports.
+   */
   export type Creation = {
+    /** Optional identifier for the sample. */
     uuid?: UUID.Format;
+    /** Name of the source file including extension. */
     name: string;
+    /** Audio file contents to decode. */
     arrayBuffer: ArrayBuffer;
+    /** Handler that receives peak‑generation progress updates. */
     progressHandler: Progress.Handler;
   };
 
+  /**
+   * Import an audio file into {@link SampleStorage} and return its metadata.
+   *
+   * @param context Audio context used for decoding.
+   * @param creation Parameters describing the file to import.
+   */
   export const run = async (
     context: AudioContext,
     { uuid, name, arrayBuffer, progressHandler }: Creation,
   ): Promise<Sample> => {
-    uuid ??= await UUID.sha256(arrayBuffer); // Must run before decodeAudioData laster, because it will detach the ArrayBuffer
+    // Must run before decodeAudioData, because it will detach the ArrayBuffer
+    uuid ??= await UUID.sha256(arrayBuffer);
     const audioResult = await Promises.tryCatch(
       context.decodeAudioData(arrayBuffer),
     );
