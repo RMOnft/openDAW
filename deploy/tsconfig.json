@@ -1,16 +1,20 @@
 {
-  "//": "Deployment scripts disabled",
+  // TypeScript configuration for deployment scripts. The scripts are currently
+  // disabled but keeping this config ensures they remain type safe.
   "compilerOptions": {
+    // Target a modern Node.js runtime.
     "target": "es2016",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    // Enable interoperability with CommonJS modules.
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    // We only perform type checking; no output files are emitted.
     "noEmit": true,
     "strict": true,
+    // Rely on declaration files provided by dependencies without rechecking.
     "skipLibCheck": true
   },
-  "files": [
-    "run.ts"
-  ]
+  // Only type-check the main deployment script.
+  "files": ["run.ts"]
 }
