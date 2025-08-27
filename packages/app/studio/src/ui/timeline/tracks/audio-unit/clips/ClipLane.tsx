@@ -1,3 +1,8 @@
+/**
+ * Hosts a row of placeholder cells and populates them with clip views for a
+ * single track. Handles showing previews while clips are being moved or
+ * modified.
+ */
 import css from "./ClipLane.sass?inline"
 import {
     Arrays,
