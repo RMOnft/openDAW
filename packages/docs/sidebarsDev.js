@@ -23,6 +23,7 @@ module.exports = {
         "architecture/overview",
         "architecture/audio-path",
         "architecture/browser-compat",
+        "architecture/headless-vs-studio",
       ],
     },
     {

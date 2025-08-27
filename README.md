@@ -111,6 +111,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Accessibility Guide](packages/docs/docs-user/accessibility.md)
 - [Developer i18n Notes](packages/docs/docs-dev/i18n.md)
 - [Documentation Site Guide](packages/docs/docs-dev/documentation-site/overview.md)
+- [Headless mode workflow](packages/docs/docs-user/workflows/headless-mode.md) – feature parity with Studio service, see [headless vs studio](packages/docs/docs-dev/architecture/headless-vs-studio.md)
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
 
 ### Style Documentation
