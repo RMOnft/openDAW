@@ -117,6 +117,14 @@ module.exports = {
           ],
         },
         "ui/browse",
+        {
+          type: "category",
+          label: "Files",
+          items: [
+            "ui/files/overview",
+            "ui/files/drag-and-drop",
+          ],
+        },
       ],
     },
     {
