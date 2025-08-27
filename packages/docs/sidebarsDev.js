@@ -33,5 +33,15 @@ module.exports = {
         { type: "doc", id: "box-forge/integration" },
       ],
     },
+    {
+      type: "category",
+      label: "Boxes",
+      items: [
+        { type: "doc", id: "boxes/overview" },
+        { type: "doc", id: "boxes/examples" },
+        { type: "doc", id: "boxes/diagram" },
+        { type: "doc", id: "boxes/faq" },
+      ],
+    },
   ],
 };
