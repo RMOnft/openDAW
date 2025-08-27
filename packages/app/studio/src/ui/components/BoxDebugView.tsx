@@ -6,11 +6,14 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "BoxDebugView")
 
-export type Construct = {
+/** Props for {@link BoxDebugView}. */
+export interface BoxDebugViewProps {
+    /** Box whose structure is displayed. */
     box: Box
 }
 
-export const BoxDebugView = ({box}: Construct) => {
+/** Renders a tree view of box fields for debugging. */
+export const BoxDebugView = ({box}: BoxDebugViewProps) => {
     const content = <div style={{display: "contents"}}/>
     const uuidElement: HTMLElement = <h2>{UUID.toString(box.address.uuid)}</h2>
     const incoming = (vertex: Vertex) => `← ${(vertex.pointerHub.incoming().length)}`
@@ -72,3 +75,8 @@ export const BoxDebugView = ({box}: Construct) => {
         </div>
     )
 }
+
+/** Property table for {@link BoxDebugView}. */
+export const BoxDebugViewPropTable = [
+    {prop: "box", type: "Box", description: "Box whose structure is displayed."}
+] as const

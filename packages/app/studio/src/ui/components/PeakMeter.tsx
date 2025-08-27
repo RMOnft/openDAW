@@ -6,14 +6,20 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "peak-meter")
 
-type Construct = {
+/** Props for {@link PeakMeter}. */
+export interface PeakMeterProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Peak values per channel in decibels. */
     peaks: Float32Array
+    /** Width of each channel bar in em units. */
     channelWidthInEm?: number
+    /** Horizontal offset between channels in em. */
     channelOffsetInEm?: number
 }
 
-export const PeakMeter = ({lifecycle, peaks, channelWidthInEm, channelOffsetInEm}: Construct) => {
+/** SVG based peak level meter. */
+export const PeakMeter = ({lifecycle, peaks, channelWidthInEm, channelOffsetInEm}: PeakMeterProps) => {
     const element: HTMLDivElement = <div className={className} data-class="peak-meter"/>
     const channelWidth = channelWidthInEm ?? 0.3
     const channelOffset = channelOffsetInEm ?? 0.125
@@ -95,3 +101,11 @@ export const PeakMeter = ({lifecycle, peaks, channelWidthInEm, channelOffsetInEm
     }))
     return element
 }
+
+/** Property table for {@link PeakMeter}. */
+export const PeakMeterPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "peaks", type: "Float32Array", description: "Peak values per channel in decibels."},
+    {prop: "channelWidthInEm", type: "number", description: "Width of each channel bar in em."},
+    {prop: "channelOffsetInEm", type: "number", description: "Offset between channel bars in em."},
+] as const
