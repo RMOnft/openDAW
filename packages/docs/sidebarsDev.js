@@ -129,6 +129,16 @@ module.exports = {
             { type: "doc", id: "ui/piano-roll/faq" },
           ],
         },
+        {
+          type: "category",
+          label: "Menu",
+          items: [
+            "ui/menu/overview",
+            "ui/menu/automation",
+            "ui/menu/debug",
+            "ui/menu/shortcuts",
+          ],
+        },
         "ui/mixer",
         {
           type: "category",

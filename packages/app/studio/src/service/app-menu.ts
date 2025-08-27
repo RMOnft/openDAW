@@ -17,6 +17,8 @@ import {IconSymbol} from "@opendaw/studio-adapters"
  *   A[Menu] --> B[File]
  *   A --> C[Debug]
  * ```
+ *
+ * @see ../../../../docs/docs-dev/ui/menu/overview.md
  */
 export const initAppMenu = (service: StudioService) => {
     return MenuItem.root()

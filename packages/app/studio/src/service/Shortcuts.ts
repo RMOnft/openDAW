@@ -13,6 +13,8 @@ import {Workspace} from "@/ui/workspace/Workspace"
  * flowchart LR
  *   Keypress --> Shortcuts --> StudioService
  * ```
+ *
+ * @see ../../../../docs/docs-dev/ui/menu/shortcuts.md
  */
 export class Shortcuts {
     constructor(service: StudioService) {
