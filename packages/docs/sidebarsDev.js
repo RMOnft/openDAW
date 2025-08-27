@@ -63,6 +63,16 @@ module.exports = {
             "ui/workspace/examples",
           ],
         },
+        {
+          type: "category",
+          label: "Typography",
+          items: [
+            "ui/typography/overview",
+            "ui/typography/font-loading",
+            "ui/typography/markdown",
+            "ui/typography/notepad",
+          ],
+        },
       ],
     },
     {
@@ -117,6 +127,14 @@ module.exports = {
           ],
         },
         "ui/browse",
+        {
+          type: "category",
+          label: "Files",
+          items: [
+            "ui/files/overview",
+            "ui/files/drag-and-drop",
+          ],
+        },
       ],
     },
     {
@@ -151,6 +169,14 @@ module.exports = {
             "ui/menu/automation",
             "ui/menu/debug",
             "ui/menu/shortcuts",
+          ],
+        },
+        {
+          type: "category",
+          label: "Metering",
+          items: [
+            "ui/metering/overview",
+            "ui/metering/rms-vs-peak",
           ],
         },
         "ui/mixer",

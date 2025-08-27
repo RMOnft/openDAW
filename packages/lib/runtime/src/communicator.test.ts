@@ -8,18 +8,30 @@ import { Messenger } from "./messenger";
 import { Communicator } from "./communicator";
 import { Wait } from "./wait";
 
+/**
+ * Structured object used to verify that cloning and round‑tripping data works
+ * across messaging boundaries.
+ */
 type DetailedType = {
   amount: number;
   numbers: Uint8Array;
   nested: { key: { value: "xyz" } };
 };
 
+/** Protocol exposed by the remote implementation. */
 interface RemoteInterface {
+  /** Sends a notification without expecting a response. */
   sendNotification(num: number): void;
+  /** Requests a transformation and resolves with the returned object. */
   fetchAndTransformData(data: DetailedType): Promise<DetailedType>;
+  /** Runs a task reporting progress callbacks. */
   runTask(init: Exec, progress: Procedure<number>): Promise<void>;
 }
 
+/**
+ * Creates a proxy that forwards {@link RemoteInterface} calls over the given
+ * {@link Messenger}.
+ */
 export const setupRemoteCaller = (messenger: Messenger): RemoteInterface =>
   Communicator.sender(
     messenger,
@@ -41,6 +53,7 @@ export const setupRemoteCaller = (messenger: Messenger): RemoteInterface =>
 
 const notificationTracker = new DefaultObservableValue(0);
 
+/** Concrete implementation used by the tests to handle calls. */
 const remoteImplementation = new (class implements RemoteInterface {
   sendNotification(num: number): void {
     notificationTracker.setValue(num);

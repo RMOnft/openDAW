@@ -50,6 +50,6 @@ For internal tooling and diagnostics see:
 - [Automation](../docs-dev/ui/pages/automation.md)
 - [Components](../docs-dev/ui/pages/components.md)
 - [Diagnostics](../docs-dev/ui/pages/diagnostics.md)
-- [Icons](../docs-dev/ui/pages/icons.md)
+- [Icons](../docs-dev/ui/pages/icons.md) – [icon docs](../docs-dev/ui/icons/overview.md)
 - [Manuals](../docs-dev/ui/pages/manuals.md)
  - [Navigation](../docs-dev/ui/navigation/overview.md)

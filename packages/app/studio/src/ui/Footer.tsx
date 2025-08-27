@@ -19,6 +19,8 @@ type Construct = { lifecycle: Lifecycle; service: StudioService };
  * ```tsx
  * <Footer lifecycle={lifecycle} service={service} />
  * ```
+ * Footer component showing connection state, project metadata and runtime
+ * statistics.
  */
 export const Footer = ({ lifecycle, service }: Construct) => {
   const labelOnline: HTMLElement = <div title="Online" aria-live="polite" />;

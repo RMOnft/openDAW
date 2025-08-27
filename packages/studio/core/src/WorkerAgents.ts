@@ -18,6 +18,8 @@ export class WorkerAgents {
     /**
      * Installs the shared worker bundle and prepares the underlying
      * {@link Messenger} for communication.
+     *
+     * @param workerURL - URL pointing to the bundled worker script.
      */
     static install(workerURL: string): void {
         console.debug("workerURL", workerURL)
@@ -27,7 +29,12 @@ export class WorkerAgents {
     /** Messenger connected to the worker, set by {@link install}. */
     static messenger: Option<Messenger> = Option.None
 
-    /** Lazily obtains the sample peak protocol exposed by the worker. */
+    /**
+     * Lazily obtains the sample peak protocol exposed by the worker.
+     *
+     * @returns Proxy implementing {@link SamplePeakProtocol} over the worker
+     * channel.
+     */
     @Lazy
     static get Peak(): SamplePeakProtocol {
         return Communicator
@@ -44,7 +51,11 @@ export class WorkerAgents {
                 })
     }
 
-    /** Lazily obtains the OPFS protocol exposed by the worker. */
+    /**
+     * Lazily obtains the OPFS protocol exposed by the worker.
+     *
+     * @returns Proxy implementing {@link OpfsProtocol} for file operations.
+     */
     @Lazy
     static get Opfs(): OpfsProtocol {
         return Communicator

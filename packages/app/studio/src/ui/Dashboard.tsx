@@ -9,6 +9,9 @@ import { Colors } from "@opendaw/studio-core";
 
 const className = Html.adoptStyleSheet(css, "Dashboard");
 
+/**
+ * Dependencies required by the {@link Dashboard} component.
+ */
 type Construct = {
   lifecycle: Lifecycle;
   service: StudioService;
@@ -21,6 +24,8 @@ type Construct = {
  * ```tsx
  * <Dashboard lifecycle={lifecycle} service={service} />
  * ```
+ * @param service Provides access to template loading and the project
+ * browser.
  */
 export const Dashboard = ({ service }: Construct) => {
   const time = TimeSpan.millis(
