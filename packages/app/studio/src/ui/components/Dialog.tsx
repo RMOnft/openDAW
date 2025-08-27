@@ -13,24 +13,37 @@ export interface DialogHandler {
     close(): void
 }
 
-export type Button = {
+/** Button descriptor used within a {@link Dialog}. */
+export interface DialogButton {
+    /** Text displayed on the button. */
     text: string
+    /** Handler invoked when the button is clicked. */
     onClick: Procedure<DialogHandler>
+    /** Marks the button as primary action. */
     primary?: boolean
 }
 
-type Construct = {
+/** Props for {@link Dialog}. */
+export interface DialogProps {
+    /** Headline displayed at the top of the dialog. */
     headline: string
+    /** Icon symbol shown next to the headline. */
     icon: IconSymbol
+    /** Callback executed when the dialog is canceled. */
     onCancel?: Exec
+    /** Whether the dialog can be closed with the Escape key. */
     cancelable?: boolean
-    buttons?: ReadonlyArray<Button>
+    /** Optional list of action buttons. */
+    buttons?: ReadonlyArray<DialogButton>
+    /** Inline style applied to the dialog element. */
     style?: Partial<CSSStyleDeclaration>
+    /** Renders the dialog in error style. */
     error?: boolean
 }
 
+/** Modal dialog component rendered using the native `<dialog>` element. */
 export const Dialog = (
-    {headline, icon, onCancel, buttons, cancelable, style, error}: Construct, children: JsxValue) => {
+    {headline, icon, onCancel, buttons, cancelable, style, error}: DialogProps, children: JsxValue) => {
     const lifecycle = new Terminator()
     const dialog: HTMLDialogElement = (
         <dialog className={Html.buildClassList(className, error && "error")} style={style}>
@@ -70,3 +83,14 @@ export const Dialog = (
     }
     return dialog
 }
+
+/** Property table for {@link Dialog}. */
+export const DialogPropTable = [
+    {prop: "headline", type: "string", description: "Headline displayed in the dialog."},
+    {prop: "icon", type: "IconSymbol", description: "Icon shown next to the headline."},
+    {prop: "onCancel", type: "Exec", description: "Callback when the dialog is cancelled."},
+    {prop: "cancelable", type: "boolean", description: "Whether the Escape key closes the dialog."},
+    {prop: "buttons", type: "ReadonlyArray<DialogButton>", description: "Buttons displayed in the footer."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline styles for the dialog element."},
+    {prop: "error", type: "boolean", description: "Render dialog with error styling."}
+] as const

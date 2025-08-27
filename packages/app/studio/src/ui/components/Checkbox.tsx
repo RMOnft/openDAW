@@ -3,15 +3,22 @@ import {createElement, JsxValue} from "@opendaw/lib-jsx"
 import {Appearance, ButtonCheckboxRadio} from "@/ui/components/ButtonCheckboxRadio.tsx"
 import {Html} from "@opendaw/lib-dom"
 
-type Construct = {
+/** Props for {@link Checkbox}. */
+export interface CheckboxProps {
+    /** Lifecycle owner for event subscriptions. */
     lifecycle: Lifecycle
+    /** Observable model reflecting the checked state. */
     model: MutableObservableValue<boolean>
+    /** Inline style applied to the wrapper. */
     style?: Partial<CSSStyleDeclaration>
+    /** Additional CSS class name for the wrapper. */
     className?: string
+    /** Visual appearance options. */
     appearance?: Appearance
 }
 
-export const Checkbox = ({lifecycle, model, style, className, appearance}: Construct, children: JsxValue) => {
+/** Toggle control wrapping a native checkbox input. */
+export const Checkbox = ({lifecycle, model, style, className, appearance}: CheckboxProps, children: JsxValue) => {
     const id = Html.nextID()
     const input: HTMLInputElement = (
         <input type="checkbox"
@@ -34,3 +41,12 @@ export const Checkbox = ({lifecycle, model, style, className, appearance}: Const
         </ButtonCheckboxRadio>
     )
 }
+
+/** Property table for {@link Checkbox}. */
+export const CheckboxPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<boolean>", description: "Observable representing the checked state."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline style for the wrapper."},
+    {prop: "className", type: "string", description: "Additional CSS class names."},
+    {prop: "appearance", type: "Appearance", description: "Visual appearance customisation."}
+] as const

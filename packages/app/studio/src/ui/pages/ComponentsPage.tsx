@@ -5,7 +5,7 @@ import css from "./ComponentsPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"
 import {Checkbox} from "@/ui/components/Checkbox.tsx"
-import {DefaultObservableValue, Option, panic, UUID} from "@opendaw/lib-std"
+import {DefaultObservableValue, Option, panic, UUID, DefaultParameter, ValueMapping, StringMapping} from "@opendaw/lib-std"
 import {Icon} from "@/ui/components/Icon.tsx"
 import {RadioGroup} from "@/ui/components/RadioGroup.tsx"
 import {Button} from "@/ui/components/Button.tsx"
@@ -21,13 +21,16 @@ import {VUMeterDesign} from "@/ui/meter/VUMeterDesign.tsx"
 import {IconSymbol} from "@opendaw/studio-adapters"
 import {dbToGain} from "@opendaw/lib-dsp"
 import {RootBox, TimelineBox} from "@opendaw/studio-boxes"
-import {BoxGraph} from "@opendaw/lib-box"
+import {BoxGraph, Editing} from "@opendaw/lib-box"
 import {BoxDebugView} from "../components/BoxDebugView"
 import {ProgressBar} from "@/ui/components/ProgressBar.tsx"
 import {TextInput} from "../components/TextInput"
 import {SearchInput} from "../components/SearchInput"
 import {Html} from "@opendaw/lib-dom"
 import {Colors} from "@opendaw/studio-core"
+import {Knob} from "@/ui/components/Knob.tsx"
+import {VolumeSlider} from "@/ui/components/VolumeSlider.tsx"
+import {TrackPeakMeter} from "@/ui/components/TrackPeakMeter.tsx"
 
 const className = Html.adoptStyleSheet(css, "ComponentsPage")
 
@@ -42,6 +45,15 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
     })
     rootBox.timeline.refer(timelineBox.root)
     boxGraph.endTransaction()
+    const editing = new Editing(boxGraph)
+    const volumeParameter = new DefaultParameter<number>(
+        ValueMapping.linear(-96, 6),
+        StringMapping.decible,
+        "Volume",
+        -6
+    )
+    const knobParameter = DefaultParameter.percent("Knob", 0.5)
+    const peaks = new Float32Array([-6, -12, -24])
     return (
         <div className={className}>
             <div>
@@ -113,6 +125,10 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
                     <TextInput lifecycle={lifecycle} model={new DefaultObservableValue("Text")}/>
                     <label>SearchField</label>
                     <SearchInput lifecycle={lifecycle} model={new DefaultObservableValue("")}/>
+                    <label>Knob</label>
+                    <Knob lifecycle={lifecycle} value={knobParameter} anchor={0.5}/>
+                    <label>Volume Slider</label>
+                    <VolumeSlider lifecycle={lifecycle} editing={editing} parameter={volumeParameter}/>
                     <label>Scroller</label>
                     <div style={{
                         width: "128px",
@@ -139,6 +155,7 @@ export const ComponentsPage: PageFactory<StudioService> = ({lifecycle}: PageCont
                     <div>
                         <VUMeterDesign.Default model={new DefaultObservableValue(dbToGain(-6))}/>
                         <VUMeterDesign.Modern model={new DefaultObservableValue(dbToGain(-6))}/>
+                        <TrackPeakMeter lifecycle={lifecycle} peaksInDb={peaks}/>
                     </div>
                 </div>
             </div>

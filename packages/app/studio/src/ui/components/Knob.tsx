@@ -5,6 +5,21 @@ import {Html, Svg} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "knob")
 
+/** Configuration of the knob design. */
+export interface Design {
+    /** Radius defining the overall size. */
+    readonly radius: number
+    /** Thickness of the track arc. */
+    readonly trackWidth: number
+    /** Offset limiting the rotation range. */
+    readonly angleOffset: number
+    /** Start and end of the indicator as fractions of the radius. */
+    readonly indicator: [unitValue, unitValue]
+    /** Width of the indicator line. */
+    readonly indicatorWidth: number
+}
+
+/** Default design used by {@link Knob}. */
 export const DefaultDesign: Readonly<Design> = Object.freeze({
     radius: 20,
     trackWidth: 1.5,
@@ -13,6 +28,7 @@ export const DefaultDesign: Readonly<Design> = Object.freeze({
     indicatorWidth: 2.5
 } satisfies Design)
 
+/** Compact design variant for small knobs. */
 export const TinyDesign: Readonly<Design> = Object.freeze({
     radius: 20,
     trackWidth: 1.5,
@@ -21,23 +37,22 @@ export const TinyDesign: Readonly<Design> = Object.freeze({
     indicatorWidth: 2.5
 } satisfies Design)
 
-type Design = {
-    readonly radius: number // defines the size
-    readonly trackWidth: number // thickness of the arc
-    readonly angleOffset: number // positive & smaller than PI/2
-    readonly indicator: [unitValue, unitValue] // allows floating indicator
-    readonly indicatorWidth: number
-}
-
-type Construct = {
+/** Props for {@link Knob}. */
+export interface KnobProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Parameter controlling the knob value. */
     value: Parameter
+    /** Anchor position used as reference for the indicator. */
     anchor: unitValue
+    /** Optional color applied to the knob. */
     color?: string
+    /** Custom visual design. */
     design?: Design
 }
 
-export const Knob = ({lifecycle, value, anchor, color, design}: Construct) => {
+/** Circular control representing a continuous parameter value. */
+export const Knob = ({lifecycle, value, anchor, color, design}: KnobProps) => {
     const {radius, trackWidth, angleOffset, indicator: [min, max], indicatorWidth} = design ?? DefaultDesign
 
     const trackRadius = Math.floor(radius - trackWidth * 0.5)
@@ -90,3 +105,12 @@ export const Knob = ({lifecycle, value, anchor, color, design}: Construct) => {
     update(value.getControlledUnitValue())
     return svg
 }
+
+/** Property table for {@link Knob}. */
+export const KnobPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "value", type: "Parameter", description: "Parameter represented by the knob."},
+    {prop: "anchor", type: "unitValue", description: "Reference position for the indicator."},
+    {prop: "color", type: "string", description: "Optional color applied to the knob."},
+    {prop: "design", type: "Design", description: "Custom design configuration."}
+] as const

@@ -6,16 +6,26 @@ import {Events, Html} from "@opendaw/lib-dom"
 
 const defaultClassName = Html.adoptStyleSheet(css, "TimeCodeInput")
 
-type Construct = {
+/** Props for {@link TimeCodeInput}. */
+export interface TimeCodeInputProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Observable model containing the time in PPQN. */
     model: MutableObservableValue<ppqn>
+    /** Additional CSS class name for the wrapper. */
     className?: string
+    /** Warn when the value becomes negative. */
     negativeWarning?: boolean
+    /** Optional time signature `[upper, lower]`. */
     signature?: [int, int]
+    /** Use one-based notation instead of zero-based. */
     oneBased?: boolean
 }
 
-export const TimeCodeInput = ({lifecycle, model, className, negativeWarning, signature, oneBased}: Construct) => {
+/**
+ * Editable time-code input represented as bars, beats and ticks.
+ */
+export const TimeCodeInput = ({lifecycle, model, className, negativeWarning, signature, oneBased}: TimeCodeInputProps) => {
     const upper = signature?.at(0) ?? 4
     const lower = signature?.at(1) ?? 4
     const units = [
@@ -134,3 +144,13 @@ export const TimeCodeInput = ({lifecycle, model, className, negativeWarning, sig
     updateDigits()
     return element
 }
+
+/** Property table for {@link TimeCodeInput}. */
+export const TimeCodeInputPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<ppqn>", description: "Observable time value."},
+    {prop: "className", type: "string", description: "Additional CSS class for the wrapper."},
+    {prop: "negativeWarning", type: "boolean", description: "Highlight when value is negative."},
+    {prop: "signature", type: "[int,int]", description: "Optional time signature."},
+    {prop: "oneBased", type: "boolean", description: "Use one-based display."}
+] as const

@@ -5,14 +5,22 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "TextInput")
 
-type Construct = {
+/** Props for {@link FloatingTextInput}. */
+export interface FloatingTextInputProps {
+    /** Promise resolvers used to resolve or reject user input. */
     resolvers?: PromiseWithResolvers<string>
+    /** Absolute screen position to place the input at. */
     position?: Point
+    /** Initial value shown inside the field. */
     value?: boolean | number | string
+    /** Unit string displayed next to the value. */
     unit?: string
 }
 
-export const FloatingTextInput = ({resolvers, position, value, unit}: Construct) => {
+/**
+ * Light-weight text input that floats at an arbitrary screen position.
+ */
+export const FloatingTextInput = ({resolvers, position, value, unit}: FloatingTextInputProps) => {
     const inputField: HTMLInputElement = (<input type="text" value={isDefined(value) ? String(value) : ""}/>)
     requestAnimationFrame(() => {
         inputField.select()
@@ -48,3 +56,11 @@ export const FloatingTextInput = ({resolvers, position, value, unit}: Construct)
     )
     return element
 }
+
+/** Property table for {@link FloatingTextInput}. */
+export const FloatingTextInputPropTable = [
+    {prop: "resolvers", type: "PromiseWithResolvers<string>", description: "Resolvers to resolve or cancel input."},
+    {prop: "position", type: "Point", description: "Absolute screen position."},
+    {prop: "value", type: "boolean | number | string", description: "Initial value shown in the field."},
+    {prop: "unit", type: "string", description: "Unit text displayed next to the value."}
+] as const
