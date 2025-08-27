@@ -1,3 +1,6 @@
+/**
+ * Worklet node forwarding peak and RMS measurements to the main thread.
+ */
 import {int, Notifier, Observer, Schema, Subscription, SyncStream, Terminable, Terminator} from "@opendaw/lib-std"
 import {AnimationFrame} from "@opendaw/lib-dom"
 import {PeakMeterProcessorOptions} from "@opendaw/studio-adapters"
@@ -56,3 +59,4 @@ export class MeterWorklet extends AudioWorkletNode implements Terminable {
     /** Terminates the worklet and releases resources. */
     terminate(): void {this.#terminator.terminate()}
 }
+
