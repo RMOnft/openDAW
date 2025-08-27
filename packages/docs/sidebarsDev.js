@@ -63,6 +63,16 @@ module.exports = {
             "ui/workspace/examples",
           ],
         },
+        {
+          type: "category",
+          label: "Typography",
+          items: [
+            "ui/typography/overview",
+            "ui/typography/font-loading",
+            "ui/typography/markdown",
+            "ui/typography/notepad",
+          ],
+        },
       ],
     },
     {
