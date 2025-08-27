@@ -1,2 +1,2 @@
 # Disable all markdownlint rules by default; enable only the ones we need
-default: false
+default: false # opt in to rules individually for fine-grained control

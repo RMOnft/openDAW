@@ -1,5 +1,6 @@
 {
   "//": "Example configuration for deploying to Vercel. Values are left blank to prevent accidental builds.",
   "buildCommand": "", // Command that produces the build output, e.g. `npm run docs:build`
-  "outputDirectory": "" // Directory containing the generated site
+  "outputDirectory": "", // Directory containing the generated site
+  "//": "Add additional Vercel options like rewrites or headers here"
 }

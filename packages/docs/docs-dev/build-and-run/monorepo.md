@@ -10,4 +10,5 @@ versions and can publish updates from the workspace. Typical commands include:
 - `npm run publish-sdk` – invoke `lerna publish` to release packages.
 
 This structure keeps development cohesive while allowing packages to evolve
-independently.
+independently. See [repository configuration](./repo-config.md) for details on
+the root config files that support this workflow.

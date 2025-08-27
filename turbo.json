@@ -6,23 +6,23 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"]
-    },
+    }, // Default build for each package
     "@opendaw/studio-forge-boxes#build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*", "src/**"],
       "outputs": ["dist/**"]
     },
-    "lint": {},
+    "lint": {}, // run ESLint across packages
     "dev": {
-      "cache": false,
-      "persistent": true
+      "cache": false, // avoid caching for the dev server
+      "persistent": true // keep processes alive for hot reload
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"] // ensure build artifacts exist
     },
     "docs:build": {
       "dependsOn": ["^build"],
-      "outputs": ["packages/docs/build/**"]
+      "outputs": ["packages/docs/build/**"] // generated docs output
     }
   }
 }

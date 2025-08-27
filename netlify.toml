@@ -1,6 +1,6 @@
 # Netlify configuration example for the documentation site. Deployment is
 # currently disabled, but the section below shows the typical settings when the
 # site is hosted on Netlify.
-#[build]
+#[build] # uncomment to enable Netlify builds
 #  command = "npm run docs:build"   # Generates the static documentation files
 #  publish = "packages/docs/build"  # Directory containing the built site

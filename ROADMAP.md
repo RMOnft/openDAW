@@ -8,6 +8,20 @@ generation, while Lerna handles package versioning and publishing; see the
 Deployment configs for Vercel and Netlify document how releases will be
 delivered.
 
+### Configuration Overview
+
+The repository root contains shared configuration files:
+
+- `.eslintrc.js` – lint rules.
+- `.markdownlint.yml` – Markdown standards.
+- `.vale.ini` – prose linting.
+- `turbo.json` – task runner config.
+- `lerna.json` – package management settings.
+- `typedoc.json` – API doc options.
+- `package.json` & `package-lock.json` – workspace manifests.
+- `netlify.toml` & `vercel.json` – example deployment configs.
+- `.gitignore` – ignored files list.
+
 ## Near term
 
 - Publish core documentation set and initial diagrams.

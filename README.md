@@ -129,6 +129,22 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [User Style Customization](packages/docs/docs-user/style-customization.md)
 - [Writing Guide](packages/docs/docs-dev/style/writing-guide.md)
 
+### Configuration Overview
+
+Key configuration files at the repository root:
+
+- `.eslintrc.js` – shared ESLint rules.
+- `.markdownlint.yml` – default Markdown lint settings.
+- `.vale.ini` – prose style guidelines.
+- `turbo.json` – task runner setup.
+- `lerna.json` – package publishing settings.
+- `typedoc.json` – API documentation output options.
+- `package.json` – workspace manifest and scripts.
+- `package-lock.json` – placeholder lockfile.
+- `netlify.toml` – sample Netlify deployment config.
+- `vercel.json` – sample Vercel deployment config.
+- `.gitignore` – files excluded from version control.
+
 ### Prepare, Clone, Installation, and Run
 
 openDAW tries to avoid external libraries and frameworks. Following is a list of the external libraries we currently use in the web studio:

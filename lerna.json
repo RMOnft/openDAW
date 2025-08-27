@@ -5,11 +5,12 @@
   "version": "independent",
   "npmClient": "npm",
   "command": {
+    "//": "Settings for lerna subcommands",
     "publish": {
-      "conventionalCommits": true,
+      "conventionalCommits": true, // generate changelog from commit messages
       "registry": "https://registry.npmjs.org/",
-      "access": "public"
+      "access": "public" // publish as public packages
     }
   },
-  "packages": ["packages/**"]
+  "packages": ["packages/**"] // glob for workspace packages
 }
