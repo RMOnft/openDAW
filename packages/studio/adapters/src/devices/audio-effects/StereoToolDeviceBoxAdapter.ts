@@ -7,6 +7,7 @@ import {BoxAdaptersContext} from "../../BoxAdaptersContext"
 import {ParameterAdapterSet} from "../../ParameterAdapterSet"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 
+/** Adapter for the Stereo Tool widening effect. */
 export class StereoToolDeviceBoxAdapter implements AudioEffectDeviceAdapter {
     readonly type = "audio-effect"
     readonly accepts = "audio"

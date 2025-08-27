@@ -8,6 +8,7 @@ import {BoxAdaptersContext} from "../../BoxAdaptersContext"
 import {ParameterAdapterSet} from "../../ParameterAdapterSet"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 
+/** Adapter for the built-in delay audio effect. */
 export class DelayDeviceBoxAdapter implements AudioEffectDeviceAdapter {
     static OffsetFractions = Fraction.builder()
         .add([1, 1]).add([1, 2]).add([1, 3]).add([1, 4])

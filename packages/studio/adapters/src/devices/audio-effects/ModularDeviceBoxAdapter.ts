@@ -10,6 +10,7 @@ import {ModularAdapter} from "../../modular/modular"
 import {DeviceInterfaceKnobAdapter} from "../../modular/user-interface"
 
 
+/** Adapter that exposes a modular device chain as an audio effect. */
 export class ModularDeviceBoxAdapter implements AudioEffectDeviceAdapter {
     readonly type = "audio-effect"
     readonly accepts = "audio"

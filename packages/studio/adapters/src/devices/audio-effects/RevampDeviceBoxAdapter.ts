@@ -8,6 +8,7 @@ import {ParameterAdapterSet} from "../../ParameterAdapterSet"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 
+/** Adapter for the Revamp equalizer and filter effect. */
 export class RevampDeviceBoxAdapter implements AudioEffectDeviceAdapter {
     readonly type = "audio-effect"
     readonly accepts = "audio"

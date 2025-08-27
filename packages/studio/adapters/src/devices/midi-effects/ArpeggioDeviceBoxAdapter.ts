@@ -9,6 +9,7 @@ import {ParameterAdapterSet} from "../../ParameterAdapterSet"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 
+/** Adapter for the Arpeggio MIDI effect. */
 export class ArpeggioDeviceBoxAdapter implements MidiEffectDeviceAdapter {
     static RateFractions = Fraction.builder()
         .add([1, 1]).add([1, 2]).add([1, 3]).add([1, 4])

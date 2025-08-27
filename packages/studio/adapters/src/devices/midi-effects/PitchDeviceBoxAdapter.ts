@@ -8,6 +8,7 @@ import {ParameterAdapterSet} from "../../ParameterAdapterSet"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 import { AutomatableParameterFieldAdapter } from "../../AutomatableParameterFieldAdapter"
 
+/** Adapter for the Pitch MIDI effect device. */
 export class PitchDeviceBoxAdapter implements MidiEffectDeviceAdapter {
     readonly type = "midi-effect"
     readonly accepts = "midi"

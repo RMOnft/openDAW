@@ -7,6 +7,7 @@ import {BoxAdaptersContext} from "../BoxAdaptersContext"
 import {ParameterAdapterSet} from "../ParameterAdapterSet"
 import {AutomatableParameterFieldAdapter} from "../AutomatableParameterFieldAdapter"
 
+/** Adapter that generates shuffle groove patterns. */
 export class GrooveShuffleBoxAdapter implements GrooveAdapter {
     static readonly Durations: ReadonlyArray<[int, int]> = [
         [1, 8], [1, 4], [1, 4], [1, 2], [1, 1], [2, 1], [4, 1], [8, 1], [16, 1]
