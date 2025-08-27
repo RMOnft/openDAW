@@ -4,6 +4,8 @@ import {SupportedSvgTags} from "./supported-svg-tags"
 import {Inject} from "./inject"
 import {DomElement, JsxValue} from "./types"
 
+/** Utility functions for creating and manipulating JSX-backed DOM elements. */
+
 type Factory = (attributes: Readonly<Record<string, any>>, children?: ReadonlyArray<JsxValue>) => JsxValue
 type TagOrFactoryOrElement = string | Factory | DomElement
 
@@ -11,14 +13,20 @@ const EmptyAttributes = Object.freeze({})
 const EmptyChildren: ReadonlyArray<JsxValue> = Object.freeze([])
 
 /**
- * This method must be exposed as the "createElement" method
- * to be passively called on each element defined in jsx files.
- * This is secured by injection defined in vite.config
- * Most magic happens here, but we try to keep it civil.
+ * JSX factory function wired up via the `createElement` pragma. It handles
+ * both intrinsic elements and functional components.
+ *
+ * @param tagOrFactoryOrElement - Element tag name, component factory or an
+ * existing DOM element to be reused.
+ * @param attributes - Attribute record to apply to the created element.
+ * @param children - Child nodes or values appended to the element.
+ * @returns The created element or primitive value returned by a component.
  */
-export function createElement(tagOrFactoryOrElement: TagOrFactoryOrElement,
-                              attributes: Readonly<Record<string, any>> | null,
-                              ...children: ReadonlyArray<JsxValue>): JsxValue {
+export function createElement(
+    tagOrFactoryOrElement: TagOrFactoryOrElement,
+    attributes: Readonly<Record<string, any>> | null,
+    ...children: ReadonlyArray<JsxValue>
+): JsxValue {
     if (tagOrFactoryOrElement instanceof HTMLElement || tagOrFactoryOrElement instanceof SVGElement) {
         // already an element > early out
         return tagOrFactoryOrElement
@@ -58,11 +66,18 @@ export function createElement(tagOrFactoryOrElement: TagOrFactoryOrElement,
     return element
 }
 
+/**
+ * Replaces all existing children of the element with the provided JSX values.
+ */
 export const replaceChildren = (element: DomElement, ...children: ReadonlyArray<JsxValue>) => {
     Html.empty(element)
     appendChildren(element, ...children)
 }
 
+/**
+ * Appends JSX values or nodes to a DOM element, recursively handling nested
+ * arrays and {@link Inject.Value} instances.
+ */
 export const appendChildren = (element: DomElement, ...children: ReadonlyArray<JsxValue>) => {
     children.forEach((value: JsxValue | Inject.Value) => {
         if (value === null || value === undefined || value === false) {return}
