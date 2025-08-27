@@ -3,7 +3,9 @@ import {Communicator, Messenger, stopwatch} from "@opendaw/lib-runtime"
 import {Peaks, SamplePeaks} from "./Peaks"
 import {SamplePeakProtocol} from "./SamplePeakProtocol"
 
+/** Worker-side utilities for generating peak overviews. */
 export namespace SamplePeakWorker {
+    /** Installs the {@link SamplePeakProtocol} on the provided messenger. */
     export const install = (messenger: Messenger) =>
         Communicator.executor(messenger.channel("peaks"), new class implements SamplePeakProtocol {
             async generateAsync(progress: Procedure<number>,
@@ -85,6 +87,7 @@ export namespace SamplePeakWorker {
         return [stages, dataOffset]
     }
 
+    /** Packs two floats into a single 32‑bit integer using `Float16` encoding. */
     export const pack = (f0: float, f1: float): int => {
         const bits0 = Float16.floatToIntBits(f0)
         const bits1 = Float16.floatToIntBits(f1)
