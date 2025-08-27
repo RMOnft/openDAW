@@ -9,6 +9,8 @@ for editing audio, managing devices and browsing samples.
 
 Get oriented with the main areas of the interface.
 
+For feature-specific notes, see the [manuals overview](manuals/overview.md).
+
 ## Transport
 
 The top bar houses play, stop, record, tempo, and loop controls.
