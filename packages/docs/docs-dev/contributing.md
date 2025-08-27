@@ -14,6 +14,8 @@ please:
 4. Run tests with `npm test` (see [Tests](./build-and-run/tests.md)).
 5. Commit with clear messages and open a pull request against `main`.
 
+For documentation changes, follow the [Writing Guide](./style/writing-guide.md).
+
 For profiling advice, read the [Profiling guide](./build-and-run/profiling.md).
 See [Licensing](./licensing.md) for information on the dual license. For more
 detail, see the root [CONTRIBUTING.md](../../../../CONTRIBUTING.md).

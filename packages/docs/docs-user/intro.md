@@ -1,6 +1,8 @@
 # User Guide
 
-This guide helps you get started with openDAW and deepen your skills.
+This guide helps you get started with openDAW and deepen your skills. If you
+want to contribute documentation, read the
+[Writing Guide](../docs-dev/style/writing-guide.md).
 
 - [Quick Start](quick-start.md) — set up the project and begin making music in minutes.
 - [UI Tour](ui-tour.md) — explore the interface and learn where everything lives.
