@@ -19,3 +19,5 @@ flowchart TD
 6. **Download or share.** Save the resulting file to your computer or send the bundle to a collaborator.
 
 Use this workflow whenever you need to back up a project or deliver a finished track. For collaboration tips see the [Collaboration workflow](collaboration.md).
+Developers can learn how exported files are written by the OPFS worker in the
+[Fusion OPFS docs](../../docs-dev/fusion/opfs.md).
