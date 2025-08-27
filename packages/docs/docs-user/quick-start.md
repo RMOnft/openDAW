@@ -8,3 +8,6 @@
 6. **Explore further.** Continue with the [Beat Making](workflows/beat.md) or [Recording and Effects](workflows/record-and-fx.md) workflows to learn more.
 
 For language options see the [Localization guide](localization.md). Accessibility features are outlined in the [Accessibility guide](accessibility.md).
+
+For writing or editing tips, consult the
+[Writing Guide](../docs-dev/style/writing-guide.md).

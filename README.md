@@ -116,6 +116,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Style Guidelines](styles/OpenDAW/style-guidelines.md)
 - [Developer Style Guide](packages/docs/docs-dev/style-guide.md)
 - [User Style Customization](packages/docs/docs-user/style-customization.md)
+- [Writing Guide](packages/docs/docs-dev/style/writing-guide.md)
 
 ### Prepare, Clone, Installation, and Run
 

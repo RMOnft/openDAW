@@ -58,4 +58,5 @@ A typical `coverage.json` looks like:
   `notDocumented` list shrinks.
 
 Contributions to improve coverage are welcome—see
-[Contributing](./contributing.md) for guidelines.
+[Contributing](./contributing.md) for guidelines. For doc style, consult the
+[Writing Guide](./style/writing-guide.md).
