@@ -1,0 +1,25 @@
+name: Docs QA
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Markdown lint
+        run: npx --yes markdownlint-cli '**/*.md'
+      - name: Vale
+        uses: errata-ai/vale-action@v2
+        with:
+          files: '**/*.md'
+      - name: Link check
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: '--no-progress .'
