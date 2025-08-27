@@ -49,6 +49,15 @@ const gain = graph.stageBox(
 3. **Execution** – Boxes receive data and update their fields. Parameters can be automated or manipulated in real time.
 4. **Deletion** – Call `delete()` or `unstage()` to remove a box and release its resources.
 
+The flowchart below summarizes this lifecycle:
+
+```mermaid
+flowchart LR
+  A[Creation] --> B[Initialization]
+  B --> C[Execution]
+  C --> D[Deletion]
+```
+
 ## Parameters and UI
 
 Parameters are represented as fields on a box. Primitive fields hold numbers, booleans, or strings. Pointer fields connect boxes together. The SDK ships with UI helpers so a device can expose controls such as knobs or sliders that bind to those fields. Custom UI components can be built with any framework and communicate through the same field API.
