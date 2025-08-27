@@ -1,8 +1,10 @@
+/** Utilities for observing pointer connections to a vertex. */
 import {PointerField, PointerTypes} from "./pointer"
 import {Vertex} from "./vertex"
 import {Exec, int, Iterables, Listeners, Option, panic, SortedSet, Subscription} from "@opendaw/lib-std"
 import {Address} from "./address"
 
+/** Listener receiving notifications about pointer additions/removals. */
 export interface PointerListener {
     onAdd(pointer: PointerField): void
     onRemove(pointer: PointerField): void
@@ -10,6 +12,9 @@ export interface PointerListener {
 
 type ChangeLog = Array<{ type: "add" | "remove", pointerField: PointerField }>
 
+/**
+ * Tracks incoming pointers to a vertex and notifies subscribed listeners.
+ */
 export class PointerHub {
     static validate(pointer: PointerField, target: Vertex): Option<string> {
         if (pointer.address.equals(target.address)) {

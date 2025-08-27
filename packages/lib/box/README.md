@@ -4,42 +4,49 @@ _This package is part of the openDAW SDK_
 
 Graph-based object modeling system with serialization, transactions, and pointer management for TypeScript projects.
 
+## Graph relationships
+
+Boxes contain fields which represent the vertices of the graph. Fields can be primitives, objects, arrays or pointers.
+Pointer fields create edges to other vertices and are tracked by the graph so that updates propagate correctly.
+
+```mermaid
+graph TD
+    subgraph BoxA[Box A]
+        A1[PrimitiveField]
+        A2[PointerField]
+    end
+    subgraph BoxB[Box B]
+        B1[Field]
+    end
+    A2 -->|points to| B1
+```
+
+The `PointerHub` and `GraphEdges` modules keep these connections consistent and notify listeners when relationships change.
+
+## Synchronization
+
+Graphs can be synchronized across contexts using `SyncSource` and `SyncTarget`. The source observes local updates and
+emits `UpdateTask` messages, while the target applies incoming tasks to its own graph.
+
+```mermaid
+sequenceDiagram
+    participant G1 as Source Graph
+    participant SS as SyncSource
+    participant M as Messenger
+    participant ST as SyncTarget
+    participant G2 as Target Graph
+
+    G1->>SS: field changes
+    SS->>M: sendUpdates
+    M->>ST: deliver tasks
+    ST->>G2: apply updates
+```
+
+This flow keeps graphs in different threads or machines consistent while allowing transactions to batch multiple changes.
+
 ## Wishlist
 
 * Introduce readonly fields (cannot only be written in the constructing phase)
 * Introduce meta-fields (compile time only)
 * Add array with all TypeMap keys
 
-## Core Architecture
-
-* **box.ts** - Core Box class for graph nodes with field management
-* **vertex.ts** - Vertex interface and visitor pattern definitions
-* **graph.ts** - BoxGraph class for managing object relationships
-* **field.ts** - Field abstraction for object properties
-* **address.ts** - Addressing system for graph navigation
-
-## Field Types
-
-* **primitive.ts** - Primitive field types (boolean, number, string)
-* **array.ts** - Array field implementations
-* **object.ts** - Object field for nested structures
-* **pointer.ts** - Pointer field for object references
-
-## Graph Management
-
-* **graph-edges.ts** - Edge management for graph relationships
-* **pointer-hub.ts** - Hub for managing incoming pointer connections
-* **dispatchers.ts** - Event dispatching system for updates
-* **updates.ts** - Update event definitions and handling
-
-## Serialization & Persistence
-
-* **serializer.ts** - Serialization utilities for objects
-* **sync.ts** - Synchronization utilities
-* **sync-source.ts** - Source-side synchronization
-* **sync-target.ts** - Target-side synchronization
-
-## Editing & Transactions
-
-* **editing.ts** - Undo/redo system for graph modifications
-* **indexed-box.ts** - Indexed box implementation for efficient lookups

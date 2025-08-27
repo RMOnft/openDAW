@@ -6,9 +6,15 @@ import {PointerTypes} from "./pointer"
 import {PointerHub} from "./pointer-hub"
 import {BoxGraph} from "./graph"
 
+/** Numeric key identifying a field within its parent. */
 export type FieldKey = number // i16 should be enough for larger arrays
+/** Immutable collection of field keys. */
 export type FieldKeys = Readonly<Int16Array>
+/** Mapping from keys to field instances. */
 export type Fields = Record<FieldKey, Field>
+/**
+ * Construction parameters required for creating a field instance.
+ */
 export type FieldConstruct<T extends PointerTypes> = {
     parent: Vertex
     fieldKey: FieldKey
@@ -16,6 +22,10 @@ export type FieldConstruct<T extends PointerTypes> = {
     pointerRules: PointerRules<T>
 }
 
+/**
+ * Base class for all fields within a box. Fields are vertices that can be
+ * traversed and may be the target of pointer references.
+ */
 export class Field<P extends PointerTypes = PointerTypes, F extends Fields = Fields> implements Vertex<P, F> {
     static hook<P extends PointerTypes>(construct: FieldConstruct<P>) {
         return new Field<P>(construct)

@@ -1,3 +1,4 @@
+/** Synchronization target that mirrors remote graph updates. */
 import {Arrays, ByteArrayInput, isDefined, Option, Terminable, UUID} from "@opendaw/lib-std"
 import {Communicator, Messenger} from "@opendaw/lib-runtime"
 import {BoxGraph} from "./graph"
@@ -6,6 +7,9 @@ import {Synchronization, UpdateTask} from "./sync"
 import {PointerField} from "./pointer"
 import {PrimitiveField, PrimitiveValues} from "./primitive"
 
+/**
+ * Creates a synchronization endpoint that applies incoming updates to a graph.
+ */
 export const createSyncTarget = <M>(graph: BoxGraph<M>, messenger: Messenger): Terminable => {
     return Communicator.executor<Synchronization<M>>(messenger, new class implements Synchronization<M> {
         sendUpdates(updates: ReadonlyArray<UpdateTask<M>>): void {
