@@ -1,3 +1,6 @@
+/**
+ * Lists all available SVG icons in the application.
+ */
 import css from "./IconsPage.sass?inline"
 import {createElement, Frag, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

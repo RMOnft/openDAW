@@ -1,3 +1,6 @@
+/**
+ * Shows the stack trace for an error report.
+ */
 import css from "./Stack.sass?inline"
 import {Html} from "@opendaw/lib-dom"
 import {createElement} from "@opendaw/lib-jsx"

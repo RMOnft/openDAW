@@ -1,3 +1,6 @@
+/**
+ * Visualizes the current project's box graph for diagnostics.
+ */
 import css from "./GraphPage.sass?inline"
 import {Await, createElement, DomElement, Frag, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {Html} from "@opendaw/lib-dom"

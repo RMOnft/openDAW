@@ -1,3 +1,6 @@
+/**
+ * Captures global errors and reports them to the logging service.
+ */
 import {EmptyExec, Terminable, Terminator, Warning} from "@opendaw/lib-std"
 import {AnimationFrame, Browser, Events} from "@opendaw/lib-dom"
 import {LogBuffer} from "@/errors/LogBuffer.ts"

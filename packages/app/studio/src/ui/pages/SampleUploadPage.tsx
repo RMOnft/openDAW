@@ -1,3 +1,6 @@
+/**
+ * Upload utility for analyzing and submitting audio samples.
+ */
 import css from "./SampleUploadPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

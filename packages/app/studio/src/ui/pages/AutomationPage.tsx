@@ -1,3 +1,6 @@
+/**
+ * Development page demonstrating value stream rendering and automation edge cases.
+ */
 import css from "./AutomationPage.sass?inline"
 import {createElement, PageContext, PageFactory} from "@opendaw/lib-jsx"
 import {StudioService} from "@/service/StudioService.ts"

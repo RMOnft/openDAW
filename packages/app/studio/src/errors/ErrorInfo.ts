@@ -1,3 +1,6 @@
+/**
+ * Helpers to normalize error information from various event types.
+ */
 import {isDefined} from "@opendaw/lib-std"
 
 export type ErrorInfo = {

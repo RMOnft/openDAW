@@ -1,3 +1,6 @@
+/**
+ * Captures recent console output for inclusion in error reports.
+ */
 import {int} from "@opendaw/lib-std"
 
 export namespace LogBuffer {
