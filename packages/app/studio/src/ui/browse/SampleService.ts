@@ -46,6 +46,7 @@ export class SampleService {
     const { editing, boxGraph, rootBoxAdapter } = project;
     editing.modify(() => {
       const samples = this.#samples();
+      // Insert new tracks sequentially after existing ones
       const startIndex = rootBoxAdapter.audioUnits.adapters().length;
       samples.forEach(
         (
@@ -57,6 +58,7 @@ export class SampleService {
             InstrumentFactories.Tape,
             { index: startIndex + index },
           );
+          // Reuse existing AudioFileBox if present, otherwise create one
           const audioFileBox = boxGraph
             .findBox<AudioFileBox>(uuid)
             .unwrapOrElse(() =>

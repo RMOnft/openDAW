@@ -25,9 +25,9 @@ export namespace SampleDialogs {
   /**
    * Prompt the user to locate a missing sample on disk.
    *
-   * @param importer Handles storing the selected sample.
-   * @param uuid Identifier of the missing sample.
-   * @param name Display name shown to the user.
+   * @param importer handler used to register the replacement sample.
+   * @param uuid identifier of the missing sample.
+   * @param name original name shown to the user.
    */
   export const missingSampleDialog = async (
     importer: SampleImporter,
