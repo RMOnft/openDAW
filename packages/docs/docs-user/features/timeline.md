@@ -14,7 +14,7 @@ Use the loop brace and time axis to scroll or set the play range.
 
 Enable snapping to align edits to the musical grid.
 
-![Timeline snapping menu](./img/timeline-snapping.png)
+![Timeline snapping menu](./img/timeline-snapping.svg)
 
 ## Example Integration
 

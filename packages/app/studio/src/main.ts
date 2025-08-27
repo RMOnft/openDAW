@@ -96,14 +96,7 @@ requestAnimationFrame(async () => {
                     Spotlight.install(surface, service)
                 )
             }
-          }),
-          ContextMenu.install(surface.owner),
-          Spotlight.install(surface, service),
-        );
-      },
-    },
-    errorHandler,
-  );
+        });
   document.querySelector("#preloader")?.remove();
   document.addEventListener(
     "touchmove",

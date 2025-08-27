@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint \"**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\"",
     "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {

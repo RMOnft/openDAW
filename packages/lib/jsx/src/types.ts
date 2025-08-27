@@ -44,9 +44,8 @@ type ExtractProperties<T extends Element> = Partial<{
 
 declare global {
     namespace JSX {
-        // @ts-expect-error: JSX intrinsic elements are merged from multiple maps
-        type IntrinsicElements =
-            & { [K in keyof Omit<SVGElementTagNameMap, "a">]: ExtractProperties<Omit<SVGElementTagNameMap, "a">[K]> }
+         type IntrinsicElements =
+              & { [K in keyof Omit<SVGElementTagNameMap, "a">]: ExtractProperties<Omit<SVGElementTagNameMap, "a">[K]> }
             & { [K in keyof Omit<HTMLElementTagNameMap, "a">]: ExtractProperties<Omit<HTMLElementTagNameMap, "a">[K]> }
             // TODO This guy is really fuzzy. For some reason I cannot type it properly
             & { a: any } // ExtractProperties<HTMLAnchorElement & HTMLElement & HTMLHyperlinkElementUtils>

@@ -12,7 +12,6 @@
   },
   "include": [
     "src",
-    "vitest.config.ts",
     "vite-env.d.ts"
   ],
   "exclude": [
