@@ -1,4 +1,5 @@
 # .github/workflows/deploy-docs.yml
+# NOTE: Workflow disabled
 name: Deploy docs
 
 on:
@@ -18,6 +19,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repository

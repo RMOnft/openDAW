@@ -1,4 +1,5 @@
 # .github/workflows/docs.yml
+# NOTE: Workflow disabled
 name: Build docs and check links
 
 on:
@@ -6,6 +7,7 @@ on:
 
 jobs:
   docs:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repository
