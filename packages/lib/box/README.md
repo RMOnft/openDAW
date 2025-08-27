@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Graph-based object modeling system with serialization, transactions, and pointer management for TypeScript projects.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/box/) for detailed reference.
+
 ## Graph relationships
 
 Boxes contain fields which represent the vertices of the graph. Fields can be primitives, objects, arrays or pointers.

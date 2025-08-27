@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Runtime utilities and asynchronous operations for TypeScript projects.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/) for detailed reference.
+
 ## Usage
 
 ```ts

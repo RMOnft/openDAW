@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 JSX utilities and components for TypeScript projects with DOM manipulation.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/jsx/) for detailed reference.
+
 ## Usage
 
 ```ts
