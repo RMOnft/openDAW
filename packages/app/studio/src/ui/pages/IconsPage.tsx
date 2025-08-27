@@ -1,5 +1,5 @@
 /**
- * Lists all available SVG icons in the application.
+ * Developer page listing every SVG icon shipped with the application.
  */
 import css from "./IconsPage.sass?inline"
 import {createElement, Frag, PageContext, PageFactory} from "@opendaw/lib-jsx"

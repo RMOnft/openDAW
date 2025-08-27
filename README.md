@@ -114,6 +114,7 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Cross-Origin Isolation Guide](packages/docs/docs-dev/build-and-run/cross-origin-isolation.md)
 - [Headless mode workflow](packages/docs/docs-user/workflows/headless-mode.md) – feature parity with Studio service, see [headless vs studio](packages/docs/docs-dev/architecture/headless-vs-studio.md)
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
+- [Icon Library](packages/docs/docs-dev/ui/icons/overview.md)
 
 ### Style Documentation
 
