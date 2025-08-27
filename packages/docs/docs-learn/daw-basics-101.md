@@ -26,3 +26,15 @@ flowchart LR
 ## Next Steps
 
 Continue to the next lesson to learn how to create tracks, record audio, and use basic effects.
+
+## Quiz
+
+1. What component combines tracks and controls their levels?
+   - [ ] Timeline
+   - [x] Mixer
+   - [ ] Automation lane
+2. Automation is used to record changes to parameters over what?
+   - [ ] Frequency
+   - [ ] File size
+   - [x] Time
+

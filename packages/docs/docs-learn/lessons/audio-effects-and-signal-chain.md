@@ -25,3 +25,15 @@ graph LR
 ```
 
 Experiment by reordering effects to discover new textures.
+
+## Quiz
+
+1. Where do you insert an effect in openDAW?
+   - [ ] On the master bus only
+   - [x] On individual tracks via the effects panel
+   - [ ] You cannot insert effects
+2. What happens when you change the order of effects in a chain?
+   - [ ] The sound is unaffected
+   - [x] Each processor receives a different input resulting in new textures
+   - [ ] The track is muted
+
