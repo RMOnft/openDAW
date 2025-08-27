@@ -40,6 +40,18 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Extending",
+      items: [
+        { type: "doc", id: "extending/opendaw-sdk" },
+        { type: "doc", id: "extending/plugin-guide" },
+        { type: "doc", id: "extending/plugin-api" },
+        { type: "doc", id: "extending/plugin-examples" },
+        { type: "doc", id: "extending/testing-plugins" },
+        { type: "doc", id: "extending/processor-guide" },
+    ]
+    },
+    {
+      type: "category",
       label: "Boxes",
       items: [
         { type: "doc", id: "boxes/overview" },
