@@ -3,6 +3,7 @@
  *
  * @see AutomationPage for automation examples.
  * @see ComponentsPage for the component showcase.
+ * @see ../../../../../docs/docs-dev/ui/pages/manuals.md
  */
 import css from "./ManualPage.sass?inline"
 import {Await, createElement, LocalLink, PageContext, PageFactory} from "@opendaw/lib-jsx"

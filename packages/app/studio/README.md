@@ -11,6 +11,10 @@ The project notepad uses markdown and can be customized. See the
 developer details. For instructions on using the feature in the Studio,
 read the [notepad user guide](../../docs/docs-user/features/notepad.md).
 
+Menu commands are built from a hierarchical `MenuItem` model. See the
+[menu overview](../../docs/docs-dev/ui/menu/overview.md) for how menus and
+keyboard shortcuts are wired into the Studio.
+
 For individual topics, browse the in-app [manuals](public/manuals/index.md).
 
 ## Component Hierarchy
