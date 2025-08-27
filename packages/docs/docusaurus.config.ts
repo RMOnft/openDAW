@@ -1,5 +1,5 @@
-import type {Config} from '@docusaurus/types';
-import {themes as prismThemes} from 'prism-react-renderer';
+import type { Config } from "@docusaurus/types";
+import { themes as prismThemes } from "prism-react-renderer";
 
 const config: Config = {
   title: 'openDAW Docs',
@@ -14,21 +14,21 @@ const config: Config = {
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: false,
         blog: false,
-        theme: { customCss: require.resolve('./src/css/custom.css') },
+        theme: { customCss: require.resolve("./src/css/custom.css") },
       },
     ],
   ],
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
   markdown: { mermaid: true },
 
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
         id: 'dev',
         path: 'docs-dev',
@@ -38,7 +38,7 @@ const config: Config = {
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
         id: 'user',
         path: 'docs-user',
@@ -48,7 +48,7 @@ const config: Config = {
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
         id: 'learn',
         path: 'docs-learn',
@@ -58,15 +58,39 @@ const config: Config = {
       },
     ],
     [
-      'docusaurus-plugin-typedoc',
+      "docusaurus-plugin-typedoc",
       {
-        id: 'api-core',
-        entryPoints: ['../lib/runtime/src/index.ts'],
-        tsconfig: '../lib/runtime/tsconfig.json',
-        out: 'api',
+        id: "api-runtime",
+        entryPoints: ["../lib/runtime/src/index.ts"],
+        tsconfig: "../lib/runtime/tsconfig.json",
+        out: "api",
         excludePrivate: true,
         excludeExternals: false,
-        plugin: ['typedoc-plugin-missing-exports'],
+        plugin: ["typedoc-plugin-missing-exports"],
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "api-dsp",
+        entryPoints: ["../lib/dsp/src/index.ts"],
+        tsconfig: "../lib/dsp/tsconfig.json",
+        out: "api/dsp",
+        excludePrivate: true,
+        excludeExternals: false,
+        plugin: ["typedoc-plugin-missing-exports"],
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "api-midi",
+        entryPoints: ["../lib/midi/src/index.ts"],
+        tsconfig: "../lib/midi/tsconfig.json",
+        out: "api/midi",
+        excludePrivate: true,
+        excludeExternals: false,
+        plugin: ["typedoc-plugin-missing-exports"],
       },
     ],
   ],
