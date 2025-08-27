@@ -5,6 +5,15 @@ import {DefaultWorkspace} from "@/ui/workspace/Default"
 import {Arrays, isUndefined} from "@opendaw/lib-std"
 import {Workspace} from "@/ui/workspace/Workspace"
 
+/**
+ * Registers global keyboard listeners and routes actions to the
+ * {@link StudioService}.
+ *
+ * ```mermaid
+ * flowchart LR
+ *   Keypress --> Shortcuts --> StudioService
+ * ```
+ */
 export class Shortcuts {
     constructor(service: StudioService) {
         window.addEventListener("keydown", async (event: KeyboardEvent) => {

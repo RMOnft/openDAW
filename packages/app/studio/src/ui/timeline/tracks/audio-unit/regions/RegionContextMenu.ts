@@ -17,15 +17,28 @@ import {Browser} from "@opendaw/lib-dom"
 import {showInfoDialog} from "@/ui/components/dialogs.tsx"
 import {StudioService} from "@/service/StudioService"
 
+/**
+ * Parameters required to install the region context menu.
+ */
 type Construct = {
+    /** Element to attach the menu to. */
     element: Element
+    /** Studio service providing project access. */
     service: StudioService
+    /** Capturing helper resolving the region under the cursor. */
     capturing: ElementCapturing<RegionCaptureTarget>
+    /** Region selection used for menu actions. */
     selection: Selection<AnyRegionBoxAdapter>
+    /** Timeline box for loop/zoom operations. */
     timelineBox: TimelineBox
+    /** Range controlling the visible portion of the timeline. */
     range: TimelineRange
 }
 
+/**
+ * Installs the context menu for timeline regions, enabling rename,
+ * color, conversion and other region related actions.
+ */
 export const installRegionContextMenu =
     ({element, service, capturing, selection, timelineBox, range}: Construct): Terminable => {
         const {project} = service

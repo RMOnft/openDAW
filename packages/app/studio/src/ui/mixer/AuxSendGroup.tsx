@@ -26,6 +26,9 @@ type Construct = {
     audioUnitAdapter: AudioUnitBoxAdapter
 }
 
+/**
+ * Renders and manages all auxiliary sends for a given audio unit.
+ */
 export const AuxSendGroup = ({lifecycle, project, audioUnitAdapter}: Construct) => {
     const canHaveAuxSends = !audioUnitAdapter.isOutput
     const groupElement: HTMLDivElement = <div className={className}/>

@@ -12,6 +12,7 @@ module.exports = {
         "features/piano-roll",
         "features/devices-and-plugins",
         "features/file-management",
+        "features/browse",
       ],
     },
   ],

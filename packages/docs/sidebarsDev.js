@@ -73,6 +73,7 @@ module.exports = {
             "ui/timeline/performance",
           ],
         },
+        "ui/browse"
       ],
     },
     {
@@ -83,6 +84,21 @@ module.exports = {
         { type: "doc", id: "boxes/examples" },
         { type: "doc", id: "boxes/diagram" },
         { type: "doc", id: "boxes/faq" },
+      ],
+    },
+    {
+      type: "category",
+      label: "UI",
+      items: ["ui/mixer"],
+},{
+      type: "category",
+      label: "Services",
+      items: [
+        "services/overview",
+        "services/sessions",
+        "services/shortcuts",
+        "services/sync",
+        "services/stems",
       ],
     },
   ],
