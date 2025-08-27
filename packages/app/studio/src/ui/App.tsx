@@ -14,6 +14,11 @@ import { ErrorsPage } from "@/ui/pages/ErrorsPage.tsx";
 import { ImprintPage } from "@/ui/pages/ImprintPage.tsx";
 import { GraphPage } from "@/ui/pages/GraphPage";
 
+/**
+ * Root application component that wires global UI elements and sets up
+ * the router. It renders the header, footer and the current page while
+ * providing a default 404 fallback.
+ */
 export const App = (service: StudioService) => {
   const terminator = new Terminator();
   return (
