@@ -9,3 +9,8 @@ helpers in [`src/utils.ts`](./src/utils.ts) for working with parameters.
 
 See the [developer documentation](../../docs/docs-dev/dawproject/overview.md) for a detailed overview,
 data format description, and additional examples.
+
+## Test fixtures
+
+Example project files for experimentation live in [`test-files`](../../test-files). A developer overview
+of these fixtures is available in the [testing docs](../../docs/docs-dev/testing/test-files.md).
