@@ -2,6 +2,7 @@
   "name": "@opendaw/app-studio",
   "private": true,
   "version": "0.0.20",
+  "description": "Web-based digital audio workstation UI for OpenDAW",
   "type": "module",
   "license": "LGPL-3.0-or-later",
   "scripts": {

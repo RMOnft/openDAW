@@ -4,7 +4,12 @@ import {IconSymbol} from "@opendaw/studio-adapters"
 import {Surface} from "@/ui/surface/Surface"
 import {Exec} from "@opendaw/lib-std"
 
+/** Dialog helpers related to MIDI device interactions. */
 export namespace MidiDialogs {
+    /**
+     * Show an instructional dialog for learning MIDI key connections.
+     * The provided callback is invoked if the user cancels the dialog.
+     */
     export const showInfoDialog = (cancel: Exec): DialogHandler => {
         const dialog: HTMLDialogElement = (
             <Dialog headline={"Learn Midi Keys..."}

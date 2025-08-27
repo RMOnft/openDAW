@@ -5,6 +5,14 @@ import {Promises} from "@opendaw/lib-runtime"
 import {createElement} from "@opendaw/lib-jsx"
 import {Colors} from "@opendaw/studio-core"
 
+/**
+ * Opens a warning dialog asking Firefox users to persist storage.
+ *
+ * Firefox does not enable persistent storage by default which can lead to
+ * data loss when the browser decides to clear storage. The dialog guides the
+ * user to enable the permission and resolves once storage persistence is
+ * granted.
+ */
 export const showStoragePersistDialog = (): Promise<void> => {
     const {resolve, promise} = Promise.withResolvers<void>()
     const dialog: HTMLDialogElement = (

@@ -1,3 +1,6 @@
+/**
+ * Vite configuration for the OpenDAW Studio application.
+ */
 import {readFileSync, writeFileSync} from "fs"
 import {resolve} from "path"
 import {defineConfig} from "vite"

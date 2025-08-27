@@ -3,7 +3,12 @@ import {IconSymbol, SampleMetaData} from "@opendaw/studio-adapters"
 import {Surface} from "@/ui/surface/Surface"
 import {Dialog} from "@/ui/components/Dialog"
 
+/** Utility dialogs for audio-related workflows. */
 export namespace AudioDialogs {
+    /**
+     * Show a dialog prompting the user to import a sample and optionally
+     * rename it.
+     */
     export const showImportSample = async ({
                                                name,
                                                bpm,
