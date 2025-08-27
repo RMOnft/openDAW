@@ -83,6 +83,7 @@ sequenceDiagram
     Main->>Worker: invoke protocols
     Main-->>Worker: terminate
 ```
+![Worker flow diagram](../../../../assets/architecture/worker-flow.svg)
 
 Workers are installed once at application startup and provide services such as
 file access and waveform analysis before being terminated when no longer
