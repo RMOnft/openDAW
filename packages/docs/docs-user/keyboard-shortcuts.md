@@ -1,10 +1,13 @@
 # Keyboard Shortcuts
 
+Replace `⌘` with `Ctrl` on Windows and Linux.
+
 ## Misc
 
 - `SPACE`: Toggle playback
 - `⌘Z`: Undo
 - `⌘⇧Z`: Redo
+- `⌘S`: Save project
 
 ## Views
 
@@ -27,3 +30,9 @@
 - Hold `⌥` and drag to copy a region/clip
 - Hold `⌥⇧` and drag to copy a region/clip as mirrored
 - Click track header and hit `⌫` to delete track
+
+## Editing
+
+- `⌘C`: Copy
+- `⌘V`: Paste
+- `⌘D`: Duplicate selection

@@ -2,6 +2,16 @@
 
 Control parameters over time for dynamic mixes and expressive sound design.
 
+```mermaid
+flowchart TD
+    A[Choose target] --> B[Create automation lane]
+    B --> C[Draw points]
+    C --> D{Add modulator?}
+    D -- Yes --> E[Map modulator]
+    D -- No --> F[Play and refine]
+    E --> F[Play and refine]
+```
+
 1. **Choose a target.** Click a track or device parameter you want to change automatically.
 2. **Create an automation lane.** Press `A` or use the context menu to reveal automation for the track.
 3. **Draw automation points.** Click to add nodes and drag to shape the curve across the timeline.

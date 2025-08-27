@@ -2,6 +2,16 @@
 
 Capture audio and shape it with effects.
 
+```mermaid
+flowchart TD
+    A[Set up input] --> B[Create audio track]
+    B --> C[Arm track]
+    C --> D[Check levels]
+    D --> E[Start recording]
+    E --> F[Add effect]
+    F --> G[Tweak parameters]
+```
+
 1. **Set up your input.** Connect a microphone or instrument and allow browser audio permissions.
 2. **Create an audio track.** Use the `+` button to add a track configured for audio recording.
 3. **Arm the track.** Click the record icon on the track header so it lights up.

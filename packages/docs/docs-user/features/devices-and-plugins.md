@@ -11,6 +11,7 @@ Add instruments and effects to shape your sound.
 
 1. Add effects by clicking **+** after an existing device and selecting from built-in modules like EQ, delay, or reverb.
 2. Devices process from top to bottom. Drag to reorder, and adjust each effect's parameters in its panel.
+3. Hover a device to bypass or remove it from the chain.
 
 ## Third-party plugins
 
@@ -19,3 +20,8 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 - Ensure plugins match your platform (e.g., 64-bit) and are officially supported.
 - Traditional desktop formats like VST or Audio Unit may require additional support and are not guaranteed to work.
 - Different plugins may expose unique parameters; test them in your environment to confirm full compatibility.
+
+## Mapping parameters
+
+- Right-click a control to create automation or modulation targets.
+- Parameters can be adjusted in real time and recorded during playback.

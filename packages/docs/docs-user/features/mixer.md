@@ -34,3 +34,5 @@ You can group tracks together by routing them through a bus:
 
 This setup lets you process and control multiple tracks as one while preserving
 individual sends and automation.
+
+For a practical example see the [Mixing workflow](../workflows/mixing.md).

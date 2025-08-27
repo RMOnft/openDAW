@@ -2,6 +2,15 @@
 
 Follow these steps to lay down a simple drum beat.
 
+```mermaid
+flowchart TD
+    A[New project] --> B[Add drum track]
+    B --> C[Open piano roll]
+    C --> D[Program pattern]
+    D --> E[Loop and audition]
+    E --> F[Extend arrangement]
+```
+
 1. **Create a new project.** Open the studio and choose _New Project_ from the start screen.
 2. **Add a drum track.** Click the `+` button in the track header and pick the built‑in drum instrument.
 3. **Open the note editor.** Double‑click the empty clip on the drum track to show the piano roll.
