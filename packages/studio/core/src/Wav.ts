@@ -1,5 +1,13 @@
 import {Arrays} from "@opendaw/lib-std"
 
+/**
+ * Encodes a set of float32 channel buffers or an {@link AudioBuffer} into a
+ * WAV-formatted {@link ArrayBuffer}.
+ *
+ * @param audio - The audio data to encode.
+ * @returns A buffer containing a 32-bit floating point WAV file.
+ * @public
+ */
 export const encodeWavFloat = (audio: {
     channels: ReadonlyArray<Float32Array>,
     sampleRate: number,

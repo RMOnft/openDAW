@@ -1,6 +1,15 @@
+/**
+ * Window functions used for spectral analysis and smoothing.
+ */
 export namespace Window {
     export enum Type {Bartlett, Blackman, BlackmanHarris, Hamming, Hanning}
 
+    /**
+     * Generates a window of the desired `type` and length `n`.
+     *
+     * @param type - Shape of the window.
+     * @param n - Number of samples.
+     */
     export const create = (type: Type, n: number): Float32Array => {
         const values = new Float32Array(n)
         const a = Math.PI / (n - 1)

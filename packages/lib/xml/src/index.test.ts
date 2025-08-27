@@ -3,6 +3,8 @@ import {Xml} from "./index"
 import {ComicSchema, LibrarySchema, NovelSchema, TextbookSchema} from "./test.schema"
 import {assertInstanceOf} from "@opendaw/lib-std"
 
+// Example XML document used for round‑trip tests
+
 const xml = `
 ${Xml.Declaration}
 <Library name="Central Library" location="Downtown">
@@ -32,6 +34,7 @@ ${Xml.Declaration}
 
 describe("Xml.parse() – LibrarySchema", () => {
     it("should parse a complex library with books, reviews and inheritance", () => {
+        // Parse the XML string into a typed LibrarySchema instance
         const library = Xml.parse(xml, LibrarySchema)
 
         expect(library.name).toBe("Central Library")
@@ -67,6 +70,7 @@ describe("Xml.parse() – LibrarySchema", () => {
         expect((shelf2.books?.[0] as TextbookSchema).edition).toBe(2)
     })
     it("should preserve structure in parse → toElement → serialize", () => {
+        // Round‑trip: parse then serialize back and compare
         const library = Xml.parse(xml, LibrarySchema)
         const recreate = Xml.parse(Xml.pretty(Xml.toElement("Library", library)), LibrarySchema)
         expect(JSON.stringify(library)).toBe(JSON.stringify(recreate)) // not perfect (missing tag names)

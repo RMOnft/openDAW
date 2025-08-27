@@ -158,3 +158,21 @@ console.debug(Xml.pretty(Xml.toElement("Project", project)))
     </Structure>
 </Project>
 ```
+
+### Parsing
+
+```typescript
+// Given an XML string and a schema, create a typed object
+const xmlString = `<Library name="Central Library"></Library>`
+const library = Xml.parse(xmlString, LibrarySchema)
+console.log(library.sections?.length)
+```
+
+### Serialization
+
+```typescript
+// Convert a typed object back to XML
+const element = Xml.toElement("Library", library)
+const xml = Xml.pretty(element)
+console.log(xml)
+```

@@ -1,6 +1,20 @@
 import {asDefined, byte, ByteArrayOutput, Func, Procedure, unitValue} from "@opendaw/lib-std"
 
+/** Utilities for working with the Fetch API. */
 export namespace Fetch {
+    /**
+     * Creates a function that reads a {@link Response} into an `ArrayBuffer`
+     * while reporting download progress.
+     *
+     * @example
+     * ```ts
+     * const load = Fetch.ProgressArrayBuffer(p => console.log(p * 100))
+     * const buffer = await load(await fetch(url))
+     * ```
+     *
+     * @param progress - Callback receiving the progress as a value between `0` and `1`.
+     * @returns Function that consumes a {@link Response} and resolves with the body as `ArrayBuffer`.
+     */
     export const ProgressArrayBuffer = (progress: Procedure<unitValue>): Func<Response, Promise<ArrayBufferLike>> =>
         async (response: Response): Promise<ArrayBufferLike> => {
             if (!response.headers.has("Content-Length")) {

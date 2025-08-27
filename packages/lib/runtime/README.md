@@ -4,20 +4,70 @@ _This package is part of the openDAW SDK_
 
 Runtime utilities and asynchronous operations for TypeScript projects.
 
-## Async & Promises
+## Usage
 
-* **promises.ts** - Promise utilities and async operation helpers
-* **wait.ts** - Waiting and delay utilities
-* **runtime.ts** - Runtime environment utilities
+```ts
+import { Wait, Promises, Runtime, network, Fetch } from "@opendaw/lib-runtime"
+```
 
-## Network & Communication
+### Async & Promises
 
-* **fetch.ts** - HTTP request utilities and fetch wrappers
-* **network.ts** - Network-related utilities
-* **messenger.ts** - Message passing utilities
-* **communicator.ts** - Inter-process communication helpers
+Use {@link Promises.retry} to automatically retry failing operations:
 
-## Time & Performance
+```ts
+const data = await Promises.retry(() => fetch("/data").then(r => r.json()))
+```
 
-* **timespan.ts** - Time span calculations and utilities
-* **stopwatch.ts** - Performance timing and measurement utilities
+Delay execution with {@link Wait.frames} or {@link Wait.timeSpan}:
+
+```ts
+await Wait.frames(2)
+await Wait.timeSpan(TimeSpan.seconds(1))
+```
+
+Debounce calls using {@link Runtime.debounce}:
+
+```ts
+const log = Runtime.debounce(console.log, 500)
+window.addEventListener("resize", () => log("resized"))
+```
+
+### Network & Communication
+
+Limit concurrent requests with {@link network.limitFetch}:
+
+```ts
+const response = await network.limitFetch("/api")
+```
+
+Track download progress using {@link Fetch.ProgressArrayBuffer}:
+
+```ts
+const load = Fetch.ProgressArrayBuffer(p => console.log(p))
+const buffer = await load(await fetch(url))
+```
+
+Create message channels via {@link Messenger} and build typed protocols with {@link Communicator.sender}:
+
+```ts
+const messenger = Messenger.for(new MessageChannel().port1)
+const protocol = Communicator.sender(messenger, d => ({
+  ping: () => d.dispatchAndForget(console.log, "pong")
+}))
+```
+
+### Time & Performance
+
+Estimate remaining time with {@link TimeSpanUtils.startEstimator}:
+
+```ts
+const estimate = TimeSpanUtils.startEstimator()
+console.log(estimate(0.5).toString())
+```
+
+Measure code execution using {@link stopwatch}:
+
+```ts
+const sw = stopwatch()
+sw.lab("step 1")
+```

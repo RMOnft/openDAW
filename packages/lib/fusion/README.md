@@ -9,6 +9,18 @@ Web-based audio workstation fusion utilities for TypeScript projects.
 * **OpfsWorker.ts** - Origin Private File System worker implementation
 * **OpfsProtocol.ts** - OPFS communication protocol definitions
 
+### Message Flow
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Worker
+    participant OPFS
+    Main->>Worker: OpfsProtocol.open
+    Worker->>OPFS: Read/Write
+    Worker-->>Main: Result
+```
+
 ## Audio Visualization
 
 * **Peaks.ts** - Audio peak data management and processing
@@ -16,9 +28,29 @@ Web-based audio workstation fusion utilities for TypeScript projects.
 * **PeakProtocol.ts** - Peak data communication protocol
 * **PeaksPainter.ts** - Canvas-based peak visualization rendering
 
+### Message Flow
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Worker
+    Main->>Worker: SamplePeakProtocol.request
+    Worker-->>Main: SamplePeakProtocol.response
+```
+
 ## Live Audio Streaming
 
 * **live-stream/** - Directory containing live audio stream processing utilities
+
+### Message Flow
+
+```mermaid
+sequenceDiagram
+    participant Broadcaster
+    participant Receiver
+    Broadcaster->>Receiver: AudioFrame
+    Receiver-->>Broadcaster: Acknowledgement
+```
 
 ## Core Types
 

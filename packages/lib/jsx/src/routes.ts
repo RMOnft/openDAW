@@ -1,5 +1,9 @@
 import {isDefined, Lazy, Notifier, Observer, Option, Subscription} from "@opendaw/lib-std"
 
+/**
+ * Tracks the current browser location and emits notifications when navigation
+ * occurs. The class also keeps the canonical link element up to date.
+ */
 export class RouteLocation {
     @Lazy
     static get(): RouteLocation {return new RouteLocation()}
@@ -11,6 +15,11 @@ export class RouteLocation {
         this.#setCanonical()
     }
 
+    /**
+     * Navigates to the given path and notifies subscribers when the path has
+     * changed.
+     * @returns `true` if navigation occurred, otherwise `false`.
+     */
     navigateTo(path: string): boolean {
         if (this.path === path) {
             return false
@@ -21,11 +30,16 @@ export class RouteLocation {
         return true
     }
 
+    /**
+     * Immediately invokes the observer with the current location and
+     * subscribes it for future changes.
+     */
     catchupAndSubscribe(observer: Observer<RouteLocation>): Subscription {
         observer(this)
         return this.#notifier.subscribe(observer)
     }
 
+    /** Current path component of the location. */
     get path(): string {return location.pathname}
 
     #setCanonical(): void {
@@ -42,13 +56,22 @@ export class RouteLocation {
     }
 }
 
+/** Descriptor for a route entry used by {@link RouteMatcher}. */
 export type Route = { path: string }
 
+/**
+ * Utility for resolving a path against a list of route descriptors.
+ * Wildcard segments (`*`) are supported.
+ */
 export class RouteMatcher<R extends Route> {
+    /** Factory method to create a matcher from a list of routes. */
     static create<R extends Route>(routes: ReadonlyArray<R>): RouteMatcher<R> {
         return new RouteMatcher<R>(routes)
     }
 
+    /**
+     * Checks whether a given path matches a route pattern.
+     */
     static match(route: string, path: string): boolean {
         if (!path.startsWith("/") || !route.startsWith("/")) {
             return false
@@ -80,6 +103,7 @@ export class RouteMatcher<R extends Route> {
         })
     }
 
+    /** Resolves the first matching route for the given path. */
     resolve(path: string): Option<R> {
         return Option.wrap(this.#routes.find(route => RouteMatcher.match(route.path, path)))
     }

@@ -1,10 +1,15 @@
+/** Array field implementations for fixed-size collections. */
 import {Field, FieldConstruct} from "./field"
 import {UnreferenceableType} from "./pointer"
 import {Arrays, asDefined, DataInput, DataOutput, int, Nullish, Option, safeExecute} from "@opendaw/lib-std"
 import {NoPointers, VertexVisitor} from "./vertex"
 
+/** Factory function used to create array element fields. */
 export type ArrayFieldFactory<FIELD extends Field> = (construct: FieldConstruct<UnreferenceableType>) => FIELD
 
+/**
+ * Field representing a fixed-length array of child fields.
+ */
 export class ArrayField<FIELD extends Field = Field>
     extends Field<UnreferenceableType, Record<int, FIELD>> {
     static create<FIELD extends Field>(

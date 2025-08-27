@@ -1,3 +1,8 @@
+/**
+ * Graph infrastructure responsible for storing boxes and propagating
+ * changes between vertices. The graph manages transactions, edges and
+ * serialization of updates.
+ */
 import {
     assert,
     ByteArrayInput,
@@ -24,22 +29,30 @@ import {DeleteUpdate, FieldUpdate, NewUpdate, PointerUpdate, PrimitiveUpdate, Up
 import {Dispatchers, Propagation} from "./dispatchers"
 import {GraphEdges} from "./graph-edges"
 
+/** Factory function used to construct boxes for the graph. */
 export type BoxFactory<BoxMap> = (name: keyof BoxMap,
                                   graph: BoxGraph<BoxMap>,
                                   uuid: UUID.Format,
                                   constructor: Procedure<Box>) => Box
 
+/** Listener invoked when transactions begin and end. */
 export interface TransactionListener {
     onBeginTransaction(): void
     onEndTransaction(): void
 }
 
+/** Listener notified of all updates dispatched by the graph. */
 export interface UpdateListener {
     onUpdate(update: Update): void
 }
 
+/** Collection describing dependencies for a given box. */
 export type Dependencies = { boxes: Iterable<Box>, pointers: Iterable<PointerField> }
 
+/**
+ * Maintains a set of boxes and propagates updates between them.
+ * The graph orchestrates transactions, edge validation and update dispatching.
+ */
 export class BoxGraph<BoxMap = any> {
     readonly #boxFactory: Option<BoxFactory<BoxMap>>
     readonly #boxes: SortedSet<Readonly<Uint8Array>, Box>

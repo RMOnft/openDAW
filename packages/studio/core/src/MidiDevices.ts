@@ -13,9 +13,16 @@ import {
 import {MidiData} from "@opendaw/lib-midi"
 import {Promises} from "@opendaw/lib-runtime"
 
+/**
+ * Utility for requesting and interacting with Web MIDI devices.
+ *
+ * @public
+ */
 export class MidiDevices {
+    /** Returns `true` if the current environment supports the Web MIDI API. */
     static canRequestMidiAccess(): boolean {return "requestMIDIAccess" in navigator}
 
+    /** Requests permission to access MIDI devices from the browser. */
     static async requestPermission() {
         if (this.canRequestMidiAccess()) {
             const {status, value: midiAccess, error} =
@@ -33,16 +40,20 @@ export class MidiDevices {
         }
     }
 
+    /** Observable access to the current {@link MIDIAccess} instance. */
     static get(): ObservableOption<MIDIAccess> {return this.#midiAccess}
 
+    /** Returns the list of available MIDI inputs, if any. */
     static inputs(): Option<ReadonlyArray<MIDIInput>> {
         return this.get().map(({inputs}) => Array.from(inputs.values()))
     }
 
+    /** Returns the list of available MIDI outputs, if any. */
     static outputs(): Option<ReadonlyArray<MIDIOutput>> {
         return this.get().map(({outputs}) => Array.from(outputs.values()))
     }
 
+    /** Sends note-off messages to all channels and notes. */
     static panic(): void {
         this.get().ifSome((midiAccess: MIDIAccess) => {
             for (let note = 0; note < 128; note++) {
@@ -61,6 +72,7 @@ export class MidiDevices {
     }
 
     @Lazy
+    /** Observable indicating whether MIDI access has been granted. */
     static available(): MutableObservableValue<boolean> {
         const scope = this
         return new class implements MutableObservableValue<boolean> {

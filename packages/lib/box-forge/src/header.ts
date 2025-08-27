@@ -1,3 +1,7 @@
+/**
+ * Header banner inserted at the top of each generated file. Includes project
+ * branding and a note that the source is auto-generated.
+ */
 export const header = `
 //
 //   ___          ___                 
@@ -8,4 +12,4 @@ export const header = `
 //
 //  auto-generated | do not edit | blame andre.michelle@opendaw.org
 //
-` as const
+` as const;

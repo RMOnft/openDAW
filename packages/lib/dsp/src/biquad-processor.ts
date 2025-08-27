@@ -1,12 +1,19 @@
 import {BiquadCoeff} from "./biquad-coeff"
 import {Arrays, int} from "@opendaw/lib-std"
 
+/**
+ * Interface for processing samples with biquad filters.
+ */
 export interface BiquadProcessor {
+    /** Clears internal state. */
     reset(): void
+    /** Processes a block of samples. */
     process(coeff: BiquadCoeff, source: Float32Array, target: Float32Array, fromIndex: int, toIndex: int): void
+    /** Processes a single sample. */
     processFrame(coeff: BiquadCoeff, x: number): number
 }
 
+/** Single-channel biquad processor implementing the difference equation. */
 export class BiquadMono implements BiquadProcessor {
     #x1: number = 0.0
     #x2: number = 0.0
@@ -50,6 +57,9 @@ export class BiquadMono implements BiquadProcessor {
     }
 }
 
+/**
+ * Stack of cascaded biquad processors to create higher-order filters.
+ */
 export class BiquadStack implements BiquadProcessor {
     readonly #stack: ReadonlyArray<BiquadProcessor>
 

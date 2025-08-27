@@ -31,9 +31,13 @@ import {ProjectApi} from "./ProjectApi"
 import {ProjectMigration} from "./ProjectMigration"
 import {CaptureManager} from "./capture/CaptureManager"
 
-// Main Entry Point for a Project
-//
+/**
+ * Represents a full project including all boxes, adapters and runtime services.
+ *
+ * @public
+ */
 export class Project implements BoxAdaptersContext, Terminable, TerminableOwner {
+    /** Creates a brand new project with default boxes. */
     static new(env: ProjectEnv): Project {
         const boxGraph = new BoxGraph<BoxIO.TypeMap>(Option.wrap(BoxIO.create))
         const isoString = new Date().toISOString()
@@ -73,12 +77,14 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
         })
     }
 
+    /** Loads a project from its serialized array buffer representation. */
     static load(env: ProjectEnv, arrayBuffer: ArrayBuffer): Project {
         const skeleton = ProjectDecoder.decode(arrayBuffer)
         ProjectMigration.migrate(skeleton)
         return new Project(env, skeleton.boxGraph, skeleton.mandatoryBoxes)
     }
 
+    /** Rehydrates a project from its decoded skeleton. */
     static skeleton(env: ProjectEnv, skeleton: ProjectDecoder.Skeleton): Project {
         ProjectMigration.migrate(skeleton)
         return new Project(env, skeleton.boxGraph, skeleton.mandatoryBoxes)
@@ -139,16 +145,22 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
     ownAll<T extends Terminable>(...terminables: Array<T>): void {return this.#terminator.ownAll<T>(...terminables)}
     spawn(): Terminator {return this.#terminator.spawn()}
 
+    /** Environment configuration for this project. */
     get env(): ProjectEnv {return this.#env}
+    /** Current beats-per-minute value. */
     get bpm(): number {return this.timelineBox.bpm.getValue()}
+    /** Adapter for the project root box. */
     get rootBoxAdapter(): RootBoxAdapter {return this.boxAdapters.adapterFor(this.rootBox, RootBoxAdapter)}
+    /** Adapter for the timeline box. */
     get timelineBoxAdapter(): TimelineBoxAdapter {return this.boxAdapters.adapterFor(this.timelineBox, TimelineBoxAdapter)}
+    /** Sample manager used for loading audio samples. */
     get sampleManager(): SampleManager {return this.#env.sampleManager}
     get clipSequencing(): ClipSequencing {return panic("Only available in audio context")}
     get isAudioContext(): boolean {return false}
     get isMainThread(): boolean {return true}
     get liveStreamBroadcaster(): LiveStreamBroadcaster {return panic("Only available in audio context")}
 
+    /** Serialized skeleton of the current project state. */
     get skeleton(): ProjectDecoder.Skeleton {
         return {
             boxGraph: this.boxGraph,
@@ -162,6 +174,7 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
         }
     }
 
+    /** Serializes the project to an {@link ArrayBuffer}. */
     toArrayBuffer(): ArrayBufferLike {
         const output = ByteArrayOutput.create()
         output.writeInt(ProjectDecoder.MAGIC_HEADER_OPEN)
@@ -179,7 +192,9 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
         return output.toArrayBuffer()
     }
 
+    /** Creates a deep copy of the project. */
     copy(): Project {return Project.load(this.#env, this.toArrayBuffer() as ArrayBuffer)}
 
+    /** Terminates all managed resources. */
     terminate(): void {this.#terminator.terminate()}
 }

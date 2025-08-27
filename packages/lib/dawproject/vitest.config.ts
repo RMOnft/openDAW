@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {defineConfig} from "vitest/config"
 import * as path from "node:path"
 

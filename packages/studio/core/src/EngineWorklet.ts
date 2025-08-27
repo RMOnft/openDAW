@@ -34,6 +34,14 @@ import {BoxIO} from "@opendaw/studio-boxes"
 import {Project} from "./Project"
 import {Engine, NoteTrigger} from "./Engine"
 
+/**
+ * Wrapper around the engine audio worklet processor.
+ *
+ * The worklet communicates with both the main thread and the shared worker
+ * using {@link Messenger} channels. Heavy operations such as file access or
+ * waveform analysis are delegated to worker agents while audio rendering
+ * stays within the audio worklet context.
+ */
 export class EngineWorklet extends AudioWorkletNode implements Engine {
     static ID: int = 0 | 0
 
@@ -57,6 +65,13 @@ export class EngineWorklet extends AudioWorkletNode implements Engine {
     readonly #commands: EngineCommands
     readonly #isReady: Promise<void>
 
+    /**
+     * Creates a new engine worklet.
+     *
+     * @param context - The audio context to attach to.
+     * @param project - Project data to initialize the engine with.
+     * @param exportConfiguration - Optional stem export configuration.
+     */
     constructor(context: BaseAudioContext,
                 project: Project,
                 exportConfiguration?: ExportStemsConfiguration) {
@@ -173,24 +188,32 @@ export class EngineWorklet extends AudioWorkletNode implements Engine {
     get markerState(): ObservableValue<Nullable<[UUID.Format, int]>> {return this.#markerState}
     get project(): Project {return this.#project}
 
+    /** Resolves once the processor has finished its initialization. */
     isReady(): Promise<void> {return this.#isReady}
+    /** Queries whether all resources have been loaded. */
     queryLoadingComplete(): Promise<boolean> {return this.#commands.queryLoadingComplete()}
+    /** Sends a note-on event to the engine and notifies observers. */
     noteOn(uuid: UUID.Format, pitch: byte, velocity: unitValue): void {
         this.#commands.noteOn(uuid, pitch, velocity)
         this.#notifyNoteTrigger.notify({type: "note-on", uuid, pitch, velocity})
     }
+    /** Sends a note-off event to the engine and notifies observers. */
     noteOff(uuid: UUID.Format, pitch: byte): void {
         this.#commands.noteOff(uuid, pitch)
         this.#notifyNoteTrigger.notify({type: "note-off", uuid, pitch})
     }
+    /** Subscribes to note trigger events emitted by the engine. */
     subscribeNotes(observer: Observer<NoteTrigger>): Subscription {return this.#notifyNoteTrigger.subscribe(observer)}
+    /** Schedules clips to start playing. */
     scheduleClipPlay(clipIds: ReadonlyArray<UUID.Format>): void {
         this.#notifyClipNotification.notify({type: "waiting", clips: clipIds})
         this.#commands.scheduleClipPlay(clipIds)
     }
+    /** Stops scheduled clips for the specified tracks. */
     scheduleClipStop(trackIds: ReadonlyArray<UUID.Format>): void {
         this.#commands.scheduleClipStop(trackIds)
     }
+    /** Subscribes to clip sequencing notifications. */
     subscribeClipNotification(observer: Observer<ClipNotification>): Subscription {
         observer({
             type: "sequencing",
@@ -199,6 +222,7 @@ export class EngineWorklet extends AudioWorkletNode implements Engine {
         return this.#notifyClipNotification.subscribe(observer)
     }
 
+    /** Terminates the worklet and disconnects from the audio graph. */
     terminate(): void {
         this.#terminator.terminate()
         this.disconnect()

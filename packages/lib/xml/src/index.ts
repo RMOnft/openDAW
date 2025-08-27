@@ -1,5 +1,11 @@
 import {asDefined, assert, Class, int, isDefined, Nullish, panic, WeakMaps} from "@opendaw/lib-std"
 
+/**
+ * Utilities for working with XML through decorators, allowing
+ * serialization and deserialization to and from typed classes.
+ *
+ * @packageDocumentation
+ */
 export namespace Xml {
     type Meta =
         | { type: "class", name: string, clazz: Class }
@@ -11,10 +17,18 @@ export namespace Xml {
     const ClassMap = new Map<string, Class>()
     const MetaClassMap = new WeakMap<Function, MetaMap>()
 
+    /** XML declaration prepended when serializing documents. */
     export const Declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
 
+    /**
+     * Validates and parses the value of an XML attribute.
+     *
+     * @typeParam T - Parsed attribute type
+     */
     export interface AttributeValidator<T> {
+        /** Whether the attribute is required on the element. */
         required: boolean
+        /** Convert a string (or existing value) to the typed form. */
         parse(value: string | T): T
     }
 
@@ -38,21 +52,45 @@ export namespace Xml {
     }
     export const NumberOptional: AttributeValidator<number> = {required: false, parse: value => Number(value)}
 
+    /**
+     * Decorator marking a property as an XML attribute.
+     *
+     * @param name - Attribute name in the XML element
+     * @param validator - Optional validator/parser for the attribute value
+     */
     export const Attribute = (name: string, validator?: AttributeValidator<unknown>): PropertyDecorator =>
         (target: Object, propertyKey: PropertyKey) =>
             WeakMaps.createIfAbsent(MetaClassMap, target.constructor, () => new Map<PropertyKey, Meta>())
                 .set(propertyKey, {type: "attribute", name, validator})
 
+    /**
+     * Decorator marking a property as a nested XML element.
+     *
+     * @param name - Child element name
+     * @param clazz - Class used to serialise the nested object
+     */
     export const Element = (name: string, clazz: Class): PropertyDecorator =>
         (target: Object, propertyKey: PropertyKey) =>
             WeakMaps.createIfAbsent(MetaClassMap, target.constructor, () => new Map<PropertyKey, Meta>())
                 .set(propertyKey, {type: "element", name, clazz})
 
+    /**
+     * Decorator for an array of elements that may refer to different classes.
+     *
+     * @param clazz - Base class of referenced elements
+     * @param nodeName - Optional wrapper or element name
+     */
     export const ElementRef = (clazz: Class, nodeName?: string): PropertyDecorator =>
         (target: Object, propertyKey: PropertyKey) =>
             WeakMaps.createIfAbsent(MetaClassMap, target.constructor, () => new Map<PropertyKey, Meta>())
                 .set(propertyKey, {type: "element-ref", clazz, name: nodeName ?? null})
 
+    /**
+     * Decorator registering a class with a tag name so it can be
+     * instantiated during parsing.
+     *
+     * @param tagName - XML tag associated with the class
+     */
     export const Class = (tagName: string): ClassDecorator => {
         return (constructor: Function): void => {
             assert(!ClassMap.has(tagName), `${tagName} is already registered as a class.`)
@@ -62,12 +100,21 @@ export namespace Xml {
         }
     }
 
+    /**
+     * Creates an immutable instance of a class with the given properties.
+     */
     export const element = <T extends {}>(object: T, clazz: Class<T>): T => {
         assert(clazz.length === 0, "constructor cannot have arguments")
         return Object.freeze(Object.create(clazz.prototype, Object.fromEntries(
             Object.entries(object).map(([key, value]) => [key, {value, enumerable: true}]))))
     }
 
+    /**
+     * Serialises a plain object or class instance into an XML {@link Element}.
+     *
+     * @param tagName - Root tag for the element
+     * @param object - Data to serialise
+     */
     export const toElement = (tagName: string, object: Record<string, any>): Element => {
         const doc = document.implementation.createDocument(null, null)
         const getClassTagName = (constructor: Function): string => {
@@ -195,6 +242,12 @@ export namespace Xml {
         return result
     }
 
+    /**
+     * Parses an XML string into a typed instance of the given class.
+     *
+     * @param xml - XML source
+     * @param clazz - Class to instantiate
+     */
     export const parse = <T extends {}>(xml: string, clazz: Class<T>): T => {
         const deserialize = <T extends {}>(element: Element, clazz: Class<unknown>): T => {
             const instance = Object.create(clazz.prototype) as T

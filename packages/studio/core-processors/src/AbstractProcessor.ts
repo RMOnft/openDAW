@@ -7,6 +7,13 @@ import {ProcessInfo, Processor} from "./processing"
 import {EngineContext} from "./EngineContext"
 import {EventBuffer} from "./EventBuffer"
 
+/**
+ * Base class for all engine processors.
+ *
+ * Provides parameter binding, automation support and wiring for the
+ * {@link UpdateClock}. Subclasses typically implement {@link reset} and
+ * {@link process}.
+ */
 export abstract class AbstractProcessor implements Processor, TerminableOwner, Terminable {
     readonly #terminator = new Terminator()
     readonly #context: EngineContext
@@ -26,6 +33,11 @@ export abstract class AbstractProcessor implements Processor, TerminableOwner, T
     abstract reset(): void
     abstract process(processInfo: ProcessInfo): void
 
+    /**
+     * Called whenever a bound {@link AutomatableParameter} changes.
+     *
+     * Sub-classes override this to react to parameter updates.
+     */
     parameterChanged(parameter: AutomatableParameter): void {
         return panic(`Got update event for ${parameter}, but has no parameter change method`)
     }
@@ -33,6 +45,10 @@ export abstract class AbstractProcessor implements Processor, TerminableOwner, T
     get context(): EngineContext {return this.#context}
     get eventInput(): EventBuffer {return this.#eventInput}
 
+    /**
+     * Creates an {@link AutomatableParameter} for the given adapter and wires it
+     * to the update clock so that automation events are received.
+     */
     bindParameter<T extends PrimitiveValues>(adapter: AutomatableParameterFieldAdapter<T>): AutomatableParameter<T> {
         const parameter = new AutomatableParameter<T>(this.#context, adapter)
         parameter.ownAll(
@@ -59,6 +75,9 @@ export abstract class AbstractProcessor implements Processor, TerminableOwner, T
         return parameter
     }
 
+    /**
+     * Updates all automated parameters to the given song position.
+     */
     updateParameter(position: number): void {
         this.#automatedParameters.forEach((parameter: AutomatableParameter) => {
             if (parameter.updateAutomation(position)) {
@@ -67,12 +86,22 @@ export abstract class AbstractProcessor implements Processor, TerminableOwner, T
         })
     }
 
+    /**
+     * Forces {@link parameterChanged} to be invoked for all bound parameters.
+     */
     readAllParameters(): void {this.#parameters.forEach(parameter => this.parameterChanged(parameter))}
 
+    /**
+     * Utility methods delegating to the internal {@link Terminator} to manage
+     * child resources.
+     */
     own<T extends Terminable>(terminable: T): T {return this.#terminator.own(terminable)}
     ownAll<T extends Terminable>(...terminables: T[]): void {return this.#terminator.ownAll(...terminables)}
     spawn(): Terminator {return this.#terminator.spawn()}
 
+    /**
+     * Tears down the processor and all owned resources.
+     */
     terminate(): void {
         this.#updateClockConnection.ifSome(connection => connection.terminate())
         this.#updateClockConnection = Option.None

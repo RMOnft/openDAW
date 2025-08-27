@@ -4,6 +4,10 @@ import {RMS, StereoMatrix} from "@opendaw/lib-dsp"
 import {LiveStreamBroadcaster} from "@opendaw/lib-fusion"
 import {RenderQuantum} from "./constants"
 
+/**
+ * Computes peak and RMS levels for a stereo signal and broadcasts them via a
+ * {@link LiveStreamBroadcaster}.
+ */
 export class PeakBroadcaster implements Terminable {
     static readonly PEAK_DECAY = Math.exp(-1.0 / (sampleRate * 0.250))
     static readonly RMS_WINDOW = Math.floor(sampleRate * 0.100)
@@ -20,6 +24,10 @@ export class PeakBroadcaster implements Terminable {
     #rmsL: number = 0.0
     #rmsR: number = 0.0
 
+    /**
+     * @param broadcaster - stream used to send metering updates
+     * @param address - address identifying the stream
+     */
     constructor(broadcaster: LiveStreamBroadcaster, address: Address) {
         this.#broadcaster = broadcaster
         this.#address = address
@@ -34,6 +42,7 @@ export class PeakBroadcaster implements Terminable {
         })
     }
 
+    /** Resets stored peak and RMS values. */
     clear(): void {
         this.#rms[0].clear()
         this.#rms[1].clear()
@@ -41,6 +50,9 @@ export class PeakBroadcaster implements Terminable {
         this.#peakR = 0.0
     }
 
+    /**
+     * Updates peak and RMS statistics for the given sample range.
+     */
     process(outL: Float32Array, outR: Float32Array, fromIndex: int = 0, toIndex: int = RenderQuantum): void {
         const [rmsL, rmsR] = this.#rms
         for (let i = fromIndex; i < toIndex; i++) {
@@ -53,6 +65,7 @@ export class PeakBroadcaster implements Terminable {
         }
     }
 
+    /** Convenience wrapper accepting a stereo channel tuple. */
     processStereo([l, r]: StereoMatrix.Channels, fromIndex: int = 0, toIndex: int = RenderQuantum): void {
         this.process(l, r, fromIndex, toIndex)
     }

@@ -1,3 +1,6 @@
-import {byte} from "@opendaw/lib-std"
+import { byte } from "@opendaw/lib-std";
 
-export type Channel = byte
+/**
+ * MIDI channel number in the range 0-15.
+ */
+export type Channel = byte;

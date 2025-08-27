@@ -38,3 +38,18 @@ Events enter the **queued** state when the app submits them to the scheduler. At
 
 See the [architecture overview](./overview.md) for the big picture and
 the [performance guide](../performance.md) for profiling tips.
+
+## Worker Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> installed
+    installed --> active: initialise services
+    active --> terminated
+    terminated --> [*]
+```
+
+The shared worker is installed during application startup, becomes active while
+providing services to the audio engine and is terminated when the session ends.
+See the [studio core README](../../../studio/core/README.md) for an
+overview of the engine components involved in this flow.

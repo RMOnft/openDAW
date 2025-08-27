@@ -1,20 +1,38 @@
 import {int} from "@opendaw/lib-std"
 import {StereoMatrix} from "./stereo"
 
+/** Generic ramp interface for smoothing parameter changes. */
 export interface Ramp<T> {
+    /** Sets the target value; optionally interpolates to it. */
     set(target: T, smooth?: boolean): void
+    /** Current value without moving. */
     get(): T
+    /** Advances one step and returns the new value. */
     moveAndGet(): T
+    /** Checks whether the ramp has reached a fixed value. */
     isFixed(value: T): boolean
+    /** Indicates whether interpolation is ongoing. */
     isInterpolating(): boolean
 }
 
 export namespace Ramp {
+    /**
+     * Creates a numeric linear ramp.
+     *
+     * @param sampleRate - Host sample-rate.
+     * @param durationInSeconds - Time to reach the target.
+     */
     export const linear = (sampleRate: number,
                            durationInSeconds: number = 0.005): LinearRamp => {
         return new LinearRamp(Math.ceil(sampleRate * durationInSeconds) | 0)
     }
 
+    /**
+     * Creates a ramp for {@link StereoMatrix.Matrix} values.
+     *
+     * @param sampleRate - Host sample-rate.
+     * @param durationInSeconds - Time to reach the target.
+     */
     export const stereoMatrix = (sampleRate: number,
                                  durationInSeconds: number = 0.005): StereoMatrixRamp => {
         return new StereoMatrixRamp(Math.ceil(sampleRate * durationInSeconds) | 0)
@@ -60,6 +78,9 @@ export namespace Ramp {
         isInterpolating(): boolean {return this.#remaining > 0}
     }
 
+    /**
+     * Ramp implementation for smoothly changing stereo matrices.
+     */
     export class StereoMatrixRamp implements Ramp<Readonly<StereoMatrix.Matrix>> {
         readonly #length: int
 
@@ -70,6 +91,12 @@ export namespace Ramp {
 
         constructor(length: int) {this.#length = length}
 
+        /**
+         * Updates the target matrix from stereo parameters.
+         * @param params - Stereo parameters to convert.
+         * @param mixing - Panning law.
+         * @param smooth - Whether to interpolate to the new matrix.
+         */
         update(params: StereoMatrix.Params,
                mixing: StereoMatrix.Mixing, smooth?: boolean): void {
             StereoMatrix.update(this.#target, params, mixing)
@@ -92,6 +119,13 @@ export namespace Ramp {
             }
         }
 
+        /**
+         * Applies the interpolating matrix to a buffer of frames.
+         * @param source - Source stereo channels.
+         * @param target - Destination stereo channels.
+         * @param fromIndex - Start index (inclusive).
+         * @param toIndex - End index (exclusive).
+         */
         processFrames(source: StereoMatrix.Channels, target: StereoMatrix.Channels, fromIndex: int, toIndex: int): void {
             const [src0, src1] = source
             const [trg0, trg1] = target
@@ -114,6 +148,11 @@ export namespace Ramp {
             }
         }
 
+        /**
+         * Directly sets a new matrix as target.
+         * @param target - Target matrix.
+         * @param smooth - Whether to interpolate.
+         */
         set(target: Readonly<StereoMatrix.Matrix>, smooth?: boolean): void {
             if (this.#equals(target)) {return}
             if (smooth === true) {

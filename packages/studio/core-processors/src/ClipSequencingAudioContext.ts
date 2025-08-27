@@ -10,6 +10,9 @@ import {ClipSequencingUpdates} from "@opendaw/studio-adapters"
 type ClipKey = UUID.Format
 type TrackKey = UUID.Format
 
+/**
+ * Internal state tracked for each sequenced track.
+ */
 class TrackState {
     waiting: Option<Option<AnyClipBoxAdapter>> = Option.None
     playing: Option<AnyClipBoxAdapter> = Option.None
@@ -17,6 +20,12 @@ class TrackState {
     constructor(readonly uuid: TrackKey) {}
 }
 
+/**
+ * Worker-side implementation of {@link ClipSequencing}.
+ *
+ * The class maintains clip scheduling state within the audio worklet thread
+ * and exposes sequencing updates back to the main thread via structured data.
+ */
 export class ClipSequencingAudioContext implements ClipSequencing {
     readonly #boxGraph: BoxGraph
     readonly #states: SortedSet<TrackKey, TrackState>
@@ -25,6 +34,9 @@ export class ClipSequencingAudioContext implements ClipSequencing {
     readonly #stopped: Array<ClipKey> = []
     readonly #obsolete: Array<ClipKey> = []
 
+    /**
+     * @param boxGraph - graph used to observe clip and track changes
+     */
     constructor(boxGraph: BoxGraph) {
         this.#boxGraph = boxGraph
         this.#boxGraph.subscribeToAllUpdatesImmediate({
@@ -54,6 +66,7 @@ export class ClipSequencingAudioContext implements ClipSequencing {
         this.#states = UUID.newSet<TrackState>(state => state.uuid)
     }
 
+    /** Schedules the supplied clip to start playing on its track. */
     schedulePlay(clipAdapter: AnyClipBoxAdapter): void {
         clipAdapter.trackBoxAdapter.ifSome(({uuid}) => {
             const trackState = this.#states.getOrCreate(uuid, uuid => new TrackState(uuid))
@@ -73,6 +86,7 @@ export class ClipSequencingAudioContext implements ClipSequencing {
         })
     }
 
+    /** Requests that the currently playing clip on the given track stops. */
     scheduleStop({uuid}: TrackBoxAdapter): void {
         const trackState = this.#states.getOrCreate(uuid, uuid => new TrackState(uuid))
         const optClip = trackState.waiting.flatMap(waiting => waiting)
@@ -87,6 +101,7 @@ export class ClipSequencingAudioContext implements ClipSequencing {
         }
     }
 
+    /** Clears all state and stops any playing clips. */
     reset(): void {
         this.#states.forEach(state => {
             state.waiting.ifSome(waiting => waiting.ifSome(clip => this.#obsolete.push(clip.uuid)))
@@ -97,6 +112,9 @@ export class ClipSequencingAudioContext implements ClipSequencing {
         this.#states.clear()
     }
 
+    /**
+     * Iterates over active sections for the track within the provided range.
+     */
     * iterate(trackKey: TrackKey, p0: ppqn, p1: ppqn): Generator<Section> {
         const state = this.#states.getOrNull(trackKey)
         if (state === null) {
@@ -148,6 +166,9 @@ export class ClipSequencingAudioContext implements ClipSequencing {
         }
     }
 
+    /**
+     * Returns and clears accumulated start/stop/obsolete information.
+     */
     changes(): Option<ClipSequencingUpdates> {
         if (this.#started.length > 0 || this.#stopped.length > 0 || this.#obsolete.length > 0) {
             const changes = Option.wrap({
