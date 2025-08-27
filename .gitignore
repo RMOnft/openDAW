@@ -18,3 +18,7 @@ lerna-debug.log
 /packages/app/studio/public/build-info.json
 /packages/app/localhost.pem
 /packages/app/localhost-key.pem
+# Docusaurus build artifacts
+/packages/docs/build
+/packages/docs/.docusaurus
+/packages/docs/api

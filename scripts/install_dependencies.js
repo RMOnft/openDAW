@@ -97,3 +97,11 @@ for (const dep of deps) {
     console.error(`Failed to install ${dep.name}:`, err.message);
   }
 }
+
+// install project npm dependencies
+try {
+  console.log('Installing npm packages...');
+  run('npm install');
+} catch (err) {
+  console.error('Failed to install npm packages:', err.message);
+}
