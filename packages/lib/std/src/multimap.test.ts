@@ -1,3 +1,4 @@
+/** Tests for array and set based multimap implementations. */
 import {beforeEach, describe, expect, it} from "vitest"
 import {ArrayMultimap, Multimap, SetMultimap} from "./multimap"
 import {int} from "./lang"

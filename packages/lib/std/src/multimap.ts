@@ -6,6 +6,9 @@ import {Maps} from "./maps"
 import {Option} from "./option"
 import {BinarySearch} from "./binary-search"
 
+/**
+ * Map allowing multiple values per key with various implementations.
+ */
 export interface Multimap<K, V> {
     clear(): void
     containsEntry(key: K, value: V): boolean
@@ -26,6 +29,7 @@ export interface Multimap<K, V> {
     clone(): Multimap<K, V>
 }
 
+/** Multimap backed by arrays preserving insertion order. */
 export class ArrayMultimap<K, V> implements Multimap<K, V>, Iterable<[K, Array<V>]> {
     readonly #map: Map<K, Array<V>>
     readonly #comparator: Option<Comparator<V>>
@@ -153,6 +157,7 @@ export class ArrayMultimap<K, V> implements Multimap<K, V>, Iterable<[K, Array<V
     }
 }
 
+/** Multimap backed by `Set` to ensure unique values per key. */
 export class SetMultimap<K, V> implements Multimap<K, V> {
     private readonly map: Map<K, Set<V>>
 
