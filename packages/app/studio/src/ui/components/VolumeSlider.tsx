@@ -52,13 +52,18 @@ const markers: ReadonlyArray<{ length: MarkerLength, decibel: number }> = [
     {length: MarkerLength.Long, decibel: -96.0}
 ] as const
 
-type Construct = {
+/** Props for {@link VolumeSlider}. */
+export interface VolumeSliderProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Editing context to integrate with undo/redo. */
     editing: Editing
+    /** Parameter representing volume in decibels. */
     parameter: Parameter<number>
 }
 
-export const VolumeSlider = ({lifecycle, editing, parameter}: Construct) => {
+/** Vertical slider component displaying and controlling a volume parameter. */
+export const VolumeSlider = ({lifecycle, editing, parameter}: VolumeSliderProps) => {
     const strokeWidth = 1.0 / devicePixelRatio
     const guide: SVGRectElement = (
         <rect width="0.125em"
@@ -138,3 +143,10 @@ export const VolumeSlider = ({lifecycle, editing, parameter}: Construct) => {
     observer(parameter)
     return wrapper
 }
+
+/** Property table for {@link VolumeSlider}. */
+export const VolumeSliderPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "editing", type: "Editing", description: "Editing context for undo/redo."},
+    {prop: "parameter", type: "Parameter<number>", description: "Volume parameter controlled by the slider."}
+] as const

@@ -7,8 +7,11 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "PeakVolumeSlider")
 
-type Construct = {
+/** Props for {@link TrackPeakMeter}. */
+export interface TrackPeakMeterProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Array of peak values per channel in decibels. */
     peaksInDb: Float32Array
 }
 
@@ -17,7 +20,8 @@ type Peak = {
     value: number
 }
 
-export const TrackPeakMeter = ({lifecycle, peaksInDb}: Construct) => {
+/** Visualises per-track peak levels using a canvas. */
+export const TrackPeakMeter = ({lifecycle, peaksInDb}: TrackPeakMeterProps) => {
     const canvas: HTMLCanvasElement = <canvas/>
     const mapping = ValueMapping.linear(-48, 9)
     const s0 = mapping.x(-12)
@@ -62,3 +66,9 @@ export const TrackPeakMeter = ({lifecycle, peaksInDb}: Construct) => {
     )
     return (<div className={className}>{canvas}</div>)
 }
+
+/** Property table for {@link TrackPeakMeter}. */
+export const TrackPeakMeterPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "peaksInDb", type: "Float32Array", description: "Peak values per channel in decibels."}
+] as const

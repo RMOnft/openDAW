@@ -6,25 +6,43 @@ import {CssUtils, Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "ButtonCheckboxRadio")
 
-export type Appearance = {
+/** Visual appearance options shared by button-like controls. */
+export interface Appearance {
+    /** Base color of the control. */
     color?: string
+    /** Color used when the control is active. */
     activeColor?: string
+    /** Renders an outline around the control. */
     framed?: boolean
+    /** Layout children in landscape orientation. */
     landscape?: boolean
+    /** Optional tooltip text. */
     tooltip?: string
+    /** Cursor style when hovering. */
     cursor?: CssUtils.Cursor
 }
 
-type Construct = {
+/** Props for {@link ButtonCheckboxRadio}. */
+export interface ButtonCheckboxRadioProps {
+    /** Lifecycle owner used for automatic disposal. */
     lifecycle: Lifecycle
+    /** Data-class attribute used for styling. */
     dataClass: string
+    /** Inline style applied to the wrapper. */
     style?: Partial<CSSStyleDeclaration>
+    /** Additional CSS class name for the wrapper. */
     className?: string
+    /** Visual appearance options. */
     appearance?: Appearance
 }
 
-export const ButtonCheckboxRadio = ({lifecycle, dataClass, style, className: externalClassName, appearance}: Construct,
-                                    children: JsxValue) => {
+/**
+ * Common wrapper around input elements that behave like buttons,
+ * checkboxes or radio buttons.
+ */
+export const ButtonCheckboxRadio = (
+    {lifecycle, dataClass, style, className: externalClassName, appearance}: ButtonCheckboxRadioProps,
+    children: JsxValue) => {
     const wrapper: HTMLElement = (
         <div className={Html.buildClassList(className,
             appearance?.framed && "framed",
@@ -62,3 +80,12 @@ export const ButtonCheckboxRadio = ({lifecycle, dataClass, style, className: ext
     }
     return wrapper
 }
+
+/** Property table for {@link ButtonCheckboxRadio}. */
+export const ButtonCheckboxRadioPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to clean up resources."},
+    {prop: "dataClass", type: "string", description: "Value assigned to the data-class attribute."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline style for the wrapper."},
+    {prop: "className", type: "string", description: "Additional CSS class applied to the wrapper."},
+    {prop: "appearance", type: "Appearance", description: "Visual appearance customisation."}
+] as const

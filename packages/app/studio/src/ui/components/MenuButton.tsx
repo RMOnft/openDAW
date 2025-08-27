@@ -8,26 +8,43 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "MenuButton")
 
-type Appearance = {
+/** Appearance options for {@link MenuButton}. */
+export interface MenuButtonAppearance {
+    /** Base color of the button. */
     color?: string
+    /** Color when the button is active. */
     activeColor?: string
+    /** Renders a frame around the button. */
     framed?: boolean
+    /** Draws a tiny triangle indicator instead of the default one. */
     tinyTriangle?: boolean
+    /** Optional tooltip text. */
     tooltip?: string
 }
 
-type Construct = {
+/** Props for {@link MenuButton}. */
+export interface MenuButtonProps {
+    /** Root menu item defining the hierarchy to display. */
     root: MenuItem
+    /** Inline style applied to the button. */
     style?: Partial<CSSStyleDeclaration>
-    appearance?: Appearance
+    /** Visual appearance options. */
+    appearance?: MenuButtonAppearance
+    /** Horizontal alignment of the menu relative to the button. */
     horizontal?: "left" | "right"
+    /** Stretch button to fill available space. */
     stretch?: boolean
+    /** Display pointer cursor when hovering. */
     pointer?: boolean
+    /** Identifier grouping menus so only one is open at a time. */
     groupId?: string
 }
 
+/**
+ * Button that opens a {@link Menu} on pointer interaction.
+ */
 export const MenuButton =
-    ({root, style, appearance, horizontal, stretch, pointer, groupId}: Construct, children: JsxValue) => {
+    ({root, style, appearance, horizontal, stretch, pointer, groupId}: MenuButtonProps, children: JsxValue) => {
         let current: Option<Menu> = Option.None
         const button: HTMLButtonElement = (
             <button
@@ -77,3 +94,14 @@ export const MenuButton =
         }
         return button
     }
+
+/** Property table for {@link MenuButton}. */
+export const MenuButtonPropTable = [
+    {prop: "root", type: "MenuItem", description: "Root menu item defining the hierarchy."},
+    {prop: "style", type: "Partial<CSSStyleDeclaration>", description: "Inline style for the button."},
+    {prop: "appearance", type: "MenuButtonAppearance", description: "Visual appearance options."},
+    {prop: "horizontal", type: '"left" | "right"', description: "Horizontal alignment for the menu."},
+    {prop: "stretch", type: "boolean", description: "Stretch button to fill space."},
+    {prop: "pointer", type: "boolean", description: "Show pointer cursor when hovering."},
+    {prop: "groupId", type: "string", description: "Group identifier for mutually exclusive menus."}
+] as const

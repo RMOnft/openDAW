@@ -9,8 +9,15 @@ import {AnimationFrame, Events, Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "menu")
 
-export const HeaderMenuDataElement = ({data}: { data: HeaderMenuData }) => (
-    <div className={Html.buildClassList("header")}>
+/** Props for {@link HeaderMenuDataElement}. */
+export interface HeaderMenuDataElementProps {
+    /** Metadata describing the menu header. */
+    data: HeaderMenuData
+}
+
+/** Renders a non-interactive menu header item. */
+export const HeaderMenuDataElement = ({data}: HeaderMenuDataElementProps) => (
+    <div className={Html.buildClassList("header")}> 
         <div className="icon-space"/>
         {data.icon && <Icon symbol={data.icon} style={{margin: "0 0.25em", fontSize: "1.25em"}}/>}
         <div className="label">{data.label}</div>
@@ -18,8 +25,15 @@ export const HeaderMenuDataElement = ({data}: { data: HeaderMenuData }) => (
     </div>
 )
 
-export const DefaultMenuDataElement = ({data}: { data: DefaultMenuData }) => (
-    <div className={Html.buildClassList("default", data.checked && "checked")}>
+/** Props for {@link DefaultMenuDataElement}. */
+export interface DefaultMenuDataElementProps {
+    /** Descriptor for a regular selectable menu item. */
+    data: DefaultMenuData
+}
+
+/** Renders an interactive menu item. */
+export const DefaultMenuDataElement = ({data}: DefaultMenuDataElementProps) => (
+    <div className={Html.buildClassList("default", data.checked && "checked")}> 
         <svg classList="check-icon" viewBox="0 0 12 12">
             <path d="M2 7L5 10L10 3"/>
         </svg>
@@ -32,6 +46,16 @@ export const DefaultMenuDataElement = ({data}: { data: DefaultMenuData }) => (
     </div>
 )
 
+/** Property table for {@link HeaderMenuDataElement}. */
+export const HeaderMenuDataElementPropTable = [
+    {prop: "data", type: "HeaderMenuData", description: "Metadata describing the menu header."}
+] as const
+
+/** Property table for {@link DefaultMenuDataElement}. */
+export const DefaultMenuDataElementPropTable = [
+    {prop: "data", type: "DefaultMenuData", description: "Descriptor of the menu item."}
+] as const
+
 type MenuHtmlStructure = {
     element: HTMLElement
     scrollUp: HTMLElement
@@ -39,6 +63,11 @@ type MenuHtmlStructure = {
     scrollDown: HTMLElement
 }
 
+/**
+ * Floating menu rendered into a {@link Surface} displaying a hierarchy of
+ * {@link MenuItem} entries. Menus can spawn nested sub-menus and handle
+ * keyboard navigation and scrolling.
+ */
 export class Menu implements Terminable, Lifecycle {
     static create(item: MenuItem, groupId?: string): Menu {return new Menu(Option.None, item, groupId ?? "")}
 

@@ -5,14 +5,20 @@ import {createElement} from "@opendaw/lib-jsx"
 
 const defaultClassName = Html.adoptStyleSheet(css, "TextInput")
 
-type Construct = {
+/** Props for {@link TextInput}. */
+export interface TextInputProps {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Observable string model representing the value. */
     model: MutableObservableValue<string>
+    /** Additional CSS class name for the wrapper. */
     className?: string
+    /** Maximum number of characters allowed. */
     maxChars?: int
 }
 
-export const TextInput = ({lifecycle, model, className, maxChars}: Construct) => {
+/** Editable text field using a `contentEditable` element. */
+export const TextInput = ({lifecycle, model, className, maxChars}: TextInputProps) => {
     maxChars ??= 127
     const input: HTMLElement = (<div contentEditable="true" style={{width: "100%"}}/>)
     const element: HTMLElement = (
@@ -59,3 +65,11 @@ export const TextInput = ({lifecycle, model, className, maxChars}: Construct) =>
     update()
     return element
 }
+
+/** Property table for {@link TextInput}. */
+export const TextInputPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "model", type: "MutableObservableValue<string>", description: "Observable value bound to the input."},
+    {prop: "className", type: "string", description: "Additional CSS classes for the wrapper."},
+    {prop: "maxChars", type: "int", description: "Maximum number of characters allowed."}
+] as const
