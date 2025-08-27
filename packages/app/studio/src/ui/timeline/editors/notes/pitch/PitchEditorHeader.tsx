@@ -1,3 +1,6 @@
+/**
+ * Header component for the pitch editor containing scale selection and tools.
+ */
 import css from "./PitchEditorHeader.sass?inline"
 import {int, Lifecycle, Selection} from "@opendaw/lib-std"
 import {ScaleSelector} from "@/ui/timeline/editors/notes/pitch/ScaleSelector.tsx"
@@ -19,6 +22,9 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "PitchEditorHeader")
 
+/**
+ * Arguments accepted by {@link PitchEditorHeader}.
+ */
 type Construct = {
     lifecycle: Lifecycle
     editing: Editing
@@ -27,6 +33,9 @@ type Construct = {
     scale: ScaleConfig
 }
 
+/**
+ * Renders scale related controls and property tools above the pitch editor.
+ */
 export const PitchEditorHeader = ({lifecycle, editing, modifyContext, selection, scale}: Construct) => {
     return (
         <div className={className}>

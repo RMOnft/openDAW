@@ -1,3 +1,6 @@
+/**
+ * Modifier that adjusts the duration of selected notes.
+ */
 import {int, Notifier, Observer, Option, Selection, Terminable, unitValue} from "@opendaw/lib-std"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -31,6 +34,9 @@ class SelectedModifyStrategy implements NoteModifyStrategy {
     }
 }
 
+/**
+ * Construction parameters for {@link NoteDurationModifier}.
+ */
 type Construct = Readonly<{
     element: Element
     selection: Selection<NoteEventBoxAdapter>
@@ -39,6 +45,9 @@ type Construct = Readonly<{
     reference: NoteEventBoxAdapter
 }>
 
+/**
+ * Handles stretching or shrinking note lengths during user interaction.
+ */
 export class NoteDurationModifier implements NoteModifier {
     static create(construct: Construct): NoteDurationModifier {
         return new NoteDurationModifier(construct)

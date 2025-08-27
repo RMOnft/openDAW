@@ -1,6 +1,12 @@
+/**
+ * Observable model representing the currently active musical scale.
+ */
 import {MidiKeys} from "@opendaw/lib-dsp"
 import {byte, int, JSONValue, Notifier, Observer, Subscription, Terminable} from "@opendaw/lib-std"
 
+/**
+ * Mutable scale representation with subscription support.
+ */
 export class ScaleConfig implements MidiKeys.Scale, Terminable {
     static readonly EMPTY = 0b111111111111
 
