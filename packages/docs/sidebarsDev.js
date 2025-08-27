@@ -89,7 +89,18 @@ module.exports = {
     {
       type: "category",
       label: "UI",
-      items: ["ui/mixer"],
+      items: [
+        {
+          type: "category",
+          label: "Piano Roll",
+          items: [
+            { type: "doc", id: "ui/piano-roll/overview" },
+            { type: "doc", id: "ui/piano-roll/visualizers" },
+            { type: "doc", id: "ui/piano-roll/metronome" },
+            { type: "doc", id: "ui/piano-roll/faq" },
+          ],
+        },
+  "ui/mixer"
 },{
       type: "category",
       label: "Services",
