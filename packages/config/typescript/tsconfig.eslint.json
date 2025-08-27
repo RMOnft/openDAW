@@ -1,0 +1,11 @@
+{
+  // Preset to help ESLint resolve TypeScript sources.
+  // Example usage:
+  // {
+  //   "extends": "@opendaw/typescript-config/tsconfig.eslint.json"
+  // }
+  "extends": "./base.json",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
