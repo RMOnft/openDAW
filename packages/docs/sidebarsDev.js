@@ -92,7 +92,7 @@ module.exports = {
             "ui/timeline/performance",
           ],
         },
-        "ui/browse"
+        "ui/browse",
       ],
     },
     {
@@ -119,8 +119,21 @@ module.exports = {
             { type: "doc", id: "ui/piano-roll/faq" },
           ],
         },
-  "ui/mixer"
-},{
+        "ui/mixer",
+        {
+          type: "category",
+          label: "Modular",
+          items: [
+            "ui/modular/overview",
+            "ui/modular/wires",
+            "ui/modular/modules",
+            "ui/modular/camera",
+            "ui/modular/faq",
+          ],
+        },
+      ],
+    },
+    {
       type: "category",
       label: "Services",
       items: [
