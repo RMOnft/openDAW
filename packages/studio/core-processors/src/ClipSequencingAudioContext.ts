@@ -21,8 +21,10 @@ class TrackState {
 }
 
 /**
- * Keeps track of clips scheduled for playback across multiple tracks and
- * produces per-track {@link Section} information for the engine.
+ * Worker-side implementation of {@link ClipSequencing}.
+ *
+ * The class maintains clip scheduling state within the audio worklet thread
+ * and exposes sequencing updates back to the main thread via structured data.
  */
 export class ClipSequencingAudioContext implements ClipSequencing {
     readonly #boxGraph: BoxGraph

@@ -15,11 +15,11 @@ export type Section = {
 }
 
 /**
- * Iterates over clip sections on a track.
+ * Contract for clip sequencing components running in a worker.
  *
- * @remarks
- * Implementations bridge the timeline adapters with the
- * {@link @opendaw/studio-core-processors#ClipSequencingAudioContext | audio worklet clip sequencer}.
+ * Implementations like {@link ClipSequencingAudioContext} manage clip state
+ * off the main thread and yield the clips that should play for a given range.
+
  */
 export interface ClipSequencing extends Terminable {
     /**

@@ -35,10 +35,12 @@ import {Project} from "./Project"
 import {Engine, NoteTrigger} from "./Engine"
 
 /**
- * AudioWorklet-based implementation of the {@link Engine} interface.
- * Handles real-time audio processing and exposes observable playback state.
+ * Wrapper around the engine audio worklet processor.
  *
- * @public
+ * The worklet communicates with both the main thread and the shared worker
+ * using {@link Messenger} channels. Heavy operations such as file access or
+ * waveform analysis are delegated to worker agents while audio rendering
+ * stays within the audio worklet context.
  */
 export class EngineWorklet extends AudioWorkletNode implements Engine {
     static ID: int = 0 | 0

@@ -4,31 +4,26 @@ import {Entry} from "@opendaw/lib-fusion"
 import {Communicator, Messenger} from "@opendaw/lib-runtime"
 
 /**
- * Installs and exposes protocol proxies for web worker communication.
+ * Access points for services hosted in the shared worker.
  *
- * This utility sets up {@link Messenger} channels for background processing
- * tasks such as sample peak generation and OPFS access.
- *
- * @public
+ * The application must call {@link WorkerAgents.install} with the URL of the
+ * bundled worker script before any of the provided protocols can be used. Once
+ * installed, the getters lazily connect to their respective message channels.
  */
 export class WorkerAgents {
-
     /**
-     * Installs the worker and prepares the underlying {@link Messenger}.
-     *
-     * @param workerURL - URL of the module worker to connect to.
+     * Installs the shared worker bundle and prepares the underlying
+     * {@link Messenger} for communication.
      */
     static install(workerURL: string): void {
         console.debug("workerURL", workerURL)
         this.messenger = Option.wrap(Messenger.for(new Worker(workerURL, {type: "module"})))
     }
 
-    /** Messenger used to communicate with background workers. */
+    /** Messenger connected to the worker, set by {@link install}. */
     static messenger: Option<Messenger> = Option.None
 
-    /**
-     * Proxy for the sample-peak generation protocol running in the worker.
-     */
+    /** Lazily obtains the sample peak protocol exposed by the worker. */
     @Lazy
     static get Peak(): SamplePeakProtocol {
         return Communicator
@@ -45,7 +40,7 @@ export class WorkerAgents {
                 })
     }
 
-    /** Proxy for OPFS access available on the worker. */
+    /** Lazily obtains the OPFS protocol exposed by the worker. */
     @Lazy
     static get Opfs(): OpfsProtocol {
         return Communicator

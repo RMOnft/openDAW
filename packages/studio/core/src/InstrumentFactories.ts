@@ -15,11 +15,10 @@ import {InstrumentFactory} from "./InstrumentFactory"
 import {Pointers} from "@opendaw/studio-enums"
 
 /**
- * Predefined {@link InstrumentFactory} implementations used by the studio.
- * Each factory constructs a specific instrument device and sets up sensible
- * defaults.
+ * Collection of built-in instrument factory descriptors.
  *
- * @public
+ * Several instruments rely on data prepared by background workers, such as
+ * file operations or waveform analysis handled through {@link WorkerAgents}.
  */
 export namespace InstrumentFactories {
     /** Factory for the tape-style audio player device. */

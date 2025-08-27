@@ -18,8 +18,11 @@ export namespace UpdateEvent {
 }
 
 /**
- * Generates {@link UpdateEvent}s at a fixed rate while the transport is
- * running and dispatches them to registered outputs.
+ * Audio engine processor that schedules periodic {@link UpdateEvent}s.
+ *
+ * The events are emitted within the worker thread and used to drive UI
+ * updates or other time-based tasks in the main thread at the rate
+ * specified by {@link UpdateClockRate}.
  */
 export class UpdateClock extends AbstractProcessor {
     readonly #outputs: Array<EventBuffer> = []
