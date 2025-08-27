@@ -1,6 +1,12 @@
+/**
+ * Maintains mapping between MIDI note numbers and vertical canvas coordinates.
+ */
 import {clamp, int, Notifier, Observer, Subscription, Terminable, Terminator, ValueAxis} from "@opendaw/lib-std"
 import {ScrollModel} from "@/ui/components/ScrollModel.ts"
 
+/**
+ * Scroll-aware converter between notes and Y positions.
+ */
 export class PitchPositioner implements Terminable {
     readonly #numNotes: int = 128
     readonly #terminator: Terminator = new Terminator()

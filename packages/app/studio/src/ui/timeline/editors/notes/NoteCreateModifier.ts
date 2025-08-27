@@ -1,3 +1,6 @@
+/**
+ * Modifier used while dragging to create a new note event in the editor.
+ */
 import {Generators, int, Mutable, Notifier, Observer, Option, Selection, Terminable} from "@opendaw/lib-std"
 import {Snapping} from "@/ui/timeline/Snapping.ts"
 import {Editing} from "@opendaw/lib-box"
@@ -9,6 +12,9 @@ import {NoteEventOwnerReader} from "@/ui/timeline/editors/EventOwnerReader.ts"
 import {UINoteEvent} from "@/ui/timeline/editors/notes/UINoteEvent.ts"
 import {Dragging} from "@opendaw/lib-dom"
 
+/**
+ * Construction parameters for {@link NoteCreateModifier}.
+ */
 type Construct = Readonly<{
     element: Element
     snapping: Snapping
@@ -18,6 +24,9 @@ type Construct = Readonly<{
     reference: NoteEventOwnerReader
 }>
 
+/**
+ * Handles creation of a note while the user drags in the editor.
+ */
 export class NoteCreateModifier implements NoteModifier {
     static create(construct: Construct): NoteCreateModifier {
         return new NoteCreateModifier(construct)

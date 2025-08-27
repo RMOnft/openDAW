@@ -1,3 +1,6 @@
+/**
+ * Canvas based editor for visualising and manipulating note pitches.
+ */
 import css from "./PitchEditor.sass?inline"
 import {Lifecycle, Nullable, Option, panic, Selection, UUID} from "@opendaw/lib-std"
 import {createElement} from "@opendaw/lib-jsx"
@@ -37,6 +40,9 @@ const CursorMap = {
     "loop-duration": "ew-resize"
 } satisfies Record<PitchCaptureTarget["type"], CssUtils.Cursor>
 
+/**
+ * Arguments required to create a {@link PitchEditor}.
+ */
 type Construct = {
     lifecycle: Lifecycle
     graph: BoxGraph
@@ -52,6 +58,9 @@ type Construct = {
     reader: NoteEventOwnerReader
 }
 
+/**
+ * Renders the pitch editor component and installs all interaction handlers.
+ */
 export const PitchEditor =
     ({
          lifecycle,

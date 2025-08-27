@@ -1,3 +1,6 @@
+/**
+ * View menu entries for the note editor.
+ */
 import {MenuCollector, MenuItem} from "@/ui/model/menu-item.ts"
 import {Procedure} from "@opendaw/lib-std"
 import {NoteEventBoxAdapter} from "@opendaw/studio-adapters"
@@ -14,6 +17,9 @@ const NoteSizes = {
     "Large": 17
 } as const
 
+/**
+ * Installs menu options that affect note appearance and zooming.
+ */
 export const installNoteViewMenu = (range: TimelineRange,
                                     owner: NoteEventOwnerReader,
                                     pitchPositioner: PitchPositioner,
