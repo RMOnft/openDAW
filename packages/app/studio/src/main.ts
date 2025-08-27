@@ -1,3 +1,10 @@
+/**
+ * Application bootstrap for the OpenDAW Studio front end.
+ *
+ * The page must be served with cross-origin isolation headers (COOP/COEP)
+ * so that `window.crossOriginIsolated` is true and WebAssembly threads and
+ * AudioWorklets can run. See `docs-dev/build-and-run/cross-origin-isolation.md`.
+ */
 import "./main.sass"
 import {App} from "@/ui/App.tsx"
 import {panic, Procedure, unitValue, UUID} from "@opendaw/lib-std"
@@ -30,6 +37,7 @@ window.name = "main"
 const loadBuildInfo = async () => fetch(`/build-info.json?v=${Date.now()}`).then(x => x.json().then(x => x as BuildInfo))
 
 requestAnimationFrame(async () => {
+        // Abort early if the required COOP/COEP headers are missing.
         if (!window.crossOriginIsolated) {return panic("window must be crossOriginIsolated")}
         console.debug("booting...")
         WorkerAgents.install(WorkersUrl)

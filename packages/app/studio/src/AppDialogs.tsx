@@ -1,3 +1,9 @@
+/**
+ * Dialog helpers shown during application start-up.
+ *
+ * The exported functions are invoked from `main.ts` to request
+ * browser-specific permissions that keep data available across sessions.
+ */
 import {Dialog} from "@/ui/components/Dialog"
 import { IconSymbol } from "@opendaw/studio-adapters"
 import {Surface} from "@/ui/surface/Surface"

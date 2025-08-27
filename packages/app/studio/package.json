@@ -1,4 +1,5 @@
 {
+  "//": "Package manifest for the Studio app; includes a plugin to enable cross-origin isolation in development.",
   "name": "@opendaw/app-studio",
   "private": true,
   "version": "0.0.20",
