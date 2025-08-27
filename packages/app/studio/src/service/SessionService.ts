@@ -1,5 +1,7 @@
 /**
  * Service handling persistence and lifecycle operations for project sessions.
+ * Works in concert with {@link SyncLogService} for commit logging and emits
+ * {@link StudioSignal} events to update the UI.
  */
 import {ProjectSession} from "@/project/ProjectSession"
 import {

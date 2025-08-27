@@ -3,6 +3,8 @@ import {Sample} from "@opendaw/studio-adapters"
 
 /**
  * Events broadcast by {@link StudioService} to update various UI elements.
+ * These complement the {@link SessionService} lifecycle and other session
+ * oriented services.
  *
  * ```mermaid
  * classDiagram
