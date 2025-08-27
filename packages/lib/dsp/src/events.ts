@@ -17,30 +17,44 @@ import {
 } from "@opendaw/lib-std"
 import {ppqn} from "./ppqn"
 
+/**
+ * Scheduling primitives for time-based musical events.  Positions are
+ * expressed in {@link ppqn} (pulses per quarter note).
+ */
 export interface Event {
+
+export interface Event {
+    /** Discriminator for the event type. */
     readonly type: string
 
+    /** Absolute position in {@link ppqn}. */
     get position(): ppqn
 }
 
 export namespace Event {
+    /** Sorts events by their position. */
     export const Comparator: Comparator<Event> = (a: Event, b: Event) => a.position - b.position
 
+    /** Extracts the position field for mapped searches. */
     export const PositionExtractor: Func<Event, ppqn> = (event: Event) => event.position
 }
 
+/** An event with a non-zero duration. */
 export interface EventSpan extends Event {
     get duration(): ppqn
 }
 
 export namespace EventSpan {
+    /** Computes the end position of a span. */
     export const complete = (event: EventSpan): ppqn => event.position + event.duration
 
+    /** Sorts spans by their end position (descending). */
     export const DescendingComparator: Comparator<EventSpan> = (a: EventSpan, b: EventSpan) => complete(b) - complete(a)
 }
 
 export type Region = EventSpan
 
+/** Region that can loop over a subsection of itself. */
 export interface LoopableRegion extends Region {
     get loopOffset(): ppqn
     get loopDuration(): ppqn
@@ -48,31 +62,39 @@ export interface LoopableRegion extends Region {
 
 // https://www.desmos.com/calculator/xz4tl5a9o9
 export namespace LoopableRegion {
+    /**
+     * Maps a global position into the loop's local coordinate system:
+     * \(r = (p - start + offset) \bmod duration\).
+     */
     export const globalToLocal = (region: LoopableRegion, ppqn: ppqn): ppqn =>
         mod(ppqn - region.position + region.loopOffset, region.loopDuration)
 
     export interface LoopCycle {
-        // index of the cycle
+        /** index of the cycle */
         index: int
-        // Full raw loop cycle, independent of region and search bounds
+        /** Full raw loop cycle, independent of region and search bounds */
         rawStart: ppqn
         rawEnd: ppqn
-        // Loop cycle clipped to fit within the defined region
+        /** Loop cycle clipped to fit within the defined region */
         regionStart: ppqn
         regionEnd: ppqn
-        // Loop cycle clipped to the result space based on the search range
+        /** Loop cycle clipped to the result space based on the search range */
         resultStart: ppqn
         resultEnd: ppqn
-        // Ratio indicating the start point within the result space (0 = full, >0 = clipped at the start)
-        // Ratio indicating the end point within the result space (1 = full, <1 = clipped at the end)
+        /** Ratios describing how much of the loop is visible */
         resultStartValue: unitValue
         resultEndValue: unitValue
     }
 
     export type Region = { position: ppqn, complete: ppqn, loopOffset: ppqn, loopDuration: ppqn }
 
-    // This locates the first loop iteration and returns a LoopPass, if the loop overlaps the passed range
-    // It is probably only used in region editors to render the region's content with the same renderer.
+    /**
+     * Locates the first loop cycle overlapping a range.
+     *
+     * @param param0 - Region descriptor.
+     * @param from - Range start.
+     * @param to - Range end.
+     */
     export const locateLoop = ({position, complete, loopOffset, loopDuration}: Region,
                                from: ppqn,
                                to: ppqn): Option<LoopCycle> => {
@@ -94,8 +116,13 @@ export namespace LoopableRegion {
         } satisfies LoopCycle)
     }
 
-    // This locates all loop passes within a given range.
-    // This is used for region rendering but can also be used for sequencing region's content.
+    /**
+     * Generates all loop cycles overlapping a range.
+     *
+     * @param param0 - Region descriptor.
+     * @param from - Range start.
+     * @param to - Range end.
+     */
     export function* locateLoops({position, complete, loopOffset, loopDuration}: Region,
                                  from: ppqn,
                                  to: ppqn): Generator<LoopCycle> {
@@ -134,6 +161,9 @@ export interface Track<REGION extends EventSpan> {
     get index(): int
 }
 
+/**
+ * Mutable collection of {@link Event}s sorted by position.
+ */
 export class EventCollection<EVENT extends Event = Event> implements EventArray<EVENT> {
     static DefaultComparator: Comparator<Event> = (a: Event, b: Event): int => a.position - b.position
 
@@ -172,6 +202,9 @@ export class EventCollection<EVENT extends Event = Event> implements EventArray<
     onIndexingChanged(): void {this.#array.onIndexingChanged()}
 }
 
+/**
+ * Specialized collection for {@link EventSpan} regions.
+ */
 export class RegionCollection<REGION extends EventSpan> implements EventArray<REGION> {
     static Comparator: Comparator<EventSpan> = (a: EventSpan, b: EventSpan): int => a.position - b.position
 
@@ -220,6 +253,9 @@ export class RegionCollection<REGION extends EventSpan> implements EventArray<RE
     onIndexingChanged(): void {this.#array.onIndexingChanged()}
 }
 
+/**
+ * Minimal interface for event containers.
+ */
 export interface EventArray<E extends Event> {
     add(event: E): void
     remove(event: E): boolean
@@ -238,11 +274,15 @@ export interface EventArray<E extends Event> {
     onIndexingChanged(): void
 }
 
+/**
+ * Tracks overlapping {@link EventSpan} instances and releases them when finished.
+ */
 export class EventSpanRetainer<E extends EventSpan> {
     readonly #array: Array<E>
 
     constructor() {this.#array = []}
 
+    /** Adds an event and keeps the array sorted by completion time. */
     addAndRetain(event: E): void {
         if (this.#array.length === 0) {
             this.#array.push(event)
@@ -252,11 +292,13 @@ export class EventSpanRetainer<E extends EventSpan> {
         }
     }
 
+    /** Iterates events overlapping the given position. */
     * overlapping(position: ppqn, comparator?: Comparator<E>): Generator<E> {
         const result = this.#array.filter(event => event.position <= position && position < event.position + event.duration)
         yield* isDefined(comparator) ? result.sort(comparator) : result
     }
 
+    /** Releases spans that finished before `position`. */
     * releaseLinearCompleted(position: ppqn): Generator<E, void, void> {
         if (this.#array.length === 0) {return}
         for (let lastIndex = this.#array.length - 1; lastIndex >= 0; lastIndex--) {
@@ -270,6 +312,7 @@ export class EventSpanRetainer<E extends EventSpan> {
         }
     }
 
+    /** Releases all spans regardless of position. */
     * releaseAll(): Generator<E, void, void> {
         if (this.#array.length === 0) {return}
         for (let lastIndex = this.#array.length - 1; lastIndex >= 0; lastIndex--) {

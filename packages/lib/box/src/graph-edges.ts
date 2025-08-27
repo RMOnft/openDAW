@@ -1,9 +1,14 @@
+/** Utilities for tracking edges between pointers and vertices. */
 import {Arrays, assert, Func, isDefined, isInstanceOf, panic, SortedSet, UUID} from "@opendaw/lib-std"
 import {Address} from "./address"
 import {PointerField} from "./pointer"
 import {Vertex} from "./vertex"
 import {Box} from "./box"
 
+/**
+ * Maintains the set of directed edges formed by pointer references.
+ * Used internally by {@link BoxGraph} to ensure edge requirements are met.
+ */
 export class GraphEdges {
     readonly #requiresTarget: SortedSet<Address, PointerField>
     readonly #requiresPointer: SortedSet<Address, Vertex>

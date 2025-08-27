@@ -2,7 +2,9 @@ _This package is part of the openDAW SDK_
 
 # @opendaw/lib-std
 
-Standard library providing core utilities and data structures for TypeScript projects.
+A lightweight standard library offering foundational utilities, algorithms and
+data structures for TypeScript projects. Each file listed below can be imported
+individually.
 
 ## Core Utilities
 

@@ -6,6 +6,12 @@ import {assert, clamp, TAU, unitValue} from "@opendaw/lib-std"
 // https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/audio/biquad.cc
 // quickly tested all biquad modes
 
+/**
+ * Coefficients for a canonical biquad filter.
+ *
+ * The corresponding difference equation is
+ * \(y[n]=b_0x[n]+b_1x[n-1]+b_2x[n-2]-a_1y[n-1]-a_2y[n-2]\).
+ */
 export class BiquadCoeff {
     a1: number = 0.0
     a2: number = 0.0
@@ -15,8 +21,14 @@ export class BiquadCoeff {
 
     constructor() {this.identity()}
 
+    /** Resets coefficients to pass-through identity. */
     identity(): void {this.setNormalizedCoefficients(1, 0, 0, 1, 0, 0)}
 
+    /**
+     * Configures a low-pass filter.
+     * @param cutoff - Normalized cutoff frequency in `[0,1]`.
+     * @param resonance - Resonance in dB.
+     */
     setLowpassParams(cutoff: unitValue, resonance: number): this {
         cutoff = clamp(cutoff, 0.0, 1.0)
         if (cutoff === 1) {
@@ -40,6 +52,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a high-pass filter.
+     * @param cutoff - Normalized cutoff frequency.
+     * @param resonance - Resonance in dB.
+     */
     setHighpassParams(cutoff: unitValue, resonance: number): this {
         cutoff = clamp(cutoff, 0.0, 1.0)
         if (cutoff === 1) {
@@ -63,6 +80,9 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Stores unnormalized coefficients and normalizes by `a0`.
+     */
     setNormalizedCoefficients(b0: number, b1: number, b2: number, a0: number, a1: number, a2: number): this {
         const a0_inverse = 1.0 / a0
         this.b0 = b0 * a0_inverse
@@ -73,6 +93,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a low-shelf filter.
+     * @param frequency - Normalized corner frequency.
+     * @param db_gain - Shelf gain in dB.
+     */
     setLowShelfParams(frequency: unitValue, db_gain: number): this {
         frequency = clamp(frequency, 0.0, 1.0)
         const a = Math.pow(10.0, db_gain / 40)
@@ -99,6 +124,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a high-shelf filter.
+     * @param frequency - Normalized corner frequency.
+     * @param db_gain - Shelf gain in dB.
+     */
     setHighShelfParams(frequency: unitValue, db_gain: number): this {
         frequency = clamp(frequency, 0.0, 1.0)
         const a = Math.pow(10.0, db_gain / 40)
@@ -125,6 +155,12 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a peaking filter.
+     * @param frequency - Normalized center frequency.
+     * @param q - Quality factor.
+     * @param db_gain - Gain in dB.
+     */
     setPeakingParams(frequency: number, q: number, db_gain: number): this {
         frequency = clamp(frequency, 0.0, 1.0)
         q = Math.max(0.0, q)
@@ -150,6 +186,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures an all-pass filter.
+     * @param frequency - Normalized center frequency.
+     * @param q - Quality factor.
+     */
     setAllpassParams(frequency: unitValue, q: number): this {
         frequency = clamp(frequency, 0.0, 1.0)
         q = Math.max(0.0, q)
@@ -174,6 +215,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a notch filter.
+     * @param frequency - Normalized center frequency.
+     * @param q - Quality factor.
+     */
     setNotchParams(frequency: unitValue, q: number): this {
         frequency = clamp(frequency, 0.0, 1.0)
         q = Math.max(0.0, q)
@@ -198,6 +244,11 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Configures a band-pass filter.
+     * @param frequency - Normalized center frequency.
+     * @param q - Quality factor.
+     */
     setBandpassParams(frequency: unitValue, q: number): this {
         frequency = Math.max(0.0, frequency)
         q = Math.max(0.0, q)
@@ -222,6 +273,12 @@ export class BiquadCoeff {
         return this
     }
 
+    /**
+     * Calculates the complex frequency response of the configured filter.
+     * @param frequency - Normalized frequency values.
+     * @param magResponse - Output magnitude array.
+     * @param phaseResponse - Output phase array.
+     */
     getFrequencyResponse(frequency: Float32Array, magResponse: Float32Array, phaseResponse: Float32Array): void {
         assert(frequency.length === magResponse.length && frequency.length === phaseResponse.length,
             "Array lengths do not match")
