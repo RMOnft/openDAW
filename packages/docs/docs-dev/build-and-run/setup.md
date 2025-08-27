@@ -1,5 +1,10 @@
 # Setup
 
+These steps build the packages
+[`@opendaw/app-studio`](../package-inventory.md#app) and
+[`@opendaw/app-headless`](../package-inventory.md#app). Follow them after
+confirming [browser support](../browser-support.md).
+
 ## Prerequisites
 
 Before starting, install the following tools for your platform.
@@ -59,6 +64,9 @@ Before starting, install the following tools for your platform.
    ```bash
    npm run dev:headless
    ```
+
+Proceed to [running tests](./tests.md) or learn about
+[profiling](./profiling.md).
 
 ## Troubleshooting
 

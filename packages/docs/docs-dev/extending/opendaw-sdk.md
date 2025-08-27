@@ -1,6 +1,10 @@
 # openDAW SDK
 
-The openDAW SDK enables developers to extend the workstation with custom devices, user interfaces, and tools. This guide covers installation, the device/box lifecycle, and the public extension points exposed by the platform.
+The openDAW SDK enables developers to extend the workstation with custom
+devices, user interfaces, and tools. The SDK is published as
+[`@opendaw/sdk`](../package-inventory.md#studio). This guide covers
+installation, the device/box lifecycle, and the public extension points exposed
+by the platform.
 
 ## Installation
 
@@ -73,3 +77,8 @@ The following APIs are stable and intended for third‑party development:
 - **Project tooling** – Use the SDK's serialization helpers to read and write project data for import/export tools.
 
 These entry points provide flexibility for building plugins, tools, or entire workflows on top of openDAW.
+
+Next steps:
+
+- Follow the [Plugin guide](./plugin-guide.md) to integrate custom UI.
+- Implement audio nodes with the [Processor guide](./processor-guide.md).
