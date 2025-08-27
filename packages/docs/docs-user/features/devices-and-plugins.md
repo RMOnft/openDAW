@@ -23,6 +23,8 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 
 Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) in the developer documentation.
 
+For how device controls are connected to automation, see the [parameter adapter guide](../../docs-dev/extending/parameter-adapters.md).
+
 ## Modular workflow
 
 Devices can be arranged as modules on a canvas and linked with wires for

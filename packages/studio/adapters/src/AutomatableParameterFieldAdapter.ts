@@ -213,6 +213,7 @@ export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any>
   get address(): Address {
     return this.#field.address;
   }
+  /** Track that contains the field, if assigned. */
   get track(): Option<TrackBoxAdapter> {
     return this.#trackBoxAdapter;
   }

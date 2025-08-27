@@ -7,6 +7,7 @@ import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldA
 import {Direction, ModuleConnectorAdapter} from "../connector"
 import {BoxAdaptersContext} from "../../BoxAdaptersContext"
 
+/** Adapter for the built-in delay module. */
 export class ModuleDelayAdapter extends AbstractModuleAdapter<ModuleDelayBox> implements ModuleAdapter {
     readonly #parameterTime: AutomatableParameterFieldAdapter<number>
     readonly #voltageInput: ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input>
@@ -23,8 +24,11 @@ export class ModuleDelayAdapter extends AbstractModuleAdapter<ModuleDelayBox> im
         this.#voltageOutput = ModuleConnectorAdapter.create(context.boxAdapters, box.voltageOutput, Direction.Output, "Output")
     }
 
+    /** Time parameter expressed in milliseconds. */
     get parameterTime(): AutomatableParameterFieldAdapter<number> {return this.#parameterTime}
+    /** Incoming voltage connection. */
     get voltageInput(): ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input> {return this.#voltageInput}
+    /** Outgoing voltage connection. */
     get voltageOutput(): ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Output> {return this.#voltageOutput}
 
     get inputs(): ReadonlyArray<ModuleConnectorAdapter<Pointers.VoltageConnection, Direction.Input>> {
