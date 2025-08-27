@@ -12,4 +12,10 @@ sub.terminate();
 
 The module also contains helpers for pointer capturing and text-input
 checks that are used by higher level features such as dragging and
-keyboard shortcuts.
+keyboard shortcuts. Double pointer downs can be handled with
+`subscribeDblDwn`:
+
+```ts
+Events.subscribeDblDwn(canvas, e => console.log("double down", e.pointerId));
+```
+

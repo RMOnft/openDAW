@@ -1,6 +1,18 @@
 import {asDefined, assert, Color, int, isDefined, panic, Rect, Subscription} from "@opendaw/lib-std"
 
+/**
+ * DOM helper utilities.
+ */
 export namespace Html {
+    /**
+     * Parses a string of markup into a single HTML or SVG element.
+     *
+     * @example
+     * ```ts
+     * const div = Html.parse('<div class="foo"></div>');
+     * document.body.append(div);
+     * ```
+     */
     export const parse = (source: string): HTMLOrSVGElement & Element => {
         const template = document.createElement("div")
         template.innerHTML = source
@@ -13,24 +25,43 @@ export namespace Html {
             : panic(`Cannot parse to HTMLOrSVGElement from '${source}'`)
     }
 
+    /**
+     * Removes all child nodes from an element.
+     */
     export const empty = (element: Element): void => {while (element.firstChild !== null) {element.firstChild.remove()}}
 
+    /**
+     * Replaces the children of an element with new nodes or HTML strings.
+     */
     export const replace = (element: Element, ...elements: ReadonlyArray<string | Element>): void => {
         Html.empty(element)
         element.append(...elements)
     }
 
+    /**
+     * Shorthand for `querySelector` that asserts the element exists.
+     */
     export const query = <E extends Element>(selectors: string, parent: ParentNode = document): E =>
         asDefined(parent.querySelector(selectors)) as E
 
+    /**
+     * Returns all elements matching the selector as a plain array.
+     */
     export const queryAll = <E extends Element>(selectors: string, parent: ParentNode = document): ReadonlyArray<E> =>
         Array.from(parent.querySelectorAll(selectors))
 
+    /**
+     * Generates a short unique identifier used for CSS classes.
+     */
     export const nextID = (() => {
         let id: int = 0 | 0
         return (): string => (++id).toString(16).padStart(4, "0")
     })()
 
+    /**
+     * Registers a `CSSStyleSheet` replacing the `component` placeholder with a
+     * unique class name and returns that class.
+     */
     export const adoptStyleSheet = (classDefinition: string, prefix?: string): string => {
         assert(classDefinition.includes("component"), `No 'component' found in: ${classDefinition}`)
         const className = `${prefix ?? "C"}${Html.nextID()}`
@@ -43,10 +74,21 @@ export namespace Html {
         return className
     }
 
-    // Allows conditional accumulation of classNames
+    /**
+     * Allows conditional accumulation of class names.
+     *
+     * @example
+     * ```ts
+     * Html.buildClassList("foo", condition && "bar");
+     * ```
+     */
     export const buildClassList = (...input: Array<string | false | undefined>) =>
         input.filter(x => x !== false && x !== undefined).join(" ")
 
+    /**
+     * Converts CSS color values into {@link Color.RGBA} objects by applying
+     * them to a temporary DOM element.
+     */
     export const readCssVarColor = (...cssValues: Array<string>): Array<Color.RGBA> => {
         const element = document.createElement("div")
         document.body.appendChild(element)
@@ -58,6 +100,15 @@ export namespace Html {
         return colors
     }
 
+    /**
+     * Observes size changes on an element via `ResizeObserver`.
+     *
+     * @example
+     * ```ts
+     * const sub = Html.watchResize(el, entry => console.log(entry.contentRect));
+     * // later: sub.terminate();
+     * ```
+     */
     export const watchResize = (target: Element,
                                 callback: (entry: ResizeObserverEntry, observer: ResizeObserver) => void,
                                 options?: ResizeObserverOptions): Subscription => {
@@ -66,6 +117,9 @@ export namespace Html {
         return {terminate: () => observer.disconnect()}
     }
 
+    /**
+     * Observes element visibility via `IntersectionObserver`.
+     */
     export const watchIntersection = (target: Element,
                                       callback: IntersectionObserverCallback,
                                       options?: IntersectionObserverInit): Subscription => {
@@ -74,7 +128,10 @@ export namespace Html {
         return {terminate: () => observer.disconnect()}
     }
 
-    // handles cases like 'display: contents', where the bounding box is always empty, although the children have dimensions
+    /**
+     * Computes a bounding box, recursing into children for elements with no
+     * box (e.g. `display: contents`).
+     */
     export const secureBoundingBox = (element: Element): DOMRect => {
         const elemRect = element.getBoundingClientRect()
         if (!Rect.isEmpty(elemRect)) {
@@ -86,6 +143,9 @@ export namespace Html {
         return elemRect
     }
 
+    /**
+     * Removes focus from the active element if possible.
+     */
     export const unfocus = (owner: Window = self) => {
         const element = owner.document.activeElement
         if (element !== null && "blur" in element && typeof element.blur === "function") {
@@ -93,6 +153,9 @@ export namespace Html {
         }
     }
 
+    /**
+     * Selects the textual contents of an element.
+     */
     export const selectContent = (element: HTMLElement) => {
         const range = document.createRange()
         const selection = window.getSelection()
@@ -103,6 +166,9 @@ export namespace Html {
         }
     }
 
+    /**
+     * Clears any selection inside the given element.
+     */
     export const unselectContent = (element: HTMLElement) => {
         const selection = window.getSelection()
         if (!isDefined(selection) || selection.rangeCount === 0) {return}
@@ -111,6 +177,10 @@ export namespace Html {
         }
     }
 
+    /**
+     * Limits the string length of a property on an element and keeps the cursor
+     * at the end.
+     */
     export const limitChars = <T extends HTMLElement, K extends keyof T & string>(element: T, property: K, limit: int) => {
         if (!(property in element)) return panic(`${property} not found in ${element}`)
         if (typeof element[property] !== "string") return panic(`${property} in ${element} is not a string`)
@@ -131,6 +201,10 @@ export namespace Html {
         }
     }
 
+    /**
+     * Data URL for a single pixel transparent gif.
+     */
     export const EmptyGif = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" as const
 }
+
 
