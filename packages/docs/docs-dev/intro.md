@@ -4,7 +4,8 @@ The developer documentation provides guidance for contributing to openDAW's
 packages such as [`@opendaw/app-studio`](./package-inventory.md#app). Learn how
 to [build and run](./build-and-run/setup.md) the project, explore its
 [architecture](./architecture/overview.md), and ensure quality with
-[testing and QA](./testing-and-qa/index.md).
+[testing and QA](./testing-and-qa/index.md). See the
+[project roadmap](../../../ROADMAP.md) for current milestones.
 
 For writing and formatting conventions, see the [Writing Guide](./style/writing-guide.md).
 

@@ -1,6 +1,7 @@
 # API Coverage
 
-Documentation coverage measured with `typedoc-plugin-coverage`:
+Documentation coverage measured with `typedoc-plugin-coverage`.
+See the [project roadmap](../../../ROADMAP.md) for planned improvements:
 
 - [`@opendaw/lib-runtime`](./package-inventory.md#lib) – 0%
 - [`@opendaw/lib-dsp`](./package-inventory.md#lib) – 0%

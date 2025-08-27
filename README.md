@@ -23,7 +23,8 @@ The Studio features a Spotlight command palette (<kbd>Shift</kbd>+<kbd>Enter</kb
 
 ## Open-Source
 
-We are committed to transparency and community-driven development.
+We are committed to transparency and community-driven development. See the
+[project roadmap](ROADMAP.md) for upcoming milestones.
 
 The source code for openDAW is available under the [MIT License](LICENSE).
 

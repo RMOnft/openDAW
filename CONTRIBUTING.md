@@ -1,6 +1,6 @@
 # Contributing to openDAW
 
-Thank you for your interest in contributing to openDAW! This guide outlines the preferred workflow for submitting pull requests and the coding style that keeps the project consistent.
+Thank you for your interest in contributing to openDAW! This guide outlines the preferred workflow for submitting pull requests and the coding style that keeps the project consistent. Review the [project roadmap](ROADMAP.md) to see upcoming milestones and priorities.
 
 ## Pipeline Overview
 
