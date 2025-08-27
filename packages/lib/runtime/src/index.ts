@@ -1,3 +1,4 @@
+/** Entry point re-exporting all runtime utilities. */
 const key = Symbol.for("@openDAW/lib-runtime")
 
 if ((globalThis as any)[key]) {
