@@ -15,6 +15,8 @@ export class MidiFileDecoder {
 
   /**
    * Create a decoder that reads from the given input.
+   *
+   * @param input - byte source containing the MIDI file
    */
   constructor(input: ByteArrayInput) {
     this.input = input;
@@ -22,6 +24,8 @@ export class MidiFileDecoder {
 
   /**
    * Decode the entire MIDI file and return its format description.
+   *
+   * @returns structure describing the file contents
    */
   decode(): MidiFileFormat {
     this.input.littleEndian = false;
@@ -53,7 +57,11 @@ export class MidiFileDecoder {
     return new MidiFileFormat(tracks, formatType, timeDivision);
   }
 
-  /** Read a variable-length integer as defined by the MIDI specification. */
+  /**
+   * Read a variable-length integer as defined by the MIDI specification.
+   *
+   * @returns decoded integer value
+   */
   readVarLen(): int {
     let value: int = this.input.readByte() & 0xff;
     let c: int;
@@ -67,7 +75,11 @@ export class MidiFileDecoder {
     return value;
   }
 
-  /** Read a time signature meta-event payload. */
+  /**
+   * Read a time signature meta-event payload.
+   *
+   * @returns tuple of `[numerator, denominator]`
+   */
   readSignature(): [int, int] {
     const b0 = this.input.readByte() & 0xff;
     const b1 = this.input.readByte() & 0xff;
@@ -84,7 +96,11 @@ export class MidiFileDecoder {
     return [b0, 1 << b1];
   }
 
-  /** Read a tempo meta-event payload and return beats per minute. */
+  /**
+   * Read a tempo meta-event payload and return beats per minute.
+   *
+   * @returns tempo in beats per minute
+   */
   readTempo(): number {
     const b0 = this.input.readByte() & 0xff;
     const b1 = this.input.readByte() & 0xff;
@@ -93,7 +109,11 @@ export class MidiFileDecoder {
     return MICROSECONDS_PER_MINUTE / ((b0 << 16) | (b1 << 8) | b2);
   }
 
-  /** Skip over a system exclusive message. */
+  /**
+   * Skip over a system exclusive message.
+   *
+   * @param value - initial status byte of the SysEx message
+   */
   skipSysEx(value: int): void {
     if (0xf0 === value) {
       if (this.#sysMode) {
@@ -110,12 +130,20 @@ export class MidiFileDecoder {
       }
     }
   }
-  /** Skip a number of bytes from the input. */
+  /**
+   * Skip a number of bytes from the input.
+   *
+   * @param count - number of bytes to advance
+   */
   skip(count: int): void {
     this.input.skip(count);
   }
 
-  /** Read a raw byte from the input. */
+  /**
+   * Read a raw byte from the input.
+   *
+   * @returns the next byte value
+   */
   readByte(): byte {
     return this.input.readByte();
   }

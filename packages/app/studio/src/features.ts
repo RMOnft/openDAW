@@ -1,10 +1,14 @@
 import { requireProperty } from "@opendaw/lib-std";
 
 /**
- * Ensures that essential Web APIs are available in the current browser
- * before the studio attempts to boot. Each check throws if the feature
- * is missing which prevents the application from starting in an
- * unsupported environment.
+ * Tests browser capabilities that are required for the Studio to run.
+ *
+ * The application performs these checks before booting and aborts if any
+ * API is unavailable. Keeping the logic centralized ensures that feature
+ * requirements stay in sync with the documentation and user messaging.
+ *
+ * @throws {Error} When a mandatory Web API is missing from the host
+ * browser.
  */
 export const testFeatures = async (): Promise<void> => {
   // Promise.withResolvers is used throughout for ergonomic async flows

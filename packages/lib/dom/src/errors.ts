@@ -5,6 +5,15 @@ import { panic } from "@opendaw/lib-std";
  *
  * Error Handling: unexpected values are forwarded to {@link panic} so
  * callers should catch and handle aborts explicitly.
+ *
+ * @example
+ * ```ts
+ * try {
+ *   await controller.abort();
+ * } catch (err) {
+ *   Errors.CatchAbort(err);
+ * }
+ * ```
  */
 export namespace Errors {
   export const AbortError =

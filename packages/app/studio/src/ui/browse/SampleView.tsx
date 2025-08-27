@@ -76,6 +76,7 @@ export const SampleView = ({
     </Button>
   );
   const metaElement: HTMLElement = (
+    // Double-click on the metadata row toggles playback
     <div className="meta" ondblclick={() => playback.toggle(sample.uuid)}>
       {labelName}
       {labelBpm}
@@ -100,6 +101,7 @@ export const SampleView = ({
   );
   lifecycle.ownAll(
     DragAndDrop.installSource(element, () => ({ type: "sample", sample })),
+    // Add context menu entries for common actions
     ContextMenu.subscribe(element, (collector) =>
       collector.addItems(
         MenuItem.default({
@@ -114,6 +116,7 @@ export const SampleView = ({
         }),
       ),
     ),
+    // Reflect playback state changes in the UI
     playback.subscribe(sample.uuid, (event) => {
       metaElement.classList.remove("buffering", "playing", "error");
       metaElement.classList.add(event.type);

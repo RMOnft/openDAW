@@ -41,6 +41,12 @@ export class SortedSet<K, V> implements Iterable<V> {
         this.#array = []
     }
 
+    /**
+     * Inserts a value into the set.
+     * @param value Element to insert.
+     * @param replace When `true`, existing element with same key is replaced.
+     * @returns `true` if the element was added.
+     */
     add(value: V, replace: boolean = false): boolean {
         const key: K = this.#extractor(value)
         const insertIndex: int = BinarySearch.leftMostMapped(this.#array, key, this.#comparator, this.#extractor)

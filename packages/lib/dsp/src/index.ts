@@ -1,3 +1,4 @@
+/** Entry point for the DSP library and module re-exports. */
 const key = Symbol.for("@openDAW/lib-dsp")
 
 if ((globalThis as any)[key]) {

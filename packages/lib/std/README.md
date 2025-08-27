@@ -6,6 +6,15 @@ A lightweight standard library offering foundational utilities, algorithms and
 data structures for TypeScript projects. Each file listed below can be imported
 individually.
 
+## Developer Guides
+
+For in-depth discussions and usage examples, see the developer documentation:
+
+* [Standard Library Overview](../../docs/docs-dev/std/overview.md)
+* [Collections](../../docs/docs-dev/std/collections.md)
+* [Observers & Reactivity](../../docs/docs-dev/std/observers.md)
+* [Randomness Utilities](../../docs/docs-dev/std/randomness.md)
+
 ## API Docs
 
 See the [API documentation](https://opendaw.org/docs/api/std/) for detailed reference.

@@ -15,6 +15,11 @@ import {Commit, SyncLogReader, SyncLogWriter} from "@opendaw/studio-core"
  * ```
  */
 export namespace SyncLogService {
+    /**
+     * Start a new SyncLog and attach it to the current project.
+     *
+     * @param service - Studio service providing the project context.
+     */
     export const start = async (service: StudioService) => {
         if (!isDefined(window.showSaveFilePicker)) {return}
         const {
@@ -32,6 +37,11 @@ export namespace SyncLogService {
         SyncLogWriter.attach(service.project, wrapBlockWriter(handle, () => label.setValue(`${++count} commits`)))
     }
 
+    /**
+     * Append commits to an existing SyncLog file selected by the user.
+     *
+     * @param service - Studio service providing the project context.
+     */
     export const append = async (service: StudioService) => {
         const openResult = await Promises.tryCatch(window.showOpenFilePicker(FilePickerAcceptTypes.ProjectSyncLog))
         if (openResult.status === "rejected") {return}
@@ -65,6 +75,12 @@ export namespace SyncLogService {
         SyncLogWriter.attach(service.project, wrapBlockWriter(handle, () => label.setValue(`${++count} commits`)), lastCommit)
     }
 
+    /**
+     * Creates a block writer that serializes commits to the given file handle.
+     *
+     * @param handle - Destination file handle.
+     * @param callback - Invoked after each commit has been queued.
+     */
     const wrapBlockWriter = (handle: FileSystemFileHandle, callback: Exec) => {
         let blocks: Array<Commit> = []
         let lastPromise: Promise<void> = Promise.resolve()
@@ -83,6 +99,7 @@ export namespace SyncLogService {
         }
     }
 
+    /** Concatenates array buffers into a single buffer. */
     const appendArrayBuffers = (buffers: ReadonlyArray<ArrayBuffer>): ArrayBuffer => {
         const totalLength = buffers.reduce((sum, buffer) => sum + buffer.byteLength, 0)
         const result = new Uint8Array(totalLength)
