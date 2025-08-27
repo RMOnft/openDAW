@@ -4,6 +4,11 @@ import {dbToGain, LoopableRegion} from "@opendaw/lib-dsp"
 import {Peaks, PeaksPainter} from "@opendaw/lib-fusion"
 import {AudioFileBoxAdapter} from "@opendaw/studio-adapters"
 
+/**
+ * Draws an audio waveform for the visible part of a region. Peaks data is
+ * sampled and scaled by the current clip gain before being painted into the
+ * provided canvas context.
+ */
 export const renderAudio = (context: CanvasRenderingContext2D,
                             range: TimelineRange,
                             file: AudioFileBoxAdapter,
