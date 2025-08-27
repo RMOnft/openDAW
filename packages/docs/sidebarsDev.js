@@ -6,6 +6,11 @@ module.exports = {
     { type: "doc", id: "performance" },
     { type: "doc", id: "security-privacy" },
     { type: "doc", id: "browser-support" },
+    {
+      type: "category",
+      label: "Configuration",
+      items: ["configuration/eslint"],
+    },
     { type: "doc", id: "licensing" },
     {
       type: "category",
@@ -21,7 +26,7 @@ module.exports = {
         "xml/pitfalls",
         "xml/best-practices",
         "xml/troubleshooting",
-        ]
+      ],
     },
     {
       type: "category",
