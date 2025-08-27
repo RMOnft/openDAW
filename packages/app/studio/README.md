@@ -1,6 +1,6 @@
-# @opendaw/studio-core
+# @opendaw/app-studio
 
-This package is part of the openDAW SDK.
+Main studio application for openDAW.
 
 ![Global data flow](../../../assets/architecture/global-dataflow.svg)
 

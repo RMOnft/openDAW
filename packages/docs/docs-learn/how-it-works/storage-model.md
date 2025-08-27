@@ -6,6 +6,10 @@ OPFS provides a sandboxed, persistent file system that is not visible to the
 user's operating system. It allows the application to save audio files and
 project state without requiring a network connection.
 
+![Global data flow](../../../../assets/architecture/global-dataflow.svg)
+
+The diagram shows how data moves from the App through the Studio, Runtime and DSP layers before reaching storage.
+
 ```mermaid
 flowchart LR
     A[Project Data] --> B[OPFS]

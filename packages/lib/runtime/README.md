@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Runtime utilities and asynchronous operations for TypeScript projects.
 
+![Global data flow](../../../assets/architecture/global-dataflow.svg)
+
+The diagram shows how data moves from the App through the Studio, Runtime and DSP layers before reaching storage.
+
 ## Async & Promises
 
 * **promises.ts** - Promise utilities and async operation helpers

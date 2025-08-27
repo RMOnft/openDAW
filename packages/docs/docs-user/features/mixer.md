@@ -2,6 +2,10 @@
 
 Control levels and routing between tracks and devices.
 
+![Global data flow](../../../../assets/architecture/global-dataflow.svg)
+
+The diagram shows how data moves from the App through the Studio, Runtime and DSP layers before reaching storage.
+
 ## Channel strips
 
 Each track is represented by a channel strip containing controls for volume,

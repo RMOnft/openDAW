@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Digital Signal Processing utilities and audio processing functions for TypeScript projects.
 
+![Global data flow](../../../assets/architecture/global-dataflow.svg)
+
+The diagram shows how data moves from the App through the Studio, Runtime and DSP layers before reaching storage.
+
 ## Core Audio Processing
 
 * **fft.ts** - Fast Fourier Transform implementations
