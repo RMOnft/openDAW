@@ -6,6 +6,10 @@ A lightweight standard library offering foundational utilities, algorithms and
 data structures for TypeScript projects. Each file listed below can be imported
 individually.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/std/) for detailed reference.
+
 ## Core Utilities
 
 * Language primitives, type definitions, and utility functions **lang.ts**

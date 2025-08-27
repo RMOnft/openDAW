@@ -6,6 +6,10 @@ Utility helpers for working with the browser DOM and related Web APIs. The
 module groups together small focused utilities that are shared across the
 openDAW projects.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/dom/) for detailed reference.
+
 ## Browser Support
 
 Tested on the latest versions of Chrome, Firefox, Safari, and Edge. See the

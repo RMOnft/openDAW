@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Utilities for reading, writing and interpreting MIDI data.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/midi/) for detailed reference.
+
 See the [serialization guide](../../docs/docs-dev/serialization/midi.md) for
 an overview of how MIDI structures map onto binary files and other formats.
 

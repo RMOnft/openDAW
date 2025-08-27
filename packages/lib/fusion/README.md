@@ -4,6 +4,10 @@ _This package is part of the openDAW SDK_
 
 Web-based audio workstation fusion utilities for TypeScript projects.
 
+## API Docs
+
+See the [API documentation](https://opendaw.org/docs/api/fusion/) for detailed reference.
+
 ## File System Operations
 
 * **OpfsWorker.ts** - Origin Private File System worker implementation
