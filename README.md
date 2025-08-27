@@ -120,6 +120,8 @@ Huge thanks to our [ambassadors](https://opendaw.org/ambassadors), whose dedicat
 - [Canvas Utilities](packages/docs/docs-dev/ui/canvas/overview.md)
 - [Icon Library](packages/docs/docs-dev/ui/icons/overview.md)
 - [Notepad Guide](packages/docs/docs-user/features/notepad.md)
+- [File Management Guide](packages/docs/docs-user/features/file-management.md)
+- [OPFS Sample Storage](packages/docs/docs-dev/architecture/opfs-samples.md)
 
 ### Style Documentation
 

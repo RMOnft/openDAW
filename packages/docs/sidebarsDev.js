@@ -57,6 +57,8 @@ module.exports = {
         "architecture/audio-path",
         "architecture/browser-compat",
         "architecture/headless-vs-studio",
+        "architecture/persistence",
+        "architecture/opfs-samples",
       ],
     },
     {

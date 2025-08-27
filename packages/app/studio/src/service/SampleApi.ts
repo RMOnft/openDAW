@@ -24,8 +24,10 @@ const headers: RequestInit = {
 /**
  * REST API helpers for retrieving and uploading sample files.
  *
- * Uses {@link network.limitFetch} to throttle HTTP requests. See
- * [StudioService](./StudioService.ts) for how the API integrates with the app.
+ * Used by {@link SampleService} and the {@link SampleBrowser} to access the
+ * cloud library. Requests are throttled through {@link network.limitFetch} to
+ * avoid hammering the server. See {@link SampleStorage} for the local OPFS
+ * counterpart.
  *
  * ```mermaid
  * sequenceDiagram

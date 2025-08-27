@@ -21,6 +21,10 @@ import { SampleApi } from "@/service/SampleApi";
 /**
  * Convenience wrapper around {@link StudioService} for managing samples in the
  * browser view.
+ *
+ * Ties together {@link SampleApi} for cloud access and {@link SampleStorage}
+ * for OPFS backed persistence, exposing higher level actions used by the
+ * {@link SampleBrowser} UI.
  */
 export class SampleService {
   readonly #service: StudioService;
