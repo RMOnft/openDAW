@@ -41,6 +41,7 @@ sequenceDiagram
     M->>ST: deliver tasks
     ST->>G2: apply updates
 ```
+![Box sync diagram](../../../assets/architecture/box-sync.svg)
 
 This flow keeps graphs in different threads or machines consistent while allowing transactions to batch multiple changes.
 

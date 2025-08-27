@@ -48,6 +48,7 @@ stateDiagram-v2
     active --> terminated
     terminated --> [*]
 ```
+![Worker flow diagram](../../../../assets/architecture/worker-flow.svg)
 
 The shared worker is installed during application startup, becomes active while
 providing services to the audio engine and is terminated when the session ends.
