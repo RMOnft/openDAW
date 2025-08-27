@@ -119,6 +119,7 @@ module.exports = {
         { type: "doc", id: "extending/plugin-guide" },
         { type: "doc", id: "extending/plugin-api" },
         { type: "doc", id: "extending/plugin-examples" },
+        { type: "doc", id: "extending/device-boxes" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
       ],

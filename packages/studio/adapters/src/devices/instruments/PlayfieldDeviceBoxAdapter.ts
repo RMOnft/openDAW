@@ -11,6 +11,7 @@ import {TrackType} from "../../timeline/TrackType"
 import {AudioUnitBoxAdapter} from "../../audio-unit/AudioUnitBoxAdapter"
 import {AutomatableParameterFieldAdapter} from "../../AutomatableParameterFieldAdapter"
 
+/** Adapter managing Playfield sample-based instruments. */
 export class PlayfieldDeviceBoxAdapter implements InstrumentDeviceBoxAdapter {
     readonly type = "instrument"
     readonly accepts = "midi"
