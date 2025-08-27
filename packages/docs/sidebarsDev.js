@@ -58,7 +58,12 @@ module.exports = {
         { type: "doc", id: "extending/plugin-examples" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
-    ]
+      ],
+    },
+    {
+      type: "category",
+      label: "UI",
+      items: ["ui/browse"],
     },
     {
       type: "category",
