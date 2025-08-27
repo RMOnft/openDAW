@@ -1,5 +1,5 @@
 {
-  "extends": "@opendaw/typescript-config/base.json",
+  "extends": "@opendaw/typescript-config/tsconfig.base.json",
   "compilerOptions": {
     "lib": [
       "ESNext",
@@ -13,7 +13,6 @@
   "exclude": [
     "dist",
     "node_modules",
-    "**/*.test.ts",
     "vitest.config.ts"
   ]
 }

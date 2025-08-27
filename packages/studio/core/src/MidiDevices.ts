@@ -60,10 +60,10 @@ export class MidiDevices {
                 for (let channel = 0; channel < 16; channel++) {
                     const data = MidiData.noteOff(channel, note)
                     const event = new MessageEvent("midimessage", {data})
-                    for (let input of midiAccess.inputs.values()) {
+            for (const input of midiAccess.inputs.values()) {
                         input.dispatchEvent(event)
                     }
-                    for (let output of midiAccess.outputs.values()) {
+            for (const output of midiAccess.outputs.values()) {
                         output.send(data)
                     }
                 }
@@ -74,12 +74,11 @@ export class MidiDevices {
     @Lazy
     /** Observable indicating whether MIDI access has been granted. */
     static available(): MutableObservableValue<boolean> {
-        const scope = this
         return new class implements MutableObservableValue<boolean> {
             readonly #notifier: Notifier<ObservableValue<boolean>> = new Notifier<ObservableValue<boolean>>()
 
             constructor() {
-                const subscription = scope.get().subscribe(option => {
+                const subscription = MidiDevices.get().subscribe(option => {
                     if (option.nonEmpty()) {
                         subscription.terminate()
                         this.#notifier.notify(this)
@@ -88,14 +87,14 @@ export class MidiDevices {
             }
 
             setValue(value: boolean): void {
-                if (!value || scope.#midiAccess.nonEmpty() || scope.#isRequesting) {return}
-                console.debug("Request MIDI access")
-                scope.#isRequesting = true
-                scope.requestPermission().finally(() => scope.#isRequesting = false)
+                  if (!value || MidiDevices.#midiAccess.nonEmpty() || MidiDevices.#isRequesting) {return}
+                  console.debug("Request MIDI access")
+                  MidiDevices.#isRequesting = true
+                  MidiDevices.requestPermission().finally(() => MidiDevices.#isRequesting = false)
             }
 
-            getValue(): boolean {return scope.#midiAccess.nonEmpty()}
-
+              getValue(): boolean {return MidiDevices.#midiAccess.nonEmpty()}
+          
             catchupAndSubscribe(observer: Observer<ObservableValue<boolean>>): Subscription {
                 observer(this)
                 return this.#notifier.subscribe(observer)

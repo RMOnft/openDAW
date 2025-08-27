@@ -21,13 +21,14 @@ export class BandLimitedOscillator {
                     out += this.#polyBLEP(t, phaseInc)
                     out -= this.#polyBLEP((t + 0.5) % 1.0, phaseInc)
                     break
-                case Waveform.triangle:
+                case Waveform.triangle: {
                     let sq = t < 0.5 ? 1.0 : -1.0
                     sq += this.#polyBLEP(t, phaseInc)
                     sq -= this.#polyBLEP((t + 0.5) % 1.0, phaseInc)
                     this.#integrator += sq * (4.0 * phaseInc)
                     out = this.#integrator
                     break
+                }
             }
             buffer[i] = out
             this.#phase += phaseInc

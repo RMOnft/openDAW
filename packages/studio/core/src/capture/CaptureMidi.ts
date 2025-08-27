@@ -56,7 +56,7 @@ export class CaptureMidi extends Capture<CaptureMidiBox> {
 
     get deviceLabel(): Option<string> {return Option.wrap("MIDI coming soon.")}
 
-    async prepareRecording({}: RecordingContext): Promise<void> {
+    async prepareRecording(_: RecordingContext): Promise<void> {
         const availableMidiDevices = MidiDevices.get()
         if (availableMidiDevices.isEmpty()) {
             return Promise.reject("MIDI has not been requested")

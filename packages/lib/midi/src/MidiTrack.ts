@@ -24,7 +24,8 @@ export class MidiTrack {
     let ticks: int = 0;
     let eventType: int = 0;
     let channel: Channel = 0;
-    while (true) {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
       const varLen = decoder.readVarLen();
       const b = decoder.readByte() & 0xff;
       if (b < 0xf0) {
@@ -81,32 +82,34 @@ export class MidiTrack {
         const bytes: Array<int> = [];
         bytes.push(i & 0x7f);
         i >>= 7;
-        while (i) {
-          let b = (i & 0x7f) | 0x80;
-          bytes.push(b);
-          i >>= 7;
-        }
+          while (i) {
+            const b = (i & 0x7f) | 0x80;
+            bytes.push(b);
+            i >>= 7;
+          }
         bytes.reverse().forEach((byte) => output.writeByte(byte));
       }
     };
     this.controlEvents.forEach((channel, events) => {
-      let ticks = 0;
-      let lastEventTypeByte = -1;
+        let ticks = 0;
+        let lastEventTypeByte = -1;
       events.forEach((event: ControlEvent) => {
         const deltaTime = event.ticks - ticks;
         writeVarInt(deltaTime);
         if (event.type === ControlType.NOTE_ON) {
           const eventTypeByte = 0x90 | channel;
-          if (eventTypeByte !== lastEventTypeByte) {
-            output.writeByte(eventTypeByte);
-          }
+            if (eventTypeByte !== lastEventTypeByte) {
+              output.writeByte(eventTypeByte);
+              lastEventTypeByte = eventTypeByte;
+            }
           output.writeByte(event.param0);
           output.writeByte(event.param1);
         } else if (event.type === ControlType.NOTE_OFF) {
           const eventTypeByte = 0x90 | channel;
-          if (eventTypeByte !== lastEventTypeByte) {
-            output.writeByte(eventTypeByte);
-          }
+            if (eventTypeByte !== lastEventTypeByte) {
+              output.writeByte(eventTypeByte);
+              lastEventTypeByte = eventTypeByte;
+            }
           output.writeByte(event.param0);
           output.writeByte(event.param1);
         } else {

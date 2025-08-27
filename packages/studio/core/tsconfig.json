@@ -1,5 +1,5 @@
 {
-  "extends": "@opendaw/typescript-config/base.json",
+  "extends": "@opendaw/typescript-config/tsconfig.base.json",
   "compilerOptions": {
     "lib": [
       "ESNext",
@@ -11,7 +11,9 @@
     "rootDir": "./src"
   },
   "include": [
-    "src"
+    "src",
+    "vitest.config.ts",
+    "vite-env.d.ts"
   ],
   "exclude": [
     "dist",

@@ -22,6 +22,7 @@ export class SyncLogReader {
         let prevCommit: Commit = firstCommit
         let lastFrame = Date.now()
         let numCommits = 0 | 0
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const {status, error, value: nextCommit} = tryCatch(() => Commit.deserialize(input))
             numCommits++
