@@ -1,9 +1,20 @@
+/** Supported oscillator waveforms. */
 export enum Waveform {sine, triangle, sawtooth, square}
 
+/** PolyBLEP-based band-limited oscillator. */
 export class BandLimitedOscillator {
     #phase = 0.0
     #integrator = 0.0
 
+    /**
+     * Fills the buffer with the selected waveform.
+     *
+     * @param buffer - Output buffer.
+     * @param phaseInc - Phase increment per sample.
+     * @param waveform - Waveform type to generate.
+     * @param fromIndex - Starting sample index.
+     * @param toIndex - Exclusive end sample index.
+     */
     generate(buffer: Float32Array, phaseInc: number, waveform: Waveform, fromIndex: number, toIndex: number): void {
         for (let i = fromIndex; i < toIndex; i++) {
             const t = this.#phase % 1.0
@@ -35,6 +46,7 @@ export class BandLimitedOscillator {
         }
     }
 
+    /** Band-limited step function used to reduce aliasing. */
     #polyBLEP(t: number, dt: number): number {
         if (t < dt) {
             t /= dt

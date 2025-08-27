@@ -2,23 +2,32 @@ import {BinarySearch, Comparator, Curve, int, Iterables, Nullable, panic, unitVa
 import {Event, EventCollection} from "./events"
 import {ppqn} from "./ppqn"
 
+/** Interpolation modes for automation values. */
 export type Interpolation = | { type: "none" } | { type: "linear" } | { type: "curve", slope: unitValue }
 
 export const Interpolation = {
+    /** Hold value until next event. */
     None: {type: "none"},
+    /** Linearly interpolate to next value. */
     Linear: {type: "linear"},
+    /** Apply a curved interpolation with the given slope. */
     Curve: (slope: unitValue) => ({type: "curve", slope}) as const
 } as const
 
+/** Automation event carrying a value at a specific index. */
 export interface ValueEvent extends Event {
     readonly type: "value-event"
 
+    /** Index within a multi-value event collection. */
     get index(): int
+    /** Event value. */
     get value(): number
+    /** Interpolation method to the subsequent event. */
     get interpolation(): Interpolation
 }
 
 export namespace ValueEvent {
+    /** Sorts events by position and index. */
     export const Comparator: Comparator<ValueEvent> = (a: ValueEvent, b: ValueEvent) => {
         const positionDiff = a.position - b.position
         if (positionDiff !== 0) {return positionDiff}
@@ -27,6 +36,9 @@ export namespace ValueEvent {
         return a === b ? 0 : panic(`${a} and ${b} are identical in terms of comparison`)
     }
 
+    /**
+     * Iterates events that fall within the given window.
+     */
     export function* iterateWindow<E extends ValueEvent>(events: EventCollection<E>,
                                                          fromPosition: ppqn,
                                                          toPosition: ppqn): Generator<E> {
@@ -37,6 +49,7 @@ export namespace ValueEvent {
         }
     }
 
+    /** Gets the next event after the given precursor or `null`. */
     export const nextEvent = <E extends ValueEvent>(events: EventCollection<E>, precursor: E): Nullable<E> => {
         const sorted = events.asArray()
         const index = BinarySearch.rightMost(sorted, precursor, ValueEvent.Comparator)

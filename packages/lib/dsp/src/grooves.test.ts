@@ -1,3 +1,4 @@
+/** Vitest specifications for groove utilities. */
 import {describe, expect, it} from "vitest"
 import {
     Groove,
@@ -10,18 +11,22 @@ import {
 import {PPQN, ppqn} from "./ppqn"
 import {moebiusEase, Random} from "@opendaw/lib-std"
 
+/** Helper to create a moebius-easing groove pattern. */
 const createMEGroove = (duration: ppqn, amount: number) => new GroovePattern({
     duration: (): ppqn => duration,
     fx: x => moebiusEase(x, amount),
     fy: y => moebiusEase(y, 1.0 - amount)
 } satisfies GroovePatternFunction)
 
+/** Creates a groove that offsets positions by a constant amount. */
 const createOffsetGroove = (offset: ppqn): Groove => ({
     warp: (position: ppqn): ppqn => position + offset,
     unwarp: (position: ppqn): ppqn => position - offset
 })
 
+/** Ensures a groove's warp/unwarp functions are inverse. */
 const groovePingPong = (groove: Groove, x: ppqn) => expect(groove.unwarp(groove.warp(x))).toBeCloseTo(x, 7)
+/** Ensures a bijective function round-trips correctly. */
 const bijectivePingPong = (func: GrooveFunction, x: ppqn) => expect(func.fy(func.fx(x))).toBeCloseTo(x, 7)
 
 describe("Grooves", () => {
