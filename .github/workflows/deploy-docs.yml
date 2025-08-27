@@ -1,5 +1,6 @@
 # .github/workflows/deploy-docs.yml
 # NOTE: Workflow disabled
+# Builds documentation and publishes it to GitHub Pages.
 name: Deploy docs
 
 on:

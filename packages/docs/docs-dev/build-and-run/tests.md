@@ -19,4 +19,5 @@ flowchart LR
 
 If a test fails, consult the logs for the specific package. See
 [Contributing](../contributing.md) for pull request guidelines and proceed to
-[profiling](./profiling.md) to analyze performance.
+[profiling](./profiling.md) to analyze performance. These tests also run as
+part of the [CI pipeline](./ci.md).

@@ -160,6 +160,14 @@ publishing via scripts like `npm run publish-sdk`. API documentation is produced
 with **Typedoc**, and deployment targets are described in the Vercel and
 Netlify configuration files (currently disabled).
 
+Continuous integration runs on **GitHub Actions**. Workflows exist for
+deployment, documentation generation, quality checks, Discord notifications, and
+SFTP connectivity tests. They are currently disabled but serve as references for
+future automation. See the [CI guide](packages/docs/docs-dev/build-and-run/ci.md)
+for details.
+
+![CI flow diagram](assets/architecture/ci-flow.svg)
+
 ### Flow Charts
 
 <img width="6551" height="5971" alt="image" src="https://github.com/user-attachments/assets/09aaf742-6175-42ba-946b-a66e5f5dac72" />
