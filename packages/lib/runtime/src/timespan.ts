@@ -27,6 +27,7 @@ export namespace TimeSpanUtils {
     export const startEstimator = (): Func<number, TimeSpan> => {
         const startTime: number = performance.now()
         return (progress: unitValue): TimeSpan => {
+            // Avoid division by zero when no progress has been reported yet.
             if (progress === 0.0) {return TimeSpan.POSITIVE_INFINITY}
             const runtime = performance.now() - startTime
             return TimeSpan.millis(runtime / progress - runtime)

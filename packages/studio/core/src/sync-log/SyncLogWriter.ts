@@ -22,7 +22,12 @@ export class SyncLogWriter implements Terminable {
     readonly #observer: Observer<Commit>
     readonly #subscription: Subscription
 
+    /**
+     * Subscription that stays active during a box-graph transaction to collect
+     * updates. Reset after each commit.
+     */
     #transactionSubscription: Subscription = Terminable.Empty
+    /** Promise chain used to serialize commit writing. */
     #lastPromise: Promise<Commit>
 
     private constructor(project: Project, observer: Observer<Commit>, lastCommit?: Commit) {
@@ -42,7 +47,12 @@ export class SyncLogWriter implements Terminable {
         this.#subscription.terminate()
     }
 
-    /** Queue a commit factory to run after the previous commit has been written. */
+    /**
+     * Queue a commit factory to run after the previous commit has finished.
+     *
+     * This ensures that commits are written in order even when asynchronous
+     * operations are involved.
+     */
     #appendCommit(factory: Func<Commit, Promise<Commit>>): Promise<Commit> {
         return this.#lastPromise = this.#lastPromise.then(async (previous) => {
             const commit = await factory(previous)
@@ -53,6 +63,7 @@ export class SyncLogWriter implements Terminable {
 
     /** Listen to box graph transactions and create update commits. */
     #listen(boxGraph: BoxGraph): Subscription {
+        // Collected updates for the current transaction.
         let updates: Array<Update> = []
         return boxGraph.subscribeTransaction({
             onBeginTransaction: () =>
