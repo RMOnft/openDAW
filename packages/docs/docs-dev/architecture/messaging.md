@@ -2,8 +2,8 @@
 
 openDAW components communicate across thread and process boundaries using
 light‑weight messaging abstractions built on top of the browser's
-`postMessage` API.  The runtime's {@link packages/lib/runtime/src/messenger.ts | `Messenger`}
-wraps `MessagePort`‑like endpoints and the {@link packages/lib/runtime/src/communicator.ts | `Communicator`}
+`postMessage` API. The runtime's [`Messenger`](/api/classes/Messenger)
+wraps `MessagePort`‑like endpoints and the [`Communicator`](/api/classes/Communicator)
 layer adds a small RPC mechanism.
 
 ## Channels and Workers
