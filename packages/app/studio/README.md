@@ -50,3 +50,17 @@ Additional information is available for
 [tracks](../../docs/docs-dev/ui/timeline/tracks.md),
 [markers](../../docs/docs-dev/ui/timeline/markers.md) and the
 [timeline footer](../../docs/docs-dev/ui/timeline/footer.md).
+
+## Development
+
+Run all commands from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+npm run dev:studio  # launch the Studio
+```

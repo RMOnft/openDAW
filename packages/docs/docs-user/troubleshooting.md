@@ -73,3 +73,16 @@
 
 - Consult the [project history guide](workflows/history.md) for working with
   SyncLog files.
+
+## Build from Source
+
+If you're running the project locally, use these commands from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

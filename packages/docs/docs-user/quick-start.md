@@ -17,3 +17,16 @@ overview of how the studio boots, see the
 [bootstrapping architecture doc](../docs-dev/architecture/bootstrap.md).
 To tweak default behaviour of the application, refer to the
 [Configuration Overview](../docs-dev/configuration/overview.md).
+
+## Build from Source
+
+Run these commands from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

@@ -38,14 +38,18 @@ and deployment samples:
 2. **Install dependencies**:
    - `npm run install:deps` to install required system tools.
    - `npm install` to fetch project packages.
-3. **Keep commits focused** and write clear commit messages that describe the change.
-4. **Format and lint** your changes:
+3. **Build the workspace**:
+   - `npm run build`
+4. **Keep commits focused** and write clear commit messages that describe the change.
+5. **Format and lint** your changes:
    - `npx prettier --write <files>`
    - `npm run lint`
-5. **Run tests** before opening a PR:
+6. **Run tests** before opening a PR:
    - `npm test`
-6. **Push your branch** and open a pull request against `main`.
-7. **Respond to review feedback** and keep the PR up to date with `main` if needed.
+7. **Generate documentation** if you changed docs:
+   - `npm run docs:build`
+8. **Push your branch** and open a pull request against `main`.
+9. **Respond to review feedback** and keep the PR up to date with `main` if needed.
 
 ## Style Guidelines
 

@@ -47,8 +47,9 @@ Before starting, install the following tools for your platform.
    ```bash
    npm run cert
    ```
-3. Install dependencies:
+3. Install required system tools and packages:
    ```bash
+   npm run install:deps
    npm install
    ```
 4. Build the workspace:
@@ -63,6 +64,16 @@ Before starting, install the following tools for your platform.
 6. Alternatively, start the headless runtime:
    ```bash
    npm run dev:headless
+   ```
+
+7. Run the tests:
+   ```bash
+   npm test
+   ```
+8. Generate documentation:
+   ```bash
+   npm run docs:dev    # local preview
+   npm run docs:build  # static output
    ```
 
 Proceed to [running tests](./tests.md) or learn about
