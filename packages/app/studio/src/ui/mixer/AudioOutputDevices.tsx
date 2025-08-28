@@ -8,6 +8,7 @@ import { AudioDevices } from "@/audio/AudioDevices";
 
 const className = Html.adoptStyleSheet(css, "AudioOutputDevices");
 
+/** Props for {@link AudioOutputDevices}. */
 type Construct = {
   output: AudioOutputDevice;
   provider: Procedure<MediaDeviceInfo>;

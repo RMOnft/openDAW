@@ -193,10 +193,15 @@ export namespace EffectFactories {
         }
     }
 
+    /** Mapping of MIDI effect names to their factory definitions. */
     export const MidiNamed = {Arpeggio, Pitch, Zeitgeist}
+    /** Mapping of audio effect names to their factory definitions. */
     export const AudioNamed = {StereoTool, Delay, Reverb, Revamp, Modular}
+    /** List of all built-in MIDI effect factories. */
     export const MidiList: ReadonlyArray<Readonly<EffectFactory>> = Object.values(MidiNamed)
+    /** List of all built-in audio effect factories. */
     export const AudioList: ReadonlyArray<Readonly<EffectFactory>> = Object.values(AudioNamed)
+    /** Combined lookup of MIDI and audio effect factories. */
     export const MergedNamed = {...MidiNamed, ...AudioNamed}
     export type MidiEffectKeys = keyof typeof MidiNamed
     export type AudioEffectKeys = keyof typeof AudioNamed
