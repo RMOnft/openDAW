@@ -9,7 +9,8 @@
  *
  * Security note: The demo relies on cross-origin isolation and local worker
  * bundles. Serve this page over HTTPS and avoid loading untrusted scripts to
- * prevent privilege escalation.
+ * prevent privilege escalation. The demo stores no persistent data and only
+ * fetches samples from the current origin.
  */
 import "./style.css"
 import {assert, Progress, UUID} from "@opendaw/lib-std"

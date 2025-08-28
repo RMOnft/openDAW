@@ -11,7 +11,11 @@ import { Promises } from "./promises";
  * using them.
  */
 export namespace network {
-  /** Limits the number of concurrent fetch requests. */
+  /**
+   * Limits the number of concurrent fetch requests.
+   *
+   * Raising the limit may increase load on both client and server.
+   */
   const limit = new Promises.Limit<Response>(4);
 
   /**

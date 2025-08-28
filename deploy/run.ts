@@ -4,6 +4,10 @@
  * `packages/app/studio/dist` directory and optionally notifies a Discord
  * channel via webhook when complete. The script is currently disabled and is
  * intended to be run manually by maintainers.
+ *
+ * Security note: credentials are read from environment variables and the
+ * routine deletes remote files before uploading new ones. Double‑check the
+ * target host and paths before executing.
  */
 // NOTE: Deployment script disabled
 import SftpClient from "ssh2-sftp-client";

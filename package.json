@@ -40,10 +40,12 @@
     "type": "git",
     "url": "https://github.com/andremichelle/opendaw"
   },
+  "engines//": "Minimum Node.js version required to work on the repo",
   "engines": {
     "node": ">=23"
   },
   "packageManager": "npm@11.4.2",
+  "workspaces//": "Monorepo packages included in the build",
   "workspaces": [
     "packages/**/*"
   ],
