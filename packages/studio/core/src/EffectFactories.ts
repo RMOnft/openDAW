@@ -1,3 +1,8 @@
+/**
+ * Built-in collection of effect factory definitions.
+ *
+ * @packageDocumentation
+ */
 import {INVERSE_SQRT_2, UUID} from "@opendaw/lib-std"
 import {
     ArpeggioDeviceBox,
@@ -193,11 +198,18 @@ export namespace EffectFactories {
         }
     }
 
+    /** Mapping of available MIDI effect factories by name. */
     export const MidiNamed = {Arpeggio, Pitch, Zeitgeist}
+    /** Mapping of available audio effect factories by name. */
     export const AudioNamed = {StereoTool, Delay, Reverb, Revamp, Modular}
+    /** List of registered MIDI effect factories. */
     export const MidiList: ReadonlyArray<Readonly<EffectFactory>> = Object.values(MidiNamed)
+    /** List of registered audio effect factories. */
     export const AudioList: ReadonlyArray<Readonly<EffectFactory>> = Object.values(AudioNamed)
+    /** Combined mapping of all effect factories. */
     export const MergedNamed = {...MidiNamed, ...AudioNamed}
+    /** Keys of the {@link MidiNamed} mapping. */
     export type MidiEffectKeys = keyof typeof MidiNamed
+    /** Keys of the {@link AudioNamed} mapping. */
     export type AudioEffectKeys = keyof typeof AudioNamed
 }

@@ -10,5 +10,8 @@ export interface DeviceBox {
   id: string;
 }
 
-/** Collection of registered device boxes. */
+/**
+ * Registry of all available device boxes. Plugins may append to this list
+ * during initialization to expose new device types to the host.
+ */
 export const deviceBoxes: DeviceBox[] = [];

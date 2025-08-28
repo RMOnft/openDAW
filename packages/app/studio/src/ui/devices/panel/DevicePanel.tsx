@@ -3,6 +3,8 @@
  *
  * The panel hosts individual device editors, meters and the channel strip
  * while supporting scrolling and drag-and-drop reordering of devices.
+ *
+ * @packageDocumentation
  */
 import css from "./DevicePanel.sass?inline"
 import {asDefined, Lifecycle, ObservableValue, Option, Terminable, Terminator, UUID} from "@opendaw/lib-std"
@@ -34,6 +36,7 @@ import {Project} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "DevicePanel")
 
+/** Options used to construct a {@link DevicePanel}. */
 type Construct = {
     lifecycle: Lifecycle
     service: StudioService
@@ -75,7 +78,8 @@ export const DevicePanel = ({lifecycle, service}: Construct) => {
         scrollModel.contentSize = containers.clientWidth
     }
 
-    const getContext = (project: Project, box: Box): Context => {
+/** Resolves the device host context for the box being edited. */
+const getContext = (project: Project, box: Box): Context => {
         const deviceHost = project.boxAdapters.adapterFor(box, Devices.isHost)
         return asDefined(box.accept<BoxVisitor<Context>>({
             visitAudioUnitBox: (_box: AudioUnitBox): Context => ({
@@ -136,6 +140,9 @@ export const DevicePanel = ({lifecycle, service}: Construct) => {
         updateScroller()
     }))
 
+    /**
+     * Subscribes to changes in the device chain and manages editor mounts.
+     */
     const subscribeChain = ({midiEffects, instrument, audioEffects, host}: {
         midiEffects: IndexedBoxAdapterCollection<MidiEffectDeviceAdapter, Pointers.MidiEffectHost>,
         instrument: ObservableValue<Option<AudioUnitInputAdapter>>,

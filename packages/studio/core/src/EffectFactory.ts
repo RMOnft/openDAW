@@ -1,3 +1,8 @@
+/**
+ * Interface definition for effect factories used to construct effect boxes.
+ *
+ * @packageDocumentation
+ */
 import {EffectPointerType, IconSymbol} from "@opendaw/studio-adapters"
 import {Field} from "@opendaw/lib-box"
 import {int} from "@opendaw/lib-std"
