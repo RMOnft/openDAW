@@ -1,5 +1,6 @@
 /**
- * Interface definition for effect factories used to construct effect boxes.
+ * Interface describing factories that construct {@link EffectBox} instances
+ * and their associated metadata for menus and device lists.
  *
  * @packageDocumentation
  */
@@ -9,10 +10,6 @@ import {int} from "@opendaw/lib-std"
 import {Project} from "./Project"
 import {EffectBox} from "./EffectBox"
 
-/**
- * Describes a factory capable of constructing an {@link EffectBox} and its
- * associated metadata used in menus and lists.
- */
 export interface EffectFactory {
     /** Default human readable name. */
     get defaultName(): string
@@ -31,6 +28,7 @@ export interface EffectFactory {
      * @param project - Project context for creating boxes.
      * @param unit - Field referencing the host audio unit.
      * @param index - Insert index within the unit's effect chain.
+     * @returns The newly created effect box.
      */
     create(project: Project, unit: Field<EffectPointerType>, index: int): EffectBox
 }

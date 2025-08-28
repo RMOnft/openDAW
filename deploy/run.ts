@@ -5,6 +5,7 @@
  * channel via webhook when complete. The script is currently disabled and is
  * intended to be run manually by maintainers.
  *
+ * @packageDocumentation
  * Security note: credentials are read from environment variables and the
  * routine deletes remote files before uploading new ones. Double‑check the
  * target host and paths before executing.

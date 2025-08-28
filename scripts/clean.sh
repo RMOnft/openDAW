@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# @packageDocumentation
 # Remove build artifacts and dependencies across the monorepo.
 #
 # Usage:

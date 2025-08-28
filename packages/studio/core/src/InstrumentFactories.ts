@@ -1,9 +1,8 @@
 /**
- * Built-in instrument factory descriptors.
+ * Registry of built-in instrument factory descriptors used by the Studio.
  *
  * @packageDocumentation
  */
-
 import {
   AudioFileBox,
   NanoDeviceBox,
