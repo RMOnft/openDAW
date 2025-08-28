@@ -70,7 +70,9 @@ class PeaksWriter implements Peaks, Peaks.Stage {
 
 /**
  * Captures audio from its input and exposes recorded data along with peak
- * information.
+ * information. Recording is performed in the audio worklet thread while the
+ * class provides a loader style interface for retrieving the resulting
+ * {@link AudioData} and peak information.
  */
 export class RecordingWorklet extends AudioWorkletNode implements Terminable, SampleLoader {
     readonly uuid: UUID.Format = UUID.generate()
@@ -118,13 +120,22 @@ export class RecordingWorklet extends AudioWorkletNode implements Terminable, Sa
         })
     }
 
+    /** Total number of frames recorded so far. */
     get numberOfFrames(): int {return this.#output.length * RenderQuantum}
+    /** Recorded audio data once {@link finalize} has been called. */
     get data(): Option<AudioData> {return this.#data}
+    /** Peak information for the recorded data if available. */
     get peaks(): Option<Peaks> {return this.#peaks}
+    /** Loading state for consumers implementing {@link SampleLoader}. */
     get state(): SampleLoaderState {return this.#state}
 
+    /** Part of {@link SampleLoader}; no-op for recordings. */
     invalidate(): void {}
 
+    /**
+     * Observe loader state changes. Once loaded, the observer is invoked
+     * immediately and no subscription is kept.
+     */
     subscribe(observer: Observer<SampleLoaderState>): Subscription {
         if (this.#state.type === "loaded") {
             observer(this.#state)
@@ -162,6 +173,7 @@ export class RecordingWorklet extends AudioWorkletNode implements Terminable, Sa
         this.#setState({type: "loaded"})
     }
 
+    /** Stop recording and release any buffered data. */
     terminate(): void {
         this.#reader.stop()
         this.#isRecording = false

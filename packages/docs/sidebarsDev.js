@@ -60,6 +60,16 @@ module.exports = {
         "architecture/persistence",
         "architecture/opfs-samples",
         "architecture/sync-log",
+        {
+          type: "category",
+          label: "Capture",
+          items: [
+            "architecture/capture/overview",
+            "architecture/capture/audio",
+            "architecture/capture/midi",
+            "architecture/capture/worklet",
+          ],
+        },
       ],
     },
     {
