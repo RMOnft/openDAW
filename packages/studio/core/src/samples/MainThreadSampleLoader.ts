@@ -18,6 +18,13 @@ import {MainThreadSampleManager} from "./MainThreadSampleManager"
 import {WorkerAgents} from "../WorkerAgents"
 import {SampleStorage} from "./SampleStorage"
 
+/**
+ * Loads sample data on the main thread and caches it in {@link SampleStorage}.
+ *
+ * Acts as a thin wrapper around the asynchronous fetch and decode pipeline,
+ * exposing the current {@link SampleLoaderState} to observers. Instances are
+ * created and tracked by {@link MainThreadSampleManager}.
+ */
 export class MainThreadSampleLoader implements SampleLoader {
     readonly #manager: MainThreadSampleManager
 
@@ -30,6 +37,12 @@ export class MainThreadSampleLoader implements SampleLoader {
     #state: SampleLoaderState = {type: "progress", progress: 0.0}
     #version: int = 0
 
+    /**
+     * Create a new loader for the given sample.
+     *
+     * @param manager owning sample manager used for fetching data
+     * @param uuid identifier of the sample to load
+     */
     constructor(manager: MainThreadSampleManager, uuid: UUID.Format) {
         this.#manager = manager
         this.#uuid = uuid
@@ -38,6 +51,9 @@ export class MainThreadSampleLoader implements SampleLoader {
         this.#get()
     }
 
+    /**
+     * Drop any cached data and restart the loading process.
+     */
     invalidate(): void {
         this.#state = {type: "progress", progress: 0.0}
         this.#meta = Option.None
@@ -47,6 +63,11 @@ export class MainThreadSampleLoader implements SampleLoader {
         this.#get()
     }
 
+    /**
+     * Subscribe to state changes.
+     *
+     * @param observer callback receiving loader state updates
+     */
     subscribe(observer: Observer<SampleLoaderState>): Subscription {
         if (this.#state.type === "loaded") {
             observer(this.#state)
@@ -55,12 +76,23 @@ export class MainThreadSampleLoader implements SampleLoader {
         return this.#notifier.subscribe(observer)
     }
 
+    /** Identifier of the loaded sample. */
     get uuid(): UUID.Format {return this.#uuid}
+    /** Loaded audio data, if available. */
     get data(): Option<AudioData> {return this.#data}
+    /** Metadata describing the sample. */
     get meta(): Option<SampleMetaData> {return this.#meta}
+    /** Peak information used for waveform rendering. */
     get peaks(): Option<Peaks> {return this.#peaks}
+    /** Current state of the loader. */
     get state(): SampleLoaderState {return this.#state}
 
+    /**
+     * Append the sample files to a ZIP archive.
+     *
+     * If loading has not yet completed the promise resolves once data becomes
+     * available.
+     */
     async pipeFilesInto(zip: JSZip): Promise<void> {
         const exec: Exec = async () => {
             const path = `${SampleStorage.Folder}/${UUID.toString(this.#uuid)}`

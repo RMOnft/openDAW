@@ -34,7 +34,7 @@ import { RadioGroup } from "../components/RadioGroup";
 import { Icon } from "../components/Icon";
 import { SampleLocation } from "@/ui/browse/SampleLocation";
 import { HTMLSelection } from "@/ui/HTMLSelection";
-import { SampleService } from "@/ui/browse/SampleService";
+import { SampleService } from "@/service/SampleService";
 
 const className = Html.adoptStyleSheet(css, "Samples");
 
@@ -57,6 +57,9 @@ const location = new DefaultObservableValue(SampleLocation.Cloud);
  * {@link SampleLocation} to present a unified view of locally cached OPFS
  * samples and the remote library. Keyboard delete removes selected local
  * samples.
+ *
+ * @param lifecycle lifecycle controlling subscriptions
+ * @param service access to studio level services
  */
 export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own({ terminate: () => service.samplePlayback.eject() });

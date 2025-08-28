@@ -4,11 +4,19 @@ import {AudioData, Sample, SampleMetaData} from "@opendaw/studio-adapters"
 import {WorkerAgents} from "../WorkerAgents"
 import {encodeWavFloat} from "../Wav"
 
+/**
+ * Helpers for persisting samples in the browser's OPFS.
+ */
 export namespace SampleStorage {
+    /** Remove legacy storage from earlier versions. */
     export const clean = () => WorkerAgents.Opfs.delete("samples/v1").catch(EmptyExec)
 
+    /** Root folder within OPFS for stored samples. */
     export const Folder = "samples/v2"
 
+    /**
+     * Write decoded audio, peaks and metadata to OPFS.
+     */
     export const store = async (uuid: UUID.Format,
                                 audio: AudioData,
                                 peaks: ArrayBuffer,
@@ -25,11 +33,17 @@ export namespace SampleStorage {
         ]).then(EmptyExec)
     }
 
+    /**
+     * Overwrite only the metadata file of a stored sample.
+     */
     export const updateMeta = async (uuid: UUID.Format, meta: SampleMetaData): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
         return WorkerAgents.Opfs.write(`${path}/meta.json`, new TextEncoder().encode(JSON.stringify(meta)))
     }
 
+    /**
+     * Load a sample from OPFS and decode it into {@link AudioData} and peaks.
+     */
     export const load = async (uuid: UUID.Format, context: AudioContext): Promise<[AudioData, Peaks, SampleMetaData]> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
         return Promise.all([
@@ -47,11 +61,13 @@ export namespace SampleStorage {
         }, peaks, meta])
     }
 
+    /** Delete a sample and all related files. */
     export const remove = async (uuid: UUID.Format): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
         return WorkerAgents.Opfs.delete(`${path}`)
     }
 
+    /** List metadata for all stored samples. */
     export const list = async (): Promise<ReadonlyArray<Sample>> => {
         return WorkerAgents.Opfs.list(Folder)
             .then(files => Promise.all(files.filter(file => file.kind === "directory")

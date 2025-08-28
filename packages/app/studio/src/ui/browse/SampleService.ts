@@ -138,7 +138,11 @@ export class SampleService {
     }
   }
 
-  /** Read the sample metadata from the current selection. */
+  /**
+   * Collect metadata from all currently selected DOM elements.
+   *
+   * @returns parsed sample objects associated with the selection.
+   */
   #samples(): ReadonlyArray<Sample> {
     const selected = this.#selection.getSelected();
     return selected.map(
