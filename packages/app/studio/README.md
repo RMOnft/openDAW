@@ -33,6 +33,13 @@ Menu commands are built from a hierarchical `MenuItem` model. See the
 [menu overview](../../docs/docs-dev/ui/menu/overview.md) for how menus and
 keyboard shortcuts are wired into the Studio.
 
+Automation of parameters is covered in the
+[automation overview](../../docs/docs-dev/ui/automation/overview.md),
+including details on [curves](../../docs/docs-dev/ui/automation/curves.md)
+and [examples](../../docs/docs-dev/ui/automation/examples.md). The
+feature is explained for users in the
+[automation guide](../../docs/docs-user/features/automation.md).
+
 For individual topics, browse the in-app [manuals](public/manuals/index.md).
 
 ## Component Hierarchy

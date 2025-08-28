@@ -1,3 +1,4 @@
+/** @file Adapter exposing primitive fields as automatable parameters. */
 import {
   assert,
   clamp,
@@ -32,6 +33,7 @@ import { BoxVisitor, TrackBox } from "@opendaw/studio-boxes";
 import { TrackBoxAdapter } from "./timeline/TrackBoxAdapter";
 import { BoxAdaptersContext } from "./BoxAdaptersContext";
 
+/** Pointers that indicate external control relationships. */
 const ExternalControlTypes = [
   Pointers.Automation,
   Pointers.Modulation,
@@ -314,7 +316,7 @@ export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any>
   }
 
   /**
-   * Resets the field to its initial value.
+   * Resets the underlying field to its initial value.
    *
    * @example
    * ```ts
@@ -332,6 +334,8 @@ export class AutomatableParameterFieldAdapter<T extends PrimitiveValues = any>
   }
 }
 
+/** Maps pointer types to their corresponding control source identifiers. */
+/** Maps pointer types to their corresponding control source identifiers. */
 const mapPointerToControlSource = (pointer: PointerTypes): ControlSource => {
   switch (pointer) {
     case Pointers.Automation:
