@@ -4,7 +4,11 @@ import {PPQN, ppqn} from "./ppqn"
 /** Tuple representing a musical fraction `n/d`. */
 export type Fraction = Readonly<[int, int]>
 
-/** Helpers for working with musical fractions. */
+/**
+ * Helpers for working with musical fractions.
+ *
+ * @public
+ */
 export namespace Fraction {
     /** Creates a builder for accumulating fractions. */
     export const builder = () => new Builder()
