@@ -1,3 +1,6 @@
+/**
+ * Observable primitives and helpers.
+ */
 import {Subscription, Terminable} from "./terminable"
 import {Notifier} from "./notifier"
 import {Option} from "./option"
@@ -20,6 +23,12 @@ export interface ObservableValue<T> extends Observable<ObservableValue<T>> {
 }
 
 export namespace ObservableValue {
+    /**
+     * Creates an immutable observable that always exposes the given value.
+     *
+     * @param value - The value to wrap.
+     * @returns Observable that never changes.
+     */
     export const make = <T>(value: T): ObservableValue<T> => new class implements ObservableValue<T> {
         getValue(): T {return value}
         subscribe(_observer: Observer<ObservableValue<T>>): Subscription {return Terminable.Empty}
@@ -52,6 +61,9 @@ export namespace MutableObservableValue {
     /**
      * Creates a view on the given boolean observable that presents and
      * writes the negated value.
+     *
+     * @param observableValue - Source observable boolean.
+     * @returns Observable reflecting the inverted state.
      */
     export const inverseBoolean = (observableValue: MutableObservableValue<boolean>): MutableObservableValue<boolean> =>
         new class implements MutableObservableValue<boolean> {
