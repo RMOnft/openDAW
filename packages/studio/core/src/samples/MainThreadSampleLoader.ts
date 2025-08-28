@@ -53,6 +53,8 @@ export class MainThreadSampleLoader implements SampleLoader {
 
     /**
      * Drop any cached data and restart the loading process.
+     *
+     * @returns void
      */
     invalidate(): void {
         this.#state = {type: "progress", progress: 0.0}
@@ -67,6 +69,7 @@ export class MainThreadSampleLoader implements SampleLoader {
      * Subscribe to state changes.
      *
      * @param observer callback receiving loader state updates
+     * @returns subscription handle that can be terminated
      */
     subscribe(observer: Observer<SampleLoaderState>): Subscription {
         if (this.#state.type === "loaded") {
@@ -92,6 +95,9 @@ export class MainThreadSampleLoader implements SampleLoader {
      *
      * If loading has not yet completed the promise resolves once data becomes
      * available.
+     *
+     * @param zip archive instance to receive the files
+     * @returns resolves once the files have been added
      */
     async pipeFilesInto(zip: JSZip): Promise<void> {
         const exec: Exec = async () => {
