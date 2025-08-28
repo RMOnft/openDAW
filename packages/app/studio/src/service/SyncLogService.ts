@@ -82,6 +82,7 @@ export namespace SyncLogService {
      *
      * @param handle - Destination file handle.
      * @param callback - Invoked after each commit has been queued.
+     * @returns Observer function passed to {@link SyncLogWriter.attach}.
      */
     const wrapBlockWriter = (handle: FileSystemFileHandle, callback: Exec) => {
         let blocks: Array<Commit> = []
@@ -101,7 +102,12 @@ export namespace SyncLogService {
         }
     }
 
-    /** Concatenates array buffers into a single buffer. */
+    /**
+     * Concatenates multiple {@link ArrayBuffer} instances into one.
+     *
+     * @param buffers - Buffers in the order they should appear.
+     * @returns Combined buffer containing all input data.
+     */
     const appendArrayBuffers = (buffers: ReadonlyArray<ArrayBuffer>): ArrayBuffer => {
         const totalLength = buffers.reduce((sum, buffer) => sum + buffer.byteLength, 0)
         const result = new Uint8Array(totalLength)

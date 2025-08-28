@@ -5,7 +5,17 @@ import {Project} from "../Project"
 import {Commit, CommitType} from "./Commit"
 import {ProjectEnv} from "../ProjectEnv"
 
+/**
+ * Reconstructs a project from a serialized sync log.
+ */
 export class SyncLogReader {
+    /**
+     * Rehydrate a project and final commit from the given log buffer.
+     *
+     * @param env - Project environment required to instantiate boxes.
+     * @param buffer - Concatenated sync log data.
+     * @returns The loaded project, the last commit and number of commits read.
+     */
     static async unwrap(env: ProjectEnv, buffer: ArrayBuffer): Promise<{
         project: Project,
         lastCommit: Commit,

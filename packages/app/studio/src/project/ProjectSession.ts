@@ -29,6 +29,16 @@ export class ProjectSession {
     #saved: boolean
     #hasChanges: boolean = false
 
+    /**
+     * Create a new session wrapper.
+     *
+     * @param service - Owning studio service.
+     * @param uuid - Unique project identifier.
+     * @param project - Loaded project instance.
+     * @param meta - Associated metadata.
+     * @param cover - Optional cover image bytes.
+     * @param hasBeenSaved - Flag indicating persistence on disk.
+     */
     constructor(service: StudioService,
                 uuid: UUID.Format,
                 project: Project,
@@ -45,9 +55,13 @@ export class ProjectSession {
         this.#metaUpdated = new Notifier<ProjectMeta>()
     }
 
+    /** Unique identifier of the project on disk. */
     get uuid(): UUID.Format {return this.#uuid}
+    /** Active project instance. */
     get project(): Project {return this.#project}
+    /** Mutable project metadata. */
     get meta(): ProjectMeta {return this.#meta}
+    /** Optional cover image for display in browsers. */
     get cover(): Option<ArrayBuffer> {return this.#cover}
 
     /**

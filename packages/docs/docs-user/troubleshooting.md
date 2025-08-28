@@ -68,3 +68,8 @@
 
 - Update the browser to the latest version or try a different one.
 - If the message persists, report it to support with your browser details.
+
+### How do I review past changes?
+
+- Consult the [project history guide](workflows/history.md) for working with
+  SyncLog files.

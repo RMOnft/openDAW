@@ -59,6 +59,7 @@ module.exports = {
         "architecture/headless-vs-studio",
         "architecture/persistence",
         "architecture/opfs-samples",
+        "architecture/sync-log",
       ],
     },
     {

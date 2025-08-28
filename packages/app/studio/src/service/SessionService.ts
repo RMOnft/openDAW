@@ -213,6 +213,9 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
 
     /**
      * Start a new session using an existing project instance.
+     *
+     * @param project - Project to wrap in a session.
+     * @param name - Display name used for metadata.
      */
     fromProject(project: Project, name: string): void {
         this.#setSession(this.#service, UUID.generate(), project, ProjectMeta.init(name), Option.None)

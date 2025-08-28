@@ -3,7 +3,17 @@ import {BoxGraph, Update} from "@opendaw/lib-box"
 import {Project} from "../Project"
 import {Commit} from "./Commit"
 
+/**
+ * Observes project changes and emits sync log commits.
+ */
 export class SyncLogWriter implements Terminable {
+    /**
+     * Attach a writer to the given project and emit an initial commit.
+     *
+     * @param project - Project to observe.
+     * @param observer - Callback receiving new commits.
+     * @param lastCommit - Optional last commit when appending to an existing log.
+     */
     static attach(project: Project, observer: Observer<Commit>, lastCommit?: Commit): SyncLogWriter {
         console.debug("SyncLogWriter.attach", project.rootBox.created.getValue(), isDefined(lastCommit) ? "append" : "new")
         return project.own(new SyncLogWriter(project, observer, lastCommit))
@@ -26,11 +36,13 @@ export class SyncLogWriter implements Terminable {
         this.#subscription = this.#listen(project.boxGraph)
     }
 
+    /** Stop observing the project. */
     terminate(): void {
         console.debug("SyncLogWriter.terminate")
         this.#subscription.terminate()
     }
 
+    /** Queue a commit factory to run after the previous commit has been written. */
     #appendCommit(factory: Func<Commit, Promise<Commit>>): Promise<Commit> {
         return this.#lastPromise = this.#lastPromise.then(async (previous) => {
             const commit = await factory(previous)
@@ -39,6 +51,7 @@ export class SyncLogWriter implements Terminable {
         })
     }
 
+    /** Listen to box graph transactions and create update commits. */
     #listen(boxGraph: BoxGraph): Subscription {
         let updates: Array<Update> = []
         return boxGraph.subscribeTransaction({
