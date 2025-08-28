@@ -132,6 +132,7 @@ module.exports = {
         { type: "doc", id: "extending/plugin-guide" },
         { type: "doc", id: "extending/plugin-api" },
         { type: "doc", id: "extending/plugin-examples" },
+        { type: "doc", id: "extending/plugin-host" },
         { type: "doc", id: "extending/device-boxes" },
         { type: "doc", id: "extending/testing-plugins" },
         { type: "doc", id: "extending/processor-guide" },
@@ -212,7 +213,11 @@ module.exports = {
             "ui/metering/rms-vs-peak",
           ],
         },
-        "ui/mixer",
+        {
+          type: "category",
+          label: "Mixer",
+          items: ["ui/mixer", "ui/mixer/routing"],
+        },
         {
           type: "category",
           label: "Modular",

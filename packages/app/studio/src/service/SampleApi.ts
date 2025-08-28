@@ -49,6 +49,8 @@ export namespace SampleApi {
 
   /**
    * Fetch metadata for all available samples.
+   *
+   * @returns array of sample metadata entries
    */
   export const all = async (): Promise<ReadonlyArray<Sample>> => {
     return await Promises.retry(() =>
@@ -63,6 +65,7 @@ export namespace SampleApi {
    * Retrieve metadata for a single sample.
    *
    * @param uuid identifier of the sample to fetch.
+   * @returns metadata for the requested sample
    */
   export const get = async (uuid: UUID.Format): Promise<Sample> => {
     const url = `${ApiRoot}/get.php?uuid=${UUID.toString(uuid)}`;
@@ -86,6 +89,7 @@ export namespace SampleApi {
    * @param context audio context used for decoding.
    * @param uuid sample identifier.
    * @param progress callback receiving loading progress between 0 and 1.
+   * @returns decoded audio data and metadata
    */
   export const load = async (
     context: AudioContext,
@@ -150,6 +154,7 @@ export namespace SampleApi {
    *
    * @param arrayBuffer raw WAV data.
    * @param metaData description of the sample to accompany the upload.
+   * @returns void
    */
   export const upload = async (
     arrayBuffer: ArrayBuffer,

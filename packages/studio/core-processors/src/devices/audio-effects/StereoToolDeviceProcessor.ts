@@ -163,3 +163,13 @@ export class StereoToolDeviceProcessor
     return `{${this.constructor.name}}`;
   }
 }
+
+/** Parameter table for {@link StereoToolDeviceProcessor}. */
+export const StereoToolDeviceProcessorParamTable = [
+  { param: "volume", type: "number", description: "Output gain in decibels." },
+  { param: "panning", type: "number", description: "Balance between left and right." },
+  { param: "stereo", type: "number", description: "Stereo width amount." },
+  { param: "invertL", type: "boolean", description: "Invert left channel polarity." },
+  { param: "invertR", type: "boolean", description: "Invert right channel polarity." },
+  { param: "swap", type: "boolean", description: "Swap left and right channels." },
+] as const;

@@ -39,6 +39,10 @@ import {PPQN} from "@opendaw/lib-dsp";
 
 // Seconds per bar at 128 BPM
 const barSeconds = PPQN.pulsesToSeconds(PPQN.Bar, 128);
+ 
+// Estimate tempo of an audio buffer
+import {BPMTools} from "@opendaw/lib-dsp";
+const bpm = BPMTools.detect(buffer, sampleRate);
 ```
 
 ## Example Integration

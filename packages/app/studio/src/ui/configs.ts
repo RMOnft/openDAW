@@ -1,4 +1,10 @@
-
+/**
+ * Preset configurations for UI snapping behaviour used throughout the
+ * Studio interface.
+ *
+ * Security note: values defined here are static constants and carry no
+ * executable code.
+ */
 import { ValueMapping } from "@opendaw/lib-std";
 
 /**

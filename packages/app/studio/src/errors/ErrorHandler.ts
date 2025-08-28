@@ -16,9 +16,11 @@ import { showErrorDialog, showInfoDialog } from "@/ui/components/dialogs.tsx";
  * facing dialog.
  */
 export class ErrorHandler {
+  /** Collects listeners that need to be disposed when the handler stops. */
   readonly terminator = new Terminator();
   readonly #service: StudioService;
 
+  /** Guard to avoid infinite error loops once an error has been processed. */
   #errorThrown: boolean = false;
 
   constructor(service: StudioService) {
@@ -87,6 +89,7 @@ export class ErrorHandler {
    *
    * @param owner - Window or worker to attach listeners to.
    * @param scope - Descriptive name of the owner for reporting.
+   * @returns Terminable that removes the listeners.
    */
   install(
     owner: WindowProxy | Worker | AudioWorkletNode,

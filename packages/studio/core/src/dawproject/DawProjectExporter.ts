@@ -55,12 +55,21 @@ import {DeviceIO} from "./DeviceIO"
  * Serializes the Studio project graph into the DAWproject XML schema.
  */
 export namespace DawProjectExporter {
-    /** Callback used to store binary resources such as samples or presets. */
+    /** Callback used to store binary resources such as samples or presets.
+     *
+     * @param path - Target path for the resource inside the archive.
+     * @param buffer - Binary data representing the resource.
+     * @returns A file reference pointing to the stored resource.
+     */
     export interface ResourcePacker {write(path: string, buffer: ArrayBufferLike): FileReferenceSchema}
 
     /**
      * Convert the given {@link Project} into a {@link ProjectSchema} and emit
      * resources via the provided {@link ResourcePacker}.
+     *
+     * @param project - Project graph to export.
+     * @param resourcePacker - Handler invoked for each binary resource.
+     * @returns The serialized project schema ready for zipping.
      */
     export const write = (project: Project, resourcePacker: ResourcePacker) => {
         const ids = new AddressIdEncoder()
@@ -80,6 +89,7 @@ export namespace DawProjectExporter {
                     })))
         }))
 
+        /** Serialize the current tempo and time signature. */
         const writeTransport = (): TransportSchema => Xml.element({
             tempo: Xml.element({
                 id: ids.getOrCreate(timelineBox.bpm.address),
@@ -92,6 +102,12 @@ export namespace DawProjectExporter {
             }, TimeSignatureParameterSchema)
         }, TransportSchema)
 
+        /**
+         * Serialize devices connected to the given field.
+         *
+         * @param field - Pointer field hosting the devices.
+         * @param deviceRole - Role assigned to the device in the channel.
+         */
         const writeDevices = (field: Field, deviceRole: string): ReadonlyArray<DeviceSchema> => field.pointerHub
             .incoming().map(({box}) => {
                 const enabled: Nullish<BooleanParameterSchema> = ("enabled" in box && isInstanceOf(box.enabled, BooleanField)
@@ -117,6 +133,7 @@ export namespace DawProjectExporter {
                 }, BuiltinDeviceSchema)
             })
 
+        /** Resolve a representative color for an audio unit type. */
         const colorForAudioType = (unitType: AudioUnitType): string => {
             const cssColor = ColorCodes.forAudioType(unitType)
             if (cssColor === "") {return "red"}
@@ -191,6 +208,7 @@ export namespace DawProjectExporter {
             return writeTracks(tracks)
         }
 
+        /** Serialize an {@link AudioRegionBox} into a {@link ClipsSchema}. */
         const writeAudioRegion = (region: AudioRegionBox): ClipsSchema => {
             const audioFileBox = asInstanceOf(region.file.targetVertex.unwrap("No file at region").box, AudioFileBox)
             const audioElement = sampleManager.getOrCreate(audioFileBox.address.uuid).data
@@ -234,6 +252,7 @@ export namespace DawProjectExporter {
             }, ClipsSchema)
         }
 
+        /** Serialize a {@link NoteRegionBox} into a {@link ClipsSchema}. */
         const writeNoteRegion = (region: NoteRegionBox): ClipsSchema => {
             const collectionBox = asInstanceOf(region.events.targetVertex
                 .unwrap("No notes in region").box, NoteEventCollectionBox)
@@ -264,7 +283,11 @@ export namespace DawProjectExporter {
             }, ClipsSchema)
         }
 
-        // TODO Implement!
+        /**
+         * TODO Implement value region serialization.
+         *
+         * @param region - Region to serialize.
+         */
         const writeValueRegion = (region: ValueRegionBox): ClipsSchema =>
             Xml.element({
                 clips: [Xml.element({
@@ -281,6 +304,7 @@ export namespace DawProjectExporter {
                 }, ClipSchema)]
             }, ClipsSchema)
 
+        /** Serialize all track lanes for the current project. */
         const writeLanes = (): ReadonlyArray<TimelineSchema> => {
             return audioUnits
                 .flatMap(audioUnitBox => audioUnitBox.tracks.pointerHub.incoming()

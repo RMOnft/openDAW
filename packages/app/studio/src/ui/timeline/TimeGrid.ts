@@ -1,12 +1,16 @@
 /**
- * Helpers for walking the musical grid of the timeline.  Provides iteration
+ * Helpers for walking the musical grid of the timeline. Provides iteration
  * utilities that call back for each bar, beat or subdivision within a range.
  */
 import {PPQN} from "@opendaw/lib-dsp"
 import {int, quantizeFloor} from "@opendaw/lib-std"
 import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 
-/** Utilities for iterating over timeline grid divisions. */
+/**
+ * Utilities for iterating over timeline grid divisions.
+ *
+ * @public
+ */
 export namespace TimeGrid {
     /**
      * Time signature expressed as `[nominator, denominator]`.
@@ -22,6 +26,11 @@ export namespace TimeGrid {
     /**
      * Iterates over grid fragments within the given range and calls `designer`
      * for each division.
+     *
+     * @param param0 - Time signature `[nominator, denominator]`.
+     * @param range - Visible timeline range to iterate over.
+     * @param designer - Callback receiving details about each fragment.
+     * @param options - Optional minimum pixel length of a fragment.
      */
     export const fragment = ([nominator, denominator]: Signature,
                              range: TimelineRange, designer: Designer, options?: Options): void => {

@@ -1,11 +1,15 @@
 /**
  * Time span calculation utilities.
+ *
+ * @public
  */
 import { int, Unhandled } from "./lang";
 
 /**
  * Represents a span of time with millisecond precision and provides
  * convenient factory methods and conversions.
+ *
+ * @public
  */
 export class TimeSpan {
   /** Time span representing positive infinity. */

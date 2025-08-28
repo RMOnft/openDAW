@@ -11,11 +11,18 @@ import {semitoneToHz} from "@opendaw/lib-dsp"
 export namespace BuiltinDevices {
     /**
      * Create a Revamp equalizer device from a DAWproject {@link EqualizerSchema}.
+     *
+     * @param boxGraph - Graph used to create the device and its bands.
+     * @param equalizer - Source schema describing the equalizer configuration.
+     * @param field - Host field the device will be inserted into.
+     * @param index - Position of the device within the host.
+     * @returns The constructed {@link RevampDeviceBox}.
      */
     export const equalizer = (boxGraph: BoxGraph,
                               equalizer: EqualizerSchema,
                               field: Field<Pointers.MidiEffectHost> | Field<Pointers.AudioEffectHost>,
                               index: int): RevampDeviceBox => {
+        /** Map DAWproject filter order to Revamp's order index. */
         const mapOrder = (order?: int) => {
             switch (order) {
                 case 1:
@@ -31,6 +38,7 @@ export namespace BuiltinDevices {
                     return 3
             }
         }
+        /** Populate a pass band from the DAWproject schema. */
         const readPass = (schema: BandSchema, pass: RevampPass) => {
             const {order, frequency, q, enabled} = pass
             order.setValue(mapOrder(schema.order))
@@ -38,6 +46,7 @@ export namespace BuiltinDevices {
             ifDefined(schema.Q?.value, value => q.setValue(value))
             ifDefined(schema.enabled?.value, value => enabled.setValue(value))
         }
+        /** Populate a shelf band from the DAWproject schema. */
         const readShelf = (schema: BandSchema, pass: RevampShelf) => {
             const {frequency, gain, enabled} = pass
             frequency.setValue(ParameterDecoder.readValue(schema.freq))

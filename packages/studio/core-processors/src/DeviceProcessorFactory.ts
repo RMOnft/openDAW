@@ -1,3 +1,10 @@
+/**
+ * Factories that construct processor instances for the various device
+ * categories used by the engine.
+ *
+ * @packageDocumentation
+ */
+
 import {
   ArpeggioDeviceBox,
   AudioBusBox,
@@ -66,6 +73,13 @@ import { UnknownMidiEffectDeviceProcessor } from "./devices/midi-effects/Unknown
  * {@link @opendaw/studio-enums#AudioUnitType.Instrument | AudioUnitType.Instrument}.
  */
 export namespace InstrumentDeviceProcessorFactory {
+  /**
+   * Creates an instrument processor for the provided device box.
+   *
+   * @param context - Engine context used to resolve adapters.
+   * @param box - Box describing the instrument device.
+   * @returns Processor instance or `undefined` when the box is not supported.
+   */
   export const create = (
     context: EngineContext,
     box: Box,
@@ -110,6 +124,13 @@ export namespace InstrumentDeviceProcessorFactory {
  * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}.
  */
 export namespace MidiEffectDeviceProcessorFactory {
+  /**
+   * Instantiates a MIDI effect processor for the given box.
+   *
+   * @param context - Engine context used to resolve adapters.
+   * @param box - Box describing the MIDI effect device.
+   * @returns The created processor.
+   */
   export const create = (
     context: EngineContext,
     box: Box,
@@ -157,6 +178,13 @@ export namespace MidiEffectDeviceProcessorFactory {
  * ```
  */
 export namespace AudioEffectDeviceProcessorFactory {
+  /**
+   * Creates an audio effect processor for the specified device box.
+   *
+   * @param context - Engine context used to resolve adapters.
+   * @param box - Box describing the audio effect.
+   * @returns The created processor.
+   */
   export const create = (
     context: EngineContext,
     box: Box,

@@ -21,6 +21,9 @@ OpenDAW loads plugins built with the project's SDK or other compatible Web Audio
 - Traditional desktop formats like VST or Audio Unit may require additional support and are not guaranteed to work.
 - Different plugins may expose unique parameters; test them in your environment to confirm full compatibility.
 
+Developer-focused API references are generated from the SDK's TSDoc comments. To learn how plugins are packaged and shared,
+see the [plugin distribution guide](../../docs-dev/extending/plugin-distribution.md).
+
 Interested in building your own plugins? Check out the [plugin guide](../../docs-dev/extending/plugin-guide.md) and the [device boxes guide](../../docs-dev/extending/device-boxes.md) in the developer documentation.
 
 For how device controls are connected to automation, see the [parameter adapter guide](../../docs-dev/extending/parameter-adapters.md).

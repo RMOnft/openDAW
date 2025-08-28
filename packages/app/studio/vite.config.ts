@@ -37,6 +37,8 @@ export default defineConfig(({ command }) => {
       minify: true,
       sourcemap: true,
       rollupOptions: {
+        // Code splitting and chunk naming strategy are documented in
+        // packages/docs/docs-dev/build-and-run/code-splitting.md
         output: {
           format: "es",
           entryFileNames: `[name].${uuid}.js`,

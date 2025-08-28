@@ -8,7 +8,10 @@ import { EffectFactories, InstrumentFactories } from "@opendaw/studio-core";
  */
 
 /** Hint to drop targets that a drag operation should be copied instead of moved. */
-export type DragCopyHint = { copy?: boolean };
+export type DragCopyHint = {
+  /** When `true`, receivers should duplicate rather than move the item. */
+  copy?: boolean;
+};
 
 /** Dragged sample originating from the browser's file system or library. */
 export type DragSample = { type: "sample"; sample: Sample } & DragCopyHint;

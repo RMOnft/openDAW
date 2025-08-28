@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+/**
+ * @packageDocumentation
+ * Utility helpers for encoding and decoding parameter schemas used in DAWproject.
+ */
 import { BooleanParameterSchema, RealParameterSchema, Unit } from "./defaults";
 import { Xml } from "@opendaw/lib-xml";
 import { asDefined } from "@opendaw/lib-std";
@@ -14,7 +18,10 @@ export namespace ParameterEncoder {
   /**
    * Encodes a boolean parameter.
    *
-   * @see {@link BooleanParameterSchema}
+   * @param id - Unique parameter identifier.
+   * @param value - Boolean value to store.
+   * @param name - Optional display name.
+   * @returns Serialized {@link BooleanParameterSchema} instance.
    */
   export const bool = (id: string, value: boolean, name?: string) =>
     Xml.element(
@@ -29,7 +36,12 @@ export namespace ParameterEncoder {
   /**
    * Encodes a linear numeric parameter.
    *
-   * @see {@link RealParameterSchema}
+   * @param id - Unique parameter identifier.
+   * @param value - Linear value to encode.
+   * @param min - Optional minimum value.
+   * @param max - Optional maximum value.
+   * @param name - Optional display name.
+   * @returns Serialized {@link RealParameterSchema} instance.
    */
   export const linear = (
     id: string,
@@ -53,7 +65,12 @@ export namespace ParameterEncoder {
   /**
    * Encodes a normalized numeric parameter.
    *
-   * @see {@link RealParameterSchema}
+   * @param id - Unique parameter identifier.
+   * @param value - Normalized value within the range `[min,max]`.
+   * @param min - Minimum value of the normalized range.
+   * @param max - Maximum value of the normalized range.
+   * @param name - Optional display name.
+   * @returns Serialized {@link RealParameterSchema} instance.
    */
   export const normalized = (
     id: string,
@@ -83,6 +100,9 @@ export namespace ParameterEncoder {
 export namespace ParameterDecoder {
   /**
    * Resolves the numeric value from a {@link RealParameterSchema}.
+   *
+   * @param schema - Parameter schema to interpret.
+   * @returns Linearized numeric value.
    *
    * @remarks
    * Normalized and semitone based parameters are converted to linear values.

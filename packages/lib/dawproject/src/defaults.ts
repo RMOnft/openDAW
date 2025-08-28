@@ -1,4 +1,5 @@
 /**
+ * @packageDocumentation
  * Core schema definitions for the DAWproject XML format.
  *
  * @remarks

@@ -3,6 +3,8 @@
 /**
  * Install required system dependencies for developing openDAW.
  *
+ * @packageDocumentation
+ *
  * Usage:
  *   npm run install:deps
  *

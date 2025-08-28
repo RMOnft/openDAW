@@ -10,7 +10,10 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "SnapSelector")
 
-/** Parameters for constructing {@link SnapSelector}. */
+/** Parameters for constructing {@link SnapSelector}.
+ *
+ * @public
+ */
 export type Construct = {
     /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle
@@ -20,6 +23,9 @@ export type Construct = {
 
 /**
  * Dropdown for selecting timeline snap resolution.
+ *
+ * @param lifecycle - Lifecycle managing subscriptions.
+ * @param snapping - Snap settings that provide available options.
  *
  * @example
  * ```tsx

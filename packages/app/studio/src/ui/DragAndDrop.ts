@@ -16,11 +16,23 @@ import { Events, Keyboard } from "@opendaw/lib-dom";
 export namespace DragAndDrop {
   let dragging: Option<AnyDragData> = Option.None;
 
+  /**
+   * Tests whether the drag event carries native file data.
+   *
+   * @param event Drag event to inspect.
+   * @returns `true` when the payload contains file information.
+   */
   const hasFiles = (event: DragEvent): boolean => {
     const type = event.dataTransfer?.types?.at(0);
     return type === "Files" || type === "application/x-moz-file";
   };
 
+  /**
+   * Extracts `File` objects from a drag event when available.
+   *
+   * @param event Drag event to inspect.
+   * @returns Array of files or an empty array.
+   */
   const extractFiles = (event: DragEvent): ReadonlyArray<File> => {
     const dataTransfer = event.dataTransfer;
     if (!isDefined(dataTransfer)) {
@@ -67,9 +79,20 @@ export namespace DragAndDrop {
 
   /** Callbacks describing the drop target behaviour. */
   export interface Process {
-    /** Called during dragover/dragenter to determine whether dropping is allowed. */
+    /**
+     * Called during `dragover`/`dragenter` to determine whether dropping is allowed.
+     *
+     * @param event Native drag event.
+     * @param dragData Data supplied by the drag source.
+     * @returns `true` when a drop should be permitted.
+     */
     drag(event: DragEvent, dragData: AnyDragData): boolean;
-    /** Called when a drop happens and `drag` returned true. */
+    /**
+     * Called when a drop happens and `drag` returned true.
+     *
+     * @param event Native drag event.
+     * @param dragData Data supplied by the drag source.
+     */
     drop(event: DragEvent, dragData: AnyDragData): void;
     /** Invoked when the first dragged item enters the target. */
     enter(allowDrop: boolean): void;

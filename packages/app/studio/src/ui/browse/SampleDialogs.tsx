@@ -25,8 +25,8 @@ export namespace SampleDialogs {
   /**
    * Open the browser's file picker for selecting sample files.
    *
-   * @param multiple Allow selection of multiple files.
-   * @returns Result of the picker invocation.
+   * @param multiple allow selection of multiple files
+   * @returns promise resolving with the picker result
    */
   export const nativeFileBrowser = async (multiple: boolean = true) =>
     Promises.tryCatch(
