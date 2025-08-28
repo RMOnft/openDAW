@@ -14,6 +14,7 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "AuxSend")
 
+/** Constructor options for {@link AuxSend}. */
 type Construct = {
     lifecycle: Lifecycle
     editing: Editing

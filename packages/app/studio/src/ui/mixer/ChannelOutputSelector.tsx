@@ -12,6 +12,7 @@ import {Colors, Project} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "OutputSelector")
 
+/** Props for {@link ChannelOutputSelector}. */
 type Construct = {
     lifecycle: Lifecycle
     project: Project
