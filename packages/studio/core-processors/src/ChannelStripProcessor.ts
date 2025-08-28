@@ -77,6 +77,11 @@ export class ChannelStripProcessor extends AudioProcessor implements Processor, 
     /** Buffer receiving the processed signal. */
     get audioOutput(): AudioBuffer {return this.#audioOutput}
 
+    /**
+     * Handles events dispatched to this processor.
+     *
+     * Currently channel strips do not react to events, so the method is a no-op.
+     */
     handleEvent(_event: Event): void {}
 
     /**

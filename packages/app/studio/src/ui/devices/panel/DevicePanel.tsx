@@ -37,11 +37,13 @@ import {Project} from "@opendaw/studio-core"
 const className = Html.adoptStyleSheet(css, "DevicePanel")
 
 /** Options used to construct a {@link DevicePanel}. */
+/** Props for {@link DevicePanel}. */
 type Construct = {
     lifecycle: Lifecycle
     service: StudioService
 }
 
+/** Context information for the currently edited device chain. */
 type Context = { deviceHost: DeviceHost, instrument: ObservableValue<Option<AudioUnitInputAdapter>> }
 
 /**

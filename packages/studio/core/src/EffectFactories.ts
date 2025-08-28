@@ -197,7 +197,6 @@ export namespace EffectFactories {
             })
         }
     }
-
     /** Mapping of available MIDI effect factories by name. */
     export const MidiNamed = {Arpeggio, Pitch, Zeitgeist}
     /** Mapping of available audio effect factories by name. */

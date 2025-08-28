@@ -8,11 +8,17 @@ declare let document: any
  * {@link @opendaw/studio-core-processors#RecordingProcessor | RecordingProcessor}.
  */
 export namespace RingBuffer {
-    /** Configuration for a ring buffer. */
+    /**
+     * Parameters describing the shared ring buffer layout.
+     */
     export interface Config {
+        /** Shared memory backing the ring buffer. */
         sab: SharedArrayBuffer
+        /** Maximum number of chunks stored at any time. */
         numChunks: int
+        /** Number of audio channels per chunk. */
         numberOfChannels: int
+        /** Number of samples in each channel of a chunk. */
         bufferSize: int
     }
 
@@ -24,6 +30,10 @@ export namespace RingBuffer {
 
     /**
      * Creates a reader that appends each chunk to the provided callback.
+     *
+     * @param config - Shared buffer configuration.
+     * @param append - Callback receiving decoded channel data for each chunk.
+     * @returns Reader that can be stopped to cease iteration.
      */
     export const reader = ({
                                sab,
@@ -71,6 +81,9 @@ export namespace RingBuffer {
 
     /**
      * Creates a writer for the given configuration.
+     *
+     * @param config - Layout of the underlying shared buffer.
+     * @returns Object exposing a {@link Writer.write | write} method.
      */
     export const writer = ({sab, numChunks, numberOfChannels, bufferSize}: Config): Writer => {
         const pointers = new Int32Array(sab, 0, 2)
@@ -97,10 +110,17 @@ export namespace RingBuffer {
 }
 /**
  * Flattens an array of planar chunks into contiguous channel buffers.
+ *
+ * @param chunks - Recorded audio split into sequential chunks.
+ * @param bufferSize - Number of frames in each chunk.
+ * @param maxFrames - Optional cap for the total number of frames copied.
+ * @returns Array of channels with concatenated audio data.
  */
-export const mergeChunkPlanes = (chunks: ReadonlyArray<ReadonlyArray<Float32Array>>,
-                                 bufferSize: int,
-                                 maxFrames: int = Number.MAX_SAFE_INTEGER): ReadonlyArray<Float32Array> => {
+export const mergeChunkPlanes = (
+    chunks: ReadonlyArray<ReadonlyArray<Float32Array>>,
+    bufferSize: int,
+    maxFrames: int = Number.MAX_SAFE_INTEGER,
+): ReadonlyArray<Float32Array> => {
     if (chunks.length === 0) {return Arrays.empty()}
     const numChannels = chunks[0].length
     const numFrames = Math.min(bufferSize * chunks.length, maxFrames)

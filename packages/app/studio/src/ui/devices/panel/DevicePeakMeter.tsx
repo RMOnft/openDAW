@@ -15,14 +15,22 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "DevicePeakMeter")
 
+/** Props for {@link DevicePeakMeter}. */
 type Construct = {
+    /** Lifecycle owner for subscriptions. */
     lifecycle: Lifecycle
+    /** Source providing live peak levels. */
     receiver: LiveStreamReceiver
+    /** Bus or channel address to observe. */
     address: Address
 }
 
 /**
  * Compact peak meter used inside the device panel to visualize output levels.
+ *
+ * @param lifecycle manages subscriptions and cleanup
+ * @param receiver provides the live peak values
+ * @param address bus or channel to monitor
  */
 export const DevicePeakMeter = ({lifecycle, receiver, address}: Construct) => {
     const element: HTMLDivElement = (<div className={className}/>)
@@ -82,3 +90,10 @@ export const DevicePeakMeter = ({lifecycle, receiver, address}: Construct) => {
     }))
     return element
 }
+
+/** Property table for {@link DevicePeakMeter}. */
+export const DevicePeakMeterPropTable = [
+    {prop: "lifecycle", type: "Lifecycle", description: "Owner used to dispose subscriptions."},
+    {prop: "receiver", type: "LiveStreamReceiver", description: "Stream supplying peak levels."},
+    {prop: "address", type: "Address", description: "Bus or channel address to monitor."}
+] as const

@@ -56,13 +56,21 @@ export class AudioUnit implements Terminable {
 
     /**
      * Returns the currently connected input processor if any.
+     *
+     * @returns Optional instrument or bus feeding this unit.
      */
     input(): Option<InstrumentDeviceProcessor | AudioBusProcessor> {return this.#input}
     /**
      * Convenience wrapper that asserts the input is an {@link AudioBusProcessor}.
+     *
+     * @throws Error if the input is missing or not an {@link AudioBusProcessor}.
      */
     inputAsAudioBus(): AudioBusProcessor {return asInstanceOf(this.#input.unwrap("No input available"), AudioBusProcessor)}
-    /** Access to the channel strip's audio output. */
+    /**
+     * Access to the channel strip's audio output.
+     *
+     * @returns Buffer representing the processed output of the unit.
+     */
     audioOutput(): AudioBuffer {return this.#audioDeviceChain.channelStrip.audioOutput}
 
     get midiDeviceChain(): MidiDeviceChain {return this.#midiDeviceChain}
@@ -70,6 +78,9 @@ export class AudioUnit implements Terminable {
     get context(): EngineContext {return this.#context}
     get adapter(): AudioUnitBoxAdapter {return this.#adapter}
 
+    /**
+     * Releases all resources and disconnects processors.
+     */
     terminate(): void {
         console.debug(`terminate ${this}`)
         this.#terminator.terminate()

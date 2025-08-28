@@ -213,7 +213,11 @@ module.exports = {
             "ui/metering/rms-vs-peak",
           ],
         },
-        "ui/mixer",
+        {
+          type: "category",
+          label: "Mixer",
+          items: ["ui/mixer", "ui/mixer/routing"],
+        },
         {
           type: "category",
           label: "Modular",

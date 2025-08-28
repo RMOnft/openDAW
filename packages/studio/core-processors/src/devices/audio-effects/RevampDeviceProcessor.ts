@@ -335,3 +335,33 @@ export class RevampDeviceProcessor
     return `{${this.constructor.name} (${this.#id})`;
   }
 }
+
+/** Parameter table for {@link RevampDeviceProcessor}. */
+export const RevampDeviceProcessorParamTable = [
+  { param: "highPass.enabled", type: "boolean", description: "Enable high‑pass filter stage." },
+  { param: "highPass.frequency", type: "number", description: "Cutoff frequency of the high‑pass filter." },
+  { param: "highPass.q", type: "number", description: "Q factor of the high‑pass filter." },
+  { param: "highPass.order", type: "int", description: "Filter order for the high‑pass stage." },
+  { param: "lowShelf.enabled", type: "boolean", description: "Enable low‑shelf stage." },
+  { param: "lowShelf.frequency", type: "number", description: "Corner frequency for the low‑shelf." },
+  { param: "lowShelf.gain", type: "number", description: "Gain applied by the low‑shelf in dB." },
+  { param: "lowBell.enabled", type: "boolean", description: "Enable low bell stage." },
+  { param: "lowBell.frequency", type: "number", description: "Center frequency of the low bell." },
+  { param: "lowBell.gain", type: "number", description: "Gain applied by the low bell in dB." },
+  { param: "lowBell.q", type: "number", description: "Q factor of the low bell." },
+  { param: "midBell.enabled", type: "boolean", description: "Enable mid bell stage." },
+  { param: "midBell.frequency", type: "number", description: "Center frequency of the mid bell." },
+  { param: "midBell.gain", type: "number", description: "Gain applied by the mid bell in dB." },
+  { param: "midBell.q", type: "number", description: "Q factor of the mid bell." },
+  { param: "highBell.enabled", type: "boolean", description: "Enable high bell stage." },
+  { param: "highBell.frequency", type: "number", description: "Center frequency of the high bell." },
+  { param: "highBell.gain", type: "number", description: "Gain applied by the high bell in dB." },
+  { param: "highBell.q", type: "number", description: "Q factor of the high bell." },
+  { param: "highShelf.enabled", type: "boolean", description: "Enable high‑shelf stage." },
+  { param: "highShelf.frequency", type: "int", description: "Corner frequency of the high‑shelf." },
+  { param: "highShelf.gain", type: "number", description: "Gain applied by the high‑shelf in dB." },
+  { param: "lowPass.enabled", type: "boolean", description: "Enable low‑pass filter stage." },
+  { param: "lowPass.frequency", type: "number", description: "Cutoff frequency for the low‑pass filter." },
+  { param: "lowPass.q", type: "number", description: "Q factor of the low‑pass filter." },
+  { param: "lowPass.order", type: "number", description: "Filter order for the low‑pass stage." },
+] as const;

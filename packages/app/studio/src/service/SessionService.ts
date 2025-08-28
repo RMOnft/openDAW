@@ -2,6 +2,10 @@
  * Service handling persistence and lifecycle operations for project sessions.
  * Works in concert with {@link SyncLogService} for commit logging and emits
  * {@link StudioSignal} events to update the UI.
+ *
+ * Security note: all operations act on data stored within the user's
+ * browser. The service never transmits project content unless explicitly
+ * exported by the user.
  */
 import {ProjectSession} from "@/project/ProjectSession"
 import {
@@ -56,6 +60,9 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
     /**
      * Subscribes to the session value and immediately dispatches the current
      * state to the observer.
+     *
+     * @param observer - Receives the current session and subsequent updates.
+     * @returns Subscription to stop receiving updates.
      */
     catchupAndSubscribe(observer: Observer<ObservableValue<Option<ProjectSession>>>): Terminable {
         observer(this)
@@ -65,6 +72,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
     /**
      * Save the current project. Unsaved sessions trigger {@link saveAs} to
      * gather metadata.
+     *
+     * @returns Promise that resolves once the project has been saved.
      */
     async save(): Promise<void> {
         return this.#session.getValue()
@@ -74,6 +83,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
     /**
      * Save the current session under a new name, prompting the user for
      * metadata.
+     *
+     * @returns Promise that resolves once the project has been saved.
      */
     async saveAs(): Promise<void> {
         return this.#session.getValue().ifSome(async session => {
@@ -87,7 +98,11 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
         })
     }
 
-    /** Open a dialog listing available projects and load the chosen one. */
+    /**
+     * Open a dialog listing available projects and load the chosen one.
+     *
+     * @returns Promise resolving when the chosen project has been loaded.
+     */
     async browse(): Promise<void> {
         const {status, value} = await Promises.tryCatch(ProjectDialogs.showBrowseDialog(this.#service))
         if (status === "resolved") {
@@ -101,6 +116,7 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
      *
      * @param uuid identifier of the project to load.
      * @param meta previously stored metadata.
+     * @returns Promise resolved once the project is loaded.
      */
     async loadExisting(uuid: UUID.Format, meta: ProjectMeta) {
         console.debug(UUID.toString(uuid))
@@ -113,6 +129,7 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
      * Load a project template shipped with the application.
      *
      * @param name template identifier without extension.
+     * @returns Promise resolved when the template has been loaded.
      */
     async loadTemplate(name: string): Promise<unknown> {
         console.debug(`load '${name}'`)
@@ -135,6 +152,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
     /**
      * Export the current project and its samples as a bundle and allow the user
      * to save it as a file.
+     *
+     * @returns Promise resolving once the export action has completed.
      */
     async exportZip(): Promise<void> {
         return this.#session.getValue().ifSome(async session => {
@@ -164,6 +183,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
 
     /**
      * Import a previously exported project bundle from disk.
+     *
+     * @returns Promise resolving when the bundle has been imported.
      */
     async importZip(): Promise<void> {
         try {
@@ -179,6 +200,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
 
     /**
      * Save the raw project file to disk without bundling samples.
+     *
+     * @returns Promise resolving when the file has been saved.
      */
     async saveFile(): Promise<void> {
         this.#session.getValue().ifSome(async session => {
@@ -198,6 +221,8 @@ export class SessionService implements MutableObservableValue<Option<ProjectSess
     }
     /**
      * Load a raw project file from disk and start a new session.
+     *
+     * @returns Promise resolving when the file has been loaded.
      */
     async loadFile(): Promise<void> {
         try {

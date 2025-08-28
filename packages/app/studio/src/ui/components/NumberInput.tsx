@@ -23,7 +23,11 @@ export interface NumberInputProps {
     step?: number
 }
 
-/** Editable numeric field with keyboard controls. */
+/**
+ * Editable numeric field with keyboard controls.
+ *
+ * @returns Element representing the numeric input.
+ */
 export const NumberInput = ({lifecycle, model, negativeWarning, className, maxChars, mapper, step}: NumberInputProps) => {
     step ??= 1.0
     maxChars ??= 3

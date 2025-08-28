@@ -10,7 +10,12 @@ export interface ControlIndicatorProps {
     parameter: AutomatableParameterFieldAdapter
 }
 
-/** Adds an automation indicator to its children. */
+/**
+ * Adds an automation indicator to its children.
+ *
+ * @param children - Elements to decorate with the indicator.
+ * @returns Wrapped element reflecting automation state.
+ */
 export const ControlIndicator = ({lifecycle, parameter}: ControlIndicatorProps, children: JsxValue) => {
     const element: HTMLElement = <Group>{children}</Group>
     lifecycle.own(parameter.catchupAndSubscribeControlSources({

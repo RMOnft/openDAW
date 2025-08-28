@@ -25,6 +25,9 @@ export namespace DawProject {
     /**
      * Decode a DAWproject archive into its metadata, project XML and resource
      * lookup helpers.
+     *
+     * @param buffer - Raw bytes of the `.dawproject` zip archive.
+     * @returns Parsed metadata, project schema and resource provider.
      */
     export const decode = async (buffer: ArrayBuffer | NonSharedBuffer): Promise<{
         metaData: MetaDataSchema,
@@ -59,6 +62,10 @@ export namespace DawProject {
     /**
      * Encode the current {@link Project} and associated metadata into a
      * `.dawproject` zip archive.
+     *
+     * @param project - The project graph to serialize.
+     * @param metaData - Metadata describing the project.
+     * @returns A binary zip archive in the DAWproject format.
      */
     export const encode = (project: Project, metaData: MetaDataSchema): Promise<ArrayBuffer> => {
         const zip = new JSZip()

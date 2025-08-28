@@ -51,6 +51,7 @@ For internal tooling and diagnostics see:
 - [Components](../docs-dev/ui/pages/components.md)
 - [Advanced Components](../docs-dev/ui/components/advanced.md)
 - [Diagnostics](../docs-dev/ui/pages/diagnostics.md)
+- [State Architecture](../docs-dev/architecture/state.md)
 - [Icons](../docs-dev/ui/pages/icons.md) – [icon docs](../docs-dev/ui/icons/overview.md)
 - [Manuals](../docs-dev/ui/pages/manuals.md)
  - [Navigation](../docs-dev/ui/navigation/overview.md)

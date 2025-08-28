@@ -79,9 +79,18 @@ import {BuiltinDevices} from "./BuiltinDevices"
  * {@link ProjectDecoder.Skeleton} ready for further processing.
  */
 export namespace DawProjectImport {
+    /** Pairing of an audio bus with its owning audio unit. */
     type AudioBusUnit = { audioBusBox: AudioBusBox, audioUnitBox: AudioUnitBox }
+
+    /** Pairing of an instrument device and its audio unit wrapper. */
     type InstrumentUnit = { instrumentBox: InstrumentBox, audioUnitBox: AudioUnitBox }
 
+    /**
+     * Populate timeline transport fields from a DAWproject transport schema.
+     *
+     * @param transport - Transport values from the project schema.
+     * @param timelineBox - Target timeline box receiving the values.
+     */
     const readTransport = ({tempo, timeSignature}: TransportSchema,
                            {bpm, signature: {nominator, denominator}}: TimelineBox) => {
         ifDefined(tempo?.value, value => bpm.setValue(value))
@@ -98,6 +107,13 @@ export namespace DawProjectImport {
         skeleton: ProjectDecoder.Skeleton
     }
 
+    /**
+     * Create a capture box based on the expected content type.
+     *
+     * @param boxGraph - Graph used to create the capture box.
+     * @param contentType - Either `"audio"` or `"notes"`.
+     * @returns A matching capture box or {@link Option.None}.
+     */
     const toAudioUnitCapture = (boxGraph: BoxGraph, contentType: Nullish<string>): Option<CaptureBox> => {
         if (contentType === "audio") return Option.wrap(CaptureAudioBox.create(boxGraph, UUID.generate()))
         if (contentType === "notes") return Option.wrap(CaptureMidiBox.create(boxGraph, UUID.generate()))
@@ -105,6 +121,10 @@ export namespace DawProjectImport {
     }
     /**
      * Rehydrate a project from a DAWproject schema and its resource provider.
+     *
+     * @param schema - Parsed project schema to read from.
+     * @param resources - Resource provider for binary assets referenced by the schema.
+     * @returns The project skeleton and collected audio resource identifiers.
      */
     export const read = async (schema: ProjectSchema, resources: DawProject.ResourceProvider): Promise<Result> => {
         const boxGraph = new BoxGraph<BoxIO.TypeMap>(Option.wrap(BoxIO.create))
@@ -473,6 +493,12 @@ export namespace DawProjectImport {
         }
     }
 
+    /**
+     * Determine the default track type connected to an audio unit.
+     *
+     * @param audioUnitBox - The audio unit whose input should be inspected.
+     * @returns The inferred track type or {@link TrackType.Undefined} if unknown.
+     */
     const readInputTrackType = (audioUnitBox: AudioUnitBox): TrackType => {
         const inputBox = audioUnitBox.input.pointerHub.incoming().at(0)?.box
         // TODO Can we find a better way to determine the track type?

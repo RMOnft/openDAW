@@ -9,6 +9,9 @@ import {DeviceBox, DeviceBoxUtils} from "@opendaw/studio-adapters"
 export namespace DeviceIO {
     /**
      * Serialize a device box and its dependencies into a compact binary format.
+     *
+     * @param box - The device box to serialize.
+     * @returns Binary representation containing the device and dependencies.
      */
     export const exportDevice = (box: Box): ArrayBufferLike => {
         const dependencies = Array.from(box.graph.dependenciesOf(box).boxes)
@@ -31,6 +34,10 @@ export namespace DeviceIO {
 
     /**
      * Deserialize a previously exported device into the given {@link BoxGraph}.
+     *
+     * @param boxGraph - Graph to which the device should be added.
+     * @param buffer - Binary data produced by {@link exportDevice}.
+     * @returns The reconstructed device box.
      */
     export const importDevice = (boxGraph: BoxGraph<BoxIO.TypeMap>, buffer: ArrayBufferLike): DeviceBox => {
         const input = new ByteArrayInput(buffer)
