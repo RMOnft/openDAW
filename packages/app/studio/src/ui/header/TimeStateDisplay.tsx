@@ -29,14 +29,22 @@ import { Propagation } from "@opendaw/lib-box";
 
 const className = Html.adoptStyleSheet(css, "TimeStateDisplay");
 
-type Construct = {
+/** Parameters for constructing {@link TimeStateDisplay}. */
+export type Construct = {
+  /** Lifecycle managing subscriptions. */
   lifecycle: Lifecycle;
+  /** Service providing access to engine and project. */
   service: StudioService;
 };
 
 const minBpm = 30.0;
 const maxBpm = 1000.0;
 
+/**
+ * Displays transport position, tempo and meter.
+ *
+ * @public
+ */
 export const TimeStateDisplay = ({ lifecycle, service }: Construct) => {
   const barDigits = Inject.value("001");
   const beatDigit = Inject.value("1");

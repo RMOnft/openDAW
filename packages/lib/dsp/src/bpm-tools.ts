@@ -11,8 +11,10 @@ export namespace BPMTools {
     /**
      * Options controlling the tempo search space and analysis parameters.
      * All fields are optional and fall back to sensible defaults.
+     *
+     * @public
      */
-    type Options = Partial<{
+    export type Options = Partial<{
         /** Number of samples between energy taps. */
         interval: number
         /** Number of coarse scan steps across the search interval. */
@@ -35,6 +37,7 @@ export namespace BPMTools {
      * @param sampleRate - Sampling rate of `buf`.
      * @param options - Configuration such as search bounds.
      * @returns Detected BPM.
+     * @public
      */
     export function detect(buf: Float32Array, sampleRate: number, options: Options = {}): number {
         const {
