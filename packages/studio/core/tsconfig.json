@@ -1,21 +1,13 @@
 {
+  "//": "TypeScript config for the studio core package. Build chunking is documented in packages/docs/docs-dev/build-and-run/code-splitting.md",
   "extends": "@opendaw/typescript-config/tsconfig.base.json",
   "compilerOptions": {
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable",
-      "DOM.AsyncIterable"
-    ],
+    // Target modern web APIs.
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
+    // Emit compiled files to dist to align with package exports.
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": [
-    "src",
-    "vite-env.d.ts"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }
