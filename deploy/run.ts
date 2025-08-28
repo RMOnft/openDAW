@@ -4,6 +4,8 @@
  * `packages/app/studio/dist` directory and optionally notifies a Discord
  * channel via webhook when complete. The script is currently disabled and is
  * intended to be run manually by maintainers.
+ *
+ * @packageDocumentation
  */
 // NOTE: Deployment script disabled
 import SftpClient from "ssh2-sftp-client";

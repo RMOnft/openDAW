@@ -1,6 +1,8 @@
 # OpenDAW Studio
 
 This package contains the web-based user interface for the OpenDAW project.
+TSDoc comments throughout the codebase power the generated API reference for
+plugin authors.
 It uses a central colour system defined in
 [`src/colors.sass`](src/colors.sass) and exposed through the
 [design tokens](../../docs/docs-dev/style/design-tokens.md).
