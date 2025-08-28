@@ -171,12 +171,15 @@ export class Project
     );
   }
 
+  /** Register a terminable to be disposed with the project. */
   own<T extends Terminable>(terminable: T): T {
     return this.#terminator.own<T>(terminable);
   }
+  /** Register multiple terminables at once. */
   ownAll<T extends Terminable>(...terminables: Array<T>): void {
     return this.#terminator.ownAll<T>(...terminables);
   }
+  /** Create a child terminator bound to this project. */
   spawn(): Terminator {
     return this.#terminator.spawn();
   }
@@ -201,15 +204,19 @@ export class Project
   get sampleManager(): SampleManager {
     return this.#env.sampleManager;
   }
+  /** Clip sequencing interface; only valid in audio contexts. */
   get clipSequencing(): ClipSequencing {
     return panic("Only available in audio context");
   }
+  /** Whether this project runs inside an audio worklet. */
   get isAudioContext(): boolean {
     return false;
   }
+  /** True when executing on the main browser thread. */
   get isMainThread(): boolean {
     return true;
   }
+  /** Broadcaster for live-streaming audio data; audio context only. */
   get liveStreamBroadcaster(): LiveStreamBroadcaster {
     return panic("Only available in audio context");
   }

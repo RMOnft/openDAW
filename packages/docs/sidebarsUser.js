@@ -20,5 +20,23 @@ module.exports = {
         "features/search",
       ],
     },
+    {
+      type: "category",
+      label: "Workflows",
+      items: [
+        "workflows/automation-modulation",
+        "workflows/beat",
+        "workflows/collaboration",
+        "workflows/creating-projects",
+        "workflows/dawproject",
+        "workflows/exporting",
+        "workflows/exporting-and-sharing",
+        "workflows/headless-mode",
+        "workflows/history",
+        "workflows/mixing",
+        "workflows/record-and-fx",
+        "workflows/sample-management",
+      ],
+    },
   ],
 };

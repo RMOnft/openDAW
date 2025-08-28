@@ -23,8 +23,11 @@ import {Project, SampleStorage, MainThreadSampleLoader, WorkerAgents} from "@ope
 export namespace ProjectPaths {
     /** Base folder for all projects. */
     export const Folder = "projects/v1"
+    /** File name containing the serialized project graph. */
     export const ProjectFile = "project.od"
+    /** File name storing project metadata. */
     export const ProjectMetaFile = "meta.json"
+    /** File name for the optional project cover image. */
     export const ProjectCoverFile = "image.bin"
     /** Path to the serialized project file. */
     export const projectFile = (uuid: UUID.Format): string => `${(projectFolder(uuid))}/${ProjectFile}`
@@ -59,6 +62,8 @@ export namespace Projects {
 
     /**
      * Load a project's cover image from storage.
+     *
+     * @param uuid - Identifier of the project to fetch the cover for.
      */
     export const loadCover = async (uuid: UUID.Format): Promise<Option<ArrayBuffer>> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectCover(uuid))
@@ -67,6 +72,9 @@ export namespace Projects {
 
     /**
      * Load and decode a project from disk.
+     *
+     * @param service - Studio service for environment configuration.
+     * @param uuid - Identifier of the project to load.
      */
     export const loadProject = async (service: StudioService, uuid: UUID.Format): Promise<Project> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectFile(uuid))
@@ -111,6 +119,8 @@ export namespace Projects {
 
     /**
      * Delete a project and all associated files.
+     *
+     * @param uuid - Identifier of the project to remove.
      */
     export const deleteProject = async (uuid: UUID.Format) => WorkerAgents.Opfs.delete(ProjectPaths.projectFolder(uuid))
 
