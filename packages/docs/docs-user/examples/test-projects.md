@@ -11,3 +11,4 @@ projects in the [`test-files`](../../../../test-files) directory:
 - **bitwig.example.xml** – a tiny Bitwig project useful for import experiments.
 
 These projects are read‑only fixtures; copy them before making changes.
+Developers can reuse them in [integration tests](../../docs-dev/testing/integration.md).
