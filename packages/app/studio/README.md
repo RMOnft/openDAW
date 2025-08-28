@@ -9,6 +9,11 @@ For a guided overview of the interface, see the [UI tour](../../docs/docs-user/u
 Guidance on saving and importing projects lives in the [file management guide](../../docs/docs-user/features/file-management.md). The [notepad feature](../../docs/docs-user/features/notepad.md) lets you store project notes using Markdown.
 Developer details about project storage and sessions can be found in the [projects documentation](../../docs/docs-dev/projects/overview.md).
 
+The capture subsystem for recording audio and MIDI is described in the
+[capture architecture docs](../../docs/docs-dev/architecture/capture/overview.md).
+Users can follow the [recording workflow guide](../../docs/docs-user/workflows/recording.md)
+to learn how to capture takes.
+
 Quickly launch commands using the Spotlight search palette with <kbd>Shift</kbd>+<kbd>Enter</kbd>. Read the [user guide](../../docs/docs-user/features/search.md) or see the [developer docs](../../docs/docs-dev/ui/spotlight/overview.md).
 Exchange projects with other DAWs via the `.dawproject` format using the
 [DAWproject workflow](../../docs/docs-user/workflows/dawproject.md). Implementation

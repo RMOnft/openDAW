@@ -9,7 +9,9 @@ import {RecordTrack} from "./RecordTrack"
 import {RecordingWorklet} from "../RecordingWorklet"
 import {ColorCodes} from "../ColorCodes"
 
+/** Utilities for recording audio into a project. */
 export namespace RecordAudio {
+    /** Context required to start recording audio. */
     type RecordAudioContext = {
         recordingWorklet: RecordingWorklet
         mediaStream: MediaStream
@@ -21,6 +23,9 @@ export namespace RecordAudio {
         gainDb: number
     }
 
+    /**
+     * Begin recording the supplied media stream into the project timeline.
+     */
     export const start = (
         {
             recordingWorklet, mediaStream, sampleManager, audioContext, engine, project, capture, gainDb

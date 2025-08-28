@@ -20,6 +20,10 @@ import {CaptureManager} from "./CaptureManager"
 import {MidiDevices} from "../MidiDevices"
 import {Promises} from "@opendaw/lib-runtime"
 
+/**
+ * Capture implementation for MIDI input devices. Streams MIDI messages from
+ * selected devices and forwards them to the recording pipeline.
+ */
 export class CaptureMidi extends Capture<CaptureMidiBox> {
     readonly #streamGenerator: Func<void, Promise<void>>
     readonly #notifier = new Notifier<MIDIMessageEvent>()
@@ -28,6 +32,11 @@ export class CaptureMidi extends Capture<CaptureMidiBox> {
 
     #streaming: Option<Subscription> = Option.None
 
+    /**
+     * @param manager        Parent {@link CaptureManager}.
+     * @param audioUnitBox   Owning audio unit.
+     * @param captureMidiBox Backing box containing configuration.
+     */
     constructor(manager: CaptureManager, audioUnitBox: AudioUnitBox, captureMidiBox: CaptureMidiBox) {
         super(manager, audioUnitBox, captureMidiBox)
 
@@ -54,8 +63,12 @@ export class CaptureMidi extends Capture<CaptureMidiBox> {
         )
     }
 
+    /** Human readable label of the current MIDI device. */
     get deviceLabel(): Option<string> {return Option.wrap("MIDI coming soon.")}
 
+    /**
+     * Ensure the selected MIDI device is available before recording starts.
+     */
     async prepareRecording(_: RecordingContext): Promise<void> {
         const availableMidiDevices = MidiDevices.get()
         if (availableMidiDevices.isEmpty()) {
@@ -72,6 +85,7 @@ export class CaptureMidi extends Capture<CaptureMidiBox> {
         }
     }
 
+    /** Start streaming MIDI events into the project engine. */
     startRecording({project, engine}: RecordingContext): Terminable {
         const availableMidiDevices = MidiDevices.inputs()
         assert(availableMidiDevices.nonEmpty(), "No MIDI input devices found")
