@@ -21,6 +21,7 @@ export namespace SyncLogService {
      * Start a new SyncLog and attach it to the current project.
      *
      * @param service - Studio service providing the project context.
+     * @returns Promise resolving when the SyncLog is ready.
      */
     export const start = async (service: StudioService) => {
         if (!isDefined(window.showSaveFilePicker)) {return}
@@ -43,6 +44,7 @@ export namespace SyncLogService {
      * Append commits to an existing SyncLog file selected by the user.
      *
      * @param service - Studio service providing the project context.
+     * @returns Promise resolving when all commits have been appended.
      */
     export const append = async (service: StudioService) => {
         const openResult = await Promises.tryCatch(window.showOpenFilePicker(FilePickerAcceptTypes.ProjectSyncLog))

@@ -1,11 +1,12 @@
-import {BlockFlag, ProcessInfo} from "./processing"
-import {Event} from "@opendaw/lib-dsp"
-import {EngineContext} from "./EngineContext"
-import {Arrays, Bits, int, Terminable} from "@opendaw/lib-std"
-import {AbstractProcessor} from "./AbstractProcessor"
-import {EventBuffer} from "./EventBuffer"
-import {Fragmentor} from "@opendaw/lib-dsp"
-import {UpdateClockRate} from "@opendaw/studio-adapters"
+/** @file Processor emitting periodic update events for automation. */
+import { BlockFlag, ProcessInfo } from "./processing";
+import { Event } from "@opendaw/lib-dsp";
+import { EngineContext } from "./EngineContext";
+import { Arrays, Bits, int, Terminable } from "@opendaw/lib-std";
+import { AbstractProcessor } from "./AbstractProcessor";
+import { EventBuffer } from "./EventBuffer";
+import { Fragmentor } from "@opendaw/lib-dsp";
+import { UpdateClockRate } from "@opendaw/studio-adapters";
 
 /**
  * Automation update event distributed by the {@link UpdateClock}.
@@ -14,11 +15,14 @@ import {UpdateClockRate} from "@opendaw/studio-adapters"
  * occur. Consumers typically translate this into UI refreshes or other
  * time‑based tasks.
  */
-export interface UpdateEvent extends Event {type: "update-event"}
+export interface UpdateEvent extends Event {
+  type: "update-event";
+}
 
 export namespace UpdateEvent {
-    /** Type guard for {@link UpdateEvent}. */
-    export const isOfType = (event: Event): event is UpdateEvent => event.type === "update-event"
+  /** Type guard for {@link UpdateEvent}. */
+  export const isOfType = (event: Event): event is UpdateEvent =>
+    event.type === "update-event";
 }
 
 /**
@@ -29,15 +33,15 @@ export namespace UpdateEvent {
  * specified by {@link UpdateClockRate}.
  */
 export class UpdateClock extends AbstractProcessor {
-    readonly #outputs: Array<EventBuffer> = []
+  readonly #outputs: Array<EventBuffer> = [];
 
-    /**
-     * @param context - Engine execution context that owns the processor.
-     */
-    constructor(context: EngineContext) {
-        super(context)
-        this.own(this.context.registerProcessor(this))
-    }
+  /**
+   * @param context - Engine execution context that owns the processor.
+   */
+  constructor(context: EngineContext) {
+    super(context);
+    this.own(this.context.registerProcessor(this));
+  }
 
     /** Clears pending input events. */
     reset(): void {this.eventInput.clear()}
@@ -70,5 +74,9 @@ export class UpdateClock extends AbstractProcessor {
         })
     }
 
-    toString(): string {return `{${this.constructor.name}}`}
+
+  /** Diagnostic representation for debugging. */
+  toString(): string {
+    return `{${this.constructor.name}}`;
+  }
 }

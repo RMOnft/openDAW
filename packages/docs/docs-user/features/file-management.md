@@ -12,6 +12,7 @@ offline. Developers can dive deeper in the
 - Search, preview and delete samples directly from the list.
 - Adjust preview volume with the slider in the browser footer.
 - Local samples are cached in OPFS and survive page reloads.
+  Once downloaded they can be reused offline until removed.
 
 ### Manage Local Storage
 

@@ -429,8 +429,15 @@ export class StudioService implements ProjectEnv {
         }
     }
 
+    /** Start a new session from an existing project. */
     fromProject(project: Project, name: string): void {this.sessionService.fromProject(project, name)}
 
+    /**
+     * Execute a procedure only if a project session is available.
+     *
+     * @param procedure - Callback invoked with the active project.
+     * @returns Option of the callback result.
+     */
     runIfProject<R>(procedure: Func<Project, R>): Option<R> {
         return this.sessionService.getValue().map(({project}) => procedure(project))
     }
@@ -448,17 +455,33 @@ export class StudioService implements ProjectEnv {
         })
     }
 
+    /**
+     * Switch the workspace to another screen.
+     *
+     * @param key - Identifier of the screen or `null` for the default.
+     */
     switchScreen(key: Nullable<Workspace.ScreenKeys>): void {
         this.layout.screen.setValue(key)
         RouteLocation.get().navigateTo("/")
     }
 
+    /**
+     * Register a factory used to create a footer label component.
+     *
+     * @param factory - Provider creating footer labels on demand.
+     */
     registerFooter(factory: Provider<FooterLabel>): void {
         this.#factoryFooterLabel = Option.wrap(factory)
     }
 
+    /**
+     * Accessor for the registered footer label factory.
+     */
     factoryFooterLabel(): Option<Provider<FooterLabel>> {return this.#factoryFooterLabel}
 
+    /**
+     * Notify listeners to reset waveform peaks across the UI.
+     */
     resetPeaks(): void {this.#signals.notify({type: "reset-peaks"})}
 
     #startAudioWorklet(terminator: Terminator, project: Project): void {

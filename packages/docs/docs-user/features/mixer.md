@@ -55,3 +55,15 @@ graph LR
 
 For a practical example see the [Mixing workflow](../workflows/mixing.md).
 
+## Changing track outputs
+
+Each channel strip provides an **Output** selector at its base. Use it to route a
+track to another bus or directly to a hardware output. The menu lists existing
+destinations and also lets you create new busses on the fly.
+
+### Output devices
+
+The master channel can target any detected audio device. Open the output menu
+and choose from the **Audio Output Devices** list to switch playback to a
+different interface such as external speakers or headphones.
+
