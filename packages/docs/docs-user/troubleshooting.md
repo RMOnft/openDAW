@@ -59,6 +59,12 @@
 - Developers looking to diagnose issues in depth can consult the
   [debugging guide](/dev/debugging/overview).
 
+### How do I collect logs for support?
+
+- The Studio automatically captures recent console output and sends it along
+  with error reports. You can also export a project `SyncLog` from the footer
+  menu to share a history of your edits.
+
 ### App stuck on loading screen
 
 - Check your internet connection and reload the page.

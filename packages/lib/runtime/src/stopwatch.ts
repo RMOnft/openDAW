@@ -31,6 +31,7 @@ interface Stopwatch {
  * @returns A stopwatch instance.
  */
 export const stopwatch = (level: "debug" | "info" = "debug"): Stopwatch => {
+    // Capture the start time once; each lap uses the delta to this point.
     const startTime = performance.now()
     return {
         lab: (label: string) =>

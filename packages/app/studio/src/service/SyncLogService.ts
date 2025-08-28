@@ -37,6 +37,7 @@ export namespace SyncLogService {
         const label: FooterLabel = asDefined(service.factoryFooterLabel().unwrap()())
         label.setTitle("SyncLog")
         let count = 0 | 0
+        // Attach a writer that updates the footer after each commit is flushed.
         SyncLogWriter.attach(service.project, wrapBlockWriter(handle, () => label.setValue(`${++count} commits`)))
     }
 
@@ -71,6 +72,7 @@ export namespace SyncLogService {
             console.warn("arrayBuffer", arrayBufferResult.error)
             return
         }
+        // Deserialize the existing log to restore the project and seek the last commit.
         const {project, lastCommit, numCommits} = await SyncLogReader.unwrap(service, arrayBufferResult.value)
         service.fromProject(project, "SyncLog")
         const label: FooterLabel = asDefined(service.factoryFooterLabel().unwrap()())
@@ -87,6 +89,8 @@ export namespace SyncLogService {
      * @returns Observer function passed to {@link SyncLogWriter.attach}.
      */
     const wrapBlockWriter = (handle: FileSystemFileHandle, callback: Exec) => {
+        // Queue of commits waiting to be written to disk. The promise chain
+        // ensures commits are flushed sequentially in order.
         let blocks: Array<Commit> = []
         let lastPromise: Promise<void> = Promise.resolve()
         return (commit: Commit): void => {
@@ -95,6 +99,7 @@ export namespace SyncLogService {
             lastPromise = lastPromise.then(async () => {
                 const writable: FileSystemWritableFileStream = await handle.createWritable({keepExistingData: true})
                 const file = await handle.getFile()
+                // Append to the end of the existing file without truncating it.
                 await writable.seek(file.size)
                 const buffers = blocks.map(block => block.serialize())
                 blocks = []
@@ -113,6 +118,7 @@ export namespace SyncLogService {
     const appendArrayBuffers = (buffers: ReadonlyArray<ArrayBuffer>): ArrayBuffer => {
         const totalLength = buffers.reduce((sum, buffer) => sum + buffer.byteLength, 0)
         const result = new Uint8Array(totalLength)
+        // Copy buffers one after another into the result view.
         buffers.reduce((offset, buffer) => {
             result.set(new Uint8Array(buffer), offset)
             return offset + buffer.byteLength
