@@ -11,6 +11,8 @@ docs are generated with **Typedoc**. Deployment configuration files for Vercel
 and Netlify describe how docs and apps would be deployed when enabled. For a
 high-level view of application start-up and recovery, refer to the
 [bootstrapping guide](packages/docs/docs-dev/architecture/bootstrap.md).
+For details on how build artifacts are split into chunks, see the
+[code splitting guide](packages/docs/docs-dev/build-and-run/code-splitting.md).
 
 GitHub Actions provides continuous integration. Workflows handle deployment,
 documentation builds, quality checks, Discord notifications, and SFTP tests.
