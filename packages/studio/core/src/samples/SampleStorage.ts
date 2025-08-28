@@ -17,11 +17,11 @@ export namespace SampleStorage {
     /**
      * Write decoded audio, peaks and metadata to OPFS.
      *
-     * @param uuid identifier of the sample to store
-     * @param audio decoded audio frames
-     * @param peaks precomputed peak data
-     * @param meta additional sample metadata
-     * @returns resolves when the files have been written
+     * @param uuid Identifier of the sample being stored.
+     * @param audio Decoded audio buffer to persist as `audio.wav`.
+     * @param peaks Pre‑computed peak data used for waveform rendering.
+     * @param meta Descriptive information written to `meta.json`.
+     * @returns Promise that resolves once all files have been written.
      */
     export const store = async (uuid: UUID.Format,
                                 audio: AudioData,
@@ -42,9 +42,9 @@ export namespace SampleStorage {
     /**
      * Overwrite only the metadata file of a stored sample.
      *
-     * @param uuid identifier of the sample to update
-     * @param meta new metadata to persist
-     * @returns resolves once the metadata file was written
+     * @param uuid Identifier of the sample to update.
+     * @param meta New metadata to persist to disk.
+     * @returns Promise that resolves when the metadata has been written.
      */
     export const updateMeta = async (uuid: UUID.Format, meta: SampleMetaData): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
@@ -54,9 +54,9 @@ export namespace SampleStorage {
     /**
      * Load a sample from OPFS and decode it into {@link AudioData} and peaks.
      *
-     * @param uuid identifier of the sample to load
-     * @param context audio context used for decoding
-     * @returns audio data, peak information and metadata
+     * @param uuid Identifier of the sample to load.
+     * @param context Audio context used for decoding.
+     * @returns Tuple containing decoded audio, peaks and metadata.
      */
     export const load = async (uuid: UUID.Format, context: AudioContext): Promise<[AudioData, Peaks, SampleMetaData]> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
@@ -75,19 +75,20 @@ export namespace SampleStorage {
         }, peaks, meta])
     }
 
-    /** Delete a sample and all related files.
+    /**
+     * Delete a sample and all related files.
      *
-     * @param uuid identifier of the sample to delete
-     * @returns resolves when the files have been removed
+     * @param uuid Identifier of the sample to remove from OPFS.
      */
     export const remove = async (uuid: UUID.Format): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
         return WorkerAgents.Opfs.delete(`${path}`)
     }
 
-    /** List metadata for all stored samples.
+    /**
+     * List metadata for all stored samples.
      *
-     * @returns metadata for each sample stored in OPFS
+     * @returns Array containing metadata for each stored sample.
      */
     export const list = async (): Promise<ReadonlyArray<Sample>> => {
         return WorkerAgents.Opfs.list(Folder)

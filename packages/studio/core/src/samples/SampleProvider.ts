@@ -10,7 +10,7 @@ export interface SampleProvider {
      *
      * @param uuid identifier of the requested sample
      * @param progress callback receiving download progress between 0 and 1
-     * @returns audio data and metadata for the sample
+     * @returns Tuple containing decoded audio and metadata for the sample.
      */
     fetch(uuid: UUID.Format, progress: Progress.Handler): Promise<[AudioData, SampleMetaData]>
 }
