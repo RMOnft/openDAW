@@ -19,3 +19,16 @@ To understand how code is split during the build, read the
 [code splitting guide](../docs-dev/build-and-run/code-splitting.md).
 To tweak default behaviour of the application, refer to the
 [Configuration Overview](../docs-dev/configuration/overview.md).
+
+## Build from Source
+
+Run these commands from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

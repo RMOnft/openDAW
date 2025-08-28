@@ -43,3 +43,16 @@ learning path or explore individual subjects as needed.
    - [ ] MIDI and Synthesis
    - [ ] Latency and Buffers
    - [x] Exporting and Sharing
+
+## Build from Source
+
+Run these commands from the repository root if you want to contribute lessons or code:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

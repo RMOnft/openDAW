@@ -17,6 +17,19 @@ see the [roadmap](../../../ROADMAP.md).
   - [Beat Making](workflows/beat.md)
   - [Recording and Effects](workflows/record-and-fx.md)
   - [Automation and Modulation](workflows/automation-modulation.md)
-  - [Mixing](workflows/mixing.md)
-  - [Exporting](workflows/exporting.md)
-  - [Collaboration](workflows/collaboration.md)
+- [Mixing](workflows/mixing.md)
+- [Exporting](workflows/exporting.md)
+- [Collaboration](workflows/collaboration.md)
+
+## Build from Source
+
+Run these commands from the repository root to work on openDAW locally:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

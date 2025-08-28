@@ -23,3 +23,16 @@ For writing and formatting conventions, see the [Writing Guide](./style/writing-
 - [Extending](./extending/opendaw-sdk.md)
 - [Contributing](./contributing.md)
 - [Licensing](./licensing.md)
+
+## Development Commands
+
+Run the following from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+```

@@ -3,11 +3,18 @@
 A minimal build of openDAW that runs entirely in the browser without any UI.
 It demonstrates booting the audio engine and playing a simple project.
 
-## Quick start
+## Development
+
+Run all commands from the repository root:
 
 ```bash
+npm run install:deps
 npm install
-npm run dev
+npm run build
+npm test
+npm run docs:dev    # local docs preview
+npm run docs:build  # static docs output
+npm run dev:headless
 ```
 
 Open <http://localhost:8080> in a compatible browser. Clicking the page will

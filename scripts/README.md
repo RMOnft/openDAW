@@ -8,3 +8,15 @@ Utility scripts that help manage the development environment.
 | `clean.sh` | Remove all `node_modules`, build outputs, lock files and Turbo caches to reset the workspace. | `npm run clean` |
 | `install_dependencies.js` | Check for required system tools (Git, Node.js, mkcert, Sass, TypeScript, OpenSSL) and install any missing ones. Also runs `npm install`. | `npm run install:deps` |
 
+## Common Development Commands
+
+Execute from the repository root:
+
+```bash
+npm run install:deps
+npm install
+npm run build
+npm test
+npm run docs:dev    # preview docs
+npm run docs:build  # generate static docs
+```

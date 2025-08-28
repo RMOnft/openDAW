@@ -184,11 +184,14 @@ Before starting, ensure you have the following installed on your system:
 
 ### Installation
 
-- `npm run cert` (only for the very first time)
-- `npm run clean` (to revert to clean slate, removes all `node_modules` and `dist` folders)
-- `npm install` (for the first time and after `npm run clean`)
-- `npm run build` (for the first time and after `npm run clean`)
-- `npm run dev:studio` | `npm run dev:headless` (start dev server)
+- `npm run cert` – generate the HTTPS certificate (first run only)
+- `npm run clean` – remove all `node_modules` and build artifacts
+- `npm run install:deps` – install required system tools
+- `npm install` – install workspace packages
+- `npm run build` – build all packages
+- `npm test` – execute the test suite
+- `npm run docs:dev` or `npm run docs:build` – generate documentation
+- `npm run dev:studio` or `npm run dev:headless` – start a development server
 - Navigate to https://localhost:8080 (port is important > cors sample api)
 
 ### Pipeline Overview
