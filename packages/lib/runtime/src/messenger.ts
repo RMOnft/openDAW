@@ -7,7 +7,8 @@ import { isDefined, Notifier, Nullable, Observable, Observer, Procedure, Subscri
  * A messenger wraps objects such as {@link Worker}, {@link MessagePort} or
  * {@link BroadcastChannel} and exposes a simple observable interface.  It can
  * also create logical sub‑channels so multiple communication streams share the
- * same underlying transport.
+ * same underlying transport. Messages are transported verbatim and are not
+ * encrypted or validated.
  */
 
 /**

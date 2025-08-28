@@ -8,5 +8,10 @@ you choose to share it.
 - Keep your browser up to date to benefit from the latest security patches.
 - When granting microphone or file permissions, ensure the request comes from
   the official openDAW application.
+- Serve the application over HTTPS to prevent man‑in‑the‑middle attacks and to
+  enable cross‑origin isolation.
+- Verify downloads before importing projects or samples from others.
+- Exported project bundles contain everything needed to recreate your work;
+  store them in a safe location.
 
 Your work remains on your device, giving you control over how it is shared.

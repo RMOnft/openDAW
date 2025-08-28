@@ -4,6 +4,9 @@
  * persisted to `public/build-info.json`. The data is fetched at
  * runtime to validate caches and expose build details to the client.
  *
+ * Security note: the information exposed here contains no user data and
+ * should not be used for authentication or authorization decisions.
+ *
  * @public
  */
 export type BuildInfo = {

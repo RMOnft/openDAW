@@ -2,6 +2,10 @@
  * Service handling persistence and lifecycle operations for project sessions.
  * Works in concert with {@link SyncLogService} for commit logging and emits
  * {@link StudioSignal} events to update the UI.
+ *
+ * Security note: all operations act on data stored within the user's
+ * browser. The service never transmits project content unless explicitly
+ * exported by the user.
  */
 import {ProjectSession} from "@/project/ProjectSession"
 import {

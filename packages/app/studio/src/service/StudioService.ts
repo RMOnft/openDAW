@@ -1,6 +1,10 @@
 /**
  * Core application service responsible for wiring together workspace, audio
  * engine and project handling utilities.
+ *
+ * Security note: project files and samples loaded through this service are
+ * treated as untrusted input. Validation is the responsibility of callers
+ * before invoking load operations.
  */
 import {
     assert,
