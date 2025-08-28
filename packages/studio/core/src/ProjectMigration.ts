@@ -19,6 +19,8 @@ import {Capture} from "./capture/Capture"
 export class ProjectMigration {
     /**
      * Applies all available migrations to the provided project skeleton.
+     *
+     * @param skeleton - The project graph and mandatory boxes to migrate.
      */
     static migrate({boxGraph, mandatoryBoxes}: ProjectDecoder.Skeleton): void {
         const {rootBox} = mandatoryBoxes
