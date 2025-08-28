@@ -13,6 +13,12 @@ offline. Developers can dive deeper in the
 - Adjust preview volume with the slider in the browser footer.
 - Local samples are cached in OPFS and survive page reloads.
 
+### Manage Local Storage
+
+- Delete unused entries from the **Sample Browser** to free space.
+- Project data and samples reside in the browser; exporting bundles is the
+  safest backup.
+
 ## Save Projects
 
 1. **Write changes to the browser.** Press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose
@@ -54,7 +60,10 @@ offline. Developers can dive deeper in the
 
 ## Collaborate and Share
 
-Use project bundles to collaborate. Export a bundle and send it to another user who can open it and continue working. The [Collaboration workflow](../workflows/collaboration.md) covers best practices.
+Use project bundles to collaborate. Export a bundle and send it to another
+user who can open it and continue working. The
+[Collaboration workflow](../workflows/collaboration.md) covers best
+practices.
 
 Detailed steps for exporting audio or bundles are available in the
 [exporting and sharing workflow](../workflows/exporting-and-sharing.md).

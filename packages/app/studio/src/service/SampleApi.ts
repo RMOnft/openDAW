@@ -133,7 +133,7 @@ export namespace SampleApi {
     );
   };
 
-  // Convert an AudioBuffer into the serialized AudioData format
+  /** Convert an {@link AudioBuffer} into serialized {@link AudioData}. */
   const fromAudioBuffer = (buffer: AudioBuffer): AudioData => ({
     frames: Arrays.create(
       (channel) => buffer.getChannelData(channel),

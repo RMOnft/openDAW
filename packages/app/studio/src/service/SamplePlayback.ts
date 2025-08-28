@@ -11,6 +11,7 @@ import {
 import { SampleApi } from "./SampleApi";
 import { encodeWavFloat, SampleStorage } from "@opendaw/studio-core";
 
+/** Events emitted by {@link SamplePlayback}. */
 export type PlaybackEvent =
   | {
       type: "idle";
@@ -127,10 +128,12 @@ export class SamplePlayback {
     return this.#linearVolume;
   }
 
+  /** Notify subscribers about a playback event. */
   #notify(uuidAsString: string, event: PlaybackEvent): void {
     this.#notifiers.get(uuidAsString).forEach((procedure) => procedure(event));
   }
 
+  /** Attach listeners to the underlying {@link HTMLAudioElement}. */
   #watchAudio(uuidAsString: string): void {
     this.#audio.onended = () => this.#notify(uuidAsString, { type: "idle" });
     this.#audio.ontimeupdate = () => {
@@ -149,6 +152,7 @@ export class SamplePlayback {
       });
   }
 
+  /** Remove previously attached audio event listeners. */
   #unwatchAudio(): void {
     this.#audio.onended = null;
     this.#audio.onplay = null;

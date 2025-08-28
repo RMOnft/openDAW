@@ -39,6 +39,7 @@ export namespace SampleDialogs {
    * @param importer handler used to register the replacement sample.
    * @param uuid identifier of the missing sample.
    * @param name original name shown to the user.
+   * @returns the sample chosen by the user.
    */
   export const missingSampleDialog = async (
     importer: SampleImporter,
