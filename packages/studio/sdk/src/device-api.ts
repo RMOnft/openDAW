@@ -1,4 +1,11 @@
 /**
+ * High level abstraction for interacting with connected audio and MIDI
+ * hardware.
+ *
+ * @packageDocumentation
+ */
+
+/**
  * Interacts with input and output devices such as audio interfaces or MIDI
  * controllers.
  *

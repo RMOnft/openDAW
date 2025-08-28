@@ -1,3 +1,8 @@
+/**
+ * Utility types and helper functions for working with device boxes.
+ *
+ * @packageDocumentation
+ */
 import { Pointers } from "@opendaw/studio-enums";
 import {
   BooleanField,

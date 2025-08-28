@@ -1,3 +1,8 @@
+/**
+ * Maintains adapters for device parameters and provides lookup utilities.
+ *
+ * @packageDocumentation
+ */
 import {FieldKeys, PointerTypes, PrimitiveField, PrimitiveValues} from "@opendaw/lib-box"
 import {assert, NumberArrayComparator, SortedSet, StringMapping, Terminable, unitValue, ValueMapping} from "@opendaw/lib-std"
 import {AutomatableParameterFieldAdapter} from "./AutomatableParameterFieldAdapter"
