@@ -28,6 +28,9 @@ type Construct = {
 /**
  * Displays and lets the user replace a project cover image.
  *
+ * @param lifecycle - Used to clean up DOM listeners and subscriptions.
+ * @param model - Observable value holding the current cover image data.
+ *
  * @example
  * ```tsx
  * <Cover lifecycle={lifecycle} model={coverModel}/>

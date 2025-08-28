@@ -20,6 +20,9 @@ type Construct = {
 /**
  * Form component for editing project metadata and cover image.
  *
+ * @param lifecycle - Manages subscriptions and DOM listeners.
+ * @param service - Provides access to the current project session.
+ *
  * @example
  * ```tsx
  * <ProjectInfo lifecycle={lifecycle} service={service}/>

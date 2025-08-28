@@ -3,6 +3,8 @@ import { Sample } from "@opendaw/studio-adapters";
 
 /**
  * Interface for importing audio samples into a project.
+ * Implementations are responsible for decoding audio data and persisting
+ * it into the project's sample storage.
  *
  * @example
  * ```ts

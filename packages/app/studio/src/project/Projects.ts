@@ -44,6 +44,9 @@ export namespace Projects {
     /**
      * Store the given project and its metadata.
      *
+     * @param session - Project session containing graph, metadata and cover.
+     * @returns Resolves once all files have been written.
+     *
      * @example
      * ```ts
      * await Projects.saveProject(session)
@@ -64,6 +67,7 @@ export namespace Projects {
      * Load a project's cover image from storage.
      *
      * @param uuid - Identifier of the project to fetch the cover for.
+     * @returns Option containing the cover image buffer or {@link Option.None}.
      */
     export const loadCover = async (uuid: UUID.Format): Promise<Option<ArrayBuffer>> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectCover(uuid))
@@ -75,6 +79,7 @@ export namespace Projects {
      *
      * @param service - Studio service for environment configuration.
      * @param uuid - Identifier of the project to load.
+     * @returns The decoded {@link Project} instance.
      */
     export const loadProject = async (service: StudioService, uuid: UUID.Format): Promise<Project> => {
         return WorkerAgents.Opfs.read(ProjectPaths.projectFile(uuid))
@@ -88,6 +93,8 @@ export namespace Projects {
 
     /**
      * List all stored projects with their metadata.
+     *
+     * @returns Array of project identifiers paired with metadata.
      */
     export const listProjects = async (): Promise<ReadonlyArray<{ uuid: UUID.Format, meta: ProjectMeta }>> => {
         return WorkerAgents.Opfs.list(ProjectPaths.Folder)
@@ -101,6 +108,8 @@ export namespace Projects {
 
     /**
      * Determine which samples are used by all stored projects.
+     *
+     * @returns Set of sample UUID strings referenced by projects.
      */
     export const listUsedSamples = async (): Promise<Set<string>> => {
         const uuids: Array<string> = []
@@ -121,11 +130,16 @@ export namespace Projects {
      * Delete a project and all associated files.
      *
      * @param uuid - Identifier of the project to remove.
+     * @returns Resolves when deletion has completed.
      */
     export const deleteProject = async (uuid: UUID.Format) => WorkerAgents.Opfs.delete(ProjectPaths.projectFolder(uuid))
 
     /**
      * Create a distributable bundle containing the project and samples.
+     *
+     * @param session - Project session to package.
+     * @param progress - Observable receiving progress updates between 0-1.
+     * @returns Array buffer containing the generated zip archive.
      */
     export const exportBundle = async ({uuid, project, meta, cover}: ProjectSession,
                                        progress: MutableObservableValue<unitValue>): Promise<ArrayBuffer> => {
@@ -154,6 +168,10 @@ export namespace Projects {
 
     /**
      * Import a bundle created by {@link exportBundle} and return a new session.
+     *
+     * @param service - Studio service used to configure the new project.
+     * @param arrayBuffer - Binary bundle previously produced by {@link exportBundle}.
+     * @returns Newly created {@link ProjectSession} based on the bundle contents.
      */
     export const importBundle = async (service: StudioService, arrayBuffer: ArrayBuffer): Promise<ProjectSession> => {
         const zip = await JSZip.loadAsync(arrayBuffer)

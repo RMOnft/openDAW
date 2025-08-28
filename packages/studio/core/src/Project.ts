@@ -49,7 +49,12 @@ import { CaptureManager } from "./capture/CaptureManager";
 export class Project
   implements BoxAdaptersContext, Terminable, TerminableOwner
 {
-  /** Creates a brand new project with default boxes. */
+  /**
+   * Creates a brand new project with default boxes.
+   *
+   * @param env - Runtime environment providing services like sample loading.
+   * @returns The newly constructed project instance.
+   */
   static new(env: ProjectEnv): Project {
     const boxGraph = new BoxGraph<BoxIO.TypeMap>(Option.wrap(BoxIO.create));
     const isoString = new Date().toISOString();
@@ -101,14 +106,26 @@ export class Project
     });
   }
 
-  /** Loads a project from its serialized array buffer representation. */
+  /**
+   * Loads a project from its serialized array buffer representation.
+   *
+   * @param env - Runtime environment for the project.
+   * @param arrayBuffer - Binary data previously produced by {@link toArrayBuffer}.
+   * @returns A fully instantiated project.
+   */
   static load(env: ProjectEnv, arrayBuffer: ArrayBuffer): Project {
     const skeleton = ProjectDecoder.decode(arrayBuffer);
     ProjectMigration.migrate(skeleton);
     return new Project(env, skeleton.boxGraph, skeleton.mandatoryBoxes);
   }
 
-  /** Rehydrates a project from its decoded skeleton. */
+  /**
+   * Rehydrates a project from its decoded skeleton.
+   *
+   * @param env - Runtime environment for the project.
+   * @param skeleton - Decoded project structure.
+   * @returns A project based on the provided skeleton.
+   */
   static skeleton(env: ProjectEnv, skeleton: ProjectDecoder.Skeleton): Project {
     ProjectMigration.migrate(skeleton);
     return new Project(env, skeleton.boxGraph, skeleton.mandatoryBoxes);
@@ -235,7 +252,11 @@ export class Project
     };
   }
 
-  /** Serializes the project to an {@link ArrayBuffer}. */
+  /**
+   * Serializes the project to an {@link ArrayBuffer}.
+   *
+   * @returns Binary representation of the current project state.
+   */
   toArrayBuffer(): ArrayBufferLike {
     const output = ByteArrayOutput.create();
     output.writeInt(ProjectDecoder.MAGIC_HEADER_OPEN);
@@ -253,12 +274,18 @@ export class Project
     return output.toArrayBuffer();
   }
 
-  /** Creates a deep copy of the project. */
+  /**
+   * Creates a deep copy of the project.
+   *
+   * @returns A new {@link Project} instance containing cloned data.
+   */
   copy(): Project {
     return Project.load(this.#env, this.toArrayBuffer() as ArrayBuffer);
   }
 
-  /** Terminates all managed resources. */
+  /**
+   * Terminates all managed resources.
+   */
   terminate(): void {
     this.#terminator.terminate();
   }

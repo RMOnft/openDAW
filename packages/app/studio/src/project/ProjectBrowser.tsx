@@ -11,13 +11,21 @@ import {Html} from "@opendaw/lib-dom"
 
 const className = Html.adoptStyleSheet(css, "ProjectBrowser")
 
+/**
+ * Construction options for {@link ProjectBrowser}.
+ */
 type Construct = {
+    /** Service used for project operations like deletion. */
     service: StudioService
+    /** Callback invoked when a project is selected. */
     select: Procedure<[UUID.Format, ProjectMeta]>
 }
 
 /**
  * List of saved projects allowing the user to select or delete entries.
+ *
+ * @param service - Studio service for project operations.
+ * @param select - Callback invoked when the user selects a project.
  *
  * @example
  * ```tsx

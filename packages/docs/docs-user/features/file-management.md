@@ -26,6 +26,12 @@ offline. Developers can dive deeper in the
 2. **Use autosave as a safety net.** openDAW periodically saves in the
    background, but exporting a bundle is the safest way to back up work.
 
+## Edit Project Metadata
+
+- Open the **Info Panel** to change the project name, tags, description and
+  cover image.
+- Changes are applied when an input loses focus or you press <kbd>Enter</kbd>.
+
 ## Export `.odb` Project Bundles
 
 1. **Open the export dialog.** From the main menu select _File → Export_.
