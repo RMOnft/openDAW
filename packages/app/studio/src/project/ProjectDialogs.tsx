@@ -1,5 +1,7 @@
 /**
  * Collection of dialogs used for common project management operations.
+ * See the capture architecture docs for details on recording:
+ * {@link ../../../../docs/docs-dev/architecture/capture/overview.md}.
  */
 import {Dialog} from "@/ui/components/Dialog"
 import {ExportStemsConfiguration, IconSymbol} from "@opendaw/studio-adapters"

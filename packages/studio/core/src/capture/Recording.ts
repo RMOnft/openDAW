@@ -6,9 +6,21 @@ import {AudioUnitType} from "@opendaw/studio-enums"
 import {InstrumentFactories} from "../InstrumentFactories"
 import {Project} from "../Project"
 
+/**
+ * Coordinates the recording lifecycle. This singleton orchestrates capture
+ * preparation, engine state and cleanup across multiple capture sources.
+ */
 export class Recording {
+    /** Whether a recording session is currently active. */
     static get isRecording(): boolean {return this.#isRecording}
 
+    /**
+     * Start a new recording session using the supplied context.
+     *
+     * @param context Runtime objects used during recording.
+     * @param countIn If `true`, the engine performs a count-in before
+     *                recording starts.
+     */
     static async start(context: RecordingContext, countIn: boolean): Promise<Terminable> {
         if (this.#isRecording) {
             return Promise.resolve(Terminable.Empty)
@@ -48,6 +60,10 @@ export class Recording {
         return terminator
     }
 
+    /**
+     * Ensure that at least one capture is armed before recording starts. If no
+     * instruments exist a default Tape instrument will be created.
+     */
     static #prepare({api, captureManager, editing, rootBox, userEditingManager}: Project): void {
         const captures = captureManager.filterArmed()
         const instruments = rootBox.audioUnits.pointerHub.incoming()

@@ -19,7 +19,9 @@ import {Capture} from "./Capture"
 import {RecordTrack} from "./RecordTrack"
 import {ColorCodes} from "../ColorCodes"
 
+/** Utilities for recording MIDI note data. */
 export namespace RecordMidi {
+    /** Context required to start a MIDI recording. */
     type RecordMidiContext = {
         notifier: Notifier<MIDIMessageEvent>,
         engine: Engine,
@@ -27,6 +29,9 @@ export namespace RecordMidi {
         capture: Capture
     }
 
+    /**
+     * Begin recording MIDI events into the project timeline.
+     */
     export const start = ({notifier, engine, project, capture}: RecordMidiContext): Terminable => {
         console.debug("RecordMidi.start")
         const beats = PPQN.fromSignature(1, project.timelineBox.signature.denominator.getValue())

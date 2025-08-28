@@ -7,6 +7,10 @@ import {RecordAudio} from "./RecordAudio"
 import {RecordingContext} from "./RecordingContext"
 import {AudioDevices} from "../AudioDevices"
 
+/**
+ * Handles capturing audio from a {@link MediaStream}. The capture will lazily
+ * create and update the stream based on the selected device and arming state.
+ */
 export class CaptureAudio extends Capture<CaptureAudioBox> {
     readonly #stream: MutableObservableOption<MediaStream>
 
@@ -15,6 +19,11 @@ export class CaptureAudio extends Capture<CaptureAudioBox> {
     #requestChannels: Option<1 | 2> = Option.None
     #gainDb: number = 0.0
 
+    /**
+     * @param manager      Parent {@link CaptureManager}.
+     * @param audioUnitBox Audio unit the capture belongs to.
+     * @param captureBox   Box storing capture configuration.
+     */
     constructor(manager: CaptureManager, audioUnitBox: AudioUnitBox, captureBox: CaptureAudioBox) {
         super(manager, audioUnitBox, captureBox)
 
@@ -43,26 +52,38 @@ export class CaptureAudio extends Capture<CaptureAudioBox> {
         )
     }
 
+    /** Gain to apply to the media stream in decibels. */
     get gainDb(): number {return this.#gainDb}
 
+    /** Observable wrapper around the active `MediaStream`. */
     get stream(): MutableObservableOption<MediaStream> {return this.#stream}
 
+    /** Device id reported by the active {@link MediaStreamTrack}. */
     get streamDeviceId(): Option<string> {
         return this.streamMediaTrack.map(settings => settings.getSettings().deviceId ?? "")
     }
 
+    /** Human readable label of the active input device. */
     get deviceLabel(): Option<string> {
         return this.streamMediaTrack.map(track => track.label ?? "")
     }
 
+    /** First audio track from the current media stream. */
     get streamMediaTrack(): Option<MediaStreamTrack> {
         return this.#stream.flatMap(stream => Option.wrap(stream.getAudioTracks().at(0)))
     }
 
+    /**
+     * Ensure a media stream exists for the current device selection. Called
+     * before a recording session starts.
+     */
     async prepareRecording(_: RecordingContext): Promise<void> {
         return this.#streamGenerator()
     }
 
+    /**
+     * Begin recording the current stream into a {@link RecordingWorklet}.
+     */
     startRecording({audioContext, worklets, project, engine, sampleManager}: RecordingContext): Terminable {
         const streamOption = this.#stream
         assert(streamOption.nonEmpty(), "Stream not prepared.")

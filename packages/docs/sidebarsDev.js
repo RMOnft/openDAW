@@ -59,6 +59,16 @@ module.exports = {
         "architecture/headless-vs-studio",
         "architecture/persistence",
         "architecture/opfs-samples",
+        {
+          type: "category",
+          label: "Capture",
+          items: [
+            "architecture/capture/overview",
+            "architecture/capture/audio",
+            "architecture/capture/midi",
+            "architecture/capture/worklet",
+          ],
+        },
       ],
     },
     {
