@@ -16,6 +16,12 @@ export namespace SampleStorage {
 
     /**
      * Write decoded audio, peaks and metadata to OPFS.
+     *
+     * @param uuid Identifier of the sample being stored.
+     * @param audio Decoded audio buffer to persist as `audio.wav`.
+     * @param peaks Pre‑computed peak data used for waveform rendering.
+     * @param meta Descriptive information written to `meta.json`.
+     * @returns Promise that resolves once all files have been written.
      */
     export const store = async (uuid: UUID.Format,
                                 audio: AudioData,
@@ -35,6 +41,10 @@ export namespace SampleStorage {
 
     /**
      * Overwrite only the metadata file of a stored sample.
+     *
+     * @param uuid Identifier of the sample to update.
+     * @param meta New metadata to persist to disk.
+     * @returns Promise that resolves when the metadata has been written.
      */
     export const updateMeta = async (uuid: UUID.Format, meta: SampleMetaData): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
@@ -43,6 +53,10 @@ export namespace SampleStorage {
 
     /**
      * Load a sample from OPFS and decode it into {@link AudioData} and peaks.
+     *
+     * @param uuid Identifier of the sample to load.
+     * @param context Audio context used for decoding.
+     * @returns Tuple containing decoded audio, peaks and metadata.
      */
     export const load = async (uuid: UUID.Format, context: AudioContext): Promise<[AudioData, Peaks, SampleMetaData]> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
@@ -61,13 +75,21 @@ export namespace SampleStorage {
         }, peaks, meta])
     }
 
-    /** Delete a sample and all related files. */
+    /**
+     * Delete a sample and all related files.
+     *
+     * @param uuid Identifier of the sample to remove from OPFS.
+     */
     export const remove = async (uuid: UUID.Format): Promise<void> => {
         const path = `${Folder}/${UUID.toString(uuid)}`
         return WorkerAgents.Opfs.delete(`${path}`)
     }
 
-    /** List metadata for all stored samples. */
+    /**
+     * List metadata for all stored samples.
+     *
+     * @returns Array containing metadata for each stored sample.
+     */
     export const list = async (): Promise<ReadonlyArray<Sample>> => {
         return WorkerAgents.Opfs.list(Folder)
             .then(files => Promise.all(files.filter(file => file.kind === "directory")

@@ -24,6 +24,7 @@ export namespace SampleUtils {
    * @param boxGraph Graph containing the boxes to inspect.
    * @param importer Utility used to load replacement samples.
    * @param audioManager Manager responsible for caching sample data.
+   * @returns Promise that resolves once verification has finished.
    *
    * @example
    * ```ts

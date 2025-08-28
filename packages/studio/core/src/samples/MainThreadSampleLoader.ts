@@ -92,6 +92,11 @@ export class MainThreadSampleLoader implements SampleLoader {
      *
      * If loading has not yet completed the promise resolves once data becomes
      * available.
+     *
+     * @param zip ZIP archive that receives the sample's audio, peaks and
+     * metadata files.
+     * @returns Promise that resolves when the files have been written to the
+     * archive.
      */
     async pipeFilesInto(zip: JSZip): Promise<void> {
         const exec: Exec = async () => {
