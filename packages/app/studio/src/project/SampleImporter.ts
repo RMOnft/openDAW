@@ -2,7 +2,10 @@ import { Progress, UUID } from "@opendaw/lib-std";
 import { Sample } from "@opendaw/studio-adapters";
 
 /**
- * Interface for importing audio samples into a project.
+ * Interface for converting raw audio files into project samples.
+ *
+ * Implementations typically decode the provided file, generate peak data and
+ * persist the result via {@link SampleStorage}.
  *
  * @example
  * ```ts

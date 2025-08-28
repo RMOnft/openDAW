@@ -1,5 +1,8 @@
 /**
  * Runtime feature detection utilities for the Studio application.
+ *
+ * Security note: these tests run entirely in the browser and do not
+ * transmit any information to remote services.
  */
 import { requireProperty } from "@opendaw/lib-std";
 
@@ -10,6 +13,7 @@ import { requireProperty } from "@opendaw/lib-std";
  * API is unavailable. Keeping the logic centralized ensures that feature
  * requirements stay in sync with the documentation and user messaging.
  *
+ * @public
  * @throws {Error} When a mandatory Web API is missing from the host
  * browser.
  */

@@ -5,8 +5,11 @@ import { isDefined } from "@opendaw/lib-std";
 
 /** Normalized representation of diverse error events. */
 export type ErrorInfo = {
+  /** Name of the error type. */
   name: string;
+  /** Optional human-readable error message. */
   message?: string;
+  /** Raw stack trace if available. */
   stack?: string;
 };
 
@@ -28,6 +31,7 @@ export namespace ErrorInfo {
       if (reason instanceof Error) {
         if (!isDefined(reason.stack)) {
           try {
+            // Re-throwing captures a stack when one isn't present.
             // noinspection ExceptionCaughtLocallyJS
             throw reason;
           } catch (error) {

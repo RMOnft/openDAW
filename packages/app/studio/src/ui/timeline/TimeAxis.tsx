@@ -20,7 +20,10 @@ const className = Html.adoptStyleSheet(css, "time-axis")
 const MIN_TRACK_DURATION = 8 * PPQN.Bar
 const MAX_TRACK_DURATION = 1024 * PPQN.Bar
 
-/** Parameters for constructing {@link TimeAxis}. */
+/** Parameters for constructing {@link TimeAxis}. 
+ *
+ * @public
+ */
 export type Construct = {
     /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle

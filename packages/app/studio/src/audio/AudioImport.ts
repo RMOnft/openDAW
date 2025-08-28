@@ -30,6 +30,7 @@ export namespace AudioImporter {
    *
    * @param context Audio context used for decoding.
    * @param creation Parameters describing the file to import.
+   * @returns Metadata describing the stored sample.
    */
   export const run = async (
     context: AudioContext,

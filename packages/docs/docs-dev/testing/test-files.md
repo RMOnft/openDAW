@@ -5,10 +5,10 @@ cover common scenarios and are used across packages for development and regressi
 
 | File | Description |
 | --- | --- |
-| `all-devices.od` | OpenDAW project exercising a wide range of built-in devices. |
+| `all-devices.od` | OpenDAW project exercising a wide range of built-in devices; used by exporter integration tests. |
 | `eq.dawproject` | DAWproject fixture containing EQ settings. |
 | `note-regions.dawproject` | Demonstrates note regions across tracks. |
-| `automation.dawproject` | Includes parameter automation curves. |
+| `automation.dawproject` | Includes parameter automation curves for automation tests. |
 | `audio-regions.dawproject` | Contains audio regions with linked media. |
 | `bitwig.example.xml` | Minimal Bitwig project used for parser tests. |
 

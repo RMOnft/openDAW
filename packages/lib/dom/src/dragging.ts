@@ -22,8 +22,15 @@ import { Events, PointerCaptureTarget } from "./events";
 import { Keyboard } from "./keyboard";
 
 export namespace Dragging {
+  /**
+   * Callbacks controlling the lifecycle of a drag interaction.
+   */
   export interface Process {
-    /** Receives updated pointer information. */
+    /**
+     * Receives updated pointer information.
+     *
+     * @param event Normalised pointer movement data.
+     */
     update(event: Event): void;
     /** Invoked when the drag is cancelled. */
     cancel?(): void;
@@ -56,7 +63,7 @@ export namespace Dragging {
 
   /**
    * Attaches pointer listeners to `target` and creates a dragging lifecycle
-   * managed by a `Process` instance produced by `factory`.
+   * managed by a {@link Process} instance produced by `factory`.
    *
    * @param target Element initiating the pointer interaction.
    * @param factory Produces a {@link Process} for the drag sequence.

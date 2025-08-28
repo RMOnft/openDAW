@@ -14,7 +14,12 @@ export namespace AudioUnitExportLayout {
         children: Array<Track>
     }
 
-    /** Build a hierarchy of tracks from the current set of audio units. */
+    /**
+     * Build a hierarchy of tracks from the current set of audio units.
+     *
+     * @param audioUnits - All audio unit boxes to arrange.
+     * @returns Ordered track hierarchy describing the signal flow.
+     */
     export const layout = (audioUnits: ReadonlyArray<AudioUnitBox>): Array<Track> => {
         const feedsInto = new ArrayMultimap<AudioUnitBox, AudioUnitBox>()
         audioUnits.forEach(unit => {
@@ -49,6 +54,14 @@ export namespace AudioUnitExportLayout {
             .filter(isDefined)
     }
 
+    /**
+     * Recursively assemble a track tree starting at the given audio unit.
+     *
+     * @param audioUnit - The root audio unit for this branch.
+     * @param feedsInto - Mapping of downstream connections.
+     * @param visited - Set used to break cycles.
+     * @returns The assembled track node or `null` when a cycle is detected.
+     */
     const buildTrackRecursive = (audioUnit: AudioUnitBox,
                                  feedsInto: ArrayMultimap<AudioUnitBox, AudioUnitBox>,
                                  visited: Set<AudioUnitBox>): Nullable<Track> => {
@@ -65,6 +78,9 @@ export namespace AudioUnitExportLayout {
 
     /**
      * Debug helper that logs the computed track hierarchy to the console.
+     *
+     * @param tracks - The track layout produced by {@link layout}.
+     * @param indent - Current indentation level (used internally).
      */
     export const printTrackStructure = (tracks: ReadonlyArray<Track>, indent = 0): void => {
         const spaces = " ".repeat(indent)

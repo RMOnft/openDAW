@@ -22,6 +22,8 @@ export default defineConfig(({ command }) => {
       },
     },
     build: {
+      // Code splitting approach mirrors the studio; see
+      // packages/docs/docs-dev/build-and-run/code-splitting.md
       target: supportedBrowsers,
     },
     esbuild: {

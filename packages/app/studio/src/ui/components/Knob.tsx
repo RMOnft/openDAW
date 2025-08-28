@@ -51,7 +51,15 @@ export interface KnobProps {
     design?: Design
 }
 
-/** Circular control representing a continuous parameter value. */
+/**
+ * Circular control representing a continuous parameter value.
+ *
+ * @param lifecycle lifecycle owner for subscriptions
+ * @param value parameter controlling the knob
+ * @param anchor anchor position for the indicator
+ * @param color optional color of the knob
+ * @param design custom visual design
+ */
 export const Knob = ({lifecycle, value, anchor, color, design}: KnobProps) => {
     const {radius, trackWidth, angleOffset, indicator: [min, max], indicatorWidth} = design ?? DefaultDesign
 

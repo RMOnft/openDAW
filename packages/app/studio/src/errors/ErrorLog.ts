@@ -14,7 +14,12 @@ export type ErrorLog = {
   agent: string;
   /** Build information for the running application. */
   build: BuildInfo;
-  /** Number of script tags present on the page. */
+  /**
+   * Number of `<script>` elements on the current page.
+   *
+   * A higher count than expected can hint at browser extensions
+   * injecting code and causing interference.
+   */
   scripts: int;
   /** Normalized error information. */
   error: ErrorInfo;

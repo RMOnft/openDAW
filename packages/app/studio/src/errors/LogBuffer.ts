@@ -10,14 +10,19 @@ import { int } from "@opendaw/lib-std";
 export namespace LogBuffer {
   /** Single console log entry preserved for debugging. */
   export type Entry = {
+    /** Timestamp in milliseconds since epoch when the log was recorded. */
     time: number;
+    /** Console severity level for the entry. */
     level: "debug" | "info" | "warn";
+    /** Arguments forwarded to the original console method. */
     args: Array<string>;
   };
 
   const logBuffer: Entry[] = [];
 
   if (import.meta.env.PROD) {
+    // Upper bound for the number of argument strings stored to avoid
+    // unbounded memory usage in long running sessions.
     let estimatedSize: int = 0;
     const MAX_ARGS_SIZE = 100_000;
     const pushLog = (level: Entry["level"], args: unknown[]) => {
@@ -69,6 +74,7 @@ export namespace LogBuffer {
         // Last resort fallback
         return Object.prototype.toString.call(value);
       } catch {
+        // Catch and mark values that throw during conversion.
         return "[unserializable]";
       }
     };

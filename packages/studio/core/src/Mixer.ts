@@ -31,6 +31,12 @@ export class Mixer implements Terminable {
     readonly #virtualSolo: Set<AudioUnitBoxAdapter>
     readonly #deferUpdate: DeferExec
 
+    /**
+     * Creates a new mixer instance that observes the given channel adapters and
+     * manages their mute and solo states.
+     *
+     * @param audioUnits - collection of channel strip adapters to manage
+     */
     constructor(audioUnits: IndexedBoxAdapterCollection<AudioUnitBoxAdapter, Pointers.AudioUnits>) {
         this.#states = UUID.newSet(({adapter: {uuid}}) => uuid)
         this.#solo = new Set()

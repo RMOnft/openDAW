@@ -4,8 +4,13 @@
  * Properties required to load a custom font.
  */
 export type FontFaceProperties = {
+  /** Name used to reference the font in CSS. */
   "font-family": string;
+  /** Font style variant. */
   "font-style": "normal" | "italic" | "oblique";
+  /**
+   * Weight numeric value or keyword accepted by the `FontFace` constructor.
+   */
   "font-weight":
     | 100
     | 200
@@ -21,6 +26,7 @@ export type FontFaceProperties = {
     | "bold"
     | "bolder"
     | "lighter";
+  /** URL pointing to the font resource. */
   src: string;
 };
 
@@ -37,8 +43,11 @@ export type FontFaceProperties = {
  * });
  * document.body.style.fontFamily = "MyFont";
  * ```
+ *
+ * @param properties Font description and source URL.
+ * @returns Promise resolving once the font is loaded and registered.
  */
-export const loadFont = async (properties: FontFaceProperties) => {
+export const loadFont = async (properties: FontFaceProperties): Promise<void> => {
   try {
     const response = await fetch(properties.src, { credentials: "omit" });
     const fontData = await response.arrayBuffer();

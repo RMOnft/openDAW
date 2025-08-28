@@ -14,12 +14,14 @@ import {Colors, Project} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "AuxSendGroup")
 
+/** Internal bookkeeping for a rendered send entry. */
 type AuxSendEntry = {
     uuid: UUID.Format
     element: HTMLElement
     terminator: Terminator
 }
 
+/** Props for {@link AuxSendGroup}. */
 type Construct = {
     lifecycle: Lifecycle
     project: Project

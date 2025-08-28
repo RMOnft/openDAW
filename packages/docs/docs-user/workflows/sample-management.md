@@ -9,6 +9,8 @@ This guide explains how to organize and edit audio samples within the browser:
    information. Changes are stored locally.
 4. **Delete** – select one or more local samples and press <kbd>Delete</kbd> to remove
    them. Samples in use by a project cannot be deleted while offline.
+5. **Replace** – if a project references a missing sample, a dialog lets you choose a
+   new audio file to take its place.
 
 These tools help keep your library tidy and make it easy to audition sounds before
 bringing them into a project.

@@ -1,5 +1,7 @@
 /**
  * Public interfaces for controlling the audio engine and reacting to note events.
+ *
+ * @packageDocumentation
  */
 import {ppqn} from "@opendaw/lib-dsp"
 import {

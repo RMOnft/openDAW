@@ -25,3 +25,5 @@ The [`SampleStorage` namespace](../../../packages/studio/core/src/samples/Sample
 4. `SampleStorage.list` enumerates stored samples for the **Sample Browser**.
 
 Clients may call `SampleStorage.remove` to free space or `SampleStorage.updateMeta` to adjust metadata without touching the audio.
+
+The `MainThreadSampleManager` uses a `SampleProvider` (such as `SampleApi`) to fetch audio when it cannot be found locally. Once retrieved, `MainThreadSampleLoader` persists the data back to OPFS via `SampleStorage` so subsequent requests are served from disk rather than the network.
