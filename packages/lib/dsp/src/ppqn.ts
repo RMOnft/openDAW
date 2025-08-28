@@ -1,5 +1,10 @@
-// Pulses per quarter note (PPQN)
-// 960 = 3*5*2^6
+/**
+ * Utilities and constants for pulses per quarter note (PPQN).
+ * A single bar in 4/4 time consists of 3,840 pulses where a quarter note equals
+ * 960 pulses (3 × 5 × 2^6).
+ *
+ * @public
+ */
 
 import {int} from "@opendaw/lib-std"
 
@@ -17,6 +22,7 @@ const SemiQuaver = Quarter >>> 2 // 240
  *
  * @param nominator - Beats per bar.
  * @param denominator - Note value representing one beat.
+ * @returns Total pulses per bar.
  */
 const fromSignature = (nominator: int, denominator: int) => Math.floor(Bar / denominator) * nominator
 /**
@@ -25,6 +31,7 @@ const fromSignature = (nominator: int, denominator: int) => Math.floor(Bar / den
  * @param ppqn - Pulse count to decompose.
  * @param nominator - Beats per bar.
  * @param denominator - Note value representing one beat.
+ * @returns Decomposed musical components.
  */
 const toParts = (ppqn: ppqn, nominator: int = 4, denominator: int = 4) => {
     const lowerPulses = fromSignature(1, denominator)

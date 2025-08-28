@@ -60,6 +60,7 @@ const location = new DefaultObservableValue(SampleLocation.Cloud);
  *
  * @param lifecycle lifecycle controlling subscriptions
  * @param service access to studio level services
+ * @returns rendered element for inclusion in the DOM
  */
 export const SampleBrowser = ({ lifecycle, service }: Construct) => {
   lifecycle.own({ terminate: () => service.samplePlayback.eject() });

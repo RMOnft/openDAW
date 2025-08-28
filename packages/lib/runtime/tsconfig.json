@@ -1,17 +1,12 @@
 {
+  "//": "TypeScript config for the runtime library. Bundling details: packages/docs/docs-dev/build-and-run/code-splitting.md",
   "extends": "@opendaw/typescript-config/tsconfig.build.json",
   "compilerOptions": {
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable",
-      "DOM.AsyncIterable"
-    ],
+    // Browser and async iterator libs are required by runtime utilities.
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
+    // Output compiled files to dist and keep sources under src.
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }

@@ -3,6 +3,8 @@
  *
  * The component renders a device header, delegates menu and control creation,
  * and wires up drag-and-drop reordering for effect devices.
+ *
+ * @packageDocumentation
  */
 import css from "./DeviceEditor.sass?inline"
 import {Lifecycle, ObservableValue, Procedure, Provider} from "@opendaw/lib-std"
@@ -21,6 +23,9 @@ import {Colors, Project} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "DeviceEditor")
 
+/**
+ * Returns the color used for the editor's header based on device type.
+ */
 const getColorFor = (type: DeviceType) => {
     switch (type) {
         case "midi-effect":
@@ -33,6 +38,7 @@ const getColorFor = (type: DeviceType) => {
     }
 }
 
+/** Parameters required to construct a {@link DeviceEditor}. */
 type Construct = {
     lifecycle: Lifecycle
     project: Project
@@ -44,6 +50,9 @@ type Construct = {
     icon: IconSymbol
 }
 
+/**
+ * Creates a label element bound to the box's label field.
+ */
 const defaultLabelFactory = (lifecycle: Lifecycle, labelField: StringField): Provider<JsxValue> =>
     () => {
         const label: HTMLElement = <h1/>
@@ -54,6 +63,9 @@ const defaultLabelFactory = (lifecycle: Lifecycle, labelField: StringField): Pro
         return label
     }
 
+/**
+ * Renders an editor for the given device box.
+ */
 export const DeviceEditor =
     ({lifecycle, project, adapter, populateMenu, populateControls, populateMeter, createLabel, icon}: Construct) => {
         const {editing} = project

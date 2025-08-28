@@ -163,3 +163,13 @@ export class DelayDeviceProcessor
     return `{${this.constructor.name} (${this.#id})}`;
   }
 }
+
+/** Parameter table for {@link DelayDeviceProcessor}. */
+export const DelayDeviceProcessorParamTable = [
+  { param: "delay", type: "number", description: "Delay offset selection index." },
+  { param: "feedback", type: "number", description: "Feedback amount between repeats." },
+  { param: "cross", type: "number", description: "Cross‑channel feedback level." },
+  { param: "filter", type: "number", description: "Filter balance for high/low pass." },
+  { param: "dry", type: "number", description: "Dry mix level in decibels." },
+  { param: "wet", type: "number", description: "Wet mix level in decibels." },
+] as const;

@@ -92,3 +92,6 @@ export class NopDeviceProcessor
     return `{${this.constructor.name} (${this.#id})`;
   }
 }
+
+/** Parameter table for {@link NopDeviceProcessor}. */
+export const NopDeviceProcessorParamTable = [] as const;

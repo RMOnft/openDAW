@@ -134,3 +134,6 @@ export class ZeitgeistDeviceProcessor
   handleEvent(_block: Readonly<Block>, _event: Event): void {}
   processEvents(_block: Readonly<Block>, _from: number, _to: number): void {}
 }
+
+/** Parameter table for {@link ZeitgeistDeviceProcessor}. */
+export const ZeitgeistDeviceProcessorParamTable = [] as const;

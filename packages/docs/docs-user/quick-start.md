@@ -15,5 +15,7 @@ For writing or editing tips, consult the
 [Writing Guide](../docs-dev/style/writing-guide.md). For a technical
 overview of how the studio boots, see the
 [bootstrapping architecture doc](../docs-dev/architecture/bootstrap.md).
+To understand how code is split during the build, read the
+[code splitting guide](../docs-dev/build-and-run/code-splitting.md).
 To tweak default behaviour of the application, refer to the
 [Configuration Overview](../docs-dev/configuration/overview.md).

@@ -126,3 +126,12 @@ export class ReverbDeviceProcessor
     return `{${this.constructor.name} (${this.#id})`;
   }
 }
+
+/** Parameter table for {@link ReverbDeviceProcessor}. */
+export const ReverbDeviceProcessorParamTable = [
+  { param: "decay", type: "number", description: "Room decay time coefficient." },
+  { param: "preDelay", type: "number", description: "Predelay time before reverberation." },
+  { param: "damp", type: "number", description: "High‑frequency damping amount." },
+  { param: "wet", type: "number", description: "Wet mix level in decibels." },
+  { param: "dry", type: "number", description: "Dry mix level in decibels." },
+] as const;

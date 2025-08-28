@@ -46,7 +46,11 @@ export class AuxSendProcessor extends AudioProcessor implements Processor, Audio
     /** Clears the output buffer. */
     reset(): void {this.#audioOutput.clear()}
 
-    /** Exposes the backing adapter for external wiring. */
+    /**
+     * Exposes the backing adapter controlling this send.
+     *
+     * @returns adapter providing access to the underlying box parameters
+     */
     get adapter(): AuxSendBoxAdapter {return this.#adapter}
 
     /**

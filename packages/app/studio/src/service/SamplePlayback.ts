@@ -63,6 +63,9 @@ export class SamplePlayback {
   /**
    * Toggle playback of a given sample. If it is currently playing it will
    * stop, otherwise it will buffer and start playback.
+   *
+   * @param uuidAsString identifier of the sample to play
+   * @returns void
    */
   toggle(uuidAsString: string): void {
     if (this.#current.contains(uuidAsString)) {
@@ -104,7 +107,10 @@ export class SamplePlayback {
     }
   }
 
-  /** Stop playback and reset the internal state. */
+  /** Stop playback and reset the internal state.
+   *
+   * @returns void
+   */
   eject(): void {
     this.#current.ifSome((uuid) => this.#notify(uuid, { type: "idle" }));
     this.#current = Option.None;
@@ -114,6 +120,10 @@ export class SamplePlayback {
 
   /**
    * Subscribe to playback events for a particular sample.
+   *
+   * @param uuidAsString identifier of the sample to observe
+   * @param procedure callback invoked with playback events
+   * @returns subscription that can be terminated to stop updates
    */
   subscribe(
     uuidAsString: string,

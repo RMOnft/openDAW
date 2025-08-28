@@ -15,7 +15,8 @@ import {
  * Union of all effect device boxes supported by the studio.
  *
  * Effects can be inserted or reached via sends using
- * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}.
+ * {@link @opendaw/studio-enums#AudioSendRouting | AudioSendRouting}. Unknown
+ * entries ensure forward compatibility with future devices.
  *
  * @public
  */

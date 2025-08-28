@@ -6,6 +6,10 @@ import {Sample} from "@opendaw/studio-adapters"
  * These complement the {@link SessionService} lifecycle and other session
  * oriented services.
  *
+ * @remarks
+ * The set is intentionally small but can grow as new UI elements are
+ * introduced.
+ *
  * ```mermaid
  * classDiagram
  *   class StudioSignal
