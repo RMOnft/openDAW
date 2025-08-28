@@ -21,7 +21,7 @@ const MIN_TRACK_DURATION = 8 * PPQN.Bar
 const MAX_TRACK_DURATION = 1024 * PPQN.Bar
 
 /** Parameters for constructing {@link TimeAxis}. */
-type Construct = {
+export type Construct = {
     /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle
     /** Service providing access to engine and project. */
@@ -34,7 +34,11 @@ type Construct = {
     mapper?: TimeAxisCursorMapper
 }
 
-/** Maps playback position to a different pulse value when drawing the cursor. */
+/**
+ * Maps playback position to a different pulse value when drawing the cursor.
+ *
+ * @public
+ */
 export interface TimeAxisCursorMapper {
     mapPlaybackCursor(position: ppqn): ppqn
 }
@@ -47,6 +51,8 @@ export interface TimeAxisCursorMapper {
  * @param snapping - Snap settings for cursor interactions.
  * @param range - Range object describing current viewport.
  * @param mapper - Optional mapper for custom cursor rendering.
+ *
+ * @public
  */
 export const TimeAxis = ({lifecycle, service, snapping, range, mapper}: Construct) => {
     let endMarkerPosition: Nullable<ppqn> = null

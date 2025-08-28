@@ -10,8 +10,11 @@ import {Colors} from "@opendaw/studio-core"
 
 const className = Html.adoptStyleSheet(css, "SnapSelector")
 
-type Construct = {
+/** Parameters for constructing {@link SnapSelector}. */
+export type Construct = {
+    /** Lifecycle managing subscriptions. */
     lifecycle: Lifecycle
+    /** Snap settings that provide available options. */
     snapping: Snapping
 }
 
@@ -22,6 +25,8 @@ type Construct = {
  * ```tsx
  * <SnapSelector lifecycle={lifecycle} snapping={snapping} />
  * ```
+ *
+ * @public
  */
 export const SnapSelector = ({lifecycle, snapping}: Construct) => {
     const snappingName = Inject.value(snapping.unit.name)

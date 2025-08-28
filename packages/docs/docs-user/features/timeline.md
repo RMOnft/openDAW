@@ -28,6 +28,19 @@ Drag handles on the navigation bar to resize the visible range. Double-click
 the end marker on the time axis to set the project length. Scroll the mouse
 wheel over the time axis to zoom and pan.
 
+## Tempo
+
+The transport header shows the current BPM and time signature. Double‑click
+either value to enter a new tempo or meter. The timeline grid adapts
+immediately to these changes.
+
+```ts
+import {PPQN} from "@opendaw/lib-dsp";
+
+// Seconds per bar at 128 BPM
+const barSeconds = PPQN.pulsesToSeconds(PPQN.Bar, 128);
+```
+
 ## Example Integration
 
 ```ts

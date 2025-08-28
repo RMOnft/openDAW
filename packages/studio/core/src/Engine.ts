@@ -18,6 +18,8 @@ import {Project} from "./Project"
 
 /**
  * Event describing a note-on or note-off trigger emitted by the engine.
+ *
+ * @public
  */
 export type NoteTrigger =
     | { type: "note-on", uuid: UUID.Format, pitch: byte, velocity: unitValue }
@@ -25,6 +27,8 @@ export type NoteTrigger =
 
 /**
  * Abstraction of the playback engine exposing transport and sequencing control.
+ *
+ * @public
  */
 export interface Engine extends Terminable {
     /** Starts playback. */

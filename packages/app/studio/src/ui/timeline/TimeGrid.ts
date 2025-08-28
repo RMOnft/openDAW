@@ -8,10 +8,15 @@ import {TimelineRange} from "@/ui/timeline/TimelineRange.ts"
 
 /** Utilities for iterating over timeline grid divisions. */
 export namespace TimeGrid {
+    /**
+     * Time signature expressed as `[nominator, denominator]`.
+     */
     export type Signature = [int, int]
     /** Optional parameters for {@link fragment}. */
     export type Options = { minLength?: number }
+    /** Information about a single grid fragment. */
     export type Fragment = { bars: int, beats: int, ticks: int, isBar: boolean, isBeat: boolean, pulse: number }
+    /** Callback invoked for each grid fragment. */
     export type Designer = (fragment: Fragment) => void
 
     /**

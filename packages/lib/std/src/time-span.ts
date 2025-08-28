@@ -3,15 +3,25 @@
  */
 import { int, Unhandled } from "./lang";
 
+/**
+ * Represents a span of time with millisecond precision and provides
+ * convenient factory methods and conversions.
+ */
 export class TimeSpan {
+  /** Time span representing positive infinity. */
   static readonly POSITIVE_INFINITY = new TimeSpan(Number.POSITIVE_INFINITY);
+  /** Creates a span from milliseconds. */
   static readonly millis = (value: number) => new TimeSpan(value);
+  /** Creates a span from seconds. */
   static readonly seconds = (value: number) =>
     new TimeSpan(value * TimeSpan.#MILLI_SECONDS_PER_SECOND);
+  /** Creates a span from minutes. */
   static readonly minutes = (value: number) =>
     new TimeSpan(value * TimeSpan.#MILLI_SECONDS_PER_MINUTE);
+  /** Creates a span from hours. */
   static readonly hours = (value: number) =>
     new TimeSpan(value * TimeSpan.#MILLI_SECONDS_PER_HOUR);
+  /** Creates a span from days. */
   static readonly days = (value: number) =>
     new TimeSpan(value * TimeSpan.#MILLI_SECONDS_PER_DAY);
 
@@ -26,21 +36,27 @@ export class TimeSpan {
     this.#ms = ms;
   }
 
+  /** Returns the span in milliseconds. */
   millis(): number {
     return this.#ms;
   }
+  /** Absolute value in seconds. */
   absSeconds(): number {
     return Math.abs(this.#ms) / TimeSpan.#MILLI_SECONDS_PER_SECOND;
   }
+  /** Absolute value in minutes. */
   absMinutes(): number {
     return Math.abs(this.#ms) / TimeSpan.#MILLI_SECONDS_PER_MINUTE;
   }
+  /** Absolute value in hours. */
   absHours(): number {
     return Math.abs(this.#ms) / TimeSpan.#MILLI_SECONDS_PER_HOUR;
   }
+  /** Absolute value in days. */
   absDays(): number {
     return Math.abs(this.#ms) / TimeSpan.#MILLI_SECONDS_PER_DAY;
   }
+  /** Splits the span into days, hours, minutes and seconds. */
   split(): { d: int; h: int; m: int; s: int } {
     return {
       d: Math.floor(this.absDays()),
@@ -49,15 +65,19 @@ export class TimeSpan {
       s: Math.floor(this.absSeconds()) % 60,
     };
   }
+  /** Checks whether the span equals zero. */
   isNow(): boolean {
     return this.#ms === 0.0;
   }
+  /** Checks whether the span is negative. */
   isPast(): boolean {
     return this.#ms < 0.0;
   }
+  /** Checks whether the span is positive. */
   isFuture(): boolean {
     return this.#ms > 0.0;
   }
+  /** Formats the span as a relative unit string such as `2 minutes`. */
   toUnitString(): string {
     let value: number, unit: Intl.RelativeTimeFormatUnit;
     const seconds = Math.floor(Math.abs(this.#ms) / 1000);
@@ -82,6 +102,7 @@ export class TimeSpan {
       style: "long",
     }).format(value * Math.sign(this.#ms), unit);
   }
+  /** Human readable representation such as `1 h, 2 m`. */
   toString(): string {
     if (isNaN(this.#ms)) {
       return "NaN";
@@ -132,3 +153,4 @@ export class TimeSpan {
     }
   };
 }
+

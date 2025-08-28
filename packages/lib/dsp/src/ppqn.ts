@@ -6,10 +6,26 @@ import {int} from "@opendaw/lib-std"
 /** Musical position expressed in pulses per quarter note. */
 export type ppqn = number
 
+/** Pulses contained in one quarter note. */
 const Quarter = 960 as const
+/** Pulses contained in a 4/4 bar. */
 const Bar = Quarter << 2 // 3_840
+/** Pulses contained in a semiquaver. */
 const SemiQuaver = Quarter >>> 2 // 240
+/**
+ * Calculates pulses for a time signature.
+ *
+ * @param nominator - Beats per bar.
+ * @param denominator - Note value representing one beat.
+ */
 const fromSignature = (nominator: int, denominator: int) => Math.floor(Bar / denominator) * nominator
+/**
+ * Breaks a pulse value down into musical parts.
+ *
+ * @param ppqn - Pulse count to decompose.
+ * @param nominator - Beats per bar.
+ * @param denominator - Note value representing one beat.
+ */
 const toParts = (ppqn: ppqn, nominator: int = 4, denominator: int = 4) => {
     const lowerPulses = fromSignature(1, denominator)
     const beats = Math.floor(ppqn / lowerPulses)
@@ -26,9 +42,13 @@ const toParts = (ppqn: ppqn, nominator: int = 4, denominator: int = 4) => {
     } as const
 }
 
+/** Converts seconds to pulses for a given tempo. */
 const secondsToPulses = (seconds: number, bpm: number): ppqn => seconds * bpm / 60.0 * Quarter
+/** Converts pulses to seconds for a given tempo. */
 const pulsesToSeconds = (pulses: ppqn, bpm: number): number => (pulses * 60.0 / Quarter) / bpm
+/** Converts sample counts to pulses. */
 const samplesToPulses = (samples: number, bpm: number, sampleRate: number): ppqn => secondsToPulses(samples / sampleRate, bpm)
+/** Converts pulses to sample counts. */
 const pulsesToSamples = (pulses: ppqn, bpm: number, sampleRate: number): number => pulsesToSeconds(pulses, bpm) * sampleRate
 
 /** Utility conversions for {@link ppqn} timing. */
