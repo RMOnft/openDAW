@@ -220,3 +220,13 @@ export class ArpeggioDeviceProcessor
     return this.#adapter;
   }
 }
+
+/** Parameter table for {@link ArpeggioDeviceProcessor}. */
+export const ArpeggioDeviceProcessorParamTable = [
+  { param: "modeIndex", type: "int", description: "Arpeggio pattern selection." },
+  { param: "rate", type: "int", description: "Playback rate as note division." },
+  { param: "gate", type: "number", description: "Gate length of each note." },
+  { param: "repeat", type: "int", description: "Number of repeats for each note." },
+  { param: "numOctaves", type: "int", description: "Number of octave transpositions." },
+  { param: "velocity", type: "int", description: "Velocity scaling applied to notes." },
+] as const;

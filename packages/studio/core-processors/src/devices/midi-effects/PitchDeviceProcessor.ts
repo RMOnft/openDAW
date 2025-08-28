@@ -139,3 +139,10 @@ export class PitchDeviceProcessor
     return this.#adapter;
   }
 }
+
+/** Parameter table for {@link PitchDeviceProcessor}. */
+export const PitchDeviceProcessorParamTable = [
+  { param: "octaves", type: "int", description: "Pitch shift in octaves." },
+  { param: "semiTones", type: "int", description: "Pitch shift in semitones." },
+  { param: "cent", type: "number", description: "Fine tuning in cents." },
+] as const;
