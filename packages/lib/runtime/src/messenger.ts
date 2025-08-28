@@ -64,6 +64,9 @@ export type Messenger = Observable<any> & Terminable & {
     channel(name: string): Messenger
 }
 
+/**
+ * Default {@link Messenger} implementation forwarding messages to a {@link Port}.
+ */
 class NativeMessenger implements Messenger {
     readonly #port: Port
     readonly #notifier = new Notifier<any>()
@@ -107,6 +110,9 @@ class NativeMessenger implements Messenger {
     }
 }
 
+/**
+ * Logical sub-channel that filters messages by name.
+ */
 class Channel implements Messenger {
     readonly #messages: Messenger
     readonly #name: string

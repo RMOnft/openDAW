@@ -13,15 +13,31 @@ export namespace SyncStream {
     WRITTEN,
   }
 
+  /**
+   * Exposes a method that attempts to write structured data into a shared buffer.
+   */
   export interface Writer {
+    /** Attempts to serialise a value into the buffer. */
     readonly tryWrite: Provider<boolean>;
   }
 
+  /**
+   * Represents the reading side of a synchronous stream.
+   */
   export interface Reader {
+    /** Shared buffer populated by a corresponding {@link Writer}. */
     readonly buffer: SharedArrayBuffer;
+    /** Attempts to read and deserialize the next value. */
     readonly tryRead: Provider<boolean>;
   }
 
+  /**
+   * Creates a {@link Writer} that serialises objects of type `T` into the provided buffer.
+   *
+   * @param io - Schema used to encode objects.
+   * @param buffer - Shared memory backing the stream.
+   * @param populate - Function that fills the schema's object prior to writing.
+   */
   export const writer = <T extends object>(
     io: Schema.IO<T>,
     buffer: SharedArrayBuffer,
@@ -50,6 +66,13 @@ export namespace SyncStream {
     };
   };
 
+  /**
+   * Creates a {@link Reader} that deserialises objects of type `T` from a shared buffer.
+   *
+   * @param io - Schema used to decode objects.
+   * @param procedure - Callback receiving each decoded instance.
+   * @returns Reader exposing the shared buffer and a polling function.
+   */
   export const reader = <T extends object>(
     io: Schema.IO<T>,
     procedure: Procedure<T>,

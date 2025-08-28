@@ -177,6 +177,10 @@ export namespace Communicator {
     };
   }
 
+  /**
+   * Executes protocol functions received from a remote {@link Sender}.
+   * Instances are created via {@link Communicator.executor}.
+   */
   export class Executor<PROTOCOL> implements Terminable {
     readonly #messenger: Messenger;
     readonly #protocol: PROTOCOL;
@@ -256,36 +260,53 @@ export namespace Communicator {
       this.#messenger.send({ type: "callback", returnId, funcAt: func, args });
   }
 
+  /**
+   * Message describing a function call.
+   */
   type Send<T> = {
+    /** Discriminator indicating a call request. */
     type: "send";
+    /** Name of the function to invoke on the executor. */
     func: keyof T;
+    /** Serialised arguments for the function. */
     args: Arg[];
+    /** Identifier used to correlate promises or `false` for fire-and-forget. */
     returnId: int | false;
   };
 
+  /** Message sent to execute a callback previously passed as an argument. */
   type Callback = {
     type: "callback";
+    /** Index of the original callback argument. */
     funcAt: int;
+    /** Arguments forwarded to the callback. */
     args: Arg[];
+    /** Identifier linking back to the originating call. */
     returnId: int;
   };
 
+  /** Response resolving a pending call. */
   type Resolve = {
     type: "resolve";
+    /** Value returned by the remote execution. */
     resolve: any;
     returnId: int;
   };
 
+  /** Response rejecting a pending call. */
   type Reject = {
     type: "reject";
+    /** Reason supplied by the remote execution. */
     reject: any;
     returnId: int;
   };
 
+  /** Internal bookkeeping for outstanding calls. */
   type Return = {
     executorTuple: ExecutorTuple<any>;
     callbacks?: Map<int, Function>;
   };
 
+  /** Either a plain value or a placeholder for a callback argument. */
   type Arg = { value: any } | { callback: int };
 }
