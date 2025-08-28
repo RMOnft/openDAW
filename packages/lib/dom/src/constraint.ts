@@ -18,6 +18,9 @@ export namespace ConstrainDOM {
    * const value = ConstrainDOM.resolveString(constraint);
    * // value === "video,audio"
    * ```
+   *
+   * @param constrain Constraint value to resolve.
+   * @returns Comma separated string representation or `undefined`.
    */
   export const resolveString = (
     constrain: Nullish<ConstrainDOMString>,
