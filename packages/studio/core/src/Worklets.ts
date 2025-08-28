@@ -15,7 +15,13 @@ import {RenderQuantum} from "./RenderQuantum"
  * engine control and recording.
  */
 export class Worklets {
-    /** Loads the bundled worklet processors into the given audio context. */
+    /**
+     * Loads the bundled worklet processors into the given audio context.
+     *
+     * @param context - Audio context to register processors with.
+     * @param workletURL - URL pointing at the compiled worklet bundle.
+     * @returns Promise resolving to the created {@link Worklets} instance.
+     */
     static async install(context: BaseAudioContext, workletURL: string): Promise<Worklets> {
         return context.audioWorklet.addModule(workletURL).then(() => {
             const worklets = new Worklets(context)
@@ -24,7 +30,11 @@ export class Worklets {
         })
     }
 
-    /** Retrieves the `Worklets` instance for the given context. */
+    /**
+     * Retrieves the {@link Worklets} instance for the given context.
+     *
+     * @param context - Audio context used during installation.
+     */
     static get(context: BaseAudioContext): Worklets {return asDefined(this.#map.get(context), "Worklets not installed")}
 
     static #map: WeakMap<BaseAudioContext, Worklets> = new WeakMap<AudioContext, Worklets>()
@@ -33,18 +43,31 @@ export class Worklets {
 
     constructor(context: BaseAudioContext) {this.#context = context}
 
-    /** Creates a {@link MeterWorklet} for monitoring levels. */
+    /**
+     * Creates a {@link MeterWorklet} for monitoring levels.
+     *
+     * @param numberOfChannels - Channel count of the monitored signal.
+     */
     createMeter(numberOfChannels: int): MeterWorklet {
         return new MeterWorklet(this.#context, numberOfChannels)
     }
 
-    /** Creates the main {@link EngineWorklet} responsible for playback. */
+    /**
+     * Creates the main {@link EngineWorklet} responsible for playback.
+     *
+     * @param project - Project instance providing graph and state.
+     * @param exportConfiguration - Optional stem export configuration.
+     */
     createEngine(project: Project, exportConfiguration?: ExportStemsConfiguration): EngineWorklet {
         return new EngineWorklet(this.#context, project, exportConfiguration)
     }
 
     /**
      * Creates a {@link RecordingWorklet} that buffers audio in a shared array.
+     *
+     * @param numberOfChannels - Channels to record.
+     * @param numChunks - Number of chunks stored in the ring buffer.
+     * @param outputLatency - Expected latency of the output device in seconds.
      */
     createRecording(numberOfChannels: int, numChunks: int, outputLatency: number): RecordingWorklet {
         const audioBytes = numberOfChannels * numChunks * RenderQuantum * Float32Array.BYTES_PER_ELEMENT

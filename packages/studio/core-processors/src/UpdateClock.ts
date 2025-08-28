@@ -39,9 +39,15 @@ export class UpdateClock extends AbstractProcessor {
         this.own(this.context.registerProcessor(this))
     }
 
+    /** Clears pending input events. */
     reset(): void {this.eventInput.clear()}
 
-    /** Adds another event buffer that should receive update events. */
+    /**
+     * Adds another event buffer that should receive update events.
+     *
+     * @param output - Buffer to append generated {@link UpdateEvent}s to.
+     * @returns Terminable that removes the buffer when invoked.
+     */
     addEventOutput(output: EventBuffer): Terminable {
         this.#outputs.push(output)
         return {terminate: () => Arrays.remove(this.#outputs, output)}
@@ -51,6 +57,8 @@ export class UpdateClock extends AbstractProcessor {
      * Walks the render blocks and emits {@link UpdateEvent}s at the configured
      * {@link UpdateClockRate}. Only blocks flagged as transporting will trigger
      * updates.
+     *
+     * @param blocks - Render blocks describing the current processing slice.
      */
     process({blocks}: ProcessInfo): void {
         blocks.forEach(({p0, p1, flags}, index: int) => {
