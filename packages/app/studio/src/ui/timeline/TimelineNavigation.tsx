@@ -26,8 +26,11 @@ type Construct = {
  *
  * @remarks
  * Place this component directly beneath the {@link TimelineHeader}.
+ *
+ * @param lifecycle Controls the lifetime of nested components.
+ * @param service Application service providing timeline state.
  */
-export const TimelineNavigation = ({lifecycle, service}: Construct) => {
+export const TimelineNavigation = ({ lifecycle, service }: Construct) => {
     const {range, snapping} = service.timeline
     const {editing, timelineBox} = service.project
     return (

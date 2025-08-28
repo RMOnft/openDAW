@@ -29,8 +29,17 @@ import { Dragging, Events, Html, Keyboard } from "@opendaw/lib-dom";
 const className = Html.adoptStyleSheet(css, "Spotlight");
 
 export namespace Spotlight {
-  /** Installs global keyboard shortcuts to toggle the spotlight view. */
-  export const install = (surface: Surface, service: StudioService) => {
+  /**
+   * Installs global keyboard shortcuts to toggle the spotlight view.
+   *
+   * @param surface Drawing surface used as the parent for the overlay.
+   * @param service Application service providing data sources.
+   * @returns Terminable subscription managing the shortcut listeners.
+   */
+  export const install = (
+    surface: Surface,
+    service: StudioService,
+  ): Terminable => {
     const position = Point.create(surface.width / 2, surface.height / 3);
     let current: Nullable<HTMLElement> = null;
     return Terminable.many(
@@ -68,19 +77,31 @@ export namespace Spotlight {
 
   /** Props required to render the spotlight view. */
   type Construct = {
+    /** Terminator controlling component cleanup. */
     terminator: Terminator;
+    /** Surface on which the overlay is rendered. */
     surface: Surface;
+    /** Access to services and command providers. */
     service: StudioService;
+    /** Initial position of the overlay. */
     position: Point;
   };
 
-  /** Floating spotlight search box rendering component. */
+  /**
+   * Floating spotlight search box rendering component.
+   *
+   * @param terminator Aggregates disposables of the view.
+   * @param surface Drawing surface hosting the overlay.
+   * @param service Application service providing data sources.
+   * @param position Initial position of the overlay.
+   * @returns Root HTML element of the spotlight view.
+   */
   export const View = ({
     terminator,
     surface,
     service,
     position,
-  }: Construct) => {
+  }: Construct): HTMLElement => {
     const query = new DefaultObservableValue("");
     const inputField: HTMLInputElement = SearchInput({
       lifecycle: terminator,

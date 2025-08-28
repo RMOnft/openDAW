@@ -17,6 +17,12 @@ export class Events {
    * // ...later
    * sub.terminate();
    * ```
+   *
+   * @param eventTarget Target dispatching the event.
+   * @param type Name of the event to listen for.
+   * @param listener Callback handling the event.
+   * @param options Optional `addEventListener` configuration.
+   * @returns Subscription object to remove the listener.
    */
   static subscribe<K extends keyof KnownEventMap>(
     eventTarget: EventTarget,
@@ -37,6 +43,12 @@ export class Events {
 
   /**
    * Subscribes to an arbitrary event by name.
+   *
+   * @param eventTarget Target dispatching the event.
+   * @param type Name of the custom event.
+   * @param listener Callback handling the event.
+   * @param options Optional `addEventListener` configuration.
+   * @returns Subscription object to remove the listener.
    */
   static subscribeAny<E extends Event>(
     eventTarget: EventTarget,
@@ -82,12 +94,17 @@ export class Events {
 
   /**
    * Convenience handler that calls `preventDefault` on the event.
+   *
+   * @param event Event to cancel.
    */
   static readonly PreventDefault: Procedure<Event> = (event) =>
     event.preventDefault();
 
   /**
    * Checks whether the given target is a text input element.
+   *
+   * @param target Event target to inspect.
+   * @returns `true` if the target represents an editable text field.
    */
   static readonly isTextInput = (target: Nullable<EventTarget>): boolean =>
     target instanceof HTMLInputElement ||
@@ -96,8 +113,14 @@ export class Events {
       isDefined(target.getAttribute("contenteditable")));
 }
 
+/**
+ * Subset of the `Element` interface that supports pointer capture.
+ */
 export interface PointerCaptureTarget extends EventTarget {
+  /** Assigns future pointer events with the given id to this target. */
   setPointerCapture(pointerId: number): void;
+  /** Releases previously captured pointer events. */
   releasePointerCapture(pointerId: number): void;
+  /** Tests whether this target currently has capture for the pointer. */
   hasPointerCapture(pointerId: number): boolean;
 }
