@@ -6,6 +6,11 @@ import {SampleManager} from "@opendaw/studio-adapters"
 /**
  * Dependencies required for constructing a {@link Project}.
  *
+ * @example
+ * ```ts
+ * const env: ProjectEnv = { sampleRate: 48000, sampleManager }
+ * const project = Project.new(env)
+ * ```
  * @public
  */
 export interface ProjectEnv {

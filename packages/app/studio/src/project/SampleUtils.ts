@@ -22,14 +22,14 @@ export namespace SampleUtils {
    * user to replace missing ones.
    *
    * @param boxGraph Graph containing the boxes to inspect.
-   * @param importer Utility used to load replacement samples.
-   * @param audioManager Manager responsible for caching sample data.
-   * @returns Promise that resolves once verification has finished.
-   *
-   * @example
-   * ```ts
-   * await SampleUtils.verify(project.boxGraph, importer, manager)
-   * ```
+  * @param importer Utility used to load replacement samples.
+  * @param audioManager Manager responsible for caching sample data.
+   * @returns Resolves once verification and any replacements are complete.
+  *
+  * @example
+  * ```ts
+  * await SampleUtils.verify(project.boxGraph, importer, manager)
+  * ```
    */
   export const verify = async (
     boxGraph: BoxGraph,

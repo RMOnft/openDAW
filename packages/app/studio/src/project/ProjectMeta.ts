@@ -25,6 +25,9 @@ export namespace ProjectMeta {
     /**
      * Create a new {@link ProjectMeta} object with sensible defaults.
      *
+     * @param name - Optional project name to use for the new metadata.
+     * @returns The initialized metadata object.
+     *
      * @example
      * ```ts
      * const meta = ProjectMeta.init("My Song")
@@ -40,6 +43,9 @@ export namespace ProjectMeta {
 
     /**
      * Create a shallow copy of the given metadata object.
+     *
+     * @param meta - Source metadata to duplicate.
+     * @returns A new metadata object containing the same fields.
      */
     export const copy = (meta: ProjectMeta): ProjectMeta => Object.assign({}, meta)
 }
