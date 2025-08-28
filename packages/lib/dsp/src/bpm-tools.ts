@@ -6,6 +6,8 @@ import {int} from "@opendaw/lib-std"
  * The detector is optimised for music with tempos in the 90‑180 BPM range and
  * operates on mono PCM data. It is a port of Mark Hills' `bpm(1)` algorithm with
  * a small penalty applied to very slow candidates to avoid half‑tempo aliases.
+ *
+ * @public
  */
 export namespace BPMTools {
     /**
