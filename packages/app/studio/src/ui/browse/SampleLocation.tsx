@@ -3,6 +3,8 @@
  *
  * Used by {@link SampleBrowser} and {@link SampleService} to toggle between
  * cloud and OPFS backed libraries.
+ *
+ * @enum
  */
 export const enum SampleLocation {
   /** Sample hosted on the server */
